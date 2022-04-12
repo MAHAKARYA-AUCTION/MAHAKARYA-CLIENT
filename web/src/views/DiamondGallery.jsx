@@ -102,6 +102,29 @@ export default function DiamondGallery() {
           width="10"
           src="url(/assets/wall/cream_1.jpg)"
         ></a-box>
+        {/* top-left diamond painting */}
+        <a-box
+          id="top-left diamond painting"
+          position="-8.75 2.5 -11.85"
+          rotation="0 45 0"
+          depth="0.2"
+          height="1.287"
+          width="2.278"
+          src="url(\assets\paintings\1.jpg)"
+        ></a-box>
+        {/* top-left diamond light */}
+        <a-light
+          id="top-left diamond light"
+          type="spot"
+          angle="50"
+          color="white"
+          intensity="0.6"
+          distance="25"
+          rotation="-45 45 0"
+          position="-6.8 4.8 -10.4"
+          penumbra="0.4"
+        ></a-light>
+
         {/* top-right diamond wall */}
         <a-box
           id="top-right diamond wall"
@@ -141,7 +164,9 @@ export default function DiamondGallery() {
           gltf-model="url(/assets/elevator/scene.gltf)"
         ></a-entity>
 
+        {/* omni light */}
         <a-light
+          id="omni_light"
           position="0 2 0"
           angle="360"
           type="ambient"
@@ -149,7 +174,9 @@ export default function DiamondGallery() {
           intensity="0.8"
         ></a-light>
 
+        {/* light for top wall painting */}
         <a-light
+          id="top_diamond_light"
           type="spot"
           angle="20"
           color="white"
@@ -159,6 +186,14 @@ export default function DiamondGallery() {
           position="0 6.8 -11"
           penumbra="0.4"
         ></a-light>
+        {/* barrier */}
+        <a-entity
+          id="barrier"
+          scale="1 1 1"
+          position="0 0 -14.5"
+          rotation="0 180 0"
+          gltf-model="url(/assets/barrier/scene.gltf)"
+        ></a-entity>
 
         <a-sky color="#ECECEC"></a-sky>
       </a-scene>
