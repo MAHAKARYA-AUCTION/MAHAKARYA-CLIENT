@@ -1,6 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Libre+Barcode+39&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "Bon Voyage";
+  src: url("../public/fonts/Bon\ Foyage.otf");
+}
+
+@font-face {
+  font-family: "BOSQUE";
+  src: url("../public/fonts/BOSQUE.otf");
+}
 
 body {
   margin: 0;
@@ -14,4 +26,30 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.poppins {
+  font-family: "Poppins", sans-serif;
+}
+
+.barcode {
+  font-family: "Libre Barcode 39",'cursive' ;
+}
+
+.landing-title{
+  font-size: 10rem;
+  font-family: 'Bon Voyage', sans-serif;
+
+}
+
+.landing-subtitle{
+  font-size: 4rem;
+}
+
+.banner {
+  background-image: url("./resources/img/Salinan\ The\ Death\ of\ Julius\ Caesar\ classic\ painting\ -\ Dibuat\ dengan\ PosterMyWall\ \(1\).png");
+  height: 800px !important;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: cover;
 }

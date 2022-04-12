@@ -5,7 +5,7 @@ import LandingView from "./views/LandingView";
 
 function App() {
   return (
-    <div className="App bg-[#ebd7bb]">
+    <div className="App bg-[#ebd7bb] min-h-screen">
       <Routes>
         <Route path="/" element={<LandingView />} />
       </Routes>

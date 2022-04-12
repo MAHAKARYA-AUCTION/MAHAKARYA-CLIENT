@@ -4,6 +4,12 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"],
+        bonVoyage: ["Bon Voyage", "cursive"],
+        bosque: ["BOSQUE", "cursive"],
+        barcode: ["Libre Barcode 39", "cursive"],
+      },
     },
   },
   plugins: [require("daisyui")],
