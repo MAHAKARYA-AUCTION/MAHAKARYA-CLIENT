@@ -135,7 +135,28 @@ export default function DiamondGallery() {
           width="10"
           src="url(/assets/wall/cream_1.jpg)"
         ></a-box>
-
+        {/* top-right diamond light */}
+        <a-light
+          id="top-right diamond light"
+          type="spot"
+          angle="50"
+          color="white"
+          intensity="0.6"
+          distance="25"
+          rotation="-45 -45 0"
+          position="6.8 4.8 -10.29"
+          penumbra="0.4"
+        ></a-light>
+        {/* top_right_diamond_painting */}
+        <a-box
+          id="top_right_diamond_painting"
+          position="9 2.5 -11.83"
+          rotation="0 135 0"
+          depth="0.5"
+          height={0.826 * 2}
+          width={0.685 * 2}
+          src="url(/assets/paintings/3_(Portrait_of_a_Young_Man,_possibly_Jacob_Francken).jpg)"
+        ></a-box>
         {/* top diamond wall */}
         <a-box
           id="top_diamond_wall"
@@ -178,12 +199,12 @@ export default function DiamondGallery() {
         <a-light
           id="top_diamond_light"
           type="spot"
-          angle="20"
+          angle="50"
           color="white"
           intensity="0.6"
-          distance="40"
+          distance="25"
           rotation="-45 0 0"
-          position="0 6.8 -11"
+          position="0 4.8 -11"
           penumbra="0.4"
         ></a-light>
         {/* barrier */}
