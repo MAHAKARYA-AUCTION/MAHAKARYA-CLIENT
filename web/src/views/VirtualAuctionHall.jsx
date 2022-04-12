@@ -1,9 +1,23 @@
+import { useNavigate } from "react-router-dom";
 require("aframe");
 
 export default function VirtualAuctionHall() {
+  const navigate = useNavigate();
+  const floorTransporter = () => {
+    navigate("../diamond_gallery", { replace: true });
+  };
   return (
     <>
       <a-scene>
+        <a-camera
+          position="0 2 0"
+          wasd-controls-enabled="true"
+          fov="60"
+          near="0.1"
+          far="100"
+        >
+          <a-cursor></a-cursor>
+        </a-camera>
         <a-assets>
           <a-asset-item id="scene" src="assets/scene.gltf"></a-asset-item>
           <a-asset-item id="door" src="assets/door/scene.gltf"></a-asset-item>
@@ -96,8 +110,10 @@ export default function VirtualAuctionHall() {
           position="5 0 -5"
           gltf-model="url(scene.gltf)"
         ></a-entity>
+
         {/* elevator */}
         <a-entity
+          onClick={floorTransporter}
           scale="0.014 0.014 0.014"
           position="0 3 -5"
           gltf-model="url(/assets/elevator/scene.gltf)"

@@ -1,31 +1,47 @@
+import { useNavigate } from "react-router-dom";
+
 require("aframe");
 
-export default function VirtualAuctionHall() {
+export default function DiamondGallery() {
+  const navigate = useNavigate();
+  const floorTransporter = () => {
+    navigate("../hall", { replace: true });
+  };
+
   return (
     <>
       <a-scene>
+        <a-camera
+          position="0 2 0"
+          wasd-controls-enabled="true"
+          fov="60"
+          near="0.1"
+          far="100"
+        >
+          <a-cursor></a-cursor>
+        </a-camera>
         <a-assets>
-          <a-asset-item id="scene" src="assets/scene.gltf"></a-asset-item>
-          <a-asset-item id="door" src="assets/door/scene.gltf"></a-asset-item>
+          <a-asset-item id="scene" src="assets/scene.gltf" />
+          <a-asset-item id="door" src="assets/door/scene.gltf" />
+          <a-asset-item id="door" src="assets/carpets" />
         </a-assets>
 
         {/* floor */}
-        {/* height = y */}
-        {/* floor = 0.5 */}
         <a-plane
           position="0 0 -4"
           rotation="-90 0 0"
           width="25"
           height="24"
-          color="#7BC8A4"
+          src="url(/assets/marble/black_2.jpg)"
+          repeat="5 5"
         ></a-plane>
 
         {/* roof */}
         {/* <a-box
-          position="0 5 -4"
+          position="0 6 -4"
           rotation="-90 0 0"
-          width="12"
-          height="24"
+          width="60"
+          height="60"
           color="beige"
         ></a-box> */}
 
@@ -35,7 +51,7 @@ export default function VirtualAuctionHall() {
           depth="0.5"
           height="5"
           width="12"
-          color="green"
+          src="url(/assets/wall/cream_1.jpg)"
         ></a-box>
         {/* left-side elevator wall */}
         <a-box
@@ -44,7 +60,7 @@ export default function VirtualAuctionHall() {
           depth="0.5"
           height="5"
           width="7"
-          color="pink"
+          src="url(/assets/wall/cream_1.jpg)"
         ></a-box>
         {/* right-side elevator wall */}
         <a-box
@@ -53,7 +69,7 @@ export default function VirtualAuctionHall() {
           depth="0.5"
           height="5"
           width="7"
-          color="blue"
+          src="url(/assets/wall/cream_1.jpg)"
         ></a-box>
         {/* bottom-left diamond wall */}
         <a-box
@@ -63,7 +79,7 @@ export default function VirtualAuctionHall() {
           depth="0.5"
           height="5"
           width="14"
-          color="aqua"
+          src="url(/assets/wall/cream_1.jpg)"
         ></a-box>
         {/* bottom-right diamond wall */}
         <a-box
@@ -73,7 +89,7 @@ export default function VirtualAuctionHall() {
           depth="0.5"
           height="5"
           width="14"
-          color="black"
+          src="url(/assets/wall/cream_1.jpg)"
         ></a-box>
 
         {/* top-left diamond wall */}
@@ -84,7 +100,7 @@ export default function VirtualAuctionHall() {
           depth="0.5"
           height="5"
           width="10"
-          color="orange"
+          src="url(/assets/wall/cream_1.jpg)"
         ></a-box>
         {/* top-right diamond wall */}
         <a-box
@@ -94,7 +110,7 @@ export default function VirtualAuctionHall() {
           depth="0.5"
           height="5"
           width="10"
-          color="red"
+          src="url(/assets/wall/cream_1.jpg)"
         ></a-box>
 
         {/* top diamond wall */}
@@ -104,18 +120,45 @@ export default function VirtualAuctionHall() {
           depth="0.5"
           height="5"
           width="11.5"
-          color="tomato"
+          src="url(/assets/wall/cream_1.jpg)"
+        ></a-box>
+        {/* top diamond painting */}
+        <a-box
+          id="top_diamond_painting"
+          position="0 2.25 -15.25"
+          depth="0.2"
+          height="2.08"
+          width="4.1"
+          src="url(\assets\paintings\2.jpg)"
         ></a-box>
 
         {/* elevator */}
         <a-entity
+          onClick={floorTransporter}
           scale="0.014 0.014 0.014"
           position="0 3 5"
           rotation="0 180 0"
           gltf-model="url(/assets/elevator/scene.gltf)"
         ></a-entity>
 
-        <a-light type="ambient" color="white" intensity="0.5"></a-light>
+        <a-light
+          position="0 2 0"
+          angle="360"
+          type="ambient"
+          color="white"
+          intensity="0.8"
+        ></a-light>
+
+        <a-light
+          type="spot"
+          angle="20"
+          color="white"
+          intensity="0.6"
+          distance="40"
+          rotation="-45 0 0"
+          position="0 6.8 -11"
+          penumbra="0.4"
+        ></a-light>
 
         <a-sky color="#ECECEC"></a-sky>
       </a-scene>
