@@ -47,8 +47,16 @@ code {
 }
 
 .banner {
-  background-image: url("./resources/img/Salinan\ The\ Death\ of\ Julius\ Caesar\ classic\ painting\ -\ Dibuat\ dengan\ PosterMyWall\ \(1\).png");
+  background-image: url("./resources/img/banner-img.png");
   height: 800px !important;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: cover;
+}
+
+
+.featured-banner {
+  height: 600px !important;
   background-repeat: no-repeat;
   background-position: bottom center;
   background-size: cover;

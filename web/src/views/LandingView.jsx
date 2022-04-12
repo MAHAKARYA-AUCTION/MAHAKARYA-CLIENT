@@ -3,11 +3,11 @@ export default function LandingView() {
     <div className="flex flex-col justify-between h-min-screen">
       <div className="drawer">
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content ">
+        <div className="drawer-content">
           {/* START:CONTENT PAGE */}
-          <div className="space-y-16 w-[80%] mx-auto">
+          <div className="space-y-16">
             {/* START:NAVBAR */}
-            <div className="flex flex-row justify-between font-semibold h-32 items-center mt-10">
+            <div className="flex flex-row justify-between font-semibold h-32 items-center mt-10 w-[80%] mx-auto">
               <div className="flex-none">
                 <label
                   htmlFor="my-drawer"
@@ -42,7 +42,7 @@ export default function LandingView() {
             </div>
             {/* END:NAVBAR */}
             {/* START:TITLE */}
-            <div className="h-[15vh] flex flex-row items-center justify-between">
+            <div className="h-[15vh] flex flex-row items-center justify-between w-[80%] mx-auto">
               <div className="flex flex-row gap-4 items-center">
                 <label className="font-bonVoyage landing-title font-bold">
                   MAHAKARYA
@@ -83,10 +83,10 @@ export default function LandingView() {
             </div>
             {/* END:TITLE */}
             {/* START:BANNER */}
-            <div className="banner mx-auto hover:scale-[101%] transform transition duration-700"></div>
+            <div className="banner  hover:scale-[101%] transform transition duration-700 w-[80%] mx-auto"></div>
             {/* END:BANNER */}
             {/* START:LINE BREAK */}
-            <div className="h-20 grid grid-cols-9 items-center mx-auto">
+            <div className="h-20 grid grid-cols-9 items-center w-[80%] mx-auto">
               <div className="col-span-4">
                 <hr className="bg-[#57240f] h-2" />
               </div>
@@ -100,22 +100,53 @@ export default function LandingView() {
               </div>
             </div>
             {/* END:LINE BREAK */}
-            {/* START: CURRENT COLLETION */}
+            {/* START: FEATURED COLLECTION */}
             <div className="pb-10 space-y-16">
-              <h1 className="font-bosque text-7xl font-bold">
-                Current Collection
-              </h1>
-              <div className="grid grid-cols-2 items-baseline">
+              <div className="featured-banner bg-[url('./resources/img/placeholder-banner.jpg')] w-full content-center p-5 flex flex-row px-[10%] justify-between">
+                <div className="text-left h-full w-[30rem] rounded-md p-10 flex flex-col">
+                  <div className="bg-[#a35831] p-10 rounded-xl shadow-2xl text-white space-y-5">
+                    <h2 className="font-bosque text-2xl font-bold ">
+                      Featured Collection
+                    </h2>
+                    <h1 className="font-bosque text-5xl font-bold">
+                      TREASURES Fine Art
+                    </h1>
+                    <p className="w-max-full poppins text-left tracking-widest">
+                      In posuere quam nulla, eget tincidunt quam scelerisque
+                      eget. Quisque tempor vel lorem sit amet porttitor. Mauris
+                      placerat euismod ligula, quis viverra ipsum placerat in.
+                      Aliquam nec dui semper sem.
+                    </p>
+                  </div>
+                </div>
+                <div className="text-left h-full w-[25rem] rounded-md p-10 flex flex-col-reverse">
+                  <div className="bg-[#a35831] rounded-xl shadow-2xl text-white grid grid-cols-2 h-[10rem] poppins  font-bold">
+                    <div className="border-r-2 border-white flex flex-col justify-center items-center">
+                      <label className="text-base">From</label>
+                      <label className="text-lg font-semibold">Monday</label>
+                      <label className="text-6xl">8</label>
+                      <label className="text-3xl">Mar</label>
+                    </div>
+                    <div className="border-l-2 border-white flex flex-col justify-center items-center">
+                      <label className="text-base">Till</label>
+                      <label className="text-lg font-semibold">Sunday</label>
+                      <label className="text-6xl">14</label>
+                      <label className="text-3xl">Apr</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 items-baseline w-[80%] mx-auto">
                 <label className="font-bosque text-3xl font-semi-bold text-[#57240f] text-left">
                   TREASURES Fine Art
                 </label>
-                <div className="text-right">
+                <div className="text-right w-[80%] mx-auto">
                   <button className="font-bosque text-xl font-bold text-[#a35831] hover:scale-110 transform transition duration-400">
                     View Lots
                   </button>
                 </div>
-                {/* START: CURRENT COLECTION LIST */}
-                <div className="grid grid-cols-5 w-full col-span-2 space-x-5 space-y-3 mt-10 justify-around grid-flow-row-dense">
+                {/* START: FEATURED COLECTION LIST */}
+                <div className="grid grid-cols-5 col-span-2 space-x-5 mt-10 justify-around">
                   {/* START: CURRENT COLLECTION CARD */}
                   <div className="w-[80%] h-full text-xl space-y-3 mx-auto">
                     <img
@@ -139,8 +170,6 @@ export default function LandingView() {
                       </div>
                     </div>
                   </div>
-                  {/* END: CURRENT COLLECTION CARD */}
-                  {/* START: CURRENT COLLECTION CARD */}
                   <div className="w-[80%] h-full text-xl space-y-3 mx-auto">
                     <img
                       src="https://loremflickr.com/g/320/240/art"
@@ -163,8 +192,6 @@ export default function LandingView() {
                       </div>
                     </div>
                   </div>
-                  {/* END: CURRENT COLLECTION CARD */}
-                  {/* START: CURRENT COLLECTION CARD */}
                   <div className="w-[80%] h-full text-xl space-y-3 mx-auto">
                     <img
                       src="https://loremflickr.com/g/320/240/art"
@@ -187,8 +214,6 @@ export default function LandingView() {
                       </div>
                     </div>
                   </div>
-                  {/* END: CURRENT COLLECTION CARD */}
-                  {/* START: CURRENT COLLECTION CARD */}
                   <div className="w-[80%] h-full text-xl space-y-3 mx-auto">
                     <img
                       src="https://loremflickr.com/g/320/240/art"
@@ -211,8 +236,6 @@ export default function LandingView() {
                       </div>
                     </div>
                   </div>
-                  {/* END: CURRENT COLLECTION CARD */}
-                  {/* START: CURRENT COLLECTION CARD */}
                   <div className="w-[80%] h-full text-xl space-y-3 mx-auto">
                     <img
                       src="https://loremflickr.com/g/320/240/art"
@@ -237,12 +260,12 @@ export default function LandingView() {
                   </div>
                   {/* END: CURRENT COLLECTION CARD */}
                 </div>
-                {/* END: CURRENT COLECTION LIST */}
+                {/* END: FEATURED COLECTION LIST */}
               </div>
             </div>
-            {/* END:COLLETION */}
+            {/* END: FEATURED COLLECTION */}
             {/* START:LINE BREAK */}
-            <div className="h-20 grid grid-cols-9 items-center mx-auto">
+            <div className="h-20 grid grid-cols-9 items-center w-[80%] mx-auto">
               <div className="col-span-4">
                 <hr className="bg-[#57240f] h-2" />
               </div>
@@ -256,18 +279,219 @@ export default function LandingView() {
               </div>
             </div>
             {/* END:LINE BREAK */}
-            {/* START: CURRENT COLLETION */}
-            <div className="min-h-screen space-y-16">
-              <h1 className="font-bosque text-7xl font-bold">Past Auctions</h1>
-              <div className="grid grid-cols-2 items-baseline">
-                {/* START: CURRENT COLECTION LIST */}
-                <div className="grid grid-cols-2 w-full col-span-2 space-x-5 space-y-3 mt-10 justify-around grid-flow-row-dense"></div>
-                {/* END: CURRENT COLECTION LIST */}
+            {/* START:COLLECTION OVERVIEW*/}
+            <div className="min-h-screen space-y-16 w-[80%] mx-auto">
+              <div className="flex flex-row justify-evenly p-5 space-x-28">
+                <div className="w-[50%]">
+                  <h1 className="font-bosque text-7xl font-bold text-center ">
+                    Upcoming Auctions
+                  </h1>
+                  {/* START:COLLECTION OVERVIEW CARD*/}
+                  <div className="grid grid-cols-4 mt-10 space-x-5">
+                    <div className="h-full">
+                      <img
+                        src="https://loremflickr.com/g/320/240/art"
+                        className="hover:scale-105 transform transition duration-600 h-full rounded-lg w-full"
+                      />
+                    </div>
+                    <div className="grid grid-rows-4 text-xl text-left col-span-3">
+                      <div className="">
+                        <label>27 APR - 2 MEI</label>
+                      </div>
+                      <div className="row-span-3 space-y-2">
+                        <h1 className="font-bold text-3xl">Collection Name</h1>
+                        <p>
+                          In posuere quam nulla, eget tincidunt quam scelerisque
+                          eget. Quisque tempor vel lorem sit amet porttitor.
+                          Mauris placerat euismod ligula, quis viverra ipsum
+                          placerat in. Aliquam nec dui semper sem.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-4 mt-10 space-x-5">
+                    <div className="h-full">
+                      <img
+                        src="https://loremflickr.com/g/320/240/art"
+                        className="hover:scale-105 transform transition duration-600 h-full rounded-lg w-full"
+                      />
+                    </div>
+                    <div className="grid grid-rows-4 text-xl text-left col-span-3">
+                      <div className="">
+                        <label>27 APR - 2 MEI</label>
+                      </div>
+                      <div className="row-span-3 space-y-2">
+                        <h1 className="font-bold text-3xl">Collection Name</h1>
+                        <p>
+                          In posuere quam nulla, eget tincidunt quam scelerisque
+                          eget. Quisque tempor vel lorem sit amet porttitor.
+                          Mauris placerat euismod ligula, quis viverra ipsum
+                          placerat in. Aliquam nec dui semper sem.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-4 mt-10 space-x-5">
+                    <div className="h-full">
+                      <img
+                        src="https://loremflickr.com/g/320/240/art"
+                        className="hover:scale-105 transform transition duration-600 h-full rounded-lg w-full"
+                      />
+                    </div>
+                    <div className="grid grid-rows-4 text-xl text-left col-span-3">
+                      <div className="">
+                        <label>27 APR - 2 MEI</label>
+                      </div>
+                      <div className="row-span-3 space-y-2">
+                        <h1 className="font-bold text-3xl">Collection Name</h1>
+                        <p>
+                          In posuere quam nulla, eget tincidunt quam scelerisque
+                          eget. Quisque tempor vel lorem sit amet porttitor.
+                          Mauris placerat euismod ligula, quis viverra ipsum
+                          placerat in. Aliquam nec dui semper sem.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  {/* END:COLLECTION OVERVIEW CARD*/}
+                </div>
+                <div className="w-[50%]">
+                  <h1 className="font-bosque text-7xl font-bold text-center ">
+                    Past Auctions
+                  </h1>
+                  <div className="grid grid-cols-4 mt-10 space-x-5 relative">
+                    <div className="h-full">
+                      <img
+                        src="https://loremflickr.com/g/320/240/art"
+                        className="hover:scale-105 transform transition duration-600 h-full rounded-lg w-full"
+                      />
+                    </div>
+                    <div className="grid grid-rows-4 text-xl text-left col-span-3">
+                      <div className="">
+                        <label className="">27 APR - 2 MEI | </label>
+                        <label className="text-[#ebd7bb] px-3 py-1 rounded-full bg-[#a35831] w-auto text-sm">
+                          40 Lots
+                        </label>
+                      </div>
+                      <button className="btn rounded-3xl bg-transparent text-[#57240f] border-[#57240f] absolute top-0 right-0 hover:text-white hover:bg-[#57240f] hover:scale-105 transform transition duration-600 ">
+                        View Collection
+                      </button>
+                      <div className="row-span-3 space-y-2">
+                        <h1 className="font-bold text-3xl">Collection Name</h1>
+                        <p>
+                          In posuere quam nulla, eget tincidunt quam scelerisque
+                          eget. Quisque tempor vel lorem sit amet porttitor.
+                          Mauris placerat euismod ligula, quis viverra ipsum
+                          placerat in. Aliquam nec dui semper sem.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-4 mt-10 space-x-5 relative ">
+                    <div className="h-full">
+                      <img
+                        src="https://loremflickr.com/g/320/240/art"
+                        className="hover:scale-105 transform transition duration-600 h-full rounded-lg w-full"
+                      />
+                    </div>
+                    <button className="btn rounded-3xl bg-transparent text-[#57240f] border-[#57240f] absolute top-0 right-0 hover:text-white hover:bg-[#57240f] hover:scale-105 transform transition duration-600 ">
+                      View Collection
+                    </button>
+                    <div className="grid grid-rows-4 text-xl text-left col-span-3">
+                      <div className="">
+                        <label className="">27 APR - 2 MEI | </label>
+                        <label className="text-[#ebd7bb] px-3 py-1 rounded-full bg-[#a35831] w-auto text-sm">
+                          40 Lots
+                        </label>
+                      </div>
+                      <div className="row-span-3 space-y-2">
+                        <h1 className="font-bold text-3xl">Collection Name</h1>
+                        <p>
+                          In posuere quam nulla, eget tincidunt quam scelerisque
+                          eget. Quisque tempor vel lorem sit amet porttitor.
+                          Mauris placerat euismod ligula, quis viverra ipsum
+                          placerat in. Aliquam nec dui semper sem.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-4 mt-10 space-x-5 relative">
+                    <div className="h-full">
+                      <img
+                        src="https://loremflickr.com/g/320/240/art"
+                        className="hover:scale-105 transform transition duration-600 h-full rounded-lg w-full"
+                      />
+                    </div>
+                    <button className="btn rounded-3xl bg-transparent text-[#57240f] border-[#57240f] absolute top-0 right-0 hover:text-white hover:bg-[#57240f] hover:scale-105 transform transition duration-600 ">
+                      View Collection
+                    </button>
+                    <div className="grid grid-rows-4 text-xl text-left col-span-3">
+                      <div className="">
+                        <label className="">27 APR - 2 MEI | </label>
+                        <label className="text-[#ebd7bb] px-3 py-1 rounded-full bg-[#a35831] w-auto text-sm">
+                          40 Lots
+                        </label>
+                      </div>
+                      <div className="row-span-3 space-y-2">
+                        <h1 className="font-bold text-3xl">Collection Name</h1>
+                        <p>
+                          In posuere quam nulla, eget tincidunt quam scelerisque
+                          eget. Quisque tempor vel lorem sit amet porttitor.
+                          Mauris placerat euismod ligula, quis viverra ipsum
+                          placerat in. Aliquam nec dui semper sem.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-4 mt-10 space-x-5 relative ">
+                    <div className="h-full">
+                      <img
+                        src="https://loremflickr.com/g/320/240/art"
+                        className="hover:scale-105 transform transition duration-600 h-full rounded-lg w-full"
+                      />
+                    </div>
+                    <button className="btn rounded-3xl bg-transparent text-[#57240f] border-[#57240f] absolute top-0 right-0 hover:text-white hover:bg-[#57240f] hover:scale-105 transform transition duration-600 ">
+                      View Collection
+                    </button>
+                    <div className="grid grid-rows-4 text-xl text-left col-span-3">
+                      <div className="">
+                        <label className="">27 APR - 2 MEI | </label>
+                        <label className="text-[#ebd7bb] px-3 py-1 rounded-full bg-[#a35831] w-auto text-sm">
+                          40 Lots
+                        </label>
+                      </div>
+                      <div className="row-span-3 space-y-2">
+                        <h1 className="font-bold text-3xl">Collection Name</h1>
+                        <p>
+                          In posuere quam nulla, eget tincidunt quam scelerisque
+                          eget. Quisque tempor vel lorem sit amet porttitor.
+                          Mauris placerat euismod ligula, quis viverra ipsum
+                          placerat in. Aliquam nec dui semper sem.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <button className="font-bosque text-2xl font-bold text-[#a35831] hover:scale-110 transform transition duration-600">
+                  View All Collections
+                </button>
               </div>
             </div>
-            {/* END:COLLETION */}
+            {/* END:COLLECTION OVERVIEW*/}
           </div>
-
+          <div className="bg-[#675237] h-[8rem] text-[#ebd7bb] w-full py-1 grid grid-rows-3 mt-10">
+            <h1>Follow Us</h1>
+            <div className="flex flex-row justify-center space-x-5">
+              <button class="fa-brands fa-youtube fa-2xl hover:scale-125 transform transition duration-400"></button>
+              <button class="fa-brands fa-twitter fa-2xl hover:scale-125 transform transition duration-400"></button>
+              <button class="fa-brands fa-instagram fa-2xl hover:scale-125 transform transition duration-400"></button>
+              <button class="fa-brands fa-facebook fa-2xl hover:scale-125 transform transition duration-400"></button>
+              <button class="fa-brands fa-pinterest fa-2xl hover:scale-125 transform transition duration-400"></button>
+            </div>
+            <h1>&#169; Mahakarya 2022</h1>
+          </div>
           {/* END:CONTENT PAGE */}
         </div>
         {/* START:SIDEBAR */}
