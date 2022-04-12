@@ -1,7 +1,7 @@
-import logo from "./logo.svg";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import VirtualAuctionHall from "./views/VirtualAuctionHall";
+import LandingView from "./views/LandingPage";
 
 function App() {
   return (
