@@ -1,9 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import './App.css';
 import LoginPage from '../src/views/LoginPage';
-
-import LandingView from "./views/LandingView";
-
 import LandingView from "./views/LandingView";
 
 function App() {
@@ -14,7 +11,7 @@ function App() {
         <Route
           path='/login'
           element={
-              <LoginPage />
+            <LoginPage />
           }
         />
       </Routes>
