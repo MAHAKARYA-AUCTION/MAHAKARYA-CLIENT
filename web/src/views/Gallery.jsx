@@ -1,4 +1,5 @@
 import "aframe";
+import anime from "animejs/lib/anime.es.js";
 import { useNavigate } from "react-router-dom";
 
 export default function DiamondGallery() {
@@ -7,6 +8,29 @@ export default function DiamondGallery() {
     navigate("../lobby", { replace: true });
   };
   // const dummyGallery = ["Onyx", "Diamond", "Garnet"];
+
+  anime({
+    targets: "#sphere",
+    rotation: "0 2 0",
+    radius: 0.45,
+    loop: true,
+    autoplay: true,
+  });
+
+  function emerge() {
+    anime({
+      targets: "#left_cone",
+      position: ["0 1.5 -8", "-0.8 1.5 -8"],
+    });
+    anime({
+      targets: "#right_cone",
+      position: ["0 1.5 -8", "0.8 1.5 -8"],
+    });
+  }
+
+  const emergeToRight = anime({
+    targets: "#",
+  });
 
   return (
     <>
@@ -25,6 +49,11 @@ export default function DiamondGallery() {
           <a-asset-item id="scene" src="assets/scene.gltf" />
           <a-asset-item id="door" src="assets/door/scene.gltf" />
           <a-asset-item id="door" src="assets/carpets" />
+          <a-mixin
+            id="up_and_down"
+            animation__bounceUp="property: position; from: 0 0 0 ; to: 0 1 0; dur:500; "
+            animation__bounceDown="property: position; from: 0 1 0 ; to: 0 0 0; dur:500; start-events: animationcomplete__bounceup"
+          ></a-mixin>
         </a-assets>
 
         {/* __________________________________floor */}
@@ -530,7 +559,43 @@ export default function DiamondGallery() {
           gltf-model="url(/assets/mini_sofa/scene.gltf)"
         ></a-entity>
 
-        <a-sphere position="0 2 0" color="yellow" radius="0.3"></a-sphere>
+        <a-sphere
+          id="sphere"
+          onClick={() => {
+            emerge();
+          }}
+          radius="0.3"
+          position="0 1.5 -8"
+          rotation="0 0 0"
+          src="url(/assets/marble/black_2.jpg)"
+          // mixin="up_and_down"
+        ></a-sphere>
+        <a-cone
+          id="left_cone"
+          color="tomato"
+          height="0.2"
+          radius-bottom="0.1"
+          radius-top="0.001"
+          rotation="0 0 90"
+          position="0 1.5 -8"
+          // position="-0.8 1.5 -8"
+        ></a-cone>
+        <a-cone
+          id="right_cone"
+          color="tomato"
+          height="0.2"
+          radius-bottom="0.1"
+          radius-top="0.001"
+          rotation="0 0 -90"
+          position="0 1.5 -8"
+          // position="-0.8 1.5 -8"
+        ></a-cone>
+
+        {/* <a-box
+          position="-1 1.6 -5"
+          animation="property: position; to: [1 8 -10, -1 1.6 -5]; dur: 2000; easing: linear; loop: true"
+          color="tomato"
+        ></a-box> */}
 
         <a-sky color="#ECECEC"></a-sky>
       </a-scene>
