@@ -4,7 +4,7 @@ require("aframe");
 export default function VirtualAuctionHall() {
   const navigate = useNavigate();
   const floorTransporter = () => {
-    navigate("../diamond_gallery", { replace: true });
+    navigate("../gallery", { replace: true });
   };
   return (
     <>

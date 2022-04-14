@@ -1,0 +1,306 @@
+import "aframe";
+import { useNavigate } from "react-router-dom";
+
+export default function DiamondGallery() {
+  const navigate = useNavigate();
+  const floorTransporter = () => {
+    navigate("../lobby", { replace: true });
+  };
+  // const dummyGallery = ["Onyx", "Diamond", "Garnet"];
+
+  return (
+    <>
+      <a-scene>
+        <a-camera
+          position="0 2 0"
+          wasd-controls-enabled="true"
+          fov="60"
+          near="0.1"
+          far="100"
+        >
+          <a-cursor></a-cursor>
+        </a-camera>
+        <a-assets>
+          <a-asset-item id="scene" src="assets/scene.gltf" />
+          <a-asset-item id="door" src="assets/door/scene.gltf" />
+          <a-asset-item id="door" src="assets/carpets" />
+        </a-assets>
+
+        {/* floor */}
+        <a-plane
+          position="0 0 -4"
+          rotation="-90 0 0"
+          width="25"
+          height="24"
+          color="white"
+          // src="url(/assets/marble/black_2.jpg)"
+          repeat="5 5"
+        ></a-plane>
+
+        {/* roof */}
+        {/* <a-box
+          position="0 7 -4"
+          rotation="-90 0 0"
+          width="60"
+          height="60"
+          src="url(/assets/marble/black_2.jpg)"
+          repeat="4 4"
+        ></a-box> */}
+
+        {/* back elevator wall */}
+        <a-box
+          position="0 3.5 7.75"
+          depth="0.5"
+          height="7"
+          width="12"
+          src="url(/assets/marble/black_2.jpg)"
+        ></a-box>
+        {/* left-side elevator wall */}
+        <a-box
+          position="-2.75 3.5 4.5"
+          rotation="0 90 0"
+          depth="0.5"
+          height="7"
+          width="7"
+          color="red"
+        ></a-box>
+        {/* right-side elevator wall */}
+        <a-box
+          position="2.75 3.5 4.5"
+          rotation="0 90 0"
+          depth="0.5"
+          height="7"
+          width="7"
+          src="url(/assets/wall/cream_1.jpg)"
+        ></a-box>
+
+        {/* bottom-left horizontal wall */}
+        <a-box
+          id="bottom-left horizontal wall "
+          position="-6 3.5 1.25"
+          rotation="0 0 0"
+          depth="0.5"
+          height="7"
+          width="6"
+          src="url(/assets/wall/cream_1.jpg)"
+        ></a-box>
+        {/* bottom-right horizontal wall */}
+        <a-box
+          id="bottom-right horizontal wall "
+          position="6 3.5 1.25"
+          rotation="0 0 0"
+          depth="0.5"
+          height="7"
+          width="6"
+          src="url(/assets/wall/cream_1.jpg)"
+        ></a-box>
+
+        {/* left-0 vertical wall */}
+        <a-box
+          id="left-0 vertical wall "
+          position="-8.75 3.5 -2"
+          rotation="0 90 0"
+          depth="0.5"
+          height="7"
+          width="6"
+          src="url(/assets/wall/cream_1.jpg)"
+        ></a-box>
+        {/* left-1 vertical wall */}
+        <a-box
+          id="left-1 vertical wall "
+          position="-8.75 3.5 -8"
+          rotation="0 90 0"
+          depth="0.5"
+          height="7"
+          width="6"
+          src="url(/assets/wall/cream_1.jpg)"
+        ></a-box>
+        {/* left-2 vertical wall */}
+        <a-box
+          id="left-2 vertical wall "
+          position="-8.75 3.5 -14"
+          rotation="0 90 0"
+          depth="0.5"
+          height="7"
+          width="6"
+          src="url(/assets/wall/cream_1.jpg)"
+        ></a-box>
+
+        {/* right-0 vertical wall */}
+        <a-box
+          id="right-0 vertical wall "
+          position="8.75 3.5 -2"
+          rotation="0 90 0"
+          depth="0.5"
+          height="7"
+          width="6"
+          src="url(/assets/wall/cream_1.jpg)"
+        ></a-box>
+        {/* right-1 vertical wall */}
+        <a-box
+          id="right-1 vertical wall "
+          position="8.75 3.5 -8"
+          rotation="0 90 0"
+          depth="0.5"
+          height="7"
+          width="6"
+          src="url(/assets/wall/cream_1.jpg)"
+        ></a-box>
+        {/* right-2 vertical wall */}
+        <a-box
+          id="right-2 vertical wall "
+          position="8.75 3.5 -14"
+          rotation="0 90 0"
+          depth="0.5"
+          height="7"
+          width="6"
+          src="url(/assets/wall/cream_1.jpg)"
+        ></a-box>
+
+        {/* top-0 horizontal wall */}
+        <a-box
+          id="top-0 horizontal wall "
+          position="-6 3.5 -17"
+          rotation="0 0 0"
+          depth="0.5"
+          height="7"
+          width="6"
+          src="url(/assets/wall/cream_1.jpg)"
+        ></a-box>
+        {/* top-1 horizontal wall */}
+        <a-box
+          id="top-1 horizontal wall "
+          position="0 3.5 -17"
+          rotation="0 0 0"
+          depth="0.5"
+          height="7"
+          width="6"
+          src="url(/assets/wall/cream_1.jpg)"
+        ></a-box>
+        {/* top-2 horizontal wall */}
+        <a-box
+          id="top-2 horizontal wall "
+          position="6 3.5 -17"
+          rotation="0 0 0"
+          depth="0.5"
+          height="7"
+          width="6"
+          src="url(/assets/wall/cream_1.jpg)"
+        ></a-box>
+
+        <a-light
+          id="top-left diamond light"
+          type="spot"
+          angle="50"
+          color="white"
+          intensity="0.6"
+          distance="25"
+          rotation="-45 45 0"
+          position="-6.8 4.8 -10.4"
+          penumbra="0.4"
+        ></a-light>
+
+        {/* top-right diamond light */}
+        <a-light
+          id="top_right_diamond_light"
+          type="spot"
+          angle="50"
+          color="white"
+          intensity="0.6"
+          distance="25"
+          rotation="-45 -45 0"
+          position="6.8 4.8 -10.2"
+          penumbra="0.4"
+        ></a-light>
+
+        {/* top horizontal wall */}
+        {/* <a-box
+          id="top horizontal wall "
+          position="0 3.5 -16"
+          rotation="0 0 0"
+          depth="0.5"
+          height="7"
+          width="18"
+          src="url(/assets/wall/cream_1.jpg)"
+        ></a-box> */}
+        {/* light for top wall painting */}
+        <a-light
+          id="top_diamond_light"
+          type="spot"
+          angle="50"
+          color="white"
+          intensity="0.6"
+          distance="25"
+          rotation="-45 0 0"
+          position="0 4.8 -11"
+          penumbra="0.4"
+        ></a-light>
+        {/* top diamond painting */}
+        <a-box
+          id="top_diamond_painting"
+          position="0 2.25 -15.25"
+          depth="0.2"
+          src="url(\assets\paintings\p2.jpg)"
+          height="2.08"
+          width="4.1"
+        ></a-box>
+
+        {/* elevator */}
+        <a-entity
+          onClick={floorTransporter}
+          scale="0.014 0.014 0.014"
+          position="0 3 4.84506"
+          rotation="0 180 0"
+          gltf-model="/assets/elevator/scene.gltf"
+        ></a-entity>
+        <a-triangle
+          id="elevator_up_button"
+          onPress={floorTransporter}
+          position="-0.9086 1.70955 4.81707"
+          color="red"
+          side="double"
+          scale="0.1 0.1 0.1"
+          material=""
+          geometry=""
+        ></a-triangle>
+
+        {/* omni light */}
+        <a-light
+          id="omni_light"
+          position="0 2 0"
+          angle="360"
+          type="ambient"
+          color="white"
+          intensity="0.8"
+        ></a-light>
+
+        {/* barrier */}
+        <a-entity
+          id="barrier"
+          scale="1 1 1"
+          position="0 0 -14.5"
+          rotation="0 180 0"
+          gltf-model="url(/assets/barrier/scene.gltf)"
+        ></a-entity>
+
+        {/* sofa */}
+        <a-entity
+          id="sofa"
+          scale="1 1 1"
+          position="0 0 -5"
+          rotation="0 0 0"
+          gltf-model="url(/assets/mini_sofa/scene.gltf)"
+        ></a-entity>
+
+        <a-sky color="#ECECEC"></a-sky>
+        <a-text
+          position="0.345 3.38 4.70185"
+          rotation="0 180 0"
+          side="double"
+          value="Garnet"
+          text=""
+        ></a-text>
+      </a-scene>
+    </>
+  );
+}
