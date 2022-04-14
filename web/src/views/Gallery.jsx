@@ -21,6 +21,7 @@ export default function DiamondGallery() {
           <a-cursor></a-cursor>
         </a-camera>
         <a-assets>
+          <img id="number_box" src="assets/marble/black_23.jpg" />
           <a-asset-item id="scene" src="assets/scene.gltf" />
           <a-asset-item id="door" src="assets/door/scene.gltf" />
           <a-asset-item id="door" src="assets/carpets" />
@@ -33,7 +34,7 @@ export default function DiamondGallery() {
           width="25"
           height="30"
           color="white"
-          src="url(/assets/marble/black_2.jpg)"
+          src="url(/assets/wood_parquet/seamless_texture_rovere_wood_parquet_DIFFUSE.jpg)"
           repeat="5 5"
         ></a-plane>
 
@@ -84,6 +85,19 @@ export default function DiamondGallery() {
           width="6"
           src="url(/assets/marble/black_2.jpg)"
         ></a-box>
+        {/* __________________________________bottom-left horizontal number */}
+        <a-text
+          position="-6 3.5 0.95"
+          rotation="0 180 0"
+          width="15"
+          color="white"
+          value="1"
+          geometry="primitive:plane, src='#number_box'"
+          side="double"
+          align="center"
+          fontImage="url(/assets/marble/black_2.jpg)"
+          src="#number_box"
+        ></a-text>
         {/* __________________________________bottom-left horizontal painting */}
         <a-box
           id="bottom-left horizontal painting "
@@ -106,6 +120,20 @@ export default function DiamondGallery() {
           width="6"
           src="url(/assets/marble/black_2.jpg)"
         ></a-box>
+        {/* __________________________________bottom_right_horizontal_number */}
+        <a-text
+          id="bottom_right_horizontal_number"
+          position="6 3.5 0.95"
+          rotation="0 180 0"
+          width="15"
+          color="white"
+          value="10"
+          geometry="primitive:plane, src='#number_box'"
+          side="double"
+          align="center"
+          fontImage="url(/assets/marble/black_1.jpg)"
+          src="#number_box"
+        ></a-text>
         {/* __________________________________bottom_right_horizontal_painting */}
         <a-box
           id="bottom_right_horizontal_painting "
@@ -128,6 +156,20 @@ export default function DiamondGallery() {
           width="6"
           src="url(/assets/marble/black_2.jpg)"
         ></a-box>
+        {/* __________________________________ left_0_number_box */}
+        <a-text
+          id="left_0_number_box"
+          position="-8.5 3.5 -2"
+          rotation="0 90 0"
+          width="15"
+          color="white"
+          value="2"
+          geometry="primitive:plane, src='#number_box'"
+          side="double"
+          align="center"
+          fontImage="url(/assets/marble/black_1.jpg)"
+          src="#number_box"
+        ></a-text>
         {/* __________________________________left-0 vertical painting */}
         <a-box
           id="left_0_vertical_painting "
@@ -150,6 +192,20 @@ export default function DiamondGallery() {
           width="6"
           src="url(/assets/marble/black_2.jpg)"
         ></a-box>
+        {/* __________________________________ left_1_number_box */}
+        <a-text
+          id="left_1_number_box"
+          position="-8.5 3.5 -8"
+          rotation="0 90 0"
+          width="15"
+          color="white"
+          value="3"
+          geometry="primitive:plane, src='#number_box'"
+          side="double"
+          align="center"
+          fontImage="url(/assets/marble/black_1.jpg)"
+          src="#number_box"
+        ></a-text>
         {/* __________________________________left_1_vertical_painting */}
         <a-box
           id="left_1_vertical_painting"
@@ -172,7 +228,21 @@ export default function DiamondGallery() {
           width="6"
           src="url(/assets/marble/black_2.jpg)"
         ></a-box>
-        {/* __________________________________left_2_vertical_painting */}
+        {/* __________________________________ left_2_number_box */}
+        <a-text
+          id="left_2_number_box"
+          position="-8.5 3.5 -14"
+          rotation="0 90 0"
+          width="15"
+          color="white"
+          value="4"
+          geometry="primitive:plane, src='#number_box'"
+          side="double"
+          align="center"
+          fontImage="url(/assets/marble/black_1.jpg)"
+          src="#number_box"
+        ></a-text>
+        {/* __________________________________ left_2_vertical_painting */}
         <a-box
           id="left_2_vertical_painting"
           position="-8.55 2 -14"
@@ -184,7 +254,43 @@ export default function DiamondGallery() {
           width="4.1"
         ></a-box>
 
-        {/* __________________________________right-0 vertical wall */}
+        {/* __________________________________seventh_wall */}
+        <a-box
+          id="seventh_wall "
+          position="8.75 3.5 -14"
+          rotation="0 90 0"
+          depth="0.5"
+          height="7"
+          width="6"
+          src="url(/assets/marble/black_2.jpg)"
+        ></a-box>
+        {/* __________________________________ seventh_number_box */}
+        <a-text
+          id="seventh_number_box"
+          position="8.5 3.5 -14"
+          rotation="0 -90 0"
+          width="15"
+          color="white"
+          value="7"
+          geometry="primitive:plane, src='#number_box'"
+          side="double"
+          align="center"
+          fontImage="url(/assets/marble/black_1.jpg)"
+          src="#number_box"
+        ></a-text>
+        {/* __________________________________ seventh_painting */}
+        <a-box
+          id="seventh_painting "
+          position="8.55 2 -14"
+          rotation="0 90 0"
+          depth="0.2"
+          // ------------------------------------ //
+          src="url(\assets\paintings\p2.jpg)"
+          height="2.08"
+          width="4.1"
+        ></a-box>
+
+        {/* __________________________________ ninth_wall */}
         <a-box
           id="right-0 vertical wall "
           position="8.75 3.5 -2"
@@ -194,7 +300,21 @@ export default function DiamondGallery() {
           width="6"
           src="url(/assets/marble/black_2.jpg)"
         ></a-box>
-        {/* __________________________________right-0 vertical painting */}
+        {/* __________________________________ ninth_number_box */}
+        <a-text
+          id="eighth_number_box"
+          position="8.5 3.5 -2"
+          rotation="0 -90 0"
+          width="15"
+          color="white"
+          value="9"
+          geometry="primitive:plane, src='#number_box'"
+          side="double"
+          align="center"
+          fontImage="url(/assets/marble/black_1.jpg)"
+          src="#number_box"
+        ></a-text>
+        {/* __________________________________ ninth_painting */}
         <a-box
           id="right_0_vertical_painting "
           position="8.55 2 -2"
@@ -205,7 +325,8 @@ export default function DiamondGallery() {
           height="2.08"
           width="4.1"
         ></a-box>
-        {/* __________________________________right-1 vertical wall */}
+
+        {/* __________________________________ eighth_wall */}
         <a-box
           id="right-1 vertical wall "
           position="8.75 3.5 -8"
@@ -215,31 +336,24 @@ export default function DiamondGallery() {
           width="6"
           src="url(/assets/marble/black_2.jpg)"
         ></a-box>
-        {/* __________________________________right-1 vertical painting */}
+        {/* __________________________________ eighth_number_box */}
+        <a-text
+          id="eighth_number_box"
+          position="8.5 3.5 -8"
+          rotation="0 -90 0"
+          width="15"
+          color="white"
+          value="8"
+          geometry="primitive:plane, src='#number_box'"
+          side="double"
+          align="center"
+          fontImage="url(/assets/marble/black_1.jpg)"
+          src="#number_box"
+        ></a-text>
+        {/* __________________________________ eighth_painting */}
         <a-box
           id="right_1_vertical_painting "
           position="8.55 2 -8"
-          rotation="0 90 0"
-          depth="0.2"
-          // ------------------------------------ //
-          src="url(\assets\paintings\p2.jpg)"
-          height="2.08"
-          width="4.1"
-        ></a-box>
-        {/* __________________________________right-2 vertical wall */}
-        <a-box
-          id="right-2 vertical wall "
-          position="8.75 3.5 -14"
-          rotation="0 90 0"
-          depth="0.5"
-          height="7"
-          width="6"
-          src="url(/assets/marble/black_2.jpg)"
-        ></a-box>
-           {/* __________________________________right-2 vertical painting */}
-           <a-box
-          id="right_2_vertical_painting "
-          position="8.55 2 -14"
           rotation="0 90 0"
           depth="0.2"
           // ------------------------------------ //
@@ -258,7 +372,33 @@ export default function DiamondGallery() {
           width="6"
           src="url(/assets/marble/black_2.jpg)"
         ></a-box>
-        {/* __________________________________top-1 horizontal wall */}
+        {/* __________________________________ top_0_number_box */}
+        <a-text
+          id="top_0_number_box"
+          position="-6 3.5 -16.7"
+          rotation="0 0 0"
+          width="15"
+          color="white"
+          value="5"
+          geometry="primitive:plane, src='#number_box'"
+          side="double"
+          align="center"
+          fontImage="url(/assets/marble/black_2.jpg)"
+          src="#number_box"
+        ></a-text>
+        {/* __________________________________top-0 horizontal painting */}
+        <a-box
+          id="top_0_horizontal_painting "
+          position="-6 2 -16.8"
+          rotation="0 0 0"
+          depth="0.2"
+          // ------------------------------------ //
+          src="url(\assets\paintings\p2.jpg)"
+          height="2.08"
+          width="4.1"
+        ></a-box>
+
+        {/* __________________________________ top_1_horizontal_wall */}
         <a-box
           id="top-1 horizontal wall "
           position="0 3.5 -17"
@@ -268,6 +408,20 @@ export default function DiamondGallery() {
           width="6"
           src="url(/assets/marble/black_2.jpg)"
         ></a-box>
+        {/* __________________________________ top_1_number_box */}
+        <a-text
+          id="top_1_number_box"
+          position="6 3.5 -16.7"
+          rotation="0 0 0"
+          width="15"
+          color="white"
+          value="6"
+          geometry="primitive:plane, src='#number_box'"
+          side="double"
+          align="center"
+          fontImage="url(/assets/marble/black_2.jpg)"
+          src="#number_box"
+        ></a-text>
         {/* __________________________________top-2 horizontal wall */}
         <a-box
           id="top-2 horizontal wall "
@@ -277,6 +431,18 @@ export default function DiamondGallery() {
           height="7"
           width="6"
           src="url(/assets/marble/black_2.jpg)"
+        ></a-box>
+
+        {/* __________________________________top-0 horizontal painting */}
+        <a-box
+          id="top_0_horizontal_painting "
+          position="6 2 -16.8"
+          rotation="0 0 0"
+          depth="0.2"
+          // ------------------------------------ //
+          src="url(\assets\paintings\p2.jpg)"
+          height="2.08"
+          width="4.1"
         ></a-box>
 
         <a-light
@@ -363,6 +529,8 @@ export default function DiamondGallery() {
           rotation="0 0 0"
           gltf-model="url(/assets/mini_sofa/scene.gltf)"
         ></a-entity>
+
+        <a-sphere position="0 2 0" color="yellow" radius="0.3"></a-sphere>
 
         <a-sky color="#ECECEC"></a-sky>
       </a-scene>
