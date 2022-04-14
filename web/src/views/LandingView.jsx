@@ -165,7 +165,7 @@ export default function LandingView() {
                       </div>
                       <div>
                         <button className="btn border-[#57240f] rounded-xl text-[#57240f] bg-[#ebd7bb] hover:bg-[#57240f] hover:text-[#ebd7bb] hover:scale-110 transform transition duration-400">
-                          view lots
+                          Details
                         </button>
                       </div>
                     </div>
@@ -187,7 +187,7 @@ export default function LandingView() {
                       </div>
                       <div>
                         <button className="btn border-[#57240f] rounded-xl text-[#57240f] bg-[#ebd7bb] hover:bg-[#57240f] hover:text-[#ebd7bb] hover:scale-110 transform transition duration-400">
-                          view lots
+                          Details
                         </button>
                       </div>
                     </div>
@@ -209,7 +209,7 @@ export default function LandingView() {
                       </div>
                       <div>
                         <button className="btn border-[#57240f] rounded-xl text-[#57240f] bg-[#ebd7bb] hover:bg-[#57240f] hover:text-[#ebd7bb] hover:scale-110 transform transition duration-400">
-                          view lots
+                          Details
                         </button>
                       </div>
                     </div>
@@ -231,7 +231,7 @@ export default function LandingView() {
                       </div>
                       <div>
                         <button className="btn border-[#57240f] rounded-xl text-[#57240f] bg-[#ebd7bb] hover:bg-[#57240f] hover:text-[#ebd7bb] hover:scale-110 transform transition duration-400">
-                          view lots
+                          Details
                         </button>
                       </div>
                     </div>
@@ -253,7 +253,7 @@ export default function LandingView() {
                       </div>
                       <div>
                         <button className="btn border-[#57240f] rounded-xl text-[#57240f] bg-[#ebd7bb] hover:bg-[#57240f] hover:text-[#ebd7bb] hover:scale-110 transform transition duration-400">
-                          view lots
+                          Details
                         </button>
                       </div>
                     </div>
