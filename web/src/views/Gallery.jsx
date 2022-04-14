@@ -26,28 +26,28 @@ export default function DiamondGallery() {
           <a-asset-item id="door" src="assets/carpets" />
         </a-assets>
 
-        {/* floor */}
+        {/* __________________________________floor */}
         <a-plane
           position="0 0 -4"
           rotation="-90 0 0"
           width="25"
-          height="24"
+          height="30"
           color="white"
-          // src="url(/assets/marble/black_2.jpg)"
+          src="url(/assets/marble/black_2.jpg)"
           repeat="5 5"
         ></a-plane>
 
-        {/* roof */}
-        {/* <a-box
+        {/* __________________________________roof */}
+        <a-box
           position="0 7 -4"
           rotation="-90 0 0"
           width="60"
           height="60"
           src="url(/assets/marble/black_2.jpg)"
           repeat="4 4"
-        ></a-box> */}
+        ></a-box>
 
-        {/* back elevator wall */}
+        {/* __________________________________back elevator wall */}
         <a-box
           position="0 3.5 7.75"
           depth="0.5"
@@ -55,26 +55,26 @@ export default function DiamondGallery() {
           width="12"
           src="url(/assets/marble/black_2.jpg)"
         ></a-box>
-        {/* left-side elevator wall */}
+        {/* __________________________________left-side elevator wall */}
         <a-box
           position="-2.75 3.5 4.5"
           rotation="0 90 0"
           depth="0.5"
           height="7"
           width="7"
-          color="red"
+          src="url(/assets/marble/black_2.jpg)"
         ></a-box>
-        {/* right-side elevator wall */}
+        {/* __________________________________right-side elevator wall */}
         <a-box
           position="2.75 3.5 4.5"
           rotation="0 90 0"
           depth="0.5"
           height="7"
           width="7"
-          src="url(/assets/wall/cream_1.jpg)"
+          src="url(/assets/marble/black_2.jpg)"
         ></a-box>
 
-        {/* bottom-left horizontal wall */}
+        {/* __________________________________bottom-left horizontal wall */}
         <a-box
           id="bottom-left horizontal wall "
           position="-6 3.5 1.25"
@@ -82,9 +82,21 @@ export default function DiamondGallery() {
           depth="0.5"
           height="7"
           width="6"
-          src="url(/assets/wall/cream_1.jpg)"
+          src="url(/assets/marble/black_2.jpg)"
         ></a-box>
-        {/* bottom-right horizontal wall */}
+        {/* __________________________________bottom-left horizontal painting */}
+        <a-box
+          id="bottom-left horizontal painting "
+          position="-6 2 1.05"
+          rotation="0 0 0"
+          depth="0.2"
+          // ------------------------------------ //
+          src="url(\assets\paintings\p2.jpg)"
+          height="2.08"
+          width="4.1"
+        ></a-box>
+
+        {/* __________________________________bottom-right horizontal wall */}
         <a-box
           id="bottom-right horizontal wall "
           position="6 3.5 1.25"
@@ -92,10 +104,21 @@ export default function DiamondGallery() {
           depth="0.5"
           height="7"
           width="6"
-          src="url(/assets/wall/cream_1.jpg)"
+          src="url(/assets/marble/black_2.jpg)"
+        ></a-box>
+        {/* __________________________________bottom_right_horizontal_painting */}
+        <a-box
+          id="bottom_right_horizontal_painting "
+          position="6 2 1.05"
+          rotation="0 0 0"
+          depth="0.2"
+          // ------------------------------------ //
+          src="url(\assets\paintings\p2.jpg)"
+          height="2.08"
+          width="4.1"
         ></a-box>
 
-        {/* left-0 vertical wall */}
+        {/* __________________________________left-0 vertical wall */}
         <a-box
           id="left-0 vertical wall "
           position="-8.75 3.5 -2"
@@ -103,9 +126,21 @@ export default function DiamondGallery() {
           depth="0.5"
           height="7"
           width="6"
-          src="url(/assets/wall/cream_1.jpg)"
+          src="url(/assets/marble/black_2.jpg)"
         ></a-box>
-        {/* left-1 vertical wall */}
+        {/* __________________________________left-0 vertical painting */}
+        <a-box
+          id="left_0_vertical_painting "
+          position="-8.55 2 -2"
+          rotation="0 90 0"
+          depth="0.2"
+          // ------------------------------------ //
+          src="url(\assets\paintings\p2.jpg)"
+          height="2.08"
+          width="4.1"
+        ></a-box>
+
+        {/* __________________________________left-1 vertical wall */}
         <a-box
           id="left-1 vertical wall "
           position="-8.75 3.5 -8"
@@ -113,20 +148,43 @@ export default function DiamondGallery() {
           depth="0.5"
           height="7"
           width="6"
-          src="url(/assets/wall/cream_1.jpg)"
+          src="url(/assets/marble/black_2.jpg)"
         ></a-box>
-        {/* left-2 vertical wall */}
+        {/* __________________________________left_1_vertical_painting */}
         <a-box
-          id="left-2 vertical wall "
+          id="left_1_vertical_painting"
+          position="-8.55 2 -8"
+          rotation="0 90 0"
+          depth="0.2"
+          // ------------------------------------ //
+          src="url(\assets\paintings\p2.jpg)"
+          height="2.08"
+          width="4.1"
+        ></a-box>
+
+        {/* __________________________________left-2 vertical wall */}
+        <a-box
+          id="left-2 vertical wall"
           position="-8.75 3.5 -14"
           rotation="0 90 0"
           depth="0.5"
           height="7"
           width="6"
-          src="url(/assets/wall/cream_1.jpg)"
+          src="url(/assets/marble/black_2.jpg)"
+        ></a-box>
+        {/* __________________________________left_2_vertical_painting */}
+        <a-box
+          id="left_2_vertical_painting"
+          position="-8.55 2 -14"
+          rotation="0 90 0"
+          depth="0.2"
+          // ------------------------------------ //
+          src="url(\assets\paintings\p2.jpg)"
+          height="2.08"
+          width="4.1"
         ></a-box>
 
-        {/* right-0 vertical wall */}
+        {/* __________________________________right-0 vertical wall */}
         <a-box
           id="right-0 vertical wall "
           position="8.75 3.5 -2"
@@ -134,9 +192,20 @@ export default function DiamondGallery() {
           depth="0.5"
           height="7"
           width="6"
-          src="url(/assets/wall/cream_1.jpg)"
+          src="url(/assets/marble/black_2.jpg)"
         ></a-box>
-        {/* right-1 vertical wall */}
+        {/* __________________________________right-0 vertical painting */}
+        <a-box
+          id="right_0_vertical_painting "
+          position="8.55 2 -2"
+          rotation="0 90 0"
+          depth="0.2"
+          // ------------------------------------ //
+          src="url(\assets\paintings\p2.jpg)"
+          height="2.08"
+          width="4.1"
+        ></a-box>
+        {/* __________________________________right-1 vertical wall */}
         <a-box
           id="right-1 vertical wall "
           position="8.75 3.5 -8"
@@ -144,9 +213,20 @@ export default function DiamondGallery() {
           depth="0.5"
           height="7"
           width="6"
-          src="url(/assets/wall/cream_1.jpg)"
+          src="url(/assets/marble/black_2.jpg)"
         ></a-box>
-        {/* right-2 vertical wall */}
+        {/* __________________________________right-1 vertical painting */}
+        <a-box
+          id="right_1_vertical_painting "
+          position="8.55 2 -8"
+          rotation="0 90 0"
+          depth="0.2"
+          // ------------------------------------ //
+          src="url(\assets\paintings\p2.jpg)"
+          height="2.08"
+          width="4.1"
+        ></a-box>
+        {/* __________________________________right-2 vertical wall */}
         <a-box
           id="right-2 vertical wall "
           position="8.75 3.5 -14"
@@ -154,10 +234,21 @@ export default function DiamondGallery() {
           depth="0.5"
           height="7"
           width="6"
-          src="url(/assets/wall/cream_1.jpg)"
+          src="url(/assets/marble/black_2.jpg)"
+        ></a-box>
+           {/* __________________________________right-2 vertical painting */}
+           <a-box
+          id="right_2_vertical_painting "
+          position="8.55 2 -14"
+          rotation="0 90 0"
+          depth="0.2"
+          // ------------------------------------ //
+          src="url(\assets\paintings\p2.jpg)"
+          height="2.08"
+          width="4.1"
         ></a-box>
 
-        {/* top-0 horizontal wall */}
+        {/* __________________________________top-0 horizontal wall */}
         <a-box
           id="top-0 horizontal wall "
           position="-6 3.5 -17"
@@ -165,9 +256,9 @@ export default function DiamondGallery() {
           depth="0.5"
           height="7"
           width="6"
-          src="url(/assets/wall/cream_1.jpg)"
+          src="url(/assets/marble/black_2.jpg)"
         ></a-box>
-        {/* top-1 horizontal wall */}
+        {/* __________________________________top-1 horizontal wall */}
         <a-box
           id="top-1 horizontal wall "
           position="0 3.5 -17"
@@ -175,9 +266,9 @@ export default function DiamondGallery() {
           depth="0.5"
           height="7"
           width="6"
-          src="url(/assets/wall/cream_1.jpg)"
+          src="url(/assets/marble/black_2.jpg)"
         ></a-box>
-        {/* top-2 horizontal wall */}
+        {/* __________________________________top-2 horizontal wall */}
         <a-box
           id="top-2 horizontal wall "
           position="6 3.5 -17"
@@ -185,7 +276,7 @@ export default function DiamondGallery() {
           depth="0.5"
           height="7"
           width="6"
-          src="url(/assets/wall/cream_1.jpg)"
+          src="url(/assets/marble/black_2.jpg)"
         ></a-box>
 
         <a-light
@@ -200,7 +291,7 @@ export default function DiamondGallery() {
           penumbra="0.4"
         ></a-light>
 
-        {/* top-right diamond light */}
+        {/* __________________________________top-right diamond light */}
         <a-light
           id="top_right_diamond_light"
           type="spot"
@@ -213,16 +304,6 @@ export default function DiamondGallery() {
           penumbra="0.4"
         ></a-light>
 
-        {/* top horizontal wall */}
-        {/* <a-box
-          id="top horizontal wall "
-          position="0 3.5 -16"
-          rotation="0 0 0"
-          depth="0.5"
-          height="7"
-          width="18"
-          src="url(/assets/wall/cream_1.jpg)"
-        ></a-box> */}
         {/* light for top wall painting */}
         <a-light
           id="top_diamond_light"
@@ -235,15 +316,6 @@ export default function DiamondGallery() {
           position="0 4.8 -11"
           penumbra="0.4"
         ></a-light>
-        {/* top diamond painting */}
-        <a-box
-          id="top_diamond_painting"
-          position="0 2.25 -15.25"
-          depth="0.2"
-          src="url(\assets\paintings\p2.jpg)"
-          height="2.08"
-          width="4.1"
-        ></a-box>
 
         {/* elevator */}
         <a-entity
@@ -275,13 +347,13 @@ export default function DiamondGallery() {
         ></a-light>
 
         {/* barrier */}
-        <a-entity
+        {/* <a-entity
           id="barrier"
           scale="1 1 1"
           position="0 0 -14.5"
           rotation="0 180 0"
           gltf-model="url(/assets/barrier/scene.gltf)"
-        ></a-entity>
+        ></a-entity> */}
 
         {/* sofa */}
         <a-entity
@@ -293,13 +365,6 @@ export default function DiamondGallery() {
         ></a-entity>
 
         <a-sky color="#ECECEC"></a-sky>
-        <a-text
-          position="0.345 3.38 4.70185"
-          rotation="0 180 0"
-          side="double"
-          value="Garnet"
-          text=""
-        ></a-text>
       </a-scene>
     </>
   );
