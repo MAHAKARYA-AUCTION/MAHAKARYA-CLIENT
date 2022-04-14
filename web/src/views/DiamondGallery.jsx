@@ -14,11 +14,12 @@ export default function DiamondGallery() {
         <a-camera
           position="0 2 0"
           wasd-controls-enabled="true"
+          wasd-controls="acceleration:25"
           fov="60"
           near="0.1"
           far="100"
         >
-          <a-cursor></a-cursor>
+          <a-cursor mouseCursorStylesEnabled="false"></a-cursor>
         </a-camera>
         <a-assets>
           <a-asset-item id="scene" src="assets/scene.gltf" />
@@ -37,13 +38,14 @@ export default function DiamondGallery() {
         ></a-plane>
 
         {/* roof */}
-        {/* <a-box
+        <a-box
           position="0 6 -4"
           rotation="-90 0 0"
           width="60"
           height="60"
-          color="beige"
-        ></a-box> */}
+          src="url(/assets/wall/cream_1.jpg)"
+          repeat="4 4"
+        ></a-box>
 
         {/* back lobby wall */}
         <a-box
@@ -137,20 +139,20 @@ export default function DiamondGallery() {
         ></a-box>
         {/* top-right diamond light */}
         <a-light
-          id="top-right diamond light"
+          id="top_right_diamond_light"
           type="spot"
           angle="50"
           color="white"
           intensity="0.6"
           distance="25"
           rotation="-45 -45 0"
-          position="6.8 4.8 -10.29"
+          position="6.8 4.8 -10.2"
           penumbra="0.4"
         ></a-light>
         {/* top_right_diamond_painting */}
         <a-box
           id="top_right_diamond_painting"
-          position="9 2.5 -11.83"
+          position="8.7 2.5 -12.00"
           rotation="0 135 0"
           depth="0.5"
           height={0.826 * 2}
@@ -166,6 +168,18 @@ export default function DiamondGallery() {
           width="11.5"
           src="url(/assets/wall/cream_1.jpg)"
         ></a-box>
+        {/* light for top wall painting */}
+        <a-light
+          id="top_diamond_light"
+          type="spot"
+          angle="50"
+          color="white"
+          intensity="0.6"
+          distance="25"
+          rotation="-45 0 0"
+          position="0 4.8 -11"
+          penumbra="0.4"
+        ></a-light>
         {/* top diamond painting */}
         <a-box
           id="top_diamond_painting"
@@ -195,18 +209,6 @@ export default function DiamondGallery() {
           intensity="0.8"
         ></a-light>
 
-        {/* light for top wall painting */}
-        <a-light
-          id="top_diamond_light"
-          type="spot"
-          angle="50"
-          color="white"
-          intensity="0.6"
-          distance="25"
-          rotation="-45 0 0"
-          position="0 4.8 -11"
-          penumbra="0.4"
-        ></a-light>
         {/* barrier */}
         <a-entity
           id="barrier"
@@ -216,7 +218,28 @@ export default function DiamondGallery() {
           gltf-model="url(/assets/barrier/scene.gltf)"
         ></a-entity>
 
+        {/* sofa */}
+        <a-entity
+          id="sofa"
+          scale="1 1 1"
+          position="0 0 -5"
+          rotation="0 0 0"
+          gltf-model="url(/assets/mini_sofa/scene.gltf)"
+        ></a-entity>
+
         <a-sky color="#ECECEC"></a-sky>
+
+        <a-text
+          position="-2.485 2 3"
+          rotation="0 90 0"
+          value="Gallery \nOnyx"
+        ></a-text>
+        <a-triangle
+          position="-2.485 2 1.75"
+          color="red"
+          side="double"
+          scale=".5 .5 .5"
+        ></a-triangle>
       </a-scene>
     </>
   );
