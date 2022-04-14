@@ -4,6 +4,8 @@ import LoginPage from '../src/views/LoginPage';
 
 import LandingView from "./views/LandingView";
 
+import LandingView from "./views/LandingView";
+
 function App() {
   return (
     <div className="App bg-[#ebd7bb] min-h-screen">

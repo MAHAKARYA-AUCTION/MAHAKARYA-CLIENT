@@ -30,7 +30,7 @@ export default function LandingView() {
               </div>
               <div className="flex-1">
                 <a className="poppins text-xl">
-                  <span className="barcode font-light text-2xl text-black-800">test</span> 21.4
+                  <span className="barcode font-light text-2xl">test</span> 21.4
                   MAHAKARYA
                 </a>
               </div>
