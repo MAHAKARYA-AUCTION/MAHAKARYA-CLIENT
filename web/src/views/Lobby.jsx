@@ -6,6 +6,12 @@ export default function VirtualAuctionHall() {
   const floorTransporter = () => {
     navigate("../gallery", { replace: true });
   };
+
+  const back = () => {
+    navigate("../", { replace: true });
+    var html = document.querySelector("html");
+    html.removeAttribute("class");
+  };
   return (
     <>
       <a-scene>
@@ -122,6 +128,8 @@ export default function VirtualAuctionHall() {
         <a-light type="ambient" color="white" intensity="0.5"></a-light>
 
         <a-sky color="#ECECEC"></a-sky>
+
+        <a-box color="pink" position="0 0 0" onClick={back}></a-box>
       </a-scene>
     </>
   );

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Navbar() {
   return (
     <>
@@ -49,9 +51,11 @@ export default function Navbar() {
           <div className="navbar-center hidden lg:flex">
             <ul className="menu-horizontal p-0 poppins text-xl font-semibold space-x-4">
               <li>
-                <button className="x-6 py-3 poppins font-semibold mr-2 hover:scale-110 transform transition duration-400">
-                  Menu 1
-                </button>
+                <Link to="/lobby">
+                  <button className="x-6 py-3 poppins font-semibold mr-2 hover:scale-110 transform transition duration-400">
+                    To Lobby
+                  </button>
+                </Link>
               </li>
               <li>
                 <button className="x-6 py-3 poppins font-semibold mr-2 hover:scale-110 transform transition duration-400">
