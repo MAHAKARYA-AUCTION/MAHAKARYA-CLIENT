@@ -121,13 +121,60 @@ export default function DetailLotView() {
                       Rp.4.700.000
                     </h1>
                   </div>
-                  <button
-                    className="px-6 poppins font-semibold text-3xl mr-2 hover:scale-110
+                  <div className="flex flex-col justify-center">
+                    <button
+                      className="btn bg-[#ebd7bb] px-6 poppins font-semibold text-3xl mr-2 hover:scale-110
                    transform transition duration-400 border-2 text-[#57240f] border-[#57240f]
-                    rounded-3xl hover:bg-[#57240f] hover:text-[#cdbba6]"
-                  >
-                    Bid
-                  </button>
+                    rounded-3xl hover:bg-[#57240f] hover:text-[#cdbba6]  text-center hover:border-0"
+                    >
+                      <label htmlFor="my-modal-5" className="modal-button">
+                        Bid
+                      </label>
+                    </button>
+                  </div>
+                  {/* START:BID MODAL */}
+                  <input
+                    type="checkbox"
+                    id="my-modal-5"
+                    className="modal-toggle"
+                  />
+                  <div className="modal ">
+                    <div className="modal-box w-10/12 relative bg-[#ebd7bb]">
+                      <label
+                        htmlFor="my-modal-5"
+                        className="btn btn-sm btn-circle absolute right-2 top-2 bg-[#57240f] hover:scale-125 transform transition duration-400 border-2 text-[#F8F1E7] border-[#57240f]
+                        rounded-3xl hover:bg-[#57240f] hover:text-[#cdbba6]  text-center hover:border-0"
+                      >
+                        ✕
+                      </label>
+                      <h3 className="font-bold text-2xl poppins">
+                        Enter Bid Amount
+                      </h3>
+                      <div className="form-control my-10 w-full">
+                        <label className="input-group">
+                          <input
+                            type="number"
+                            placeholder="0.01"
+                            className="input input-bordered w-full"
+                          />
+                          <span className="bg-[#675237] text-[#F8F1E7]">
+                            IDR
+                          </span>
+                        </label>
+                      </div>
+                      <div className="modal-action">
+                        <button
+                          className="btn bg-[#ebd7bb] px-6 poppins font-semibold text-3xl mr-2 hover:scale-110
+                   transform transition duration-400 border-2 text-[#57240f] border-[#57240f]
+                    rounded-3xl hover:bg-[#57240f] hover:text-[#cdbba6]  text-center hover:border-0"
+                        >
+                          <label htmlFor="my-modal-5" className="">
+                            Bid
+                          </label>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
               {/* END:Table Header */}
