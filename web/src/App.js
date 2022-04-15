@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import './App.css';
 import LoginPage from '../src/views/LoginPage';
 import LandingView from "./views/LandingView";
+import DetailLotView from "./views/DetailLotView";
 
 function App() {
   return (
@@ -14,7 +15,9 @@ function App() {
             <LoginPage />
           }
         />
+        <Route path="/lot/:id" element={<DetailLotView />} />
       </Routes>
+
     </div>
   );
 }

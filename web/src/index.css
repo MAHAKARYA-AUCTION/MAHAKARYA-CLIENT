@@ -61,3 +61,9 @@ code {
   background-position: bottom center;
   background-size: cover;
 }
+
+.imgDetail{
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: fit;
+}
