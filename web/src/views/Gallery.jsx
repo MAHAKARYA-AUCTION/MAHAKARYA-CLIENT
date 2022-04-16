@@ -13,17 +13,19 @@ export default function Gallery() {
 
   const [wholeData, setWholeData] = useState(null);
   const [data, setData] = useState(null);
+  const [sliceIndex, setSliceIndex] = useState([0, 10]);
 
   useEffect(() => {
     fetch(BASE_URL).then((response) =>
       response.json().then((x) => {
         x.map((y, index) => (y.number = index + 1));
         setWholeData(x);
-        setData(x.slice(null, 10));
+        setData(x.slice(sliceIndex[0], sliceIndex[1]));
       })
     );
   }, []);
   console.log(wholeData, 666);
+  console.log(data);
 
   const floorTransporter = () => {
     navigate("../lobby", { replace: true });
@@ -60,7 +62,12 @@ export default function Gallery() {
   }
 
   const toNextBatch = () => {
-    setData(wholeData.slice(10, 20));
+    if (wholeData[sliceIndex[0] + 10]) {
+      setSliceIndex([sliceIndex[0] + 10, sliceIndex[1] + 10]);
+    } else {
+      setSliceIndex([0, 10]);
+    }
+    setData(wholeData.slice(sliceIndex[0], sliceIndex[1]));
   };
 
   return (
@@ -196,7 +203,7 @@ export default function Gallery() {
                   penumbra="0.4"
                 ></a-light>
                 {/* __________________________________ first_number */}
-                {data && (
+                {data[0] && (
                   <a-text
                     position="-6 4 0.95"
                     rotation="0 180 0"
@@ -259,19 +266,21 @@ export default function Gallery() {
                   penumbra="0.4"
                 ></a-light>
                 {/* __________________________________ second_number_box */}
-                <a-text
-                  id="second_number_box"
-                  position="-8.5 4 -2"
-                  rotation="0 90 0"
-                  width="15"
-                  color="white"
-                  value="2"
-                  geometry="primitive:plane, src='#number_box'"
-                  side="double"
-                  align="center"
-                  fontImage="url(/assets/marble/black_1.jpg)"
-                  src="#number_box"
-                ></a-text>
+                {data[1] && (
+                  <a-text
+                    id="second_number_box"
+                    position="-8.5 4 -2"
+                    rotation="0 90 0"
+                    width="15"
+                    color="white"
+                    value={data[1].number}
+                    geometry="primitive:plane, src='#number_box'"
+                    side="double"
+                    align="center"
+                    fontImage="url(/assets/marble/black_1.jpg)"
+                    src="#number_box"
+                  ></a-text>
+                )}
                 {/* __________________________________ second_painting */}
                 {data[1] && (
                   <a-box
@@ -321,19 +330,21 @@ export default function Gallery() {
                   penumbra="0.4"
                 ></a-light>
                 {/* __________________________________ third_number_box */}
-                <a-text
-                  id="left_1_number_box"
-                  position="-8.5 4 -8"
-                  rotation="0 90 0"
-                  width="15"
-                  color="white"
-                  value="3"
-                  geometry="primitive:plane, src='#number_box'"
-                  side="double"
-                  align="center"
-                  fontImage="url(/assets/marble/black_1.jpg)"
-                  src="#number_box"
-                ></a-text>
+                {data[2] && (
+                  <a-text
+                    id="third_number_box"
+                    position="-8.5 4 -8"
+                    rotation="0 90 0"
+                    width="15"
+                    color="white"
+                    value={data[2].number}
+                    geometry="primitive:plane, src='#number_box'"
+                    side="double"
+                    align="center"
+                    fontImage="url(/assets/marble/black_1.jpg)"
+                    src="#number_box"
+                  ></a-text>
+                )}
                 {/* __________________________________ third_painting */}
                 {data[2] && (
                   <a-box
@@ -383,19 +394,21 @@ export default function Gallery() {
                   penumbra="0.4"
                 ></a-light>
                 {/* __________________________________ fourth_number_box */}
-                <a-text
-                  id="left_2_number_box"
-                  position="-8.5 4 -14"
-                  rotation="0 90 0"
-                  width="15"
-                  color="white"
-                  value="4"
-                  geometry="primitive:plane, src='#number_box'"
-                  side="double"
-                  align="center"
-                  fontImage="url(/assets/marble/black_1.jpg)"
-                  src="#number_box"
-                ></a-text>
+                {data[3] && (
+                  <a-text
+                    id="fourth_number_box"
+                    position="-8.5 4 -14"
+                    rotation="0 90 0"
+                    width="15"
+                    color="white"
+                    value={data[3].number}
+                    geometry="primitive:plane, src='#number_box'"
+                    side="double"
+                    align="center"
+                    fontImage="url(/assets/marble/black_1.jpg)"
+                    src="#number_box"
+                  ></a-text>
+                )}
                 {/* __________________________________ fourth_painting */}
                 {data[3] && (
                   <a-box
@@ -444,20 +457,22 @@ export default function Gallery() {
                   position="-6 5 -14"
                   penumbra="0.4"
                 ></a-light>
-                {/* __________________________________ fifth_number */}
-                <a-text
-                  id="top_0_number_box"
-                  position="-6 4 -16.7"
-                  rotation="0 0 0"
-                  width="15"
-                  color="white"
-                  value="5"
-                  geometry="primitive:plane, src='#number_box'"
-                  side="double"
-                  align="center"
-                  fontImage="url(/assets/marble/black_2.jpg)"
-                  src="#number_box"
-                ></a-text>
+                {/* __________________________________ fifth_number_box */}
+                {data[4] && (
+                  <a-text
+                    id="fifth_number_box"
+                    position="-6 4 -16.7"
+                    rotation="0 0 0"
+                    width="15"
+                    color="white"
+                    value={data[4].number}
+                    geometry="primitive:plane, src='#number_box'"
+                    side="double"
+                    align="center"
+                    fontImage="url(/assets/marble/black_2.jpg)"
+                    src="#number_box"
+                  ></a-text>
+                )}
                 {/* __________________________________ fifth_painting */}
                 {data[4] && (
                   <a-box
@@ -484,20 +499,22 @@ export default function Gallery() {
 
               {/* __________________________________ sixth */}
               <>
-                {/* __________________________________ sixth_number */}
-                <a-text
-                  id="top_1_number_box"
-                  position="6 3.5 -16.7"
-                  rotation="0 0 0"
-                  width="15"
-                  color="white"
-                  value="6"
-                  geometry="primitive:plane, src='#number_box'"
-                  side="double"
-                  align="center"
-                  fontImage="url(/assets/marble/black_2.jpg)"
-                  src="#number_box"
-                ></a-text>
+                {/* __________________________________ sixth_number_box */}
+                {data[5] && (
+                  <a-text
+                    id="sixth_number_box"
+                    position="6 3.5 -16.7"
+                    rotation="0 0 0"
+                    width="15"
+                    color="white"
+                    value={data[5].number}
+                    geometry="primitive:plane, src='#number_box'"
+                    side="double"
+                    align="center"
+                    fontImage="url(/assets/marble/black_2.jpg)"
+                    src="#number_box"
+                  ></a-text>
+                )}
                 {/* __________________________________ sixth_wall */}
                 <a-box
                   id="sixth_wall"
@@ -569,19 +586,21 @@ export default function Gallery() {
                   penumbra="0.4"
                 ></a-light>
                 {/* __________________________________ seventh_number_box */}
-                <a-text
-                  id="seventh_number_box"
-                  position="8.5 3.5 -14"
-                  rotation="0 -90 0"
-                  width="15"
-                  color="white"
-                  value="7"
-                  geometry="primitive:plane, src='#number_box'"
-                  side="double"
-                  align="center"
-                  fontImage="url(/assets/marble/black_1.jpg)"
-                  src="#number_box"
-                ></a-text>
+                {data[6] && (
+                  <a-text
+                    id="seventh_number_box"
+                    position="8.5 3.5 -14"
+                    rotation="0 -90 0"
+                    width="15"
+                    color="white"
+                    value="7"
+                    geometry="primitive:plane, src='#number_box'"
+                    side="double"
+                    align="center"
+                    fontImage="url(/assets/marble/black_1.jpg)"
+                    src="#number_box"
+                  ></a-text>
+                )}
                 {/* __________________________________ seventh_painting */}
                 {data[6] && (
                   <a-box
@@ -610,7 +629,7 @@ export default function Gallery() {
               <>
                 {/* __________________________________ eighth_wall */}
                 <a-box
-                  id="right-1 vertical wall "
+                  id="eighth_wall"
                   position="8.75 3.5 -8"
                   rotation="0 90 0"
                   depth="0.5"
@@ -619,6 +638,21 @@ export default function Gallery() {
                   src="url(/assets/marble/black_2.jpg)"
                 ></a-box>
                 {/* __________________________________ eighth_number_box */}
+                {data[7] && (
+                  <a-text
+                    id="eighth_number_box"
+                    position="8.5 3.5 -8"
+                    rotation="0 -90 0"
+                    width="15"
+                    color="white"
+                    value={data[7].number}
+                    geometry="primitive:plane, src='#number_box'"
+                    side="double"
+                    align="center"
+                    fontImage="url(/assets/marble/black_1.jpg)"
+                    src="#number_box"
+                  ></a-text>
+                )}
                 {/* __________________________________ eighth_light */}
                 <a-light
                   id="eighth_light"
@@ -631,19 +665,7 @@ export default function Gallery() {
                   position="6.5 5 -8"
                   penumbra="0.4"
                 ></a-light>
-                <a-text
-                  id="eighth_number_box"
-                  position="8.5 3.5 -8"
-                  rotation="0 -90 0"
-                  width="15"
-                  color="white"
-                  value="8"
-                  geometry="primitive:plane, src='#number_box'"
-                  side="double"
-                  align="center"
-                  fontImage="url(/assets/marble/black_1.jpg)"
-                  src="#number_box"
-                ></a-text>
+
                 {/* __________________________________ eighth_painting */}
                 {data[7] && (
                   <a-box
@@ -693,19 +715,21 @@ export default function Gallery() {
                   penumbra="0.4"
                 ></a-light>
                 {/* __________________________________ ninth_number_box */}
-                <a-text
-                  id="eighth_number_box"
-                  position="8.5 3.5 -2"
-                  rotation="0 -90 0"
-                  width="15"
-                  color="white"
-                  value="9"
-                  geometry="primitive:plane, src='#number_box'"
-                  side="double"
-                  align="center"
-                  fontImage="url(/assets/marble/black_1.jpg)"
-                  src="#number_box"
-                ></a-text>
+                {data[8] && (
+                  <a-text
+                    id="eighth_number_box"
+                    position="8.5 3.5 -2"
+                    rotation="0 -90 0"
+                    width="15"
+                    color="white"
+                    value="9"
+                    geometry="primitive:plane, src='#number_box'"
+                    side="double"
+                    align="center"
+                    fontImage="url(/assets/marble/black_1.jpg)"
+                    src="#number_box"
+                  ></a-text>
+                )}
                 {/* __________________________________ ninth_painting */}
                 {data[8] && (
                   <a-box
@@ -755,19 +779,21 @@ export default function Gallery() {
                   penumbra="0.4"
                 ></a-light>
                 {/* __________________________________ tenth_number_box */}
-                <a-text
-                  id="bottom_right_horizontal_number"
-                  position="6 3.5 0.95"
-                  rotation="0 180 0"
-                  width="15"
-                  color="white"
-                  value={data[9].number}
-                  geometry="primitive:plane, src='#number_box'"
-                  side="double"
-                  align="center"
-                  fontImage="url(/assets/marble/black_1.jpg)"
-                  src="#number_box"
-                ></a-text>
+                {data[9] && (
+                  <a-text
+                    id="bottom_right_horizontal_number"
+                    position="6 3.5 0.95"
+                    rotation="0 180 0"
+                    width="15"
+                    color="white"
+                    value={data[9].number}
+                    geometry="primitive:plane, src='#number_box'"
+                    side="double"
+                    align="center"
+                    fontImage="url(/assets/marble/black_1.jpg)"
+                    src="#number_box"
+                  ></a-text>
+                )}
                 {/* __________________________________ tenth_painting */}
                 {data[9] && (
                   <a-box
