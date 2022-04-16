@@ -3,6 +3,7 @@ import './App.css';
 import LoginPage from '../src/views/LoginPage';
 import LandingView from "./views/LandingView";
 import DetailLotView from "./views/DetailLotView";
+import DetailCollection from "./views/DetailCollection";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <LoginPage />
           }
         />
+        <Route path="/collection/:id" element={<DetailCollection />} />
         <Route path="/lot/:id" element={<DetailLotView />} />
       </Routes>
 

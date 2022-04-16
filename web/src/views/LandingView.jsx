@@ -1,5 +1,6 @@
 import FeaturedCollection from "../components/featuredCollection";
 import Navbar from "../components/navbar";
+import Footer from "../components/footer";
 
 export default function LandingView() {
   return (
@@ -56,7 +57,7 @@ export default function LandingView() {
         </div>
         {/* END:LINE BREAK */}
         {/* START:COLLECTION OVERVIEW*/}
-        <div className="min-h-screen space-y-16 w-[80%] mx-auto">
+        <div className="min-h-screen space-y-16 w-[80%] mx-auto ">
           <div className="flex flex-row justify-evenly p-5 space-x-28">
             <div className="w-[50%]">
               <h1 className="font-bosque text-7xl font-bold text-center ">
@@ -257,17 +258,7 @@ export default function LandingView() {
         </div>
         {/* END:COLLECTION OVERVIEW*/}
       </div>
-      <div className="bg-[#675237] h-[8rem] text-[#ebd7bb] w-full py-5 grid grid-rows-3 mt-10 items-baseline">
-        <h1>Follow Us</h1>
-        <div className="flex flex-row justify-center space-x-5 mt-3">
-          <button className="fa-brands fa-youtube fa-2xl hover:scale-125 transform transition duration-400"></button>
-          <button className="fa-brands fa-twitter fa-2xl hover:scale-125 transform transition duration-400"></button>
-          <button className="fa-brands fa-instagram fa-2xl hover:scale-125 transform transition duration-400"></button>
-          <button className="fa-brands fa-facebook fa-2xl hover:scale-125 transform transition duration-400"></button>
-          <button className="fa-brands fa-pinterest fa-2xl hover:scale-125 transform transition duration-400"></button>
-        </div>
-        <h1>&#169; Mahakarya 2022</h1>
-      </div>
+      <Footer />
       {/* END:CONTENT PAGE */}
     </div>
   );

@@ -1,5 +1,6 @@
 import Navbar from "../components/navbar";
 import Slider from "react-slick";
+import Footer from "../components/footer";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useBarcode } from "react-barcodes";
@@ -7,7 +8,7 @@ import { useCountdown } from "../hooks/useCountdown";
 
 export default function DetailLotView() {
   // Placeholder Time
-  var tomorrow = new Date("16 Apr 2022");
+  var tomorrow = new Date("17 Apr 2022");
   // tomorrow.setDate(tomorrow.getDate() + 1);
 
   const [days, hours, minutes, seconds] = useCountdown(tomorrow);
@@ -29,9 +30,9 @@ export default function DetailLotView() {
     },
   });
   return (
-    <div className="flex flex-col justify-between h-min-screen py-10">
+    <div className="flex flex-col justify-between pt-10">
       <Navbar />
-      <div className="w-[80vw] mx-auto mt-10 h-[90vh]">
+      <div className="w-[80vw] mx-auto my-10 min-h-[80vh]">
         <div className="flex flex-row h-full">
           <div className="w-1/2 flex flex-col">
             {/* START:IMAGE CAROUSEL */}
@@ -61,7 +62,7 @@ export default function DetailLotView() {
               <img ref={inputRef} className="w-1/3" />,
             </div>
             <div className="flex flex-col font-poppins text-xl text-left pt-4">
-              <table className="w-1/3">
+              <table className="w-1/2">
                 <tbody>
                   <tr>
                     <td>Size</td>
@@ -178,9 +179,9 @@ export default function DetailLotView() {
                 </div>
               </div>
               {/* END:Table Header */}
-              <div className="relative collapse-content overflow-auto w-full scrollbar-thin scrollbar-thumb-amber-900 scrollbar-track-[#cdbba6] z-50">
-                <table className="table w-full sticky">
-                  <thead>
+              <div className="collapse-content overflow-x-auto w-full z-50 table-bid scrollbar-thin scrollbar-thumb-amber-900 scrollbar-track-[#cdbba6] ">
+                <table className="table relative w-full bid-table ">
+                  <thead className="sticky">
                     <tr>
                       <th className="bg-[#b58e67]"></th>
                       <th className="bg-[#b58e67]">Price</th>
@@ -256,6 +257,7 @@ export default function DetailLotView() {
                       </td>
                       <td className="bg-[#F8F1E7] text-xl">Jhonny Krugger</td>
                     </tr>
+                    {/* ????????????????????????????/ */}
                   </tbody>
                 </table>
               </div>
@@ -263,6 +265,7 @@ export default function DetailLotView() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

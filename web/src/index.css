@@ -62,8 +62,20 @@ code {
   background-size: cover;
 }
 
+.collection-banner {
+  height: 700px !important;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
 .imgDetail{
   background-repeat: no-repeat;
   background-position: center center;
   background-size: fit;
+}
+
+.table-bid{
+  height: fit-content !important;
+  max-height: 40vh !important;
 }
