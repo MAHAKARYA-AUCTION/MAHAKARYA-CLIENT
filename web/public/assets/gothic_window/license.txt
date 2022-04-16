@@ -1,0 +1,11 @@
+Model Information:
+* title:	Gothic Window
+* source:	https://sketchfab.com/3d-models/gothic-window-371f87b2f6564e48919be1e97cf360c2
+* author:	Mário Mendes (https://sketchfab.com/mariomendesdeveloper)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Gothic Window" (https://sketchfab.com/3d-models/gothic-window-371f87b2f6564e48919be1e97cf360c2) by Mário Mendes (https://sketchfab.com/mariomendesdeveloper) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

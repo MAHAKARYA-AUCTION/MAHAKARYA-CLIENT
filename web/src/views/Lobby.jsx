@@ -16,8 +16,10 @@ export default function VirtualAuctionHall() {
     <>
       <a-scene>
         <a-camera
-          position="0 2 0"
+          position="0 2 5"
           wasd-controls-enabled="true"
+          wasd-controls="acceleration:25"
+          look-controls="pointerLockEnabled:true"
           fov="60"
           near="0.1"
           far="100"
@@ -37,25 +39,54 @@ export default function VirtualAuctionHall() {
           rotation="-90 0 0"
           width="12"
           height="24"
-          color="#7BC8A4"
+          src="url(/assets/wood_parquet/seamless_texture_rovere_wood_parquet_DIFFUSE.jpg)"
         ></a-plane>
 
+        {/* left_door */}
+        <a-entity
+          id="left_door"
+          onClick={back}
+          scale="1.4 1.4 1.4"
+          position="0.8 0 7.5"
+          rotation="0 180 0"
+          gltf-model="url(/assets/door/scene.gltf)"
+        ></a-entity>
+        {/* right_door */}
+        <a-entity
+          id="right_door"
+          onClick={back}
+          scale="1.4 1.4 1.4"
+          position="-0.8 0 7.5"
+          rotation="0 0 0"
+          gltf-model="url(/assets/door/scene.gltf)"
+        ></a-entity>
+
+        {/* omni light */}
+        <a-light
+          id="omni_light"
+          position="0 2 0"
+          angle="360"
+          type="ambient"
+          color="white"
+          intensity="0.8"
+        ></a-light>
+
         {/* roof */}
-        <a-box
+        {/* <a-box
           position="0 5 -4"
           rotation="-90 0 0"
           width="12"
           height="24"
           color="beige"
-        ></a-box>
+        ></a-box> */}
 
-        {/* back lobby wall */}
         <a-box
+          id="right_side_elevator_wall"
           position="0 2.5 7.75"
           depth="0.5"
           height="5"
           width="12"
-          color="green"
+          src={"url(/assets/marble/black_2.jpg)"}
         ></a-box>
 
         {/* left-side lobby wall */}
@@ -65,7 +96,7 @@ export default function VirtualAuctionHall() {
           depth="0.5"
           height="5"
           width="14"
-          color="pink"
+          src={"url(/assets/marble/black_2.jpg)"}
         ></a-box>
         {/* right-side lobby wall */}
         <a-box
@@ -74,34 +105,36 @@ export default function VirtualAuctionHall() {
           depth="0.5"
           height="5"
           width="14"
-          color="blue"
+          src={"url(/assets/marble/black_2.jpg)"}
         ></a-box>
 
         {/* left-side elevator wall */}
         <a-box
+          id="left_side_elevator_wall"
           position="-3.5 2.5 -6"
           depth="0.5"
           height="5"
           width="5"
-          color="aqua"
+          src={"url(/assets/marble/black_2.jpg)"}
         ></a-box>
 
-        {/* left-side elevator wall */}
+        {/* right_side_elevator_wall */}
         <a-box
           id="right_side_elevator_wall"
           position="3.5 2.5 -6"
           depth="0.5"
           height="5"
           width="5"
-          color="tomato"
+          src={"url(/assets/marble/black_2.jpg)"}
         ></a-box>
+        {/* above_elevator_wall */}
         <a-box
-          id="right_side_elevator_wall"
-          position="0 4.1 -6"
+          id="above_elevator_wall"
+          position="0 4 -6"
           depth="0.5"
-          height="1"
+          height="2"
           width="5"
-          color="red"
+          src={"url(/assets/marble/black_2.jpg)"}
         ></a-box>
 
         {/* left front plant */}
@@ -128,8 +161,6 @@ export default function VirtualAuctionHall() {
         <a-light type="ambient" color="white" intensity="0.5"></a-light>
 
         <a-sky color="#ECECEC"></a-sky>
-
-        <a-box color="pink" position="0 0 0" onClick={back}></a-box>
       </a-scene>
     </>
   );

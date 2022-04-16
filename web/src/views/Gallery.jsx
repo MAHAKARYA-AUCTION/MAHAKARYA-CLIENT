@@ -1,4 +1,6 @@
 import "aframe";
+import "aframe-extras";
+import "aframe-fps-look-controls-component";
 import anime from "animejs/lib/anime.es.js";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -9,17 +11,19 @@ export default function Gallery() {
   const navigate = useNavigate();
   const BASE_URL = "http://localhost:3000/lots";
 
+  const [wholeData, setWholeData] = useState(null);
   const [data, setData] = useState(null);
 
   useEffect(() => {
     fetch(BASE_URL).then((response) =>
       response.json().then((x) => {
         x.map((y, index) => (y.number = index + 1));
-        setData(x);
+        setWholeData(x);
+        setData(x.slice(null, 10));
       })
     );
   }, []);
-  console.log(data, 666);
+  console.log(wholeData, 666);
 
   const floorTransporter = () => {
     navigate("../lobby", { replace: true });
@@ -55,18 +59,27 @@ export default function Gallery() {
     });
   }
 
+  const toNextBatch = () => {
+    setData(wholeData.slice(10, 20));
+  };
+
   return (
     <>
       <a-scene>
         <a-camera
           position="0 2 0"
           wasd-controls-enabled="true"
+          wasd-controls="acceleration:25"
+          look-controls="
+          pointerLockEnabled: true;
+          "
           fov="60"
           near="0.1"
           far="100"
         >
           <a-cursor></a-cursor>
         </a-camera>
+
         {/* __________________________________ assets */}
         <>
           <a-assets>
@@ -82,7 +95,7 @@ export default function Gallery() {
           </a-assets>
         </>
 
-        {/* __________________________________floor */}
+        {/* __________________________________ floor */}
         <a-plane
           position="0 0 -4"
           rotation="-90 0 0"
@@ -93,15 +106,15 @@ export default function Gallery() {
           repeat="5 5"
         ></a-plane>
 
-        {/* __________________________________roof */}
-        {/* <a-box
+        {/* __________________________________ roof */}
+        <a-box
           position="0 7 -4"
           rotation="-90 0 0"
           width="60"
           height="60"
           src="url(/assets/marble/black_2.jpg)"
           repeat="4 4"
-        ></a-box> */}
+        ></a-box>
 
         {/* elevator and elevator walls */}
         <>
@@ -198,7 +211,7 @@ export default function Gallery() {
                   ></a-text>
                 )}
                 {/* __________________________________ first_painting */}
-                {data && (
+                {data[0] && (
                   <a-box
                     id="first_painting"
                     onClick={() => {
@@ -260,7 +273,7 @@ export default function Gallery() {
                   src="#number_box"
                 ></a-text>
                 {/* __________________________________ second_painting */}
-                {data && (
+                {data[1] && (
                   <a-box
                     id="second_painting "
                     onClick={() => {
@@ -276,7 +289,7 @@ export default function Gallery() {
                     rotation="0 90 0"
                     depth="0.2"
                     // ------------------------------------ //
-                    src={data[1].primaryImage}
+                    src={data[1]?.primaryImage}
                     height={data[1].height / 100}
                     width={data[1].width / 100}
                   ></a-box>
@@ -322,7 +335,7 @@ export default function Gallery() {
                   src="#number_box"
                 ></a-text>
                 {/* __________________________________ third_painting */}
-                {data && (
+                {data[2] && (
                   <a-box
                     id="left_1_vertical_painting"
                     onClick={() => {
@@ -384,7 +397,7 @@ export default function Gallery() {
                   src="#number_box"
                 ></a-text>
                 {/* __________________________________ fourth_painting */}
-                {data && (
+                {data[3] && (
                   <a-box
                     id="left_2_vertical_painting"
                     onClick={() => {
@@ -446,7 +459,7 @@ export default function Gallery() {
                   src="#number_box"
                 ></a-text>
                 {/* __________________________________ fifth_painting */}
-                {data && (
+                {data[4] && (
                   <a-box
                     id="fifth_painting"
                     onClick={() => {
@@ -508,25 +521,27 @@ export default function Gallery() {
                   penumbra="0.4"
                 ></a-light>
                 {/* __________________________________ sixth_painting */}
-                <a-box
-                  id="sixth_painting"
-                  onClick={() => {
-                    Swal.fire({
-                      title: data[5].name,
-                      text: `Created by: ${data[5].artistName}`,
-                      imageUrl: data[5].primaryImage,
-                      imageWidth: data[5].width,
-                      imageHeight: data[5].height,
-                    });
-                  }}
-                  position="6 2 -16.8"
-                  rotation="0 0 0"
-                  depth="0.2"
-                  // ------------------------------------ //
-                  src={data[5].primaryImage}
-                  height={data[5].height / 100}
-                  width={data[5].width / 100}
-                ></a-box>
+                {data[5] && (
+                  <a-box
+                    id="sixth_painting"
+                    onClick={() => {
+                      Swal.fire({
+                        title: data[5].name,
+                        text: `Created by: ${data[5].artistName}`,
+                        imageUrl: data[5].primaryImage,
+                        imageWidth: data[5].width,
+                        imageHeight: data[5].height,
+                      });
+                    }}
+                    position="6 2 -16.8"
+                    rotation="0 0 0"
+                    depth="0.2"
+                    // ------------------------------------ //
+                    src={data[5].primaryImage}
+                    height={data[5].height / 100}
+                    width={data[5].width / 100}
+                  ></a-box>
+                )}
               </>
 
               {/* __________________________________ seventh */}
@@ -568,7 +583,7 @@ export default function Gallery() {
                   src="#number_box"
                 ></a-text>
                 {/* __________________________________ seventh_painting */}
-                {data && (
+                {data[6] && (
                   <a-box
                     id="seventh_painting"
                     onClick={() => {
@@ -630,7 +645,7 @@ export default function Gallery() {
                   src="#number_box"
                 ></a-text>
                 {/* __________________________________ eighth_painting */}
-                {data && (
+                {data[7] && (
                   <a-box
                     id="right_1_vertical_painting "
                     onClick={() => {
@@ -692,7 +707,7 @@ export default function Gallery() {
                   src="#number_box"
                 ></a-text>
                 {/* __________________________________ ninth_painting */}
-                {data && (
+                {data[8] && (
                   <a-box
                     id="right_0_vertical_painting "
                     onClick={() => {
@@ -754,7 +769,7 @@ export default function Gallery() {
                   src="#number_box"
                 ></a-text>
                 {/* __________________________________ tenth_painting */}
-                {data && (
+                {data[9] && (
                   <a-box
                     id="bottom_right_horizontal_painting "
                     onClick={() => {
@@ -823,6 +838,24 @@ export default function Gallery() {
           geometry=""
         ></a-triangle>
 
+        {/* window */}
+        <a-entity
+          id="window"
+          scale="1.5 1.5 1"
+          position="0 2.8 -15.18"
+          rotation="0 0 0"
+          gltf-model="/assets/gothic_window/scene.gltf"
+        ></a-entity>
+
+        {/* chandelier */}
+        <a-entity
+          id="chandelier"
+          scale=".04 .04 .04"
+          position="0 5 -7.75"
+          rotation="0 0 0"
+          gltf-model="/assets/chandelier/scene.gltf"
+        ></a-entity>
+
         {/* omni light */}
         <a-light
           id="omni_light"
@@ -832,6 +865,7 @@ export default function Gallery() {
           color="white"
           intensity="0.8"
         ></a-light>
+
         {/* barrier */}
         {/* <a-entity
           id="barrier"
@@ -871,13 +905,15 @@ export default function Gallery() {
         ></a-cone>
         <a-cone
           id="right_cone"
+          onClick={() => {
+            toNextBatch();
+          }}
           color="tomato"
           height="0.2"
           radius-bottom="0.1"
           radius-top="0.001"
           rotation="0 0 -90"
           position="0 1.5 -8"
-          // position="-0.8 1.5 -8"
         ></a-cone>
         {/* <a-box
           position="-1 1.6 -5"
