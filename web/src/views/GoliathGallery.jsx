@@ -69,6 +69,14 @@ export default function Gallery() {
     }
     setData(wholeData.slice(sliceIndex[0], sliceIndex[1]));
   };
+  const toPreviousBatch = () => {
+    if (sliceIndex[0] - 10 > 0) {
+      setSliceIndex([sliceIndex[0] - 10, sliceIndex[1] - 10]);
+    } else {
+      setSliceIndex([0, 10]);
+    }
+    setData(wholeData.slice(sliceIndex[0], sliceIndex[1]));
+  };
 
   return (
     <>
@@ -921,6 +929,9 @@ export default function Gallery() {
         ></a-sphere>
         <a-cone
           id="left_cone"
+          onClick={() => {
+            toPreviousBatch();
+          }}
           color="tomato"
           height="0.2"
           radius-bottom="0.1"

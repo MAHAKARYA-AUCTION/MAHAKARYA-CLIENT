@@ -1,7 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 
 import Lobby from "./views/Lobby";
-import Gallery from "./views/Gallery";
+import GoliathGallery from "./views/GoliathGallery";
+import DavidGallery from "./views/DavidGallery";
 import "./App.css";
 import LoginPage from "../src/views/LoginPage";
 import LandingView from "./views/LandingView";
@@ -13,7 +14,8 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingView />} />
         <Route path="/lobby" element={<Lobby />} />
-        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/goliath-gallery" element={<GoliathGallery />} />
+        <Route path="/david-gallery" element={<DavidGallery />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/lot/:id" element={<DetailLotView />} />
       </Routes>
