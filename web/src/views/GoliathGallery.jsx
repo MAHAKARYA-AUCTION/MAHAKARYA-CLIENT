@@ -210,9 +210,10 @@ export default function Gallery() {
                   position="-6 5 -1"
                   penumbra="0.4"
                 ></a-light>
-                {/* __________________________________ first_number */}
+                {/* __________________________________ first_number_box */}
                 {data[0] && (
                   <a-text
+                    id="first_number_box"
                     position="-6 4 0.95"
                     rotation="0 180 0"
                     width="15"

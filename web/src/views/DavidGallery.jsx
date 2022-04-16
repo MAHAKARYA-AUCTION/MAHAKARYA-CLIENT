@@ -12,7 +12,7 @@ export default function DavidGallery() {
 
   const [wholeData, setWholeData] = useState(null);
   const [data, setData] = useState(null);
-  const [sliceIndex, setSliceIndex] = useState([0, 10]);
+  const [sliceIndex, setSliceIndex] = useState([0, 5]);
 
   useEffect(() => {
     fetch(BASE_URL).then((response) =>
@@ -61,18 +61,18 @@ export default function DavidGallery() {
   }
 
   const toNextBatch = () => {
-    if (wholeData[sliceIndex[0] + 10]) {
-      setSliceIndex([sliceIndex[0] + 10, sliceIndex[1] + 10]);
+    if (wholeData[sliceIndex[0] + 5]) {
+      setSliceIndex([sliceIndex[0] + 5, sliceIndex[1] + 5]);
     } else {
-      setSliceIndex([0, 10]);
+      setSliceIndex([0, 5]);
     }
     setData(wholeData.slice(sliceIndex[0], sliceIndex[1]));
   };
   const toPreviousBatch = () => {
-    if (sliceIndex[0] - 10 > 0) {
-      setSliceIndex([sliceIndex[0] - 10, sliceIndex[1] - 10]);
+    if (sliceIndex[0] - 5 > 0) {
+      setSliceIndex([sliceIndex[0] - 5, sliceIndex[1] - 5]);
     } else {
-      setSliceIndex([0, 10]);
+      setSliceIndex([0, 5]);
     }
     setData(wholeData.slice(sliceIndex[0], sliceIndex[1]));
   };
@@ -94,100 +94,355 @@ export default function DavidGallery() {
           <a-cursor></a-cursor>
         </a-camera>
 
-        {/* left_wall */}
-        <a-box
-          id="left_wall"
-          position="-5 2.5 1.25"
-          rotation="0 0 0"
-          depth="0.5"
-          height="5"
-          width="4"
-          src={"url(/assets/marble/black_2.jpg)"}
-        ></a-box>
-        {/* intx_bot pillar */}
-        <a-box
-          id="left_wall"
-          position="-7 2.5 1.25"
-          rotation="0 0 0"
-          depth="1.5"
-          height="5"
-          width="1.5"
-          color="red"
-          src={"url(/assets/marble/black_2.jpg)"}
-        ></a-box>
-        {/* first_wall */}
-        <a-box
-          id="first_wall"
-          position="-7d 2.5 -1.25"
-          rotation="0 90 0"
-          depth="0.5"
-          height="5"
-          width="4"
-          src={"url(/assets/marble/black_2.jpg)"}
-        ></a-box>
-        {/* __________________________________ first_painting */}
-        {data[0] && (
+        {/* __________________________________ intersection pillars */}
+        <>
+          {/* __________________________________ intx_bot_pillar */}
           <a-box
-            id="first_painting "
-            onClick={() => {
-              Swal.fire({
-                title: data[0].name,
-                text: `Created by: ${data[0].artistName}`,
-                imageUrl: data[0].primaryImage,
-                imageWidth: data[0].width,
-                imageHeight: data[0].height,
-              });
-            }}
-            position="-8.55 2 -2"
-            rotation="0 90 0"
-            depth="0.2"
-            // ------------------------------------ //
-            src={data[0].primaryImage}
-            height={data[0].height / 100}
-            width={data[0].width / 100}
+            id="left_wall"
+            position="-7 2.5 1.25"
+            rotation="0 0 0"
+            depth="1.5"
+            height="5"
+            width="1.5"
+            color="red"
+            src={"url(/assets/marble/black_2.jpg)"}
           ></a-box>
-        )}
-        {/* second_wall */}
-        <a-box
-          id="second_wall"
-          position="-7 2.5 -5.25"
-          rotation="0 90 0"
-          depth="0.5"
-          height="5"
-          width="4"
-          src={"url(/assets/marble/black_2.jpg)"}
-        ></a-box>
-        {/* third_wall */}
-        <a-box
-          id="third_wall"
-          position="-7d 2.5 -9.25"
-          rotation="0 90 0"
-          depth="0.5"
-          height="5"
-          width="4"
-          src={"url(/assets/marble/black_2.jpg)"}
-        ></a-box>
-        {/* intx_bot pillar */}
-        <a-box
-          id="left_wall"
-          position="-7 2.5 -11.25"
-          rotation="0 0 0"
-          depth="1.5"
-          height="5"
-          width="1.5"
-          color="red"
-          src={"url(/assets/marble/black_2.jpg)"}
-        ></a-box>
-        {/* left_top_wall */}
-        <a-box
-          id="left_top_wall"
-          position="-5 2.5 -11.25"
-          rotation="0 0 0"
-          depth="0.5"
-          height="5"
-          width="4"
-          src={"url(/assets/marble/black_2.jpg)"}
-        ></a-box>
+          {/* __________________________________ intx_bot pillar */}
+          <a-box
+            id="left_wall"
+            position="-7 2.5 -11.25"
+            rotation="0 0 0"
+            depth="1.5"
+            height="5"
+            width="1.5"
+            color="red"
+            src={"url(/assets/marble/black_2.jpg)"}
+          ></a-box>
+        </>
+
+        {/* __________________________________ paintings */}
+        <>
+          {data && (
+            <>
+              {/* first */}
+              <>
+                {/* __________________________________ first_wall */}
+                <a-box
+                  id="first_wall"
+                  position="-5 2.5 1.25"
+                  rotation="0 0 0"
+                  depth="0.5"
+                  height="5"
+                  width="4"
+                  src={"url(/assets/marble/black_2.jpg)"}
+                ></a-box>
+                {/* __________________________________ first_light */}
+                <a-light
+                  id="first_light"
+                  type="spot"
+                  angle="50"
+                  color="white"
+                  intensity="0.6"
+                  distance="25"
+                  rotation="-45 180 0"
+                  position="-5 4.25 -1"
+                  penumbra="0.4"
+                ></a-light>
+                {/* __________________________________ first_number_box */}
+                {data[0] && (
+                  <a-text
+                    id="first_number_box"
+                    position="-4.5 4 0.95"
+                    rotation="0 180 0"
+                    width="15"
+                    color="white"
+                    value={data[0].number}
+                    geometry="primitive:plane, src='#number_box'"
+                    side="double"
+                    align="center"
+                    fontImage="url(/assets/marble/black_2.jpg)"
+                    src="#number_box"
+                  ></a-text>
+                )}
+                {/* __________________________________ first_painting */}
+                {data[0] && (
+                  <a-box
+                    id="first_painting "
+                    onClick={() => {
+                      Swal.fire({
+                        title: data[0].name,
+                        text: `Created by: ${data[0].artistName}`,
+                        imageUrl: data[0].primaryImage,
+                        imageWidth: data[0].width,
+                        imageHeight: data[0].height,
+                      });
+                    }}
+                    position="-4.5 2 1"
+                    rotation="0 0 0"
+                    depth="0.2"
+                    // ------------------------------------ //
+                    src={data[0].primaryImage}
+                    height={data[0].height / 100}
+                    width={data[0].width / 100}
+                  ></a-box>
+                )}
+              </>
+              {/* second */}
+              <>
+                {/* __________________________________ second_wall */}
+                <a-box
+                  id="second_wall"
+                  position="-7 2.5 -1.25"
+                  rotation="0 90 0"
+                  depth="0.5"
+                  height="5"
+                  width="4"
+                  src={"url(/assets/marble/black_2.jpg)"}
+                ></a-box>
+                {/* __________________________________ second_light */}
+                <a-light
+                  id="second_light"
+                  type="spot"
+                  angle="50"
+                  color="white"
+                  intensity="0.6"
+                  distance="25"
+                  rotation="-45 90 0"
+                  position="-4.5 4.25 -1.25"
+                  penumbra="0.4"
+                ></a-light>
+                {/* __________________________________ second_number_box */}
+                {data[1] && (
+                  <a-text
+                    id="second_number_box"
+                    position="-6.75 4 -1.25"
+                    rotation="0 90 0"
+                    width="15"
+                    color="white"
+                    value={data[1].number}
+                    geometry="primitive:plane, src='#number_box'"
+                    side="double"
+                    align="center"
+                    fontImage="url(/assets/marble/black_2.jpg)"
+                    src="#number_box"
+                  ></a-text>
+                )}
+                {/* __________________________________ second_painting */}
+                {data[1] && (
+                  <a-box
+                    id="second_painting "
+                    onClick={() => {
+                      Swal.fire({
+                        title: data[1].name,
+                        text: `Created by: ${data[1].artistName}`,
+                        imageUrl: data[1].primaryImage,
+                        imageWidth: data[1].width,
+                        imageHeight: data[1].height,
+                      });
+                    }}
+                    position="-6.8 2 -1.25"
+                    rotation="0 90 0"
+                    depth="0.2"
+                    // ------------------------------------ //
+                    src={data[1].primaryImage}
+                    height={data[1].height / 100}
+                    width={data[1].width / 100}
+                  ></a-box>
+                )}
+              </>
+              {/* third */}
+              <>
+                {/* __________________________________ third_wall */}
+                <a-box
+                  id="third_wall"
+                  position="-7 2.5 -5.25"
+                  rotation="0 90 0"
+                  depth="0.5"
+                  height="5"
+                  width="4"
+                  src={"url(/assets/marble/black_2.jpg)"}
+                ></a-box>
+                {/* __________________________________ third_light */}
+                <a-light
+                  id="third_light"
+                  type="spot"
+                  angle="50"
+                  color="white"
+                  intensity="0.6"
+                  distance="25"
+                  rotation="-45 90 0"
+                  position="-4.5 4.25 -5.25"
+                  penumbra="0.4"
+                ></a-light>
+                {/* __________________________________ third_number_box */}
+                {data[2] && (
+                  <a-text
+                    id="third_number_box"
+                    position="-6.75 4 -5.25"
+                    rotation="0 90 0"
+                    width="15"
+                    color="white"
+                    value={data[2].number}
+                    geometry="primitive:plane, src='#number_box'"
+                    side="double"
+                    align="center"
+                    fontImage="url(/assets/marble/black_2.jpg)"
+                    src="#number_box"
+                  ></a-text>
+                )}
+                {/* __________________________________ third_painting */}
+                {data[2] && (
+                  <a-box
+                    id="third_painting "
+                    onClick={() => {
+                      Swal.fire({
+                        title: data[2].name,
+                        text: `Created by: ${data[2].artistName}`,
+                        imageUrl: data[2].primaryImage,
+                        imageWidth: data[2].width,
+                        imageHeight: data[2].height,
+                      });
+                    }}
+                    position="-6.8 2 -5.25"
+                    rotation="0 90 0"
+                    depth="0.2"
+                    // ------------------------------------ //
+                    src={data[2].primaryImage}
+                    height={data[2].height / 100}
+                    width={data[2].width / 100}
+                  ></a-box>
+                )}
+              </>
+              {/* fourth */}
+              <>
+                {/* fourth_wall */}
+                <a-box
+                  id="fourth_wall"
+                  position="-7 2.5 -9.25"
+                  rotation="0 90 0"
+                  depth="0.5"
+                  height="5"
+                  width="4"
+                  src={"url(/assets/marble/black_2.jpg)"}
+                ></a-box>
+                {/* __________________________________ fourth_light */}
+                <a-light
+                  id="fourth_light"
+                  type="spot"
+                  angle="50"
+                  color="white"
+                  intensity="0.6"
+                  distance="25"
+                  rotation="-45 90 0"
+                  position="-4.5 4.25 -9.25"
+                  penumbra="0.4"
+                ></a-light>
+                {/* __________________________________ fourth_number_box */}
+                {data[3] && (
+                  <a-text
+                    id="third_number_box"
+                    position="-6.75 4 -9.25"
+                    rotation="0 90 0"
+                    width="15"
+                    color="white"
+                    value={data[3].number}
+                    geometry="primitive:plane, src='#number_box'"
+                    side="double"
+                    align="center"
+                    fontImage="url(/assets/marble/black_2.jpg)"
+                    src="#number_box"
+                  ></a-text>
+                )}
+                {/* __________________________________ fourth_painting */}
+                {data[3] && (
+                  <a-box
+                    id="fourth_painting "
+                    // onClick={() => {
+                    //   Swal.fire({
+                    //     title: data[3].name,
+                    //     text: `Created by: ${data[3].artistName}`,
+                    //     imageUrl: data[3].primaryImage,
+                    //     imageWidth: data[3].width,
+                    //     imageHeight: data[3].height,
+                    //   });
+                    // }}
+                    position="-6.8 2 -9.25"
+                    rotation="0 90 0"
+                    depth="0.2"
+                    // ------------------------------------ //
+                    src={data[3].primaryImage}
+                    height={data[3].height / 100}
+                    width={data[3].width / 100}
+                  ></a-box>
+                )}
+              </>
+              {/* fifth */}
+              <>
+                {/* __________________________________ fifth_wall */}
+                <a-box
+                  id="left_top_wall"
+                  position="-5 2.5 -11.25"
+                  rotation="0 0 0"
+                  depth="0.5"
+                  height="5"
+                  width="4"
+                  src={"url(/assets/marble/black_2.jpg)"}
+                ></a-box>
+                {/* __________________________________ fifth_light */}
+                <a-light
+                  id="fifth_light"
+                  type="spot"
+                  angle="50"
+                  color="white"
+                  intensity="0.6"
+                  distance="25"
+                  rotation="-45 0 0"
+                  position="-4.5 4.25 -9.5"
+                  penumbra="0.4"
+                ></a-light>
+                {/* __________________________________ fifth_number_box */}
+                {data[4] && (
+                  <a-text
+                    id="fifth_number_box"
+                    position="-4.5 4 -11"
+                    rotation="0 0 0"
+                    width="15"
+                    color="white"
+                    value={data[4].number}
+                    geometry="primitive:plane, src='#number_box'"
+                    side="double"
+                    align="center"
+                    fontImage="url(/assets/marble/black_2.jpg)"
+                    src="#number_box"
+                  ></a-text>
+                )}
+                {/* __________________________________ fifth_painting */}
+                {data[4] && (
+                  <a-box
+                    id="fifth_painting"
+                    onClick={() => {
+                      Swal.fire({
+                        title: data[4].name,
+                        text: `Created by: ${data[4].artistName}`,
+                        imageUrl: data[4].primaryImage,
+                        imageWidth: data[4].width,
+                        imageHeight: data[4].height,
+                      });
+                    }}
+                    position="-4.5 2 -11"
+                    rotation="0 0 0"
+                    depth="0.2"
+                    // ------------------------------------ //
+                    src={data[4].primaryImage}
+                    height={data[4].height / 100}
+                    width={data[4].width / 100}
+                  ></a-box>
+                )}
+              </>
+            </>
+          )}
+        </>
+
         {/* left_statue_wall */}
         <a-box
           id="left_statue_wall"
@@ -338,6 +593,7 @@ export default function DavidGallery() {
           radius="0.2"
           position="1.5 1.5 -9.5"
           rotation="0 0 0"
+          color="#ebd7bb"
           src="url(/assets/marble/black_2.jpg)"
           // mixin="up_and_down"
         ></a-sphere>
@@ -346,7 +602,7 @@ export default function DavidGallery() {
           onClick={() => {
             toPreviousBatch();
           }}
-          color="tomato"
+          color="#675237"
           height="0.2"
           radius-bottom="0.1"
           radius-top="0.001"
@@ -359,7 +615,7 @@ export default function DavidGallery() {
           onClick={() => {
             toNextBatch();
           }}
-          color="tomato"
+          color="#675237"
           height="0.2"
           radius-bottom="0.1"
           radius-top="0.001"
