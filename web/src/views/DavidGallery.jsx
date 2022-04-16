@@ -30,18 +30,6 @@ export default function DavidGallery() {
     navigate("../lobby", { replace: true });
   };
 
-  const position = {
-    first: [-6, 2, 1.05],
-    second: [0, 0, 0],
-    third: [0, 0, 0],
-    fourth: [0, 0, 0],
-    fifth: [0, 0, 0],
-    sixth: [0, 0, 0],
-    seventh: [0, 0, 0],
-    eighth: [0, 0, 0],
-    ninth: [0, 0, 0],
-  };
-
   anime({
     targets: "#sphere",
     rotation: "0 2 0",
@@ -80,20 +68,23 @@ export default function DavidGallery() {
   return (
     <>
       <a-scene>
+        <a-entity environment="preset: forest; dressingAmount: 500"></a-entity>
+        <a-entity
+          id="tete"
+          environment="preset: forest; groundColor: #f0f0f0; groundTexture: none; horizonColor: silver; skyColor: skyblue; dressingColor: #fcfcfc; shadow: true"
+        ></a-entity>
+        <a-entity enviropack="preset: tankfarm"></a-entity>a
         <a-camera
           position="0 2 0"
           wasd-controls-enabled="true"
           wasd-controls="acceleration:25"
-          look-controls="
           // pointerLockEnabled: true;
-          "
           fov="60"
           near="0.1"
           far="100"
         >
           <a-cursor></a-cursor>
         </a-camera>
-
         {/* __________________________________ intersection pillars */}
         <>
           {/* __________________________________ intx_bot_pillar */}
@@ -104,8 +95,8 @@ export default function DavidGallery() {
             depth="1.5"
             height="5"
             width="1.5"
-            color="red"
-            src={"url(/assets/marble/black_2.jpg)"}
+            color="#cdbba6"
+            src={"url(/assets/wall/white_stucco_paint.jpg)"}
           ></a-box>
           {/* __________________________________ intx_bot pillar */}
           <a-box
@@ -115,11 +106,64 @@ export default function DavidGallery() {
             depth="1.5"
             height="5"
             width="1.5"
-            color="red"
-            src={"url(/assets/marble/black_2.jpg)"}
+            color="#cdbba6"
+            src={"url(/assets/wall/white_stucco_paint.jpg)"}
           ></a-box>
         </>
-
+        {/* elevator and elevator walls */}
+        <>
+          {/* elevator */}
+          <a-entity
+            onClick={floorTransporter}
+            scale="0.014 0.014 0.014"
+            position="0 3 4.84506"
+            rotation="0 180 0"
+            gltf-model="/assets/elevator/scene.gltf"
+          ></a-entity>
+          <a-triangle
+            id="elevator_up_button"
+            onPress={floorTransporter}
+            position="-0.9086 1.70955 4.81707"
+            color="red"
+            side="double"
+            scale="0.1 0.1 0.1"
+            material=""
+            geometry=""
+          ></a-triangle>
+          {/* elevator_wall */}
+          <>
+            {/* __________________________________ back_elevator_wall */}
+            <a-box
+              position="0 2.5 7.75"
+              depth="0.5"
+              height="5"
+              width="12"
+              color="bisque"
+              src={"url(/assets/wall/white_stucco_paint.jpg)"}
+            ></a-box>
+            {/* __________________________________ left_elevator_wall */}
+            <a-box
+              position="-2.75 2.5 4.5"
+              rotation="0 90 0"
+              depth="0.5"
+              height="5"
+              width="7"
+              color="bisque"
+              src={"url(/assets/wall/white_stucco_paint.jpg)"}
+            ></a-box>
+            {/* __________________________________ right_elevator_wall */}
+            <a-box
+              position="2.75 2.5 -1.75"
+              rotation="0 90 0"
+              depth="0.5"
+              height="5"
+              width="19.5"
+              repeat="2 2"
+              color="bisque"
+              src={"url(/assets/wall/white_stucco_paint.jpg)"}
+            ></a-box>
+          </>
+        </>
         {/* __________________________________ paintings */}
         <>
           {data && (
@@ -134,7 +178,8 @@ export default function DavidGallery() {
                   depth="0.5"
                   height="5"
                   width="4"
-                  src={"url(/assets/marble/black_2.jpg)"}
+                  color="bisque"
+                  src={"url(/assets/wall/white_stucco_paint.jpg)"}
                 ></a-box>
                 {/* __________________________________ first_light */}
                 <a-light
@@ -155,7 +200,7 @@ export default function DavidGallery() {
                     position="-4.5 4 0.95"
                     rotation="0 180 0"
                     width="15"
-                    color="white"
+                    color="#57240f"
                     value={data[0].number}
                     geometry="primitive:plane, src='#number_box'"
                     side="double"
@@ -197,7 +242,8 @@ export default function DavidGallery() {
                   depth="0.5"
                   height="5"
                   width="4"
-                  src={"url(/assets/marble/black_2.jpg)"}
+                  color="bisque"
+                  src={"url(/assets/wall/white_stucco_paint.jpg)"}
                 ></a-box>
                 {/* __________________________________ second_light */}
                 <a-light
@@ -218,7 +264,7 @@ export default function DavidGallery() {
                     position="-6.75 4 -1.25"
                     rotation="0 90 0"
                     width="15"
-                    color="white"
+                    color="#57240f"
                     value={data[1].number}
                     geometry="primitive:plane, src='#number_box'"
                     side="double"
@@ -260,7 +306,8 @@ export default function DavidGallery() {
                   depth="0.5"
                   height="5"
                   width="4"
-                  src={"url(/assets/marble/black_2.jpg)"}
+                  color="bisque"
+                  src={"url(/assets/wall/white_stucco_paint.jpg)"}
                 ></a-box>
                 {/* __________________________________ third_light */}
                 <a-light
@@ -281,7 +328,7 @@ export default function DavidGallery() {
                     position="-6.75 4 -5.25"
                     rotation="0 90 0"
                     width="15"
-                    color="white"
+                    color="#57240f"
                     value={data[2].number}
                     geometry="primitive:plane, src='#number_box'"
                     side="double"
@@ -323,7 +370,8 @@ export default function DavidGallery() {
                   depth="0.5"
                   height="5"
                   width="4"
-                  src={"url(/assets/marble/black_2.jpg)"}
+                  color="bisque"
+                  src={"url(/assets/wall/white_stucco_paint.jpg)"}
                 ></a-box>
                 {/* __________________________________ fourth_light */}
                 <a-light
@@ -344,7 +392,7 @@ export default function DavidGallery() {
                     position="-6.75 4 -9.25"
                     rotation="0 90 0"
                     width="15"
-                    color="white"
+                    color="#57240f"
                     value={data[3].number}
                     geometry="primitive:plane, src='#number_box'"
                     side="double"
@@ -357,15 +405,15 @@ export default function DavidGallery() {
                 {data[3] && (
                   <a-box
                     id="fourth_painting "
-                    // onClick={() => {
-                    //   Swal.fire({
-                    //     title: data[3].name,
-                    //     text: `Created by: ${data[3].artistName}`,
-                    //     imageUrl: data[3].primaryImage,
-                    //     imageWidth: data[3].width,
-                    //     imageHeight: data[3].height,
-                    //   });
-                    // }}
+                    onClick={() => {
+                      Swal.fire({
+                        title: data[3].name,
+                        text: `Created by: ${data[3].artistName}`,
+                        imageUrl: data[3].primaryImage,
+                        imageWidth: data[3].width,
+                        imageHeight: data[3].height,
+                      });
+                    }}
                     position="-6.8 2 -9.25"
                     rotation="0 90 0"
                     depth="0.2"
@@ -386,7 +434,8 @@ export default function DavidGallery() {
                   depth="0.5"
                   height="5"
                   width="4"
-                  src={"url(/assets/marble/black_2.jpg)"}
+                  color="bisque"
+                  src={"url(/assets/wall/white_stucco_paint.jpg)"}
                 ></a-box>
                 {/* __________________________________ fifth_light */}
                 <a-light
@@ -407,7 +456,7 @@ export default function DavidGallery() {
                     position="-4.5 4 -11"
                     rotation="0 0 0"
                     width="15"
-                    color="white"
+                    color="#57240f"
                     value={data[4].number}
                     geometry="primitive:plane, src='#number_box'"
                     side="double"
@@ -442,7 +491,6 @@ export default function DavidGallery() {
             </>
           )}
         </>
-
         {/* left_statue_wall */}
         <a-box
           id="left_statue_wall"
@@ -451,7 +499,8 @@ export default function DavidGallery() {
           depth="0.5"
           height="5"
           width="4"
-          src={"url(/assets/marble/black_2.jpg)"}
+          color="bisque"
+          src={"url(/assets/wall/white_stucco_paint.jpg)"}
         ></a-box>
         {/* back_statue_wall */}
         <a-box
@@ -461,7 +510,8 @@ export default function DavidGallery() {
           depth="0.5"
           height="5"
           width="4"
-          src={"url(/assets/marble/black_2.jpg)"}
+          color="bisque"
+          src={"url(/assets/wall/white_stucco_paint.jpg)"}
         ></a-box>
         {/* right_statue_wall */}
         <a-box
@@ -471,7 +521,8 @@ export default function DavidGallery() {
           depth="0.5"
           height="5"
           width="4"
-          src={"url(/assets/marble/black_2.jpg)"}
+          color="bisque"
+          src={"url(/assets/wall/white_stucco_paint.jpg)"}
         ></a-box>
         {/* left_mini_wall */}
         <a-box
@@ -481,9 +532,9 @@ export default function DavidGallery() {
           depth="0.5"
           height="5"
           width="2"
-          src={"url(/assets/marble/black_2.jpg)"}
+          color="bisque"
+          src={"url(/assets/wall/white_stucco_paint.jpg)"}
         ></a-box>
-
         {/* __________________________________ floor */}
         <a-plane
           position="0 0 -4"
@@ -491,90 +542,19 @@ export default function DavidGallery() {
           width="25"
           height="30"
           color="white"
-          src="url(/assets/wood_parquet/seamless_texture_rovere_wood_parquet_DIFFUSE.jpg)"
-          repeat="5 5"
+          src="url(/assets/carpets/Seamless_Orange_Carpet.jpg)"
+          repeat="20 20"
         ></a-plane>
-
         {/* __________________________________ roof */}
-        {/* <a-box
-          position="0 7 -4"
+        <a-box
+          position="0 6 -4"
           rotation="-90 0 0"
           width="60"
           height="60"
           src="url(/assets/marble/black_2.jpg)"
+          color="gray"
           repeat="4 4"
-        ></a-box> */}
-
-        {/* elevator and elevator walls */}
-        <>
-          {/* elevator */}
-          <a-entity
-            onClick={floorTransporter}
-            scale="0.014 0.014 0.014"
-            position="0 3 4.84506"
-            rotation="0 180 0"
-            gltf-model="/assets/elevator/scene.gltf"
-          ></a-entity>
-          <a-triangle
-            id="elevator_up_button"
-            onPress={floorTransporter}
-            position="-0.9086 1.70955 4.81707"
-            color="red"
-            side="double"
-            scale="0.1 0.1 0.1"
-            material=""
-            geometry=""
-          ></a-triangle>
-          {/* elevator_wall */}
-          <>
-            {/* __________________________________ back_elevator_wall */}
-            <a-box
-              position="0 2.5 7.75"
-              depth="0.5"
-              height="5"
-              width="12"
-              src="url(/assets/marble/black_2.jpg)"
-            ></a-box>
-            {/* __________________________________ left_elevator_wall */}
-            <a-box
-              position="-2.75 2.5 4.5"
-              rotation="0 90 0"
-              depth="0.5"
-              height="5"
-              width="7"
-              src="url(/assets/marble/black_2.jpg)"
-            ></a-box>
-            {/* __________________________________ right_elevator_wall */}
-            <a-box
-              position="2.75 2.5 -1.75"
-              rotation="0 90 0"
-              depth="0.5"
-              height="5"
-              width="19.5"
-              src="url(/assets/marble/black_2.jpg)"
-            ></a-box>
-          </>
-        </>
-
-        {/* elevator */}
-        {/* <a-entity
-          onClick={floorTransporter}
-          scale="0.014 0.014 0.014"
-          position="0 3 4.84506"
-          rotation="0 180 0"
-          gltf-model="/assets/elevator/scene.gltf"
-        ></a-entity>
-        <a-triangle
-          id="elevator_up_button"
-          onPress={floorTransporter}
-          position="-0.9086 1.70955 4.81707"
-          color="red"
-          side="double"
-          scale="0.1 0.1 0.1"
-          material=""
-          geometry=""
-        ></a-triangle> */}
-
+        ></a-box>
         {/* omni light */}
         <a-light
           id="omni_light"
@@ -584,17 +564,17 @@ export default function DavidGallery() {
           color="white"
           intensity="0.8"
         ></a-light>
-
         <a-sphere
-          id="sphere"
+          id="pagination_sphere"
           onClick={() => {
             emerge();
           }}
           radius="0.2"
-          position="1.5 1.5 -9.5"
+          position="1.5 1.45 -9.5"
           rotation="0 0 0"
           color="#ebd7bb"
-          src="url(/assets/marble/black_2.jpg)"
+          animation="property: object3D.position.y; to: 1.55; dir: alternate; dur: 2000; loop: true"
+          src="url(/assets/sphere/Kraft_Dirty_Paper_Texture.jpg)"
           // mixin="up_and_down"
         ></a-sphere>
         <a-cone
@@ -627,7 +607,7 @@ export default function DavidGallery() {
           animation="property: position; to: [1 8 -10, -1 1.6 -5]; dur: 2000; easing: linear; loop: true"
           color="tomato"
         ></a-box> */}
-        <a-sky color="#ECECEC"></a-sky>
+        {/* <a-sky color="#ECECEC"></a-sky>s */}
       </a-scene>
     </>
   );
