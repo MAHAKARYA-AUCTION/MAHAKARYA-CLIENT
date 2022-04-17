@@ -17,6 +17,7 @@ export default function CollectionList() {
   const [filter, setFilter] = useState({
     name: "",
     artistName: "",
+    startingBid: "",
   });
   const [refetchSwitch, setRefetchSwitch] = useState(false);
 
@@ -28,8 +29,6 @@ export default function CollectionList() {
     console.log("a");
     dispatch(fetchLotsByCollectionId({ id, filter }));
   }, [refetchSwitch]);
-
-  console.log(lots);
 
   var tomorrow = new Date(collection.endDate);
   const [days, hours, minutes, seconds] = useCountdown(tomorrow);
