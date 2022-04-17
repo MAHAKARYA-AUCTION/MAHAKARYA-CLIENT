@@ -7,13 +7,16 @@ import "slick-carousel/slick/slick-theme.css";
 import NumberInput from "../components/numberInputs";
 import { useBarcode } from "react-barcodes";
 import { useCountdown } from "../hooks/useCountdown";
+import { useState } from "react";
 import formatRupiah from "../helpers/formatPrice";
+import Swal from "sweetalert2";
+import swal from "../helpers/swalToast";
 
 export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
   // Placeholder Time
   var tomorrow = new Date("20 Apr 2022");
   // tomorrow.setDate(tomorrow.getDate() + 1);
-
+  const [bidAmount, setBidAmount] = useState(0);
   const [days, hours, minutes, seconds] = useCountdown(tomorrow);
 
   const bids = [
@@ -46,6 +49,29 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
       },
     },
   ];
+
+  function bidHandler(bid) {
+    Swal.fire({
+      title: "Bid " + formatRupiah(bid + bidAmount),
+      color: "#080504",
+      background: "#ebd7bb",
+      showDenyButton: false,
+      showCancelButton: true,
+      cancelButtonText: "Cancel",
+      confirmButtonText: "Bid",
+      confirmButtonColor: "#a35831",
+      cancelButtonColor: "#702F13",
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        setBidAmount(bid + bids[0].bidPrice);
+        swal("success", "Bid Success");
+        setBidAmount(0);
+      } else if (result.isDenied) {
+        Swal.fire("Changes are not saved", "", "info");
+      }
+    });
+  }
 
   const settings = {
     dots: true,
@@ -117,7 +143,7 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
             </div>
             <div
               tabIndex="0"
-              className="collapse collapse-arrow border-2 border-[#675237] rounded-box mt-5 pl-5 shadow-sm"
+              className="collapse collapse-arrow border-2 border-[#675237] rounded-box mt-5 pl-5 shadow-sm overflow-visible"
             >
               {/* START:Table Header */}
               <input type="checkbox" className="peer" />
@@ -159,65 +185,60 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
                         </h1>
                       </div>
                       <div className="flex flex-col justify-center">
-                        <button
-                          className="btn bg-[#ebd7bb] px-6 poppins font-semibold text-3xl mr-2 hover:scale-110
+                        {/* START:BID Dropdown */}
+                        <div class="dropdown dropdown-left">
+                          <button
+                            tabindex="0"
+                            className="btn bg-[#ebd7bb] px-6 poppins font-semibold text-3xl mr-2 hover:scale-110
                    transform transition duration-400 border-2 text-[#57240f] border-[#57240f]
-                    rounded-3xl hover:bg-[#57240f] hover:text-[#cdbba6]  text-center hover:border-0"
-                        >
-                          <label htmlFor="my-modal-5" className="modal-button">
-                            Bid
-                          </label>
-                        </button>
-                      </div>
-                      {/* START:BID MODAL */}
-                      <input
-                        type="checkbox"
-                        id="my-modal-5"
-                        className="modal-toggle"
-                      />
-                      <div className="modal ">
-                        <div className="modal-box w-10/12 relative bg-[#ebd7bb]">
-                          <label
-                            htmlFor="my-modal-5"
-                            className="btn btn-sm btn-circle absolute right-2 top-2 bg-[#57240f] hover:scale-125 transform transition duration-400 border-2 text-[#F8F1E7] border-[#57240f]
-                        rounded-3xl hover:bg-[#57240f] hover:text-[#cdbba6]  text-center hover:border-0"
+                    rounded-xl hover:bg-[#57240f] hover:text-[#cdbba6]  focus:bg-[#57240f] focus:text-[#cdbba6] focus:scale-110 text-center hover:border-0 "
                           >
-                            ✕
-                          </label>
-                          <h3 className="font-bold text-2xl poppins">
-                            Enter Bid Amount
-                          </h3>
-                          <div className="form-control my-10 w-full">
-                            <label className="input-group w-full">
-                              <span className="bg-[#675237] text-[#F8F1E7]">
-                                Bid
-                              </span>
-                              <NumberInput
-                                localeOptions={{
-                                  maximumFractionDigits: 0,
-                                  currency: "IDR",
-                                  style: "currency",
-                                  currencyDisplay: "symbol",
+                            Bid
+                          </button>
+                          <ul
+                            tabindex="0"
+                            class="dropdown-content menu p-2 bg-[#F0E2CD] rounded-box w-32 z-50 shadow-2xl font-poppins text-center"
+                          >
+                            <li>
+                              <a
+                                onClick={() => {
+                                  bidHandler(500000);
                                 }}
-                                className="input input-bordered w-screen text-xl"
-                                defaultValue={bids[0].bidPrice + 100000}
-                              />
-                            </label>
-                          </div>
-                          <div className="modal-action">
-                            <button
-                              className="btn bg-[#ebd7bb] px-6 poppins font-semibold text-3xl mr-2 hover:scale-110
-                   transform transition duration-400 border-2 text-[#57240f] border-[#57240f]
-                    rounded-3xl hover:bg-[#57240f] hover:text-[#cdbba6]  text-center hover:border-0"
-                            >
-                              <label htmlFor="my-modal-5" className="">
-                                Bid
-                              </label>
-                            </button>
-                          </div>
+                              >
+                                500 K
+                              </a>
+                            </li>
+                            <li>
+                              <a
+                                onClick={() => {
+                                  bidHandler(1000000);
+                                }}
+                              >
+                                1 M
+                              </a>
+                            </li>
+                            <li>
+                              <a
+                                onClick={() => {
+                                  bidHandler(2000000);
+                                }}
+                              >
+                                2 M
+                              </a>
+                            </li>
+                            <li>
+                              <a
+                                onClick={() => {
+                                  bidHandler(5000000);
+                                }}
+                              >
+                                5 M
+                              </a>
+                            </li>
+                          </ul>
                         </div>
+                        {/* END:BID Dropdown */}
                       </div>
-                      {/* END:BID MODAL */}
                     </div>
                   </>
                 ) : (
@@ -237,7 +258,7 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
               {/* END:Table Header */}
               {/* START:Table Bid */}
               <div className="collapse-content overflow-x-auto w-full">
-                <div className="overflow-x-auto w-full  z-50 table-bid scrollbar-thin scrollbar-thumb-amber-900 scrollbar-track-[#cdbba6] ">
+                <div className="overflow-x-auto w-full z-40 table-bid scrollbar-thin scrollbar-thumb-amber-900 scrollbar-track-[#cdbba6] ">
                   <table className="table relative w-full bid-table">
                     <thead className="sticky">
                       <tr>
