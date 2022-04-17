@@ -1,6 +1,12 @@
 import { Link } from "react-router-dom";
 
 export default function Navbar() {
+  const menu = [
+    {
+      name: "Home",
+      link: "/",
+    },
+  ];
   return (
     <>
       {/* START:TITLE */}
@@ -19,7 +25,7 @@ export default function Navbar() {
           <div className="row-span-4 justify-center flex flex-row">
             <img
               src={require("../resources/img/sphere.png")}
-              className="h-32 "
+              className="h-32 w-32"
               alt="sphere"
             />
           </div>
