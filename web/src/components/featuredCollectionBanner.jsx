@@ -20,7 +20,7 @@ export default function FeaturedCollectionBanner({
         }}
       >
         <div className="text-left h-full w-[30rem] rounded-md p-16 flex flex-col">
-          <div className="bg-[#a35831] p-10 rounded-xl shadow-2xl text-white space-y-5">
+          <div className="bg-[#a35831] p-10 rounded-xl shadow-2xl text-white space-y-5 w-96">
             <h2 className="font-bosque text-2xl font-bold ">
               Featured Collection
             </h2>
@@ -47,6 +47,10 @@ export default function FeaturedCollectionBanner({
               <label className="text-3xl">{endMonth}</label>
             </div>
           </div>
+          <button className="btn rounded-xl w-[13.5vw] bg-[#a35831] text-white border-0 hover:text-white hover:border-0 hover:bg-[#a35831] hover:scale-110 transform transition duration-600 z-50 mb-10">
+            <i class="fa-solid fa-house-chimney fa-2xl mr-2"></i>Explore Virtual
+            Gallery
+          </button>
         </div>
       </div>
       <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">

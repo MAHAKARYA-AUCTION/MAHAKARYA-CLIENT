@@ -23,7 +23,7 @@ export default function Navbar() {
           <div className="row-span-4 justify-center flex flex-row">
             <img
               src={require("../resources/img/sphere.png")}
-              className="h-32 "
+              className="h-32 w-32"
               alt="sphere"
             />
           </div>

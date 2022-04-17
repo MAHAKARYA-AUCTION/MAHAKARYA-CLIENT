@@ -79,3 +79,8 @@ code {
   height: fit-content !important;
   max-height: 40vh !important;
 }
+
+.img-cover{
+  width: inherit !important;
+  height: inherit !important;
+}
