@@ -4,6 +4,7 @@ import LoginPage from '../src/views/LoginPage';
 import LandingView from "./views/LandingView";
 import DetailLotView from "./views/DetailLotView";
 import DetailCollection from "./views/DetailCollection";
+import ProfileView from "./views/ProfileView";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         />
         <Route path="/collection/:id" element={<DetailCollection />} />
         <Route path="/lot/:id" element={<DetailLotView />} />
+        <Route path="/profile/:id" element={<ProfileView />} />
       </Routes>
 
     </div>
