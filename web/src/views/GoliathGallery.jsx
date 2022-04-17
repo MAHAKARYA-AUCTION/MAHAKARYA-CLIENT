@@ -117,8 +117,8 @@ export default function Gallery() {
           width="25"
           height="30"
           color="white"
-          src="url(/assets/wood_parquet/seamless_texture_rovere_wood_parquet_DIFFUSE.jpg)"
-          repeat="5 5"
+          src="url(/assets/square_floor_4k/textures/square_floor_diff_4k.jpg)"
+          repeat="10 10"
         ></a-plane>
 
         {/* __________________________________ roof */}

@@ -547,7 +547,8 @@ export default function DavidGallery() {
         ></a-plane>
         {/* __________________________________ roof */}
         <a-box
-          position="0 6 -4"
+          id="roof"
+          position="0 5 -4"
           rotation="-90 0 0"
           width="60"
           height="60"
@@ -562,7 +563,7 @@ export default function DavidGallery() {
           angle="360"
           type="ambient"
           color="white"
-          intensity="0.8"
+          intensity="0.9"
         ></a-light>
         <a-sphere
           id="pagination_sphere"
@@ -602,6 +603,22 @@ export default function DavidGallery() {
           rotation="0 0 -90"
           position="1.5 1.5 -9.5"
         ></a-cone>
+        {/* sofa */}
+        <a-entity
+          id="sofa"
+          scale="1.4 1.4 1.4"
+          position="1.98 0 -4.6"
+          rotation="0 -90 0"
+          gltf-model="/assets/beige_sofa/Sofa_01_4k.gltf"
+        ></a-entity>
+        {/* chandelier */}
+        <a-entity
+          id="chandelier"
+          scale="1.4 1.4 1.4"
+          position="0.5 4.75 -3.5"
+          rotation="0 -90 0"
+          gltf-model="/assets/Chandelier_01_4k/Chandelier_01_4k.gltf"
+        ></a-entity>
         {/* <a-box
           position="-1 1.6 -5"
           animation="property: position; to: [1 8 -10, -1 1.6 -5]; dur: 2000; easing: linear; loop: true"
