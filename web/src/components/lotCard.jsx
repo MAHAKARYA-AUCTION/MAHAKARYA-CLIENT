@@ -2,27 +2,25 @@ import formatRupiah from "../helpers/formatPrice";
 
 export default function LotCard({ lot, lotNumber }) {
   return (
-    <div className="card card-compact w-80 bg-[#F8F1E7] shadow-xl hover:scale-105 relative overflow-hidden">
+    <div className="card card-compact w-80 bg-[#F8F1E7] shadow-xl hover:scale-105 relative overflow-hidden h-[490px]">
       <figure>
-        <img src={lot.primaryImage} alt="Lot Picture" />
+        <img src={lot?.primaryImage} alt="Lot Picture" className="w-96 h-60" />
       </figure>
       <div className="card-body font-poppins">
         <div className="flex flex-row justify-between">
-          <h2 className="card-title">{lot.name}</h2>
+          <h2 className="card-title clamp">{lot?.name}</h2>
         </div>
         <div className="text-left">
           <p className="text-base">
             Painter :
-            <span className=" ml-1 font-semibold text-lg">
-              {lot.artistName}
+            <span className=" ml-1 font-semibold text-lg clamp">
+              {lot?.artistName}
             </span>
           </p>
           <p className="text-base">
-            Current Price :
-            <span className=" ml-1 font-semibold text-lg">
-              {formatRupiah(
-                lot.Bids[0] ? lot.Bids[0].bidPrice : lot.startingBid
-              )}
+            Starting Price :
+            <span className=" ml-1 font-semibold text-lg clamp">
+              {formatRupiah(lot.startingBid)}
             </span>
           </p>
         </div>

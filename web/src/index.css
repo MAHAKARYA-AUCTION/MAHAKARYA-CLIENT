@@ -63,10 +63,9 @@ code {
 }
 
 .collection-banner {
-  height: 700px !important;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
+  height: 900px !important;
+  object-fit: cover;
+  object-position: center center;
 }
 
 .imgDetail{
@@ -83,4 +82,11 @@ code {
 .img-cover{
   width: inherit !important;
   height: inherit !important;
+}
+
+.clamp{
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
