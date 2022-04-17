@@ -18,6 +18,8 @@ export default function LandingView() {
 
   const collections = useSelector((state) => state.lotsReducer.collections);
 
+  // console.log(collections);
+
   // const collections = [
   //   {
   //     id: 1,
@@ -99,7 +101,7 @@ export default function LandingView() {
         </div>
         {/* END:LINE BREAK */}
         {/* START: FEATURED COLLECTION */}
-        <FeaturedCollection />
+        <FeaturedCollection collections={collections} />
         {/* END: FEATURED COLLECTION */}
         {/* START:LINE BREAK */}
         <div className="h-20 grid grid-cols-9 items-center w-[80%] mx-auto">
