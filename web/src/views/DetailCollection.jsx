@@ -1,10 +1,94 @@
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import { useCountdown } from "../hooks/useCountdown";
+import { useState, useEffect } from "react";
+import LotCard from "../components/lotCard";
 
 export default function CollectionList() {
-  var tomorrow = new Date("17 Apr 2022");
+  const collection = {
+    Lots: [
+      {
+        id: 1,
+        name: "Paintings 1",
+        artistName: "Artist 1",
+        primaryImage: "https://loremflickr.com/g/1080/720/painting?lock=2",
+        startingBid: 1000000,
+        Bids: [
+          {
+            id: 1,
+            bidPrice: 1500000,
+          },
+        ],
+      },
+      {
+        id: 2,
+        name: "Paintings 1",
+        artistName: "Artist 1",
+        primaryImage: "https://loremflickr.com/g/1080/720/painting?lock=2",
+        startingBid: 1000000,
+        Bids: [
+          {
+            id: 1,
+            bidPrice: 1500000,
+          },
+        ],
+      },
+      {
+        id: 3,
+        name: "Paintings 1",
+        artistName: "Artist 1",
+        primaryImage: "https://loremflickr.com/g/1080/720/painting?lock=2",
+        startingBid: 1000000,
+        Bids: [],
+      },
+      {
+        id: 4,
+        name: "Paintings 1",
+        artistName: "Artist 1",
+        primaryImage: "https://loremflickr.com/g/1080/720/painting?lock=2",
+        startingBid: 1000000,
+        Bids: [
+          {
+            id: 1,
+            bidPrice: 1500000,
+          },
+        ],
+      },
+      {
+        id: 5,
+        name: "Paintings 1",
+        artistName: "Artist 1",
+        primaryImage: "https://loremflickr.com/g/1080/720/painting?lock=2",
+        startingBid: 1000000,
+        Bids: [
+          {
+            id: 1,
+            bidPrice: 1500000,
+          },
+        ],
+      },
+      ,
+    ],
+  };
+
+  var tomorrow = new Date("20 Apr 2022");
   const [days, hours, minutes, seconds] = useCountdown(tomorrow);
+
+  const [pageNumber, setPageNumber] = useState(1);
+  const [limit] = useState(10);
+  const offset = pageNumber * limit - limit;
+  const paginatedLots = collection.Lots.slice(offset, offset + limit);
+
+  function handlePrev() {
+    if (pageNumber === 1) return;
+    setPageNumber(pageNumber - 1);
+  }
+
+  function handleNext() {
+    if (pageNumber === Math.ceil(collection.Lots.length / limit)) return;
+    setPageNumber(pageNumber + 1);
+  }
+
   return (
     <div className="flex flex-col justify-between h-min-screen pt-10">
       <Navbar />
@@ -26,42 +110,47 @@ export default function CollectionList() {
             </p>
           </div>
           <div className="w-1/2">
-            <h1 className=" font-poppins text-2xl tracking-widest">
-              Auction End at
-            </h1>
-            <div className="bg-[#ebd7bb] rounded-xl shadow-2xl text-[#57240f] grid grid-cols-4 poppins font-bold py-2">
-              <div className="border-r-2 border-white flex flex-col justify-center items-center">
-                <label className="text-3xl">{days}</label>
-                <label className="text-xl">Day</label>
-              </div>
-              <div className="border-r-2 border-white flex flex-col justify-center items-center">
-                <label className="text-3xl">{hours}</label>
-                <label className="text-xl">Hours</label>
-              </div>
-              <div className="border-r-2 border-white flex flex-col justify-center items-center">
-                <label className="text-3xl">{minutes}</label>
-                <label className="text-xl">Minutes</label>
-              </div>
-              <div className=" border-white flex flex-col justify-center items-center">
-                <label className="text-3xl">{seconds}</label>
-                <label className="text-xl">Seconds</label>
-              </div>
-            </div>
+            {days + hours + minutes + seconds < 0 ? (
+              <h1 className=" font-poppins text-3xl tracking-widest">
+                Auction Has Ended
+              </h1>
+            ) : (
+              <>
+                <h1 className=" font-poppins text-2xl tracking-widest">
+                  Auction End at
+                </h1>
+                <div className="bg-[#ebd7bb] rounded-xl shadow-2xl text-[#57240f] grid grid-cols-4 poppins font-bold py-2">
+                  <div className="border-r-2 border-white flex flex-col justify-center items-center">
+                    <label className="text-3xl">{days}</label>
+                    <label className="text-xl">Day</label>
+                  </div>
+                  <div className="border-r-2 border-white flex flex-col justify-center items-center">
+                    <label className="text-3xl">{hours}</label>
+                    <label className="text-xl">Hours</label>
+                  </div>
+                  <div className="border-r-2 border-white flex flex-col justify-center items-center">
+                    <label className="text-3xl">{minutes}</label>
+                    <label className="text-xl">Minutes</label>
+                  </div>
+                  <div className=" border-white flex flex-col justify-center items-center">
+                    <label className="text-3xl">{seconds}</label>
+                    <label className="text-xl">Seconds</label>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
         <div className="w-[80%] flex flex-col mx-auto z-50 relative bg-[#F8F1E7] rounded-lg pb-10 first-letter:shadow-2xl border-[#675237] space-y-12">
           <h1 className="font-bosque text-6xl text-center my-10 font-semibold">
-            {" "}
-            Lot List{" "}
+            Lot List
           </h1>
           <div className="flex flex-row px-5 divide-x-2 divide-[#675237] h-[100%]">
-            <div className="flex flex-col w-1/4 space-y-10 px-5">
-              <h1 className="font-poppins text-2xl font-semibold tracking-wider">
-                Filter
-              </h1>
-              <div className="form-control w-full font-poppins">
+            <div className="flex flex-col w-1/4 space-y-10 px-5  font-poppins tracking-wider">
+              <h1 className="font-poppins text-2xl font-semibold ">Filter</h1>
+              <div className="form-control w-full">
                 <label className="label">
-                  <span className="label-text text-xl">Painting Name</span>
+                  <span className="text-xl">Painting Name</span>
                 </label>
                 <input
                   type="text"
@@ -76,7 +165,7 @@ export default function CollectionList() {
               </div>
               <div className="form-control w-full">
                 <label className="label">
-                  <span className="label-text text-xl">Painter Name</span>
+                  <span className="text-xl">Painter Name</span>
                 </label>
                 <input
                   type="text"
@@ -124,165 +213,32 @@ export default function CollectionList() {
                   </h1>
                 </div>
               </div>
-              <div className="grid grid-cols-4 grid-flow-row p-5 space-x-1 space-y-3 items-baseline">
-                <div className="card card-compact w-80 bg-[#F8F1E7] shadow-xl hover:scale-105 relative overflow-hidden">
-                  <figure>
-                    <img
-                      src="https://api.lorem.space/image/shoes?w=400&h=225"
-                      alt="Shoes"
+              <div className="grid grid-cols-4 grid-flow-row p-5 space-x-2 space-y-3 items-baseline">
+                {collection.Lots.map((lot, index) => {
+                  return (
+                    <LotCard
+                      key={lot.id}
+                      lot={lot}
+                      lotNumber={offset + index + 1}
                     />
-                  </figure>
-                  <div className="card-body font-poppins">
-                    <div className="flex flex-row justify-between">
-                      <h2 className="card-title">Shoes!</h2>
-                    </div>
-                    <div className="text-left">
-                      <p className="text-base">
-                        Painter :
-                        <span className=" ml-1 font-semibold text-lg">
-                          Jhon Doe
-                        </span>
-                      </p>
-                      <p className="text-base">
-                        Current Price :
-                        <span className=" ml-1 font-semibold text-lg">
-                          Rp 1.500.000
-                        </span>
-                      </p>
-                    </div>
-                    <div className="card-actions justify-end">
-                      <button className="btn bg-[#702F13] text-[#ebd7bb] border-0 hover:bg-[#451D0C]">
-                        See Lot
-                      </button>
-                    </div>
-                  </div>
-                  <div className="flex flex-col justify-end absolute shadow-2xl">
-                    <label className="text-[#ebd7bb] px-3 py-1 rounded-br-lg bg-[#a35831] w-auto text-sm top-5">
-                      Lot 1
-                    </label>
-                  </div>
-                </div>
-                <div className="card card-compact w-80 bg-[#F8F1E7] shadow-xl hover:scale-105 relative overflow-hidden">
-                  <figure>
-                    <img
-                      src="https://api.lorem.space/image/shoes?w=400&h=225"
-                      alt="Shoes"
-                    />
-                  </figure>
-                  <div className="card-body font-poppins">
-                    <div className="flex flex-row justify-between">
-                      <h2 className="card-title">Shoes!</h2>
-                    </div>
-                    <div className="text-left">
-                      <p className="text-base">
-                        Painter :
-                        <span className=" ml-1 font-semibold text-lg">
-                          Dani Baswani
-                        </span>
-                      </p>
-                      <p className="text-base">
-                        Current Price :
-                        <span className=" ml-1 font-semibold text-lg">
-                          Rp 10.500.000
-                        </span>
-                      </p>
-                    </div>
-                    <div className="card-actions justify-end">
-                      <button className="btn bg-[#702F13] text-[#ebd7bb] border-0 hover:bg-[#451D0C]">
-                        See Lot
-                      </button>
-                    </div>
-                  </div>
-                  <div className="flex flex-col justify-end absolute">
-                    <label className="text-[#ebd7bb] px-3 py-1 rounded-br-lg shadow-2xl bg-[#a35831] w-auto text-sm top-5">
-                      Lot 2
-                    </label>
-                  </div>
-                </div>
-                <div className="card card-compact w-80 bg-[#F8F1E7] shadow-xl hover:scale-105 relative overflow-hidden">
-                  <figure>
-                    <img
-                      src="https://api.lorem.space/image/shoes?w=400&h=225"
-                      alt="Shoes"
-                    />
-                  </figure>
-                  <div className="card-body font-poppins">
-                    <div className="flex flex-row justify-between">
-                      <h2 className="card-title">Shoes!</h2>
-                    </div>
-                    <div className="text-left">
-                      <p className="text-base">
-                        Painter :
-                        <span className=" ml-1 font-semibold text-lg">
-                          Bagas Bagaskoro
-                        </span>
-                      </p>
-                      <p className="text-base">
-                        Current Price :
-                        <span className=" ml-1 font-semibold text-lg">
-                          Rp 2.650.000
-                        </span>
-                      </p>
-                    </div>
-                    <div className="card-actions justify-end">
-                      <button className="btn bg-[#702F13] text-[#ebd7bb] border-0 hover:bg-[#451D0C]">
-                        See Lot
-                      </button>
-                    </div>
-                  </div>
-                  <div className="flex flex-col justify-end absolute">
-                    <label className="text-[#ebd7bb] px-3 py-1 rounded-br-lg shadow-2xl bg-[#a35831] w-auto text-sm top-5">
-                      Lot 3
-                    </label>
-                  </div>
-                </div>
-                <div className="card card-compact w-80 bg-[#F8F1E7] shadow-xl hover:scale-105 relative overflow-hidden">
-                  <figure>
-                    <img
-                      src="https://api.lorem.space/image/shoes?w=400&h=225"
-                      alt="Shoes"
-                    />
-                  </figure>
-                  <div className="card-body font-poppins">
-                    <div className="flex flex-row justify-between">
-                      <h2 className="card-title">Shoes!</h2>
-                    </div>
-                    <div className="text-left">
-                      <p className="text-base">
-                        Painter :
-                        <span className=" ml-1 font-semibold text-lg">
-                          Doe Jhonson
-                        </span>
-                      </p>
-                      <p className="text-base">
-                        Current Price :
-                        <span className=" ml-1 font-semibold text-lg">
-                          Rp 4.000.000
-                        </span>
-                      </p>
-                    </div>
-                    <div className="card-actions justify-end">
-                      <button className="btn bg-[#702F13] text-[#ebd7bb] border-0 hover:bg-[#451D0C]">
-                        See Lot
-                      </button>
-                    </div>
-                  </div>
-                  <div className="flex flex-col justify-end absolute">
-                    <label className="text-[#ebd7bb] px-3 py-1 rounded-br-lg shadow-2xl bg-[#a35831] w-auto text-sm top-5">
-                      Lot 4
-                    </label>
-                  </div>
-                </div>
+                  );
+                })}
               </div>
               <div className="flex flex-row justify-center">
                 <div className="btn-group">
-                  <button className="btn bg-[#ebd7bb] border-[#57240f] text-[#57240f]  hover:bg-[#451D0C] hover:text-[#ebd7bb] text-xl">
+                  <button
+                    className="btn bg-[#ebd7bb] border-[#57240f] text-[#57240f]  hover:bg-[#451D0C] hover:text-[#ebd7bb] text-xl"
+                    onClick={handlePrev}
+                  >
                     «
                   </button>
                   <button className="btn border-y-2 border-x-0 bg-[#ebd7bb] border-[#57240f] text-[#57240f]  hover:bg-[#ebd7bb]">
-                    Page 22
+                    Page {pageNumber}
                   </button>
-                  <button className="btn bg-[#ebd7bb] border-l-0 border-[#57240f] text-[#57240f]  hover:bg-[#451D0C] hover:text-[#ebd7bb]">
+                  <button
+                    className="btn bg-[#ebd7bb] border-l-0 border-[#57240f] text-[#57240f]  hover:bg-[#451D0C] hover:text-[#ebd7bb]"
+                    onClick={handleNext}
+                  >
                     »
                   </button>
                 </div>

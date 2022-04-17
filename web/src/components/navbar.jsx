@@ -1,4 +1,10 @@
 export default function Navbar() {
+  const menu = [
+    {
+      name: "Home",
+      link: "/",
+    },
+  ];
   return (
     <>
       {/* START:TITLE */}

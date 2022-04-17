@@ -139,8 +139,8 @@ export default function LandingView() {
               <div className="grid grid-cols-4 mt-10 space-x-5 relative">
                 <div className="h-full">
                   <img
-                    src="https://loremflickr.com/g/320/240/art"
-                    className="hover:scale-105 transform transition duration-600 h-full rounded-lg w-full"
+                    src="https://loremflickr.com/g/1000/2000/art"
+                    className="hover:scale-105 transform transition duration-600 max-h-[170.59px] bg-cover rounded-lg w-full"
                   />
                 </div>
                 <div className="grid grid-rows-4 text-xl text-left col-span-3">
