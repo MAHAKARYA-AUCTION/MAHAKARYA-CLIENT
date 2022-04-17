@@ -2,38 +2,39 @@ import FeaturedCollectionBanner from "./featuredCollectionBanner";
 import FeaturedPreviewCard from "./featuredPreviewCard";
 import { useState } from "react";
 
-export default function FeaturedCollection() {
+export default function FeaturedCollection({ collections }) {
   const [displayIndex, setDisplayIndex] = useState(0);
-
-  const featuredCollections = [
-    {
-      id: 1,
-      name: "TREASURES Fine Art",
-      imgUrl: "https://loremflickr.com/g/1080/720/painting?lock=212",
-      description:
-        "In posuere quam nulla, eget tincidunt quam scelerisque eget. Quisque tempor vel lorem sit amet porttitor. Mauris placerat euismod ligula, quis viverra ipsum placerat in. Aliquam nec dui semper sem.",
-      startDate: "8 March 2020",
-      endDate: "14 April 2020",
-    },
-    {
-      id: 2,
-      name: "Renneisannce Reminisance",
-      imgUrl: "https://loremflickr.com/g/1080/720/painting?lock=121",
-      description:
-        "In posuere quam nulla, eget tincidunt quam scelerisque eget. Quisque tempor vel lorem sit amet porttitor. Mauris placerat euismod ligula, quis viverra ipsum placerat in. Aliquam nec dui semper sem.",
-      startDate: "8 March 2020",
-      endDate: "14 April 2020",
-    },
-    {
-      id: 3,
-      name: "Beauty In Humanity",
-      imgUrl: "https://loremflickr.com/g/1080/720/painting?lock=281",
-      description:
-        "In posuere quam nulla, eget tincidunt quam scelerisque eget. Quisque tempor vel lorem sit amet porttitor. Mauris placerat euismod ligula, quis viverra ipsum placerat in. Aliquam nec dui semper sem.",
-      startDate: "8 March 2020",
-      endDate: "14 April 2020",
-    },
-  ];
+  console.log(collections, 555);
+  const featuredCollections = collections
+  // const featuredCollections = [
+  //   {
+  //     id: 1,
+  //     name: "TREASURES Fine Art",
+  //     imgUrl: "https://loremflickr.com/g/1080/720/painting?lock=212",
+  //     description:
+  //       "In posuere quam nulla, eget tincidunt quam scelerisque eget. Quisque tempor vel lorem sit amet porttitor. Mauris placerat euismod ligula, quis viverra ipsum placerat in. Aliquam nec dui semper sem.",
+  //     startDate: "8 March 2020",
+  //     endDate: "14 April 2020",
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Renneisannce Reminisance",
+  //     imgUrl: "https://loremflickr.com/g/1080/720/painting?lock=121",
+  //     description:
+  //       "In posuere quam nulla, eget tincidunt quam scelerisque eget. Quisque tempor vel lorem sit amet porttitor. Mauris placerat euismod ligula, quis viverra ipsum placerat in. Aliquam nec dui semper sem.",
+  //     startDate: "8 March 2020",
+  //     endDate: "14 April 2020",
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Beauty In Humanity",
+  //     imgUrl: "https://loremflickr.com/g/1080/720/painting?lock=281",
+  //     description:
+  //       "In posuere quam nulla, eget tincidunt quam scelerisque eget. Quisque tempor vel lorem sit amet porttitor. Mauris placerat euismod ligula, quis viverra ipsum placerat in. Aliquam nec dui semper sem.",
+  //     startDate: "8 March 2020",
+  //     endDate: "14 April 2020",
+  //   },
+  // ];
 
   const featuredPreview = [
     [

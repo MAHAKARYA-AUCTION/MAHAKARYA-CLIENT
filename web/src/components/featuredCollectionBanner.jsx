@@ -6,7 +6,7 @@ export default function FeaturedCollectionBanner({
   totalFeaturedCollection,
   setDisplayIndex,
 }) {
-  console.log(index);
+  // console.log(index);
   const startDate = new Date(collection.startDate);
   const endDate = new Date(collection.endDate);
   const [startDay, startMonth] = timeNameFinder(startDate);
@@ -48,7 +48,7 @@ export default function FeaturedCollectionBanner({
             </div>
           </div>
           <button className="btn rounded-xl w-[13.5vw] bg-[#a35831] text-white border-0 hover:text-white hover:border-0 hover:bg-[#a35831] hover:scale-110 transform transition duration-600 z-50 mb-10">
-            <i class="fa-solid fa-house-chimney fa-2xl mr-2"></i>Explore Virtual
+            <i className="fa-solid fa-house-chimney fa-2xl mr-2"></i>Explore Virtual
             Gallery
           </button>
         </div>
