@@ -2,43 +2,56 @@ import FeaturedCollection from "../components/featuredCollection";
 import LandingCollectionItem from "../components/landingCollectionItem";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchLots, fetchCollections } from "../store/actions/lots";
 
 export default function LandingView() {
-  const collections = [
-    {
-      id: 1,
-      name: "TREASURES Fine Art",
-      imgUrl: "https://loremflickr.com/g/1080/720/painting?lock=212",
-      description:
-        "In posuere quam nulla, eget tincidunt quam scelerisque eget. Quisque tempor vel lorem sit amet porttitor. Mauris placerat euismod ligula, quis viverra ipsum placerat in. Aliquam nec dui semper sem.",
-      startDate: "8 March 2020",
-      endDate: "14 April 2020",
-    },
-    {
-      id: 2,
-      name: "Renneisannce Reminisance",
-      imgUrl: "https://loremflickr.com/g/1080/720/painting?lock=121",
-      description:
-        "In posuere quam nulla, eget tincidunt quam scelerisque eget. Quisque tempor vel lorem sit amet porttitor. Mauris placerat euismod ligula, quis viverra ipsum placerat in. Aliquam nec dui semper sem.",
-      startDate: "8 March 2020",
-      endDate: "14 April 2020",
-    },
-    {
-      id: 3,
-      name: "Beauty In Humanity",
-      imgUrl: "https://loremflickr.com/g/1080/720/painting?lock=281",
-      description:
-        "In posuere quam nulla, eget tincidunt quam scelerisque eget. Quisque tempor vel lorem sit amet porttitor. Mauris placerat euismod ligula, quis viverra ipsum placerat in. Aliquam nec dui semper sem.",
-      startDate: "8 March 2020",
-      endDate: "14 April 2020",
-    },
-  ];
+  const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(fetchLots());
+  // }, []);
+
+  useEffect(() => {
+    dispatch(fetchCollections());
+  }, []);
+
+  const collections = useSelector((state) => state.lotsReducer.collections);
+
+  // const collections = [
+  //   {
+  //     id: 1,
+  //     name: "TREASURES Fine Art",
+  //     imgUrl: "https://loremflickr.com/g/1080/720/painting?lock=212",
+  //     description:
+  //       "In posuere quam nulla, eget tincidunt quam scelerisque eget. Quisque tempor vel lorem sit amet porttitor. Mauris placerat euismod ligula, quis viverra ipsum placerat in. Aliquam nec dui semper sem.",
+  //     startDate: "8 March 2020",
+  //     endDate: "14 April 2020",
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Renneisannce Reminisance",
+  //     imgUrl: "https://loremflickr.com/g/1080/720/painting?lock=121",
+  //     description:
+  //       "In posuere quam nulla, eget tincidunt quam scelerisque eget. Quisque tempor vel lorem sit amet porttitor. Mauris placerat euismod ligula, quis viverra ipsum placerat in. Aliquam nec dui semper sem.",
+  //     startDate: "8 March 2020",
+  //     endDate: "14 April 2020",
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Beauty In Humanity",
+  //     imgUrl: "https://loremflickr.com/g/1080/720/painting?lock=281",
+  //     description:
+  //       "In posuere quam nulla, eget tincidunt quam scelerisque eget. Quisque tempor vel lorem sit amet porttitor. Mauris placerat euismod ligula, quis viverra ipsum placerat in. Aliquam nec dui semper sem.",
+  //     startDate: "8 March 2020",
+  //     endDate: "14 April 2020",
+  //   },
+  // ];
 
   const [pageNumber, setPageNumber] = useState(1);
   const [limit] = useState(10);
   const offset = pageNumber * limit - limit;
-  const paginatedCollections = collections.slice(offset, offset + limit);
+  const paginatedCollections = collections?.slice(offset, offset + limit);
 
   function handlePrev() {
     if (pageNumber === 1) return;
@@ -109,14 +122,16 @@ export default function LandingView() {
             <h1 className="font-bosque text-7xl font-bold text-center ">
               Our Past Collections
             </h1>
-            <div className="grid grid-cols-2 gap-5">
-              {paginatedCollections.map((collection) => (
-                <LandingCollectionItem
-                  key={collection.id}
-                  collection={collection}
-                />
-              ))}
-            </div>
+            {collections && (
+              <div className="grid grid-cols-2 gap-5">
+                {paginatedCollections.map((collection) => (
+                  <LandingCollectionItem
+                    key={collection.id}
+                    collection={collection}
+                  />
+                ))}
+              </div>
+            )}
             <div className="mt-5">
               <div className="flex flex-row justify-center">
                 <div className="btn-group">
