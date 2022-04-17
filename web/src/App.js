@@ -7,7 +7,7 @@ import DetailCollection from "./views/DetailCollection";
 
 function App() {
   return (
-    <div className="App bg-[#ebd7bb] min-h-screen">
+    <div className="App bg-[#ebd7bb] min-h-screen text-[#1F2937]">
       <Routes>
         <Route path="/" element={<LandingView />} />
         <Route
