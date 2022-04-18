@@ -17,38 +17,9 @@ export default function LandingView() {
   }, []);
 
   const collections = useSelector((state) => state.lotsReducer.collections);
-
-  // console.log(collections);
-
-  // const collections = [
-  //   {
-  //     id: 1,
-  //     name: "TREASURES Fine Art",
-  //     imgUrl: "https://loremflickr.com/g/1080/720/painting?lock=212",
-  //     description:
-  //       "In posuere quam nulla, eget tincidunt quam scelerisque eget. Quisque tempor vel lorem sit amet porttitor. Mauris placerat euismod ligula, quis viverra ipsum placerat in. Aliquam nec dui semper sem.",
-  //     startDate: "8 March 2020",
-  //     endDate: "14 April 2020",
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Renneisannce Reminisance",
-  //     imgUrl: "https://loremflickr.com/g/1080/720/painting?lock=121",
-  //     description:
-  //       "In posuere quam nulla, eget tincidunt quam scelerisque eget. Quisque tempor vel lorem sit amet porttitor. Mauris placerat euismod ligula, quis viverra ipsum placerat in. Aliquam nec dui semper sem.",
-  //     startDate: "8 March 2020",
-  //     endDate: "14 April 2020",
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Beauty In Humanity",
-  //     imgUrl: "https://loremflickr.com/g/1080/720/painting?lock=281",
-  //     description:
-  //       "In posuere quam nulla, eget tincidunt quam scelerisque eget. Quisque tempor vel lorem sit amet porttitor. Mauris placerat euismod ligula, quis viverra ipsum placerat in. Aliquam nec dui semper sem.",
-  //     startDate: "8 March 2020",
-  //     endDate: "14 April 2020",
-  //   },
-  // ];
+  const pastCollections = useSelector((state) =>
+    state?.lotsReducer?.collections?.filter((e) => e.endDate > new Date())
+  );
 
   const [pageNumber, setPageNumber] = useState(1);
   const [limit] = useState(10);
@@ -124,13 +95,10 @@ export default function LandingView() {
             <h1 className="font-bosque text-7xl font-bold text-center ">
               Our Past Collections
             </h1>
-            {collections && (
+            {paginatedCollections && (
               <div className="grid grid-cols-2 gap-5">
-                {paginatedCollections.map((collection) => (
-                  <LandingCollectionItem
-                    key={collection.id}
-                    collection={collection}
-                  />
+                {pastCollections.map((collection, index) => (
+                  <LandingCollectionItem key={index} collection={collection} />
                 ))}
               </div>
             )}
