@@ -5,6 +5,7 @@ import Footer from "../components/footer";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLots, fetchCollections } from "../store/actions/lots";
+import HorizontalLines from "../components/horizontalLines";
 
 export default function LandingView() {
   const dispatch = useDispatch();
@@ -59,6 +60,7 @@ export default function LandingView() {
           <div className="col-span-4">
             <hr className="bg-[#57240f] h-2" />
           </div>
+          {/* <HorizontalLines /> */}
           <img
             src={require("../resources/img/barcode.png")}
             className="h-16 font-bold w-40 mx-auto"

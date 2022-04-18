@@ -106,7 +106,7 @@ export default function Navbar() {
                   <li>
                     <Link to="/login">
                       <button className="x-6 py-3 poppins font-semibold mr-2 hover:scale-110 transform transition duration-400">
-                        login
+                        Login
                       </button>
                     </Link>
                   </li>
