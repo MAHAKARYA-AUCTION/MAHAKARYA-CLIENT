@@ -7,47 +7,69 @@ import "slick-carousel/slick/slick-theme.css";
 import NumberInput from "../components/numberInputs";
 import { useBarcode } from "react-barcodes";
 import { useCountdown } from "../hooks/useCountdown";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import formatRupiah from "../helpers/formatPrice";
 import Swal from "sweetalert2";
 import swal from "../helpers/swalToast";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchLotById } from "../store/actions/lots";
+import { useParams } from "react-router-dom";
 
 export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
   // Placeholder Time
-  var tomorrow = new Date("20 Apr 2022");
   // tomorrow.setDate(tomorrow.getDate() + 1);
   const [bidAmount, setBidAmount] = useState(0);
-  const [days, hours, minutes, seconds] = useCountdown(tomorrow);
+  const { lot: lotData } = useSelector((state) => state.lotsReducer);
+  const [days, hours, minutes, seconds] = useCountdown(
+    lotData?.Collection?.endDate
+  );
+
+  const { id } = useParams();
+  const dispatch = useDispatch();
+
+  // const [data, setData] = useState({
+  //   name: "",
+  //   description: "",
+  //   size: "",
+  //   startingBid: "",
+  //   CollectionId: "",
+  //   lotNumber: "",
+  //   primaryImage: ""
+  // });
+
+  useEffect(() => {
+    dispatch(fetchLotById(id));
+  }, []);
 
   const bids = [
     {
       id: 4,
       bidPrice: 4500000,
       Users: {
-        username: "Jhon Doe",
-      },
+        username: "Jhon Doe"
+      }
     },
     {
       id: 3,
       bidPrice: 4000000,
       Users: {
-        username: "Konstadina Kondwani",
-      },
+        username: "Konstadina Kondwani"
+      }
     },
     {
       id: 2,
       bidPrice: 2700000,
       Users: {
-        username: "Budiman Perkasa",
-      },
+        username: "Budiman Perkasa"
+      }
     },
     {
       id: 1,
       bidPrice: 1500000,
       Users: {
-        username: "Jhonny Krugger",
-      },
-    },
+        username: "Jhonny Krugger"
+      }
+    }
   ];
 
   function bidHandler(bid) {
@@ -60,7 +82,7 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
       cancelButtonText: "Cancel",
       confirmButtonText: "Bid",
       confirmButtonColor: "#a35831",
-      cancelButtonColor: "#702F13",
+      cancelButtonColor: "#702F13"
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
@@ -79,7 +101,7 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: false,
+    arrows: false
   };
 
   //BARCODE SETTING
@@ -87,8 +109,8 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
     value: "http://localhost:3000/lot/1",
     options: {
       background: "#ebd7bb",
-      displayValue: false,
-    },
+      displayValue: false
+    }
   });
   return (
     <div className="flex flex-col justify-between pt-10">
@@ -101,9 +123,30 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
               {...settings}
               className="w-[80%] mx-auto col-span-2 row-span-2"
             >
-              <div className="object-fit w-[720px] h-[480px] bg-[url(https://loremflickr.com/720/480/painting?lock=1)] bg-no-repeat bg-center"></div>
-              <div className="object-fit w-[720px] h-[480px] bg-[url(https://loremflickr.com/720/480/painting?lock=1234)] bg-no-repeat bg-center"></div>
-              <div className="object-fit w-[720px] h-[480px] bg-[url(https://loremflickr.com/720/480/painting?lock=145)] bg-no-repeat bg-center"></div>
+              {lotData?.primaryImage && (
+                <div className="object-fit w-[720px] h-[480px] bg-no-repeat bg-center">
+                  <div
+                    className="w-full h-full bg-no-repeat bg-center"
+                    style={{ backgroundImage: `url(${lotData.primaryImage})` }}
+                  ></div>
+                </div>
+              )}
+              {lotData?.secondImage && (
+                <div className="object-fit w-[720px] h-[480px] bg-no-repeat bg-center">
+                  <div
+                    className="w-full h-full bg-no-repeat bg-center"
+                    style={{ backgroundImage: `url(${lotData.secondImage})` }}
+                  ></div>
+                </div>
+              )}
+              {lotData?.thirdImage && (
+                <div className="object-fit w-[720px] h-[480px] bg-no-repeat bg-center">
+                  <div
+                    className="w-full h-full bg-no-repeat bg-center"
+                    style={{ backgroundImage: `url(${lotData.thirdImage})` }}
+                  ></div>
+                </div>
+              )}
             </Slider>
             {/* END:IMAGE CAROUSEL */}
           </div>
@@ -111,13 +154,13 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
             <div className="text-left flex flex-row justify-between">
               <div className="w-2/3">
                 <label className="text-center text-xl align-middle p-[1px] btn-circle font-semibold">
-                  Lot 1
+                  Lot {lotData?.lotNumber}
                 </label>
                 <h1 className="text-6xl font-bold font-bosque">
-                  Painting Name
+                  {lotData?.name}
                 </h1>
                 <h2 className="text-2xl font-bold font-bosque bg-[#F8F1E7] border border-[#57240f] rounded-full w-fit px-3 py-[1px] text-[#57240f]">
-                  Artist Name
+                  {lotData?.artistName}
                 </h2>
               </div>
               <img ref={inputRef} className="w-1/3" />,
@@ -128,7 +171,7 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
                   <tr>
                     <td>Size</td>
                     <td>:</td>
-                    <td>24 cm x 60 cm</td>
+                    <td>{lotData?.size}</td>
                   </tr>
                   <tr>
                     <td>Description</td>
@@ -136,10 +179,7 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
                   </tr>
                 </tbody>
               </table>
-              <p className="text-justify">
-                Signed and stamped in Chinese character, upper left Signed and
-                dated, lower left: Soo Pieng'59
-              </p>
+              <p className="text-justify">{lotData?.description}</p>
             </div>
             <div
               tabIndex="0"
