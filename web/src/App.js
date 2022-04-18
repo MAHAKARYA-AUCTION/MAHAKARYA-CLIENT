@@ -3,7 +3,8 @@ import Lobby from "./views/Lobby";
 import GoliathGallery from "./views/GoliathGallery";
 import DavidGallery from "./views/DavidGallery";
 import "./App.css";
-import LoginPage from "../src/views/LoginPage";
+import LoginPage from "./views/LoginPage";
+import RegisterPage from "./views/RegisterPage";
 import LandingView from "./views/LandingView";
 import DetailLotView from "./views/DetailLotView";
 import DetailCollection from "./views/DetailCollection";
@@ -18,6 +19,7 @@ function App() {
         <Route path="/goliath-gallery" element={<GoliathGallery />} />
         <Route path="/david-gallery" element={<DavidGallery />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
         <Route path="/collection/:id" element={<DetailCollection />} />
         <Route path="/lot/:id" element={<DetailLotView />} />
         <Route path="/profile/:id" element={<ProfileView />} />
