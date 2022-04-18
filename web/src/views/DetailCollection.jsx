@@ -7,6 +7,7 @@ import {
   fetchCollection,
   fetchLotsByCollectionId,
 } from "../store/actions/lots";
+import { SET_SORTED_LOTS } from "../store/actionTypes/global";
 import { useParams } from "react-router-dom";
 import LotCard from "../components/lotCard";
 
@@ -19,6 +20,7 @@ export default function CollectionList() {
     artistName: "",
     startingBid: "",
   });
+  const [sortBy, setSortBy] = useState("");
   const [refetchSwitch, setRefetchSwitch] = useState(false);
 
   useEffect(() => {
@@ -26,9 +28,20 @@ export default function CollectionList() {
   }, []);
 
   useEffect(() => {
-    console.log("a");
     dispatch(fetchLotsByCollectionId({ id, filter }));
+    setSortBy("");
   }, [refetchSwitch]);
+
+  useEffect(() => {}, [sortBy]);
+
+  let sortedLots;
+  if (sortBy === "highestPrice") {
+    sortedLots = lots.sort((a, b) => b.startingBid - a.startingBid);
+  } else if (sortBy === "lowestPrice") {
+    sortedLots = lots.sort((a, b) => a.startingBid - b.startingBid);
+  } else {
+    sortedLots = lots.sort((a, b) => a.id - b.id);
+  }
 
   var tomorrow = new Date(collection.endDate);
   const [days, hours, minutes, seconds] = useCountdown(tomorrow);
@@ -36,7 +49,7 @@ export default function CollectionList() {
   const [pageNumber, setPageNumber] = useState(1);
   const [limit, setLimit] = useState(8);
   const offset = pageNumber * limit - limit;
-  let paginatedLots = lots.slice(offset, offset + limit);
+  let paginatedLots = sortedLots.slice(offset, offset + limit);
 
   function filterHandler(e) {
     e.preventDefault();
@@ -46,7 +59,6 @@ export default function CollectionList() {
   }
 
   function refetch() {
-    console.log("refetch");
     setRefetchSwitch(!refetchSwitch);
   }
 
@@ -58,6 +70,10 @@ export default function CollectionList() {
   function handleNext() {
     if (pageNumber === Math.ceil(collection.Lots.length / limit)) return;
     setPageNumber(pageNumber + 1);
+  }
+
+  function handleSort(sortBy) {
+    setSortBy(sortBy);
   }
 
   return (
@@ -174,13 +190,31 @@ export default function CollectionList() {
                     className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 text-left"
                   >
                     <li>
-                      <a>Lot Number</a>
+                      <a
+                        onClick={() => {
+                          handleSort("");
+                        }}
+                      >
+                        Lot Number
+                      </a>
                     </li>
                     <li>
-                      <a>Price: Highest to Lowest</a>
+                      <a
+                        onClick={() => {
+                          handleSort("highestPrice");
+                        }}
+                      >
+                        Price: Highest to Lowest
+                      </a>
                     </li>
                     <li>
-                      <a>Price: Lowest to Highest</a>
+                      <a
+                        onClick={() => {
+                          handleSort("lowestPrice");
+                        }}
+                      >
+                        Price: Lowest to Highest
+                      </a>
                     </li>
                   </ul>
                 </div>

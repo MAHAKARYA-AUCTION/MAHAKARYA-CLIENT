@@ -40,7 +40,7 @@ export default function LotCard({ lot, lotNumber }) {
       </div>
       <div className="flex flex-col justify-end absolute shadow-2xl">
         <label className="text-[#ebd7bb] px-3 py-1 rounded-br-lg bg-[#a35831] w-auto text-sm top-5">
-          Lot {lot.id}
+          Lot {lot.lotNumber}
         </label>
       </div>
     </div>

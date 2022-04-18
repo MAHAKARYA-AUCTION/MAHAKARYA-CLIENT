@@ -1,13 +1,14 @@
 import axios from "axios";
 import { FETCH_USER_DETAIL } from "../actionTypes/global";
-const baseUrl = "http://localhost:3000";
+// const baseUrl = "http://localhost:3000";
+const baseUrl = "https://api.mahakarya-auction.com";
 
 export const fetchUserDetail = (id) => {
   return async (dispatch) => {
-  try {
-    const user = await axios(`${baseUrl}/users/${id}`, {
-      method: "GET",
-      headers: {
+    try {
+      const user = await axios(`${baseUrl}/users/${id}`, {
+        method: "GET",
+        headers: {
           // access_token: localStorage.access_token,
         }
       })
@@ -18,7 +19,7 @@ export const fetchUserDetail = (id) => {
   }
 }
 
-export function fetchUserDetailAction (payload) {
+export function fetchUserDetailAction(payload) {
   return {
     type: FETCH_USER_DETAIL,
     payload,
