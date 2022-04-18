@@ -83,7 +83,7 @@ export default function Gallery() {
     <>
       <a-scene>
         <a-camera
-          position="0 2 0"
+          position="0 2 7"
           wasd-controls-enabled="true"
           wasd-controls="acceleration:25"
           // look-controls="

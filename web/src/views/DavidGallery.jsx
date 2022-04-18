@@ -87,7 +87,7 @@ export default function DavidGallery() {
         ></a-entity>
         <a-entity enviropack="preset: tankfarm"></a-entity>a
         <a-camera
-          position="0 2 0"
+          position="0 2 7"
           wasd-controls-enabled="true"
           wasd-controls="acceleration:25"
           look-controls="
@@ -553,6 +553,20 @@ export default function DavidGallery() {
                     depth="0.2"
                     // ------------------------------------ //
                     src={data[4].primaryImage}
+                    height={data[4].height / 100}
+                    width={data[4].width / 100}
+                  ></a-box>
+                )}
+                {/* __________________________________ fifth_frame */}
+                {data[4] && (
+                  <a-box
+                    id="fifth_frame"
+                    position="-4.5 2 -11.015"
+                    rotation="0 0 0"
+                    depth="0.2"
+                    scale="1.1 1.1 1.1"
+                    // ------------------------------------ //
+                    color="tomato"
                     height={data[4].height / 100}
                     width={data[4].width / 100}
                   ></a-box>
