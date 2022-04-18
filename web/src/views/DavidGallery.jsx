@@ -3,29 +3,40 @@ import "aframe-extras";
 import "aframe-fps-look-controls-component";
 import anime from "animejs/lib/anime.es.js";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
 
 export default function DavidGallery() {
+  const location = useLocation();
   const navigate = useNavigate();
   // const BASE_URL = "http://localhost:3000/lots";
-  const BASE_URL = "https://api.mahakarya-auction.com/lots";
+  const BASE_URL = "https://api.mahakarya-auction.com/";
 
   const [wholeData, setWholeData] = useState(null);
   const [data, setData] = useState(null);
   const [sliceIndex, setSliceIndex] = useState([0, 5]);
 
+  const [test, setTest] = useState(null);
+
+  // useEffect(() => {
+  //   fetch(BASE_URL + "lots").then((response) =>
+  //     response.json().then((x) => {
+  //       x.map((y, index) => (y.number = index + 1));
+  //       setWholeData(x);
+  //       setData(x.slice(sliceIndex[0], sliceIndex[1]));
+  //     })
+  //   );
+  // }, []);
+
   useEffect(() => {
-    fetch(BASE_URL).then((response) =>
+    fetch(BASE_URL + "collections").then((response) =>
       response.json().then((x) => {
-        x.map((y, index) => (y.number = index + 1));
-        setWholeData(x);
-        setData(x.slice(sliceIndex[0], sliceIndex[1]));
+        x = x.filter((e) => e.galleryName != location.pathname.slice(1));
+        setWholeData(x[0].Lots);
+        setData(x[0].Lots.slice(sliceIndex[0], sliceIndex[1]));
       })
     );
   }, []);
-  console.log(wholeData, 666);
-  console.log(data);
 
   const floorTransporter = () => {
     navigate("../lobby", { replace: true });
@@ -234,6 +245,20 @@ export default function DavidGallery() {
                     width={data[0].width / 100}
                   ></a-box>
                 )}
+                {/* __________________________________ first_frame */}
+                {data[0] && (
+                  <a-box
+                    id="first_frame"
+                    position="-4.5 2 1.02"
+                    rotation="0 0 0"
+                    depth="0.2"
+                    scale="1.1 1.1 1.1"
+                    // ------------------------------------ //
+                    color="LightSalmon"
+                    height={data[0].height / 100}
+                    width={data[0].width / 100}
+                  ></a-box>
+                )}
               </>
               {/* second */}
               <>
@@ -294,6 +319,20 @@ export default function DavidGallery() {
                     depth="0.2"
                     // ------------------------------------ //
                     src={data[1].primaryImage}
+                    height={data[1].height / 100}
+                    width={data[1].width / 100}
+                  ></a-box>
+                )}
+                {/* __________________________________ second_frame */}
+                {data[1] && (
+                  <a-box
+                    id="second_frame "
+                    position="-6.811 2 -1.25"
+                    rotation="0 90 0"
+                    depth="0.2"
+                    scale="1.1 1.1 1.1"
+                    // ------------------------------------ //
+                    color="LightSalmon"
                     height={data[1].height / 100}
                     width={data[1].width / 100}
                   ></a-box>
@@ -362,6 +401,20 @@ export default function DavidGallery() {
                     width={data[2].width / 100}
                   ></a-box>
                 )}
+                {/* __________________________________ third_frame */}
+                {data[2] && (
+                  <a-box
+                    id="third_frame "
+                    position="-6.811 2 -5.25"
+                    rotation="0 90 0"
+                    depth="0.2"
+                    scale="1.1 1.1 1.1"
+                    // ------------------------------------ //
+                    color="brown"
+                    height={data[2].height / 100}
+                    width={data[2].width / 100}
+                  ></a-box>
+                )}
               </>
               {/* fourth */}
               <>
@@ -422,6 +475,20 @@ export default function DavidGallery() {
                     depth="0.2"
                     // ------------------------------------ //
                     src={data[3].primaryImage}
+                    height={data[3].height / 100}
+                    width={data[3].width / 100}
+                  ></a-box>
+                )}
+                {/* __________________________________ fourth_frame */}
+                {data[3] && (
+                  <a-box
+                    id="fourth_frame "
+                    position="-6.811 2 -9.25"
+                    rotation="0 90 0"
+                    depth="0.2"
+                    scale="1.05 1.05 1.05"
+                    // ------------------------------------ //
+                    color="brown"
                     height={data[3].height / 100}
                     width={data[3].width / 100}
                   ></a-box>
@@ -568,44 +635,47 @@ export default function DavidGallery() {
           color="white"
           intensity="0.9"
         ></a-light>
-        <a-sphere
-          id="pagination_sphere"
-          onClick={() => {
-            emerge();
-          }}
-          radius="0.2"
-          position="-2.75 1.5 -5.25"
-          rotation="0 0 0"
-          color="#ebd7bb"
-          animation="property: object3D.position.y; to: 1.55; dir: alternate; dur: 2000; loop: true"
-          src="url(/assets/sphere/Kraft_Dirty_Paper_Texture.jpg)"
-          // mixin="up_and_down"
-        ></a-sphere>
-        <a-cone
-          id="left_cone"
-          onClick={() => {
-            toPreviousBatch();
-          }}
-          color="#675237"
-          height="0.2"
-          radius-bottom="0.1"
-          radius-top="0.001"
-          position="-2.75 1.5 -5.25"
-          rotation="90 0 0"
-          // position="-0.8 1.5 -8"
-        ></a-cone>
-        <a-cone
-          id="right_cone"
-          onClick={() => {
-            toNextBatch();
-          }}
-          color="#675237"
-          height="0.2"
-          radius-bottom="0.1"
-          radius-top="0.001"
-          rotation="-90 0 0"
-          position="-2.75 1.5 -5.25"
-        ></a-cone>
+        {/* pagination_sphere */}
+        <>
+          <a-sphere
+            id="pagination_sphere"
+            onClick={() => {
+              emerge();
+            }}
+            radius="0.2"
+            position="-2.75 1.5 -5.25"
+            rotation="0 0 0"
+            color="#ebd7bb"
+            animation="property: object3D.position.y; to: 1.55; dir: alternate; dur: 2000; loop: true"
+            src="url(/assets/sphere/Kraft_Dirty_Paper_Texture.jpg)"
+            // mixin="up_and_down"
+          ></a-sphere>
+          <a-cone
+            id="left_cone"
+            onClick={() => {
+              toPreviousBatch();
+            }}
+            color="#675237"
+            height="0.2"
+            radius-bottom="0.1"
+            radius-top="0.001"
+            position="-2.75 1.5 -5.25"
+            rotation="90 0 0"
+            // position="-0.8 1.5 -8"
+          ></a-cone>
+          <a-cone
+            id="right_cone"
+            onClick={() => {
+              toNextBatch();
+            }}
+            color="#675237"
+            height="0.2"
+            radius-bottom="0.1"
+            radius-top="0.001"
+            rotation="-90 0 0"
+            position="-2.75 1.5 -5.25"
+          ></a-cone>
+        </>
         {/* sofa */}
         <a-entity
           id="sofa"
@@ -613,6 +683,15 @@ export default function DavidGallery() {
           position="1.98 0 -4.6"
           rotation="0 -90 0"
           gltf-model="/assets/beige_sofa/Sofa_01_4k.gltf"
+          // gltf-model="/assets/david_with_goliath_s_head/scene.gltf"
+        ></a-entity>
+        {/* statue */}
+        <a-entity
+          id="statue"
+          scale="1 1 1"
+          position="0.15 1.5 -4.6"
+          rotation="0 -90 0"
+          gltf-model="/assets/david/scene.gltf"
         ></a-entity>
         {/* chandelier */}
         <a-entity
@@ -622,12 +701,6 @@ export default function DavidGallery() {
           rotation="0 -90 0"
           gltf-model="/assets/Chandelier_01_4k/Chandelier_01_4k.gltf"
         ></a-entity>
-        {/* <a-box
-          position="-1 1.6 -5"
-          animation="property: position; to: [1 8 -10, -1 1.6 -5]; dur: 2000; easing: linear; loop: true"
-          color="tomato"
-        ></a-box> */}
-        {/* <a-sky color="#ECECEC"></a-sky>s */}
       </a-scene>
     </>
   );

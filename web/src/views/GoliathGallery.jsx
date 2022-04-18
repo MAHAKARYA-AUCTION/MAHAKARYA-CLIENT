@@ -114,8 +114,9 @@ export default function Gallery() {
           rotation="-90 0 0"
           width="25"
           height="30"
-          color="brown"
-          src="url(/assets/square_floor_4k/textures/square_floor_diff_4k.jpg)"
+          // color="brown"
+          src="url(/assets/wood_parquet/wood_parquet_2.jpg)"
+          // src="url(/assets/square_floor_4k/textures/square_floor_diff_4k.jpg)"
           repeat="10 10"
         ></a-plane>
 
@@ -125,7 +126,7 @@ export default function Gallery() {
           rotation="-90 0 0"
           width="60"
           height="60"
-          color="tan"
+          color="saddlebrown"
           src="url(/assets/marble/black_2.jpg)"
           repeat="4 4"
         ></a-box>
@@ -134,7 +135,6 @@ export default function Gallery() {
         <>
           {/* elevator */}
           <a-entity
-            onClick={floorTransporter}
             scale="0.014 0.014 0.014"
             position="0 3 4.84506"
             rotation="0 180 0"
@@ -150,6 +150,14 @@ export default function Gallery() {
             material=""
             geometry=""
           ></a-triangle>
+          <a-circle
+            id="elevator_lift_button"
+            onClick={floorTransporter}
+            color="red"
+            side="double"
+            position="0.882 1.7285 5.080"
+            scale="0.1 0.1 0.1"
+          ></a-circle>
           {/* elevator_wall */}
           <>
             {/* __________________________________back elevator wall */}
@@ -251,6 +259,20 @@ export default function Gallery() {
                     width={data[0].width / 100}
                   ></a-box>
                 )}
+                {/* __________________________________ first_frame */}
+                {data[0] && (
+                  <a-box
+                    id="first_frame"
+                    position="-6 2 1.075"
+                    rotation="0 0 0"
+                    depth="0.2"
+                    scale="1.05 1.05 1.05"
+                    // ------------------------------------ //
+                    color="saddlebrown"
+                    height={data[0].height / 100}
+                    width={data[0].width / 100}
+                  ></a-box>
+                )}
               </>
 
               {/* __________________________________ second */}
@@ -307,11 +329,25 @@ export default function Gallery() {
                         imageHeight: data[1].height,
                       });
                     }}
-                    position="-8.55 2 -2"
+                    position="-8.55 2 -1.995"
                     rotation="0 90 0"
                     depth="0.2"
                     // ------------------------------------ //
                     src={data[1]?.primaryImage}
+                    height={data[1].height / 100}
+                    width={data[1].width / 100}
+                  ></a-box>
+                )}
+                {/* __________________________________ second_frame */}
+                {data[1] && (
+                  <a-box
+                    id="second_frame "
+                    position="-8.56 2 -2"
+                    rotation="0 90 0"
+                    depth="0.2"
+                    scale="1.07 1.07 1.07"
+                    // ------------------------------------ //
+                    color="saddlebrown"
                     height={data[1].height / 100}
                     width={data[1].width / 100}
                   ></a-box>
@@ -379,6 +415,20 @@ export default function Gallery() {
                     src={data[2].primaryImage}
                     height={data[2].height / 100}
                     width={data[2].width / 100}
+                  ></a-box>
+                )}
+                {/* __________________________________ third_frame */}
+                {data[1] && (
+                  <a-box
+                    id="third_frame "
+                    position="-8.56 2 -2"
+                    rotation="0 90 0"
+                    depth="0.2"
+                    scale="1.07 1.07 1.07"
+                    // ------------------------------------ //
+                    color="saddlebrown"
+                    height={data[1].height / 100}
+                    width={data[1].width / 100}
                   ></a-box>
                 )}
               </>
@@ -904,7 +954,7 @@ export default function Gallery() {
           gltf-model="/assets/chandelier/scene.gltf"
         ></a-entity>
 
-        {/* omni light */}
+        {/* omni_light */}
         <a-light
           id="omni_light"
           position="0 2 0"
@@ -930,47 +980,46 @@ export default function Gallery() {
           rotation="0 0 0"
           gltf-model="url(/assets/mini_sofa/scene.gltf)"
         ></a-entity>
-        <a-sphere
-          id="sphere"
-          onClick={() => {
-            emerge();
-          }}
-          radius="0.2"
-          position="0 1.5 -8"
-          rotation="0 0 0"
-          src="url(/assets/marble/black_2.jpg)"
-          // mixin="up_and_down"
-        ></a-sphere>
-        <a-cone
-          id="left_cone"
-          onClick={() => {
-            toPreviousBatch();
-          }}
-          color="tomato"
-          height="0.2"
-          radius-bottom="0.1"
-          radius-top="0.001"
-          rotation="0 0 90"
-          position="0 1.5 -8"
-          // position="-0.8 1.5 -8"
-        ></a-cone>
-        <a-cone
-          id="right_cone"
-          onClick={() => {
-            toNextBatch();
-          }}
-          color="tomato"
-          height="0.2"
-          radius-bottom="0.1"
-          radius-top="0.001"
-          rotation="0 0 -90"
-          position="0 1.5 -8"
-        ></a-cone>
-        {/* <a-box
-          position="-1 1.6 -5"
-          animation="property: position; to: [1 8 -10, -1 1.6 -5]; dur: 2000; easing: linear; loop: true"
-          color="tomato"
-        ></a-box> */}
+        {/* pagination_sphere */}
+        <>
+          s
+          <a-sphere
+            id="sphere"
+            onClick={() => {
+              emerge();
+            }}
+            radius="0.2"
+            position="0 1.5 -8"
+            rotation="0 0 0"
+            src="url(/assets/textures/Bumpy-Red-Plastic-Texture.png)"
+            // mixin="up_and_down"
+          ></a-sphere>
+          <a-cone
+            id="left_cone"
+            onClick={() => {
+              toPreviousBatch();
+            }}
+            src="url(/assets/textures/Bumpy-Red-Plastic-Texture.png)"
+            height="0.2"
+            radius-bottom="0.1"
+            radius-top="0.001"
+            rotation="0 0 90"
+            position="0 1.5 -8"
+            // position="-0.8 1.5 -8"
+          ></a-cone>
+          <a-cone
+            id="right_cone"
+            onClick={() => {
+              toNextBatch();
+            }}
+            src="url(/assets/textures/Bumpy-Red-Plastic-Texture.png)"
+            height="0.2"
+            radius-bottom="0.1"
+            radius-top="0.001"
+            rotation="0 0 -90"
+            position="0 1.5 -8"
+          ></a-cone>
+        </>
         <a-sky color="#ECECEC"></a-sky>
       </a-scene>
     </>
