@@ -23,7 +23,7 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/collection/:id" element={<DetailCollection />} />
         <Route path="/lot/:id" element={<DetailLotView />} />
-        <Route path="/profile/:id" element={
+        <Route path="/profile" element={
           <RequireAuth>
             <ProfileView />
           </RequireAuth>

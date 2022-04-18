@@ -3,12 +3,6 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 export default function Navbar() {
-  const menu = [
-    {
-      name: "Home",
-      link: "/",
-    },
-  ];
   const navigate = useNavigate();
   const doLogout = () => {
     localStorage.clear();
@@ -28,9 +22,12 @@ export default function Navbar() {
       {/* START:TITLE */}
       <div className="h-[10vh] flex flex-row items-center justify-between w-[80%] mx-auto ">
         <div className="flex flex-row gap-4 items-center">
-          <label className="font-bonVoyage landing-title font-bold">
-            MAHAKARYA
-          </label>
+          <Link to="/">
+            <button className="font-bonVoyage landing-title font-bold hover:text-[#080504] transform duration-700">
+              MAHAKARYA
+            </button>
+          </Link>
+
           <div className="flex flex-col justify-between h-full text-left gap-4 pb-4 items-center">
             <label className="font-bosque font-bold text-7xl">Auction</label>
             <label className="font-bosque text-3xl">Search Bid Buy!</label>
@@ -80,14 +77,23 @@ export default function Navbar() {
                 </Link>
               </li>
               {localStorage.getItem("access_token") ? (
-                <li>
-                  <button
-                    onClick={doLogout}
-                    className="x-6 py-3 poppins font-semibold mr-2 hover:scale-110 transform transition duration-400"
-                  >
-                    Logout
-                  </button>
-                </li>
+                <>
+                  <li>
+                    <Link to={"/profile/" + localStorage.getItem("id")}>
+                      <button className="x-6 py-3 poppins font-semibold mr-2 hover:scale-110 transform transition duration-400">
+                        Profile
+                      </button>
+                    </Link>
+                  </li>
+                  <li>
+                    <button
+                      onClick={doLogout}
+                      className="x-6 py-3 poppins font-semibold mr-2 hover:scale-110 transform transition duration-400"
+                    >
+                      Logout
+                    </button>
+                  </li>
+                </>
               ) : (
                 <>
                   <li>

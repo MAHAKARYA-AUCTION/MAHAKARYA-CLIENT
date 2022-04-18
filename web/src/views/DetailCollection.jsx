@@ -224,7 +224,7 @@ export default function CollectionList() {
                   </h1>
                 </div>
               </div>
-              <div className="grid grid-cols-4 grid-flow-row p-5 space-x-2 space-y-6 items-baseline">
+              <div className="grid grid-cols-4 grid-flow-row p-5 space-x-2 space-y-6 items-baseline ">
                 {paginatedLots.map((lot, index) => {
                   return (
                     <LotCard

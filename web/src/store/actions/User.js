@@ -9,7 +9,7 @@ export const fetchUserDetail = (id) => {
       const user = await axios(`${baseUrl}/users/${id}`, {
         method: "GET",
         headers: {
-          // access_token: localStorage.access_token,
+          access_token: localStorage.access_token,
         },
       });
       dispatch(fetchUserDetailAction(user));
