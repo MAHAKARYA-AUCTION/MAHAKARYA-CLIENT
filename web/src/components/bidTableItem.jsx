@@ -9,19 +9,15 @@ export default function BidTableItem({ bid, index, previousPrice }) {
       <td className="bg-[#F8F1E7]">
         <div className="flex items-center space-x-3">
           <div>
-            <div className="font-bold text-3xl">
-              {formatRupiah(bid.bidPrice)}
-            </div>
+            <div className="font-bold text-3xl">{formatRupiah(bid.price)}</div>
             <div className="text-xm opacity-70 tracking-widest">
-              {Math.floor(
-                ((bid.bidPrice - previousPrice) / previousPrice) * 100
-              )}{" "}
+              {Math.floor(((bid.price - previousPrice) / previousPrice) * 100)}{" "}
               % increase from previous price
             </div>
           </div>
         </div>
       </td>
-      <td className="bg-[#F8F1E7] text-xl">{bid.Users.username}</td>
+      <td className="bg-[#F8F1E7] text-xl">Usename</td>
     </tr>
   );
 }

@@ -12,8 +12,10 @@ import formatRupiah from "../helpers/formatPrice";
 import Swal from "sweetalert2";
 import swal from "../helpers/swalToast";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchLotById } from "../store/actions/lots";
+import { fetchLotById, bidByLotId } from "../store/actions/lots";
 import { useParams } from "react-router-dom";
+import firestore from "../config/firebase";
+import { useCollectionData } from "react-firebase-hooks/firestore";
 
 export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
   // Placeholder Time
@@ -27,50 +29,18 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
   const { id } = useParams();
   const dispatch = useDispatch();
 
-  // const [data, setData] = useState({
-  //   name: "",
-  //   description: "",
-  //   size: "",
-  //   startingBid: "",
-  //   CollectionId: "",
-  //   lotNumber: "",
-  //   primaryImage: ""
-  // });
+  const dbref = firestore.collection("bid");
+  const query = dbref.where("lotId", "==", +id);
+  // .orderBy("createdAt", "desc")
+  // .limit(25);
+  // .limit(25);
+  const [bidData] = useCollectionData(query, { idField: "id" });
+
+  console.log(bidData);
 
   useEffect(() => {
     dispatch(fetchLotById(id));
   }, []);
-
-  const bids = [
-    {
-      id: 4,
-      bidPrice: 4500000,
-      Users: {
-        username: "Jhon Doe"
-      }
-    },
-    {
-      id: 3,
-      bidPrice: 4000000,
-      Users: {
-        username: "Konstadina Kondwani"
-      }
-    },
-    {
-      id: 2,
-      bidPrice: 2700000,
-      Users: {
-        username: "Budiman Perkasa"
-      }
-    },
-    {
-      id: 1,
-      bidPrice: 1500000,
-      Users: {
-        username: "Jhonny Krugger"
-      }
-    }
-  ];
 
   function bidHandler(bid) {
     Swal.fire({
@@ -83,10 +53,18 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
       confirmButtonText: "Bid",
       confirmButtonColor: "#a35831",
       cancelButtonColor: "#702F13"
-    }).then((result) => {
+    }).then(async (result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        setBidAmount(bid + bids[0].bidPrice);
+        let total = 0;
+        if (bidData[0]) {
+          total = bid + bidData[0].price;
+          setBidAmount(total);
+        } else {
+          total = lotData.startingBid + bid;
+          setBidAmount(total);
+        }
+        await handleBid(total);
         swal("success", "Bid Success");
         setBidAmount(0);
       } else if (result.isDenied) {
@@ -94,6 +72,12 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
       }
     });
   }
+
+  const handleBid = async (total) => {
+    try {
+      dispatch(bidByLotId(id, total));
+    } catch (error) {}
+  };
 
   const settings = {
     dots: true,
@@ -181,6 +165,7 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
               </table>
               <p className="text-justify">{lotData?.description}</p>
             </div>
+            <div></div>
             <div
               tabIndex="0"
               className="collapse collapse-arrow border-2 border-[#675237] rounded-box mt-5 pl-5 shadow-sm overflow-visible"
@@ -220,15 +205,17 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
                     <div className="flex flex-row justify-between">
                       <div className="w-2/3 ">
                         <label>Minimum Bid</label>
-                        <h1 className="text-6xl font-bold font-bosque tracking-widest">
-                          {formatRupiah(bids[0].bidPrice + 100000)}
+                        <h1 className="text-5xl font-bold font-bosque tracking-widest">
+                          {bidData && bidData[0]
+                            ? formatRupiah(bidData[0].price + 100000)
+                            : formatRupiah(lotData?.startingBid)}
                         </h1>
                       </div>
                       <div className="flex flex-col justify-center">
                         {/* START:BID Dropdown */}
-                        <div class="dropdown dropdown-left">
+                        <div className="dropdown dropdown-left">
                           <button
-                            tabindex="0"
+                            tabIndex="0"
                             className="btn bg-[#ebd7bb] px-6 poppins font-semibold text-3xl mr-2 hover:scale-110
                    transform transition duration-400 border-2 text-[#57240f] border-[#57240f]
                     rounded-xl hover:bg-[#57240f] hover:text-[#cdbba6]  focus:bg-[#57240f] focus:text-[#cdbba6] focus:scale-110 text-center hover:border-0 "
@@ -236,8 +223,8 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
                             Bid
                           </button>
                           <ul
-                            tabindex="0"
-                            class="dropdown-content menu p-2 bg-[#F0E2CD] rounded-box w-32 z-50 shadow-2xl font-poppins text-center"
+                            tabIndex="0"
+                            className="dropdown-content menu p-2 bg-[#F0E2CD] rounded-box w-32 z-50 shadow-2xl font-poppins text-center"
                           >
                             <li>
                               <a
@@ -308,20 +295,31 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
                       </tr>
                     </thead>
                     <tbody>
-                      {bids.map((bid, index) => {
-                        return (
-                          <BidTableItem
-                            key={bid.id}
-                            bid={bid}
-                            index={index}
-                            previousPrice={
-                              bids[index + 1]
-                                ? bids[index + 1].bidPrice
-                                : lot.startingBid
-                            }
-                          />
-                        );
-                      })}
+                      {bidData?.length === 0 ? (
+                        <tr>
+                          <th
+                            colSpan="3"
+                            className="bg-[#F8F1E7] text-center text-2xl"
+                          >
+                            No Bidders
+                          </th>
+                        </tr>
+                      ) : (
+                        bidData?.map((bid, index) => {
+                          return (
+                            <BidTableItem
+                              key={index}
+                              bid={bid}
+                              index={index}
+                              previousPrice={
+                                bidData[index + 1]
+                                  ? bidData[index + 1].price
+                                  : lot.startingBid
+                              }
+                            />
+                          );
+                        })
+                      )}
                     </tbody>
                   </table>
                 </div>
@@ -331,6 +329,12 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
           </div>
         </div>
       </div>
+      {bidData &&
+        bidData.map((e) => {
+          <>
+            <p>{e}</p>;<p>Test</p>
+          </>;
+        })}
       <Footer />
     </div>
   );

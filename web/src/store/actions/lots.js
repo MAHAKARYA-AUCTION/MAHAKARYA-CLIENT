@@ -45,7 +45,26 @@ export const fetchCollection = (id) => {
 export const fetchLotById = (id) => {
   return async (dispatch) => {
     const data = await axios.get(BASE_URL + "lots/" + id);
-    console.log(data.data);
     dispatch({ type: SET_LOT, payload: data.data });
+  };
+};
+
+export const bidByLotId = (id, sum) => {
+  return async (dispatch) => {
+    try {
+      let data = await axios.post(
+        `${BASE_URL}bid/${id}`,
+        { userId: localStorage.getItem("id"), sum: sum },
+        {
+          method: "POST",
+          headers: {
+            access_token: localStorage.access_token
+          }
+        }
+      );
+      console.log(data.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
