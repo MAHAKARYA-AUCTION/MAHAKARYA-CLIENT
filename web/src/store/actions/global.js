@@ -1,6 +1,7 @@
 import axios from "axios";
 import { SET_IS_LOADING, SET_ERROR, SET_LOTS } from "../actionTypes/global";
-const BASE_URL = "http://localhost:3000/";
+// const BASE_URL = "http://localhost:3000/";
+const BASE_URL = "https://api.mahakarya-auction.com/";
 
 export function setIsLoading(isLoading) {
   return {

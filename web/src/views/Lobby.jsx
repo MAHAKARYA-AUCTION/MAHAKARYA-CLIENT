@@ -1,17 +1,25 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 require("aframe");
 
-export default function VirtualAuctionHall() {
+export default function Lobby() {
   const navigate = useNavigate();
   const floorTransporter = () => {
     navigate("../goliath-gallery", { replace: true });
   };
-
   const back = () => {
     navigate("../", { replace: true });
     var html = document.querySelector("html");
     html.removeAttribute("class");
   };
+  const BASE_URL = "http://localhost:3000/";
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    fetch(BASE_URL + "collections")
+      .then((response) => response.json())
+      .then((x) => setData(x));
+  }, []);
+
   return (
     <>
       <a-scene>
