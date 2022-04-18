@@ -10,7 +10,6 @@ export default function FeaturedCollection({ collections }) {
 
   if (featuredCollections) {
     featuredPreview = featuredCollections[displayIndex].Lots;
-    console.log(featuredPreview);
   }
 
   // const featuredPreview = [

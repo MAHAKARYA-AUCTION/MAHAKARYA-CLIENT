@@ -15,9 +15,10 @@ export default function LandingView() {
   }, []);
 
   const collections = useSelector((state) => state.lotsReducer.collections);
-  console.log(collections);
   const pastCollections = useSelector((state) =>
-    state?.lotsReducer?.collections?.filter((e) => e.endDate > new Date())
+    state?.lotsReducer?.collections?.filter(
+      (e) => new Date(e.endDate) < new Date()
+    )
   );
 
   const [pageNumber, setPageNumber] = useState(1);
@@ -95,7 +96,7 @@ export default function LandingView() {
             <h1 className="font-bosque text-7xl font-bold text-center ">
               Our Past Collections
             </h1>
-            {paginatedCollections && (
+            {pastCollections && (
               <div className="grid grid-cols-2 gap-5">
                 {pastCollections.map((collection, index) => (
                   <LandingCollectionItem key={index} collection={collection} />

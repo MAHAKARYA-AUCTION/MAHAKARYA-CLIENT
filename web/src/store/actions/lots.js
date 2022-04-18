@@ -30,7 +30,6 @@ export const fetchLotsByCollectionId = ({ id: collectionId, filter }) => {
 export const fetchCollections = () => {
   return async (dispatch) => {
     const data = await axios.get(BASE_URL + "collections");
-    console.log(data);
     dispatch({ type: SET_COLLECTIONS, payload: data.data });
   };
 };

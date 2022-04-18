@@ -18,16 +18,6 @@ export default function DavidGallery() {
 
   const [test, setTest] = useState(null);
 
-  // useEffect(() => {
-  //   fetch(BASE_URL + "lots").then((response) =>
-  //     response.json().then((x) => {
-  //       x.map((y, index) => (y.number = index + 1));
-  //       setWholeData(x);
-  //       setData(x.slice(sliceIndex[0], sliceIndex[1]));
-  //     })
-  //   );
-  // }, []);
-
   useEffect(() => {
     fetch(BASE_URL + "collections").then((response) =>
       response.json().then((x) => {
