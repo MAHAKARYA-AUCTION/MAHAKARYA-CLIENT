@@ -10,7 +10,6 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import axios from "axios";
 import LotCard from "../components/lotCard";
-// import EditProfile from "../components/EditProfile";
 // import {useNavigate} from "react-router"
 
 export default function ProfileView() {
