@@ -1,6 +1,12 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { doRegister } from "../store/actions/User";
+import Swal from "sweetalert2";
 
 export default function Register() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [inputData, setInputData] = useState({
     username: "",
     email: "",
@@ -8,6 +14,7 @@ export default function Register() {
     ktp: "",
     phoneNumber: "",
     address: "",
+    role: "buyer",
   });
 
   const inputHandler = (e) => {
@@ -21,7 +28,28 @@ export default function Register() {
 
   const registerHandler = (e) => {
     e.preventDefault();
-    console.log(inputData);
+    dispatch(doRegister(inputData))
+      .then((_) => {
+        Swal.fire({
+          icon: "success",
+          title: "Register Success!",
+          text: "Please continue by logging in",
+          color: "#080504",
+          background: "#ebd7bb",
+          confirmButtonColor: "#a35831",
+        });
+        navigate("/login");
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Error!",
+          text: error.response.data.message,
+          color: "#080504",
+          background: "#ebd7bb",
+          confirmButtonColor: "#a35831",
+        });
+      });
   };
 
   return (

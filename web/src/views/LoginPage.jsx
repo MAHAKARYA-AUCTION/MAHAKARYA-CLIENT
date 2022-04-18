@@ -1,6 +1,12 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { doLogin } from "../store/actions/User";
+import Swal from "sweetalert2";
 
 export default function LoginPage() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [inputData, setInputData] = useState({
     email: "",
     password: "",
@@ -17,7 +23,34 @@ export default function LoginPage() {
 
   const loginHandler = (e) => {
     e.preventDefault();
-    console.log(inputData);
+    dispatch(doLogin(inputData))
+      .then((response) => {
+        Swal.fire({
+          icon: "success",
+          title: "Login Success!",
+          color: "#080504",
+          background: "#ebd7bb",
+          confirmButtonColor: "#a35831",
+        });
+        const { id, username, email } = response.data.user;
+        const access_token = response.data.access_token;
+        console.log(id, username, email, access_token);
+        localStorage.setItem("id", id);
+        localStorage.setItem("username", username);
+        localStorage.setItem("email", email);
+        localStorage.setItem("access_token", access_token);
+        navigate("/");
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Error!",
+          text: error.response.data.message,
+          color: "#080504",
+          background: "#ebd7bb",
+          confirmButtonColor: "#a35831",
+        });
+      });
   };
 
   return (
