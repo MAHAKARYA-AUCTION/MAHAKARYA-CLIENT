@@ -271,8 +271,8 @@ export default function ProfileView() {
               </div>
               <br />
               <br />
-              <div className="flex flex-col w-full px-3 py-3">
-                <div className="flex flex-row justify-between px-5 pr-14">
+              <div className="flex flex-col w-[80%] px-3 py-3">
+                <div className="flex flex-row justify-center">
                   <div className="overflow-hidden rounded-lg shadow-lg bg-[#675237]">
                     <img className="object-cover w-full h-56" src="https://cdn-2.tstatic.net/tribunnews/foto/bank/images/midtrans.jpg" alt="avatar" />
 
