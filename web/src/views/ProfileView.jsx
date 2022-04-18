@@ -444,7 +444,8 @@ export default function ProfileView() {
             </div>
           </div>
           <div className="w-2/3 flex flex-col">
-            <div className="collapse collapse-arrow border-2 border-[#675237] rounded-box mt-5 pl-5 shadow-sm overflow-visible">
+            <h1 className="text-6xl font-bold font-bosque">Transaction History</h1>
+            <div className="collapse collapse-arrow border-2 border-[#675237] rounded-box mt-5 pl-5 py-4 shadow-sm overflow-visible">
               <table className="table-fixed text-left">
                 <thead>
                   <tr>
@@ -471,6 +472,7 @@ export default function ProfileView() {
               </table>
             </div>
             <div className="flex flex-col w-full px-3 py-3">
+            <h1 className="text-6xl font-bold font-bosque pt-7">Watch Lot</h1>
               <div className="flex flex-row justify-between px-5 pr-14">
                 <div className="flex flex-col justify-end items-baseline">
                 </div>
