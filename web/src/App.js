@@ -9,6 +9,7 @@ import LandingView from "./views/LandingView";
 import DetailLotView from "./views/DetailLotView";
 import DetailCollection from "./views/DetailCollection";
 import ProfileView from "./views/ProfileView";
+import RequireAuth from "./middlewares/requireAuth";
 
 function App() {
   return (
@@ -22,7 +23,11 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/collection/:id" element={<DetailCollection />} />
         <Route path="/lot/:id" element={<DetailLotView />} />
-        <Route path="/profile/:id" element={<ProfileView />} />
+        <Route path="/profile/:id" element={
+          <RequireAuth>
+            <ProfileView />
+          </RequireAuth>
+        } />
       </Routes>
     </div>
   );

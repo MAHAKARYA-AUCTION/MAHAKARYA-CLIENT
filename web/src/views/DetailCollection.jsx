@@ -7,7 +7,6 @@ import {
   fetchCollection,
   fetchLotsByCollectionId,
 } from "../store/actions/lots";
-import { SET_SORTED_LOTS } from "../store/actionTypes/global";
 import { useParams } from "react-router-dom";
 import LotCard from "../components/lotCard";
 
@@ -47,7 +46,7 @@ export default function CollectionList() {
   const [days, hours, minutes, seconds] = useCountdown(tomorrow);
 
   const [pageNumber, setPageNumber] = useState(1);
-  const [limit, setLimit] = useState(8);
+  const [limit] = useState(8);
   const offset = pageNumber * limit - limit;
   let paginatedLots = sortedLots.slice(offset, offset + limit);
 
@@ -83,6 +82,7 @@ export default function CollectionList() {
         <img
           src={collection.imgUrl}
           className="collection-banner w-[100vw] absolute z-0 brightness-75"
+          alt="collection banner"
         ></img>
         <div className="z-50 relative text-[#F8F1E7] font-bold mt-64 mb-16  w-[80%] mx-auto space-y-5 flex flex-row">
           <div className="w-1/2">
@@ -190,31 +190,31 @@ export default function CollectionList() {
                     className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 text-left"
                   >
                     <li>
-                      <a
+                      <button
                         onClick={() => {
                           handleSort("");
                         }}
                       >
                         Lot Number
-                      </a>
+                      </button>
                     </li>
                     <li>
-                      <a
+                      <button
                         onClick={() => {
                           handleSort("highestPrice");
                         }}
                       >
                         Price: Highest to Lowest
-                      </a>
+                      </button>
                     </li>
                     <li>
-                      <a
+                      <button
                         onClick={() => {
                           handleSort("lowestPrice");
                         }}
                       >
                         Price: Lowest to Highest
-                      </a>
+                      </button>
                     </li>
                   </ul>
                 </div>

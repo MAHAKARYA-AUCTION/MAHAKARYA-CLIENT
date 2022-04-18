@@ -1,6 +1,7 @@
 import FeaturedCollectionBanner from "./featuredCollectionBanner";
 import FeaturedPreviewCard from "./featuredPreviewCard";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function FeaturedCollection({ collections }) {
   const [displayIndex, setDisplayIndex] = useState(0);
@@ -131,15 +132,24 @@ export default function FeaturedCollection({ collections }) {
           {featuredCollections && featuredCollections[displayIndex].name}
         </label>
         <div className="text-right w-[80%] mx-auto">
-          <button className="font-bosque text-xl font-bold text-[#a35831] hover:scale-110 transform transition duration-400">
-            View Lots
-          </button>
+          <Link
+            to={
+              featuredCollections
+                ? "/collection/" + featuredCollections[displayIndex].id
+                : "/"
+            }
+          >
+            <button className="font-bosque text-xl font-bold text-[#a35831] hover:scale-110 transform transition duration-400">
+              View Lots
+            </button>
+          </Link>
         </div>
         {/* START: FEATURED COLECTION LIST */}
         <div className="grid grid-cols-5 col-span-2 space-x-5 mt-10 justify-around">
           {/* START: CURRENT COLLECTION CARD */}
           {featuredPreview &&
-            featuredPreview.slice(0,5)
+            featuredPreview
+              .slice(0, 5)
               // [displayIndex]
               .map((lot, index) => {
                 return (
