@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 export default function DavidGallery() {
   const navigate = useNavigate();
   const BASE_URL = "http://localhost:3000/lots";
+  // const BASE_URL = "https://api.mahakarya-auction.com/lots";
 
   const [wholeData, setWholeData] = useState(null);
   const [data, setData] = useState(null);
@@ -78,7 +79,9 @@ export default function DavidGallery() {
           position="0 2 0"
           wasd-controls-enabled="true"
           wasd-controls="acceleration:25"
-          // pointerLockEnabled: true;
+          look-controls="
+          pointerLockEnabled: true;
+          "
           fov="60"
           near="0.1"
           far="100"

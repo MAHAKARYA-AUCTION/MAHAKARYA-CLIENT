@@ -1,4 +1,5 @@
 import timeNameFinder from "../helpers/timeNameFinder";
+import { Link } from "react-router-dom";
 
 export default function FeaturedCollectionBanner({
   collection,
@@ -47,10 +48,13 @@ export default function FeaturedCollectionBanner({
               <label className="text-3xl">{endMonth}</label>
             </div>
           </div>
-          <button className="btn rounded-xl w-full bg-[#a35831] text-white border-0 hover:text-white hover:border-0 hover:bg-[#a35831] hover:scale-110 transform transition duration-600 z-50 mb-10">
+          <Link
+            to="/lobby"
+            className="btn rounded-xl w-full bg-[#a35831] text-white border-0 hover:text-white hover:border-0 hover:bg-[#a35831] hover:scale-110 transform transition duration-600 z-50 mb-10"
+          >
             <i className="fa-solid fa-house-chimney fa-2xl mr-2"></i>Explore
             Virtual Gallery
-          </button>
+          </Link>
         </div>
       </div>
       <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">

@@ -90,3 +90,7 @@ code {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+/* .card:hover .lot-name:after {
+  border-radius: 0,5rem ;
+} */

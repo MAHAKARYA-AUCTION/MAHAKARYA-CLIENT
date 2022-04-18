@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import axios from "axios";
 import LotCard from "../components/lotCard";
+import NumberInput from "../components/numberInputs";
 // import {useNavigate} from "react-router"
 
 export default function ProfileView() {
@@ -17,21 +18,21 @@ export default function ProfileView() {
   const dispatch = useDispatch()
   const [showTopup, setShowTopup] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
-  const { userById, isLoading } = useSelector((state) => state.userReducer)
+  const { userById, isLoading } = useSelector((state) => state.userReducer);
   useEffect(() => {
-    dispatch(fetchUserDetail(id))
+    dispatch(fetchUserDetail(id));
   }, [id]);
 
   useEffect(() => {
-    if(userById !== null ) {
+    if (userById !== null) {
       setPreloadedValues({
         username: userById.data.username,
         email: userById.data.email,
         phoneNumber: userById.data.phoneNumber,
         address: userById.data.address,
-      })
+      });
     }
-  },[userById])
+  }, [userById]);
 
   const [preloadedValues, setPreloadedValues] = useState({
     username: "",
@@ -40,12 +41,12 @@ export default function ProfileView() {
     address: "",
   });
 
-  const preloadedValuesHandler = e => {
-    const { value, name } = e.target
-    const newValues = {...preloadedValues}
-    newValues[name] = value
-    setPreloadedValues(newValues)
-  }
+  const preloadedValuesHandler = (e) => {
+    const { value, name } = e.target;
+    const newValues = { ...preloadedValues };
+    newValues[name] = value;
+    setPreloadedValues(newValues);
+  };
 
   useEffect(() => {
     const midtransScriptUrl = "https://app.sandbox.midtrans.com/snap/snap.js";
@@ -62,17 +63,20 @@ export default function ProfileView() {
     };
   }, []);
 
-  const {register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const onSubmitTopup = async (data) => {
     try {
-      const UserId = id
-      const { price } = data
+      const UserId = id;
+      const { price } = data;
       // console.log(UserId, price);
-      const cb = await axios.post(`http://localhost:3000/topup`, { UserId, price })
+      const cb = await axios.post(`https://api.mahakarya-auction.com/topup`, {
+        UserId,
+        price,
+      });
       // console.log(cb.data);
-      let win = window.open(cb.data.redirect_url, '_blank')
-      win.focus()
+      let win = window.open(cb.data.redirect_url, "_blank");
+      win.focus();
       setShowTopup(false);
     } catch (error) {
       Swal.fire({
@@ -87,9 +91,9 @@ export default function ProfileView() {
     // console.log(data);
     try {
       if (data.password !== data.currentPassword) {
-        throw new Error("password not match")
+        throw new Error("password not match");
       }
-      await axios.put(`http://localhost:3000/users/${id}`, data)
+      await axios.put(`https://api.mahakarya-auction.com/users/${id}`, data);
       Swal.fire({
         icon: "success",
         title: "Edit",
@@ -111,8 +115,7 @@ export default function ProfileView() {
         });
       }
     }
-  }
-
+  };
 
   const collection = {
     Lots: [
@@ -202,9 +205,11 @@ export default function ProfileView() {
             <div className="w-full flex flex-col">
               <div className="text-left flex flex-row justify-between">
                 <div className="w-2/3">
-                  {userById && <h1 className="text-6xl font-bold font-bosque">
-                    {userById.data.username}
-                  </h1>}
+                  {userById && (
+                    <h1 className="text-6xl font-bold font-bosque">
+                      {userById.data.username}
+                    </h1>
+                  )}
                 </div>
               </div>
               <div className="flex flex-col font-poppins text-xl text-left pt-4">
@@ -216,44 +221,65 @@ export default function ProfileView() {
                       <tr>
                         <td>Email</td>
                         <td className="px-2">:</td>
-                        {userById && <td className="py-2">{userById.data.email}</td>}
+                        {userById && (
+                          <td className="py-2">{userById.data.email}</td>
+                        )}
                       </tr>
                       {/* <br /> */}
                       <tr>
                         <td>Balance</td>
                         <td className="px-2">:</td>
-                        {userById && <td className="py-2">{formatRupiah(userById.data.balance)}</td>}
+                        {userById && (
+                          <td className="py-2">
+                            {formatRupiah(userById.data.balance)}
+                          </td>
+                        )}
                       </tr>
                       {/* <br /> */}
                       <tr>
                         <td>Spent</td>
                         <td className="px-2">:</td>
-                        {userById && <td className="py-2">{formatRupiah(userById.data.balanceSpent)}</td>}
+                        {userById && (
+                          <td className="py-2">
+                            {formatRupiah(userById.data.balanceSpent)}
+                          </td>
+                        )}
                       </tr>
                       {/* <br /> */}
                       <tr>
                         <td>Phone</td>
                         <td className="px-2">:</td>
-                        {userById && <td className="py-2">{userById.data.phoneNumber}</td>}
+                        {userById && (
+                          <td className="py-2">{userById.data.phoneNumber}</td>
+                        )}
                       </tr>
                       {/* <br /> */}
                       <tr>
                         <td>Address</td>
                         <td className="px-2">:</td>
-                        {userById && <td className="py-2">{userById.data.address}</td>}
+                        {userById && (
+                          <td className="py-2">{userById.data.address}</td>
+                        )}
                       </tr>
                       {/* <br /> */}
                       <tr>
                         <td>Join At</td>
                         <td className="px-2">:</td>
-                        {userById && <td className="py-2">{userById.data.createdAt.split("T")[0]}</td>}
+                        {userById && (
+                          <td className="py-2">
+                            {userById.data.createdAt.split("T")[0]}
+                          </td>
+                        )}
                       </tr>
                       {/* <br /> */}
                       <tr>
                         <td>Actions</td>
                         <td className="px-2">:</td>
                         <td>
-                          <button onClick={() => setShowEdit(true)} className="btn bg-[#702F13] text-[#ebd7bb] border-0 hover:bg-[#451D0C]">
+                          <button
+                            onClick={() => setShowEdit(true)}
+                            className="btn bg-[#702F13] text-[#ebd7bb] border-0 hover:bg-[#451D0C]"
+                          >
                             Edit
                           </button>
                         </td>
@@ -265,17 +291,23 @@ export default function ProfileView() {
               <div
                 tabIndex="0"
                 className="collapse collapse-arrow border-2 border-[#675237] rounded-box w-[80%] mt-5 pl-5 shadow-sm"
-              >
-              </div>
+              ></div>
               <br />
               <br />
               <div className="flex flex-col w-[80%] px-3 py-3">
                 <div className="flex flex-row justify-center">
                   <div className="overflow-hidden rounded-lg shadow-lg bg-[#675237]">
-                    <img className="object-cover w-full h-56" src="https://cdn-2.tstatic.net/tribunnews/foto/bank/images/midtrans.jpg" alt="avatar" />
+                    <img
+                      className="object-cover w-full h-56"
+                      src="https://cdn-2.tstatic.net/tribunnews/foto/bank/images/midtrans.jpg"
+                      alt="avatar"
+                    />
 
                     <div className="py-5 text-center">
-                      <button onClick={() => setShowTopup(true)} className="btn bg-[#451D0C] text-[#ebd7bb] border-0 hover:bg-[#57240f]">
+                      <button
+                        onClick={() => setShowTopup(true)}
+                        className="btn bg-[#451D0C] text-[#ebd7bb] border-0 hover:bg-[#57240f]"
+                      >
                         Topup balance
                       </button>
                     </div>
@@ -285,12 +317,8 @@ export default function ProfileView() {
               <>
                 {showTopup ? (
                   <>
-                    <div
-                      className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
-                    >
-                      <div
-                        className="relative my-6 mx-auto w-11/12 max-w-xl h-fit font-encode bg-[#ebd7bb] rounded-xl text-slate-900"
-                      >
+                    <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                      <div className="relative my-6 mx-auto w-11/12 max-w-xl h-fit font-encode bg-[#ebd7bb] rounded-xl text-slate-900">
                         <button
                           className="px-3 py-1 rounded-full absolute right-4 top-4 bg-[#57240f] hover:bg-[#451D0C] text-[#ebd7bb] text-xl font-encode"
                           onClick={() => setShowTopup(false)}
@@ -298,7 +326,9 @@ export default function ProfileView() {
                           X
                         </button>
                         <div className="w-full px-4 mt-8 flex flex-col justify-center items-center">
-                          <p className="text-2xl font-semibold">Topup Your Balance</p>
+                          <p className="text-2xl font-semibold">
+                            Topup Your Balance
+                          </p>
                           <form
                             className="w-full flex flex-col mt-12 px-16 pb-16"
                             onSubmit={handleSubmit(onSubmitTopup)}
@@ -310,7 +340,7 @@ export default function ProfileView() {
                               Price
                             </label>
                             <input
-                              type="text"
+                              type="number"
                               className="w-full px-8 py-4 text-md font-encode border border-slate-500 rounded-full"
                               name="price"
                               placeholder="input your number"
@@ -332,12 +362,8 @@ export default function ProfileView() {
                 {showEdit ? (
                   <>
                     <div>
-                      <div
-                        className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
-                      >
-                        <div
-                          className="relative my-6 mx-auto w-11/12 max-w-xl h-fit font-encode bg-[#ebd7bb] rounded-xl text-slate-900"
-                        >
+                      <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                        <div className="relative my-6 mx-auto w-11/12 max-w-xl h-fit font-encode bg-[#ebd7bb] rounded-xl text-slate-900">
                           <button
                             className="px-3 py-1 rounded-full absolute right-4 top-4 bg-[#57240f] hover:bg-[#451D0C] text-[#ebd7bb] text-xl font-encode"
                             onClick={() => setShowEdit(false)}
@@ -345,7 +371,9 @@ export default function ProfileView() {
                             X
                           </button>
                           <div className="w-full px-4 mt-8 flex flex-col justify-center items-center">
-                            <p className="text-2xl font-semibold">Edit Your Profile</p>
+                            <p className="text-2xl font-semibold">
+                              Edit Your Profile
+                            </p>
                             <form
                               className="w-full flex flex-col mt-12 px-16 pb-16"
                               onSubmit={handleSubmit(onSubmitEdit)}
@@ -442,7 +470,9 @@ export default function ProfileView() {
             </div>
           </div>
           <div className="w-2/3 flex flex-col">
-            <h1 className="text-6xl font-bold font-bosque">Transaction History</h1>
+            <h1 className="text-6xl font-bold font-bosque">
+              Transaction History
+            </h1>
             <div className="collapse collapse-arrow border-2 border-[#675237] rounded-box mt-5 pl-5 py-4 shadow-sm overflow-visible">
               <table className="table-fixed text-left">
                 <thead>
@@ -455,25 +485,25 @@ export default function ProfileView() {
                   </tr>
                 </thead>
                 <tbody>
-                  {userById && userById.data.Transactions.map((e, i) => {
-                    return (
-                      <tr className="pt-4">
-                        <td>{i + 1}.</td>
-                        <td>{e.transactionNumber}</td>
-                        <td>{e.status}</td>
-                        <td>{formatRupiah(e.price)}</td>
-                        <td>{e.updatedAt.split("T")[0]}</td>
-                      </tr>
-                    )
-                  })}
+                  {userById &&
+                    userById.data.Transactions.map((e, i) => {
+                      return (
+                        <tr className="pt-4">
+                          <td>{i + 1}.</td>
+                          <td>{e.transactionNumber}</td>
+                          <td>{e.status}</td>
+                          <td>{formatRupiah(e.price)}</td>
+                          <td>{e.updatedAt.split("T")[0]}</td>
+                        </tr>
+                      );
+                    })}
                 </tbody>
               </table>
             </div>
             <div className="flex flex-col w-full px-3 py-3">
-            <h1 className="text-6xl font-bold font-bosque pt-7">Watch Lot</h1>
+              <h1 className="text-6xl font-bold font-bosque pt-7">Watch Lot</h1>
               <div className="flex flex-row justify-between px-5 pr-14">
-                <div className="flex flex-col justify-end items-baseline">
-                </div>
+                <div className="flex flex-col justify-end items-baseline"></div>
               </div>
               <div className="grid grid-cols-4 grid-flow-row p-5 space-x-2 space-y-8 items-baseline">
                 {collection.Lots.map((lot, index) => {
@@ -511,5 +541,5 @@ export default function ProfileView() {
       </div>
       <Footer />
     </div>
-  )
+  );
 }

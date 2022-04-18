@@ -1,11 +1,10 @@
-import { SET_COLLECTION, SET_LOTS, SET_SORTED_LOTS } from "../actionTypes/global";
+import { SET_COLLECTION, SET_LOTS } from "../actionTypes/global";
 import { SET_COLLECTIONS } from "../actionTypes/global";
 
 const initialState = {
   lots: [],
   collections: null,
-  collection: {},
-  sortedLots: []
+  collection: {}
 };
 
 export default function lotsReducer(state = initialState, action) {
@@ -25,7 +24,6 @@ export default function lotsReducer(state = initialState, action) {
         ...state,
         collection: action.payload
       }
-    case SET_SORTED_LOTS:
     default:
       return state;
   }

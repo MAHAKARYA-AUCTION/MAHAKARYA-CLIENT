@@ -19,6 +19,7 @@ export default function CollectionList() {
     artistName: "",
     startingBid: "",
   });
+  const [sortBy, setSortBy] = useState("");
   const [refetchSwitch, setRefetchSwitch] = useState(false);
 
   useEffect(() => {
@@ -26,17 +27,28 @@ export default function CollectionList() {
   }, []);
 
   useEffect(() => {
-    console.log("a");
     dispatch(fetchLotsByCollectionId({ id, filter }));
+    setSortBy("");
   }, [refetchSwitch]);
+
+  useEffect(() => {}, [sortBy]);
+
+  let sortedLots;
+  if (sortBy === "highestPrice") {
+    sortedLots = lots.sort((a, b) => b.startingBid - a.startingBid);
+  } else if (sortBy === "lowestPrice") {
+    sortedLots = lots.sort((a, b) => a.startingBid - b.startingBid);
+  } else {
+    sortedLots = lots.sort((a, b) => a.id - b.id);
+  }
 
   var tomorrow = new Date(collection.endDate);
   const [days, hours, minutes, seconds] = useCountdown(tomorrow);
 
   const [pageNumber, setPageNumber] = useState(1);
-  const [limit, setLimit] = useState(8);
+  const [limit] = useState(8);
   const offset = pageNumber * limit - limit;
-  let paginatedLots = lots.slice(offset, offset + limit);
+  let paginatedLots = sortedLots.slice(offset, offset + limit);
 
   function filterHandler(e) {
     e.preventDefault();
@@ -46,7 +58,6 @@ export default function CollectionList() {
   }
 
   function refetch() {
-    console.log("refetch");
     setRefetchSwitch(!refetchSwitch);
   }
 
@@ -60,6 +71,10 @@ export default function CollectionList() {
     setPageNumber(pageNumber + 1);
   }
 
+  function handleSort(sortBy) {
+    setSortBy(sortBy);
+  }
+
   return (
     <div className="flex flex-col justify-between h-min-screen pt-10">
       <Navbar />
@@ -67,6 +82,7 @@ export default function CollectionList() {
         <img
           src={collection.imgUrl}
           className="collection-banner w-[100vw] absolute z-0 brightness-75"
+          alt="collection banner"
         ></img>
         <div className="z-50 relative text-[#F8F1E7] font-bold mt-64 mb-16  w-[80%] mx-auto space-y-5 flex flex-row">
           <div className="w-1/2">
@@ -174,13 +190,31 @@ export default function CollectionList() {
                     className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 text-left"
                   >
                     <li>
-                      <a>Lot Number</a>
+                      <button
+                        onClick={() => {
+                          handleSort("");
+                        }}
+                      >
+                        Lot Number
+                      </button>
                     </li>
                     <li>
-                      <a>Price: Highest to Lowest</a>
+                      <button
+                        onClick={() => {
+                          handleSort("highestPrice");
+                        }}
+                      >
+                        Price: Highest to Lowest
+                      </button>
                     </li>
                     <li>
-                      <a>Price: Lowest to Highest</a>
+                      <button
+                        onClick={() => {
+                          handleSort("lowestPrice");
+                        }}
+                      >
+                        Price: Lowest to Highest
+                      </button>
                     </li>
                   </ul>
                 </div>
@@ -190,7 +224,7 @@ export default function CollectionList() {
                   </h1>
                 </div>
               </div>
-              <div className="grid grid-cols-4 grid-flow-row p-5 space-x-2 space-y-6 items-baseline">
+              <div className="grid grid-cols-4 grid-flow-row p-5 space-x-2 space-y-6 items-baseline ">
                 {paginatedLots.map((lot, index) => {
                   return (
                     <LotCard
