@@ -17,7 +17,6 @@ import { useParams } from "react-router-dom";
 
 export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
   // Placeholder Time
-  var tomorrow = new Date("20 Apr 2022");
   // tomorrow.setDate(tomorrow.getDate() + 1);
   const [bidAmount, setBidAmount] = useState(0);
   const { lot: lotData } = useSelector((state) => state.lotsReducer);
