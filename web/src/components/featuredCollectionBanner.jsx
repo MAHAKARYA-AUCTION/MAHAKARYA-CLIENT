@@ -33,7 +33,7 @@ export default function FeaturedCollectionBanner({
           </div>
         </div>
         <div className="text-left h-full w-[25rem] rounded-md p-10 flex flex-col-reverse">
-          <div className="bg-[#a35831] rounded-xl shadow-2xl text-white grid grid-cols-2 h-[10rem] poppins  font-bold">
+          <div className="bg-[#a35831] rounded-xl shadow-2xl text-white grid grid-cols-2 h-[10rem] poppins  font-bold w-full">
             <div className="border-r-2 border-white flex flex-col justify-center items-center">
               <label className="text-base">From</label>
               <label className="text-lg font-semibold">{startDay}</label>
@@ -47,9 +47,9 @@ export default function FeaturedCollectionBanner({
               <label className="text-3xl">{endMonth}</label>
             </div>
           </div>
-          <button className="btn rounded-xl w-[13.5vw] bg-[#a35831] text-white border-0 hover:text-white hover:border-0 hover:bg-[#a35831] hover:scale-110 transform transition duration-600 z-50 mb-10">
-            <i className="fa-solid fa-house-chimney fa-2xl mr-2"></i>Explore Virtual
-            Gallery
+          <button className="btn rounded-xl w-full bg-[#a35831] text-white border-0 hover:text-white hover:border-0 hover:bg-[#a35831] hover:scale-110 transform transition duration-600 z-50 mb-10">
+            <i className="fa-solid fa-house-chimney fa-2xl mr-2"></i>Explore
+            Virtual Gallery
           </button>
         </div>
       </div>

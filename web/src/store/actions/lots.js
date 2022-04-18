@@ -1,6 +1,7 @@
 import axios from "axios";
 import { SET_LOTS, SET_COLLECTIONS, SET_COLLECTION } from "../actionTypes/global";
-const BASE_URL = "http://localhost:3000/";
+// const BASE_URL = "http://localhost:3000/";
+const BASE_URL = "https://api.mahakarya-auction.com/";
 
 export const fetchLots = () => {
   return async (dispatch) => {
