@@ -1,0 +1,11 @@
+Model Information:
+* title:	David Statue 3D Scan - Artec 3D
+* source:	https://sketchfab.com/3d-models/david-statue-3d-scan-artec-3d-08c5b7a46d23401cacaec1acb6c55211
+* author:	CIMtech Inc. (https://sketchfab.com/cimtech)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "David Statue 3D Scan - Artec 3D" (https://sketchfab.com/3d-models/david-statue-3d-scan-artec-3d-08c5b7a46d23401cacaec1acb6c55211) by CIMtech Inc. (https://sketchfab.com/cimtech) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

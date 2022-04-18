@@ -79,7 +79,7 @@ export default function Navbar() {
               {localStorage.getItem("access_token") ? (
                 <>
                   <li>
-                    <Link to={"/profile/" + localStorage.getItem("id")}>
+                    <Link to={"/profile"}>
                       <button className="x-6 py-3 poppins font-semibold mr-2 hover:scale-110 transform transition duration-400">
                         Profile
                       </button>

@@ -9,8 +9,8 @@ import Swal from "sweetalert2";
 
 export default function Gallery() {
   const navigate = useNavigate();
-  const BASE_URL = "http://localhost:3000/lots";
-  // const BASE_URL = "http://api.mahakarya-auction.com/lots";
+  // const BASE_URL = "http://localhost:3000/lots";
+  const BASE_URL = "http://api.mahakarya-auction.com/lots";
 
   const [wholeData, setWholeData] = useState(null);
   const [data, setData] = useState(null);
@@ -86,9 +86,9 @@ export default function Gallery() {
           position="0 2 0"
           wasd-controls-enabled="true"
           wasd-controls="acceleration:25"
-          look-controls="
-          pointerLockEnabled: true;
-          "
+          // look-controls="
+          // // pointerLockEnabled: true;
+          // "
           fov="60"
           near="0.1"
           far="100"
@@ -96,7 +96,7 @@ export default function Gallery() {
           <a-cursor></a-cursor>
         </a-camera>
 
-        {/* __________________________________ assets */}
+        {/* __________________________________ assets
         <>
           <a-assets>
             <img
@@ -106,7 +106,7 @@ export default function Gallery() {
           </a-assets>
         </>
 
-        <a-box src="#advertisement"></a-box>
+        <a-box src="#advertisement"></a-box> */}
 
         {/* __________________________________ floor */}
         <a-plane
@@ -114,8 +114,9 @@ export default function Gallery() {
           rotation="-90 0 0"
           width="25"
           height="30"
-          color="white"
-          src="url(/assets/square_floor_4k/textures/square_floor_diff_4k.jpg)"
+          // color="brown"
+          src="url(/assets/wood_parquet/wood_parquet_2.jpg)"
+          // src="url(/assets/square_floor_4k/textures/square_floor_diff_4k.jpg)"
           repeat="10 10"
         ></a-plane>
 
@@ -125,6 +126,7 @@ export default function Gallery() {
           rotation="-90 0 0"
           width="60"
           height="60"
+          color="saddlebrown"
           src="url(/assets/marble/black_2.jpg)"
           repeat="4 4"
         ></a-box>
@@ -133,7 +135,6 @@ export default function Gallery() {
         <>
           {/* elevator */}
           <a-entity
-            onClick={floorTransporter}
             scale="0.014 0.014 0.014"
             position="0 3 4.84506"
             rotation="0 180 0"
@@ -149,6 +150,14 @@ export default function Gallery() {
             material=""
             geometry=""
           ></a-triangle>
+          <a-circle
+            id="elevator_lift_button"
+            onClick={floorTransporter}
+            color="red"
+            side="double"
+            position="0.882 1.7285 5.080"
+            scale="0.1 0.1 0.1"
+          ></a-circle>
           {/* elevator_wall */}
           <>
             {/* __________________________________back elevator wall */}
@@ -157,7 +166,8 @@ export default function Gallery() {
               depth="0.5"
               height="7"
               width="12"
-              src="url(/assets/marble/black_2.jpg)"
+              color="firebrick"
+              src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
             ></a-box>
             {/* __________________________________left-side elevator wall */}
             <a-box
@@ -166,7 +176,8 @@ export default function Gallery() {
               depth="0.5"
               height="7"
               width="7"
-              src="url(/assets/marble/black_2.jpg)"
+              color="firebrick"
+              src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
             ></a-box>
             {/* __________________________________right-side elevator wall */}
             <a-box
@@ -175,7 +186,8 @@ export default function Gallery() {
               depth="0.5"
               height="7"
               width="7"
-              src="url(/assets/marble/black_2.jpg)"
+              color="firebrick"
+              src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
             ></a-box>
           </>
         </>
@@ -194,7 +206,8 @@ export default function Gallery() {
                   depth="0.5"
                   height="7"
                   width="6"
-                  src={"url(/assets/marble/black_2.jpg)"}
+                  color="firebrick"
+                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
                 ></a-box>
                 {/* __________________________________ first_light */}
                 <a-light
@@ -246,6 +259,20 @@ export default function Gallery() {
                     width={data[0].width / 100}
                   ></a-box>
                 )}
+                {/* __________________________________ first_frame */}
+                {data[0] && (
+                  <a-box
+                    id="first_frame"
+                    position="-6 2 1.075"
+                    rotation="0 0 0"
+                    depth="0.2"
+                    scale="1.05 1.05 1.05"
+                    // ------------------------------------ //
+                    color="saddlebrown"
+                    height={data[0].height / 100}
+                    width={data[0].width / 100}
+                  ></a-box>
+                )}
               </>
 
               {/* __________________________________ second */}
@@ -258,7 +285,8 @@ export default function Gallery() {
                   depth="0.5"
                   height="7"
                   width="6"
-                  src="url(/assets/marble/black_2.jpg)"
+                  color="firebrick"
+                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
                 ></a-box>
                 {/* __________________________________ second_light */}
                 <a-light
@@ -301,11 +329,25 @@ export default function Gallery() {
                         imageHeight: data[1].height,
                       });
                     }}
-                    position="-8.55 2 -2"
+                    position="-8.55 2 -1.995"
                     rotation="0 90 0"
                     depth="0.2"
                     // ------------------------------------ //
                     src={data[1]?.primaryImage}
+                    height={data[1].height / 100}
+                    width={data[1].width / 100}
+                  ></a-box>
+                )}
+                {/* __________________________________ second_frame */}
+                {data[1] && (
+                  <a-box
+                    id="second_frame "
+                    position="-8.56 2 -2"
+                    rotation="0 90 0"
+                    depth="0.2"
+                    scale="1.07 1.07 1.07"
+                    // ------------------------------------ //
+                    color="saddlebrown"
                     height={data[1].height / 100}
                     width={data[1].width / 100}
                   ></a-box>
@@ -322,7 +364,8 @@ export default function Gallery() {
                   depth="0.5"
                   height="7"
                   width="6"
-                  src="url(/assets/marble/black_2.jpg)"
+                  color="firebrick"
+                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
                 ></a-box>
                 {/* __________________________________ third_light */}
                 <a-light
@@ -374,6 +417,20 @@ export default function Gallery() {
                     width={data[2].width / 100}
                   ></a-box>
                 )}
+                {/* __________________________________ third_frame */}
+                {data[1] && (
+                  <a-box
+                    id="third_frame "
+                    position="-8.56 2 -2"
+                    rotation="0 90 0"
+                    depth="0.2"
+                    scale="1.07 1.07 1.07"
+                    // ------------------------------------ //
+                    color="saddlebrown"
+                    height={data[1].height / 100}
+                    width={data[1].width / 100}
+                  ></a-box>
+                )}
               </>
 
               {/* __________________________________ fourth */}
@@ -386,7 +443,8 @@ export default function Gallery() {
                   depth="0.5"
                   height="7"
                   width="6"
-                  src="url(/assets/marble/black_2.jpg)"
+                  color="firebrick"
+                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
                 ></a-box>
                 {/* __________________________________ fourth_light */}
                 <a-light
@@ -450,7 +508,8 @@ export default function Gallery() {
                   depth="0.5"
                   height="7"
                   width="6"
-                  src="url(/assets/marble/black_2.jpg)"
+                  color="firebrick"
+                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
                 ></a-box>
                 {/* __________________________________ fifth_light */}
                 <a-light
@@ -530,7 +589,8 @@ export default function Gallery() {
                   depth="0.5"
                   height="7"
                   width="6"
-                  src="url(/assets/marble/black_2.jpg)"
+                  color="firebrick"
+                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
                 ></a-box>
                 {/* __________________________________ sixth_light */}
                 <a-light
@@ -578,7 +638,8 @@ export default function Gallery() {
                   depth="0.5"
                   height="7"
                   width="6"
-                  src="url(/assets/marble/black_2.jpg)"
+                  color="firebrick"
+                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
                 ></a-box>
                 {/* __________________________________ seventh_light */}
                 <a-light
@@ -642,7 +703,8 @@ export default function Gallery() {
                   depth="0.5"
                   height="7"
                   width="6"
-                  src="url(/assets/marble/black_2.jpg)"
+                  color="firebrick"
+                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
                 ></a-box>
                 {/* __________________________________ eighth_number_box */}
                 {data[7] && (
@@ -707,7 +769,8 @@ export default function Gallery() {
                   depth="0.5"
                   height="7"
                   width="6"
-                  src="url(/assets/marble/black_2.jpg)"
+                  color="firebrick"
+                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
                 ></a-box>
                 {/* __________________________________ ninth_light */}
                 <a-light
@@ -771,7 +834,8 @@ export default function Gallery() {
                   depth="0.5"
                   height="7"
                   width="6"
-                  src="url(/assets/marble/black_2.jpg)"
+                  color="firebrick"
+                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
                 ></a-box>
                 {/* __________________________________ tenth_light */}
                 <a-light
@@ -836,7 +900,8 @@ export default function Gallery() {
           depth="0.5"
           height="7"
           width="6"
-          src="url(/assets/marble/black_2.jpg)"
+          color="firebrick"
+          src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
         ></a-box>
 
         {/* light for top wall painting */}
@@ -889,7 +954,7 @@ export default function Gallery() {
           gltf-model="/assets/chandelier/scene.gltf"
         ></a-entity>
 
-        {/* omni light */}
+        {/* omni_light */}
         <a-light
           id="omni_light"
           position="0 2 0"
@@ -915,47 +980,46 @@ export default function Gallery() {
           rotation="0 0 0"
           gltf-model="url(/assets/mini_sofa/scene.gltf)"
         ></a-entity>
-        <a-sphere
-          id="sphere"
-          onClick={() => {
-            emerge();
-          }}
-          radius="0.2"
-          position="0 1.5 -8"
-          rotation="0 0 0"
-          src="url(/assets/marble/black_2.jpg)"
-          // mixin="up_and_down"
-        ></a-sphere>
-        <a-cone
-          id="left_cone"
-          onClick={() => {
-            toPreviousBatch();
-          }}
-          color="tomato"
-          height="0.2"
-          radius-bottom="0.1"
-          radius-top="0.001"
-          rotation="0 0 90"
-          position="0 1.5 -8"
-          // position="-0.8 1.5 -8"
-        ></a-cone>
-        <a-cone
-          id="right_cone"
-          onClick={() => {
-            toNextBatch();
-          }}
-          color="tomato"
-          height="0.2"
-          radius-bottom="0.1"
-          radius-top="0.001"
-          rotation="0 0 -90"
-          position="0 1.5 -8"
-        ></a-cone>
-        {/* <a-box
-          position="-1 1.6 -5"
-          animation="property: position; to: [1 8 -10, -1 1.6 -5]; dur: 2000; easing: linear; loop: true"
-          color="tomato"
-        ></a-box> */}
+        {/* pagination_sphere */}
+        <>
+          s
+          <a-sphere
+            id="sphere"
+            onClick={() => {
+              emerge();
+            }}
+            radius="0.2"
+            position="0 1.5 -8"
+            rotation="0 0 0"
+            src="url(/assets/textures/Bumpy-Red-Plastic-Texture.png)"
+            // mixin="up_and_down"
+          ></a-sphere>
+          <a-cone
+            id="left_cone"
+            onClick={() => {
+              toPreviousBatch();
+            }}
+            src="url(/assets/textures/Bumpy-Red-Plastic-Texture.png)"
+            height="0.2"
+            radius-bottom="0.1"
+            radius-top="0.001"
+            rotation="0 0 90"
+            position="0 1.5 -8"
+            // position="-0.8 1.5 -8"
+          ></a-cone>
+          <a-cone
+            id="right_cone"
+            onClick={() => {
+              toNextBatch();
+            }}
+            src="url(/assets/textures/Bumpy-Red-Plastic-Texture.png)"
+            height="0.2"
+            radius-bottom="0.1"
+            radius-top="0.001"
+            rotation="0 0 -90"
+            position="0 1.5 -8"
+          ></a-cone>
+        </>
         <a-sky color="#ECECEC"></a-sky>
       </a-scene>
     </>
