@@ -5,8 +5,6 @@ export default function LandingCollectionItem({ collection, isPastAuction }) {
   const [startDay, startMonth] = timeNameFinder(startDate);
   const [endDay, endMonth] = timeNameFinder(endDate);
 
-  console.log(collection);
-
   return (
     <div className="grid grid-cols-4 mt-10 space-x-5 relative">
       <div className="h-full overflow-hidden rounded-lg">

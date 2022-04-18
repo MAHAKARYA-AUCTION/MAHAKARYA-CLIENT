@@ -21,12 +21,14 @@ export default function DavidGallery() {
   useEffect(() => {
     fetch(BASE_URL + "collections").then((response) =>
       response.json().then((x) => {
-        x = x.filter((e) => e.galleryName != location.pathname.slice(1));
+        x = x.filter((e) => e.galleryName == location.pathname.slice(1));
         setWholeData(x[0].Lots);
         setData(x[0].Lots.slice(sliceIndex[0], sliceIndex[1]));
       })
     );
   }, []);
+
+  console.log(data);
 
   const floorTransporter = () => {
     navigate("../lobby", { replace: true });
@@ -205,7 +207,7 @@ export default function DavidGallery() {
                     rotation="0 180 0"
                     width="15"
                     color="#57240f"
-                    value={data[0].number}
+                    value={data[0].lotNumber}
                     geometry="primitive:plane, src='#number_box'"
                     side="double"
                     align="center"
@@ -283,7 +285,7 @@ export default function DavidGallery() {
                     rotation="0 90 0"
                     width="15"
                     color="#57240f"
-                    value={data[1].number}
+                    value={data[1].lotNumber}
                     geometry="primitive:plane, src='#number_box'"
                     side="double"
                     align="center"
@@ -361,7 +363,7 @@ export default function DavidGallery() {
                     rotation="0 90 0"
                     width="15"
                     color="#57240f"
-                    value={data[2].number}
+                    value={data[2].lotNumber}
                     geometry="primitive:plane, src='#number_box'"
                     side="double"
                     align="center"
@@ -439,7 +441,7 @@ export default function DavidGallery() {
                     rotation="0 90 0"
                     width="15"
                     color="#57240f"
-                    value={data[3].number}
+                    value={data[3].lotNumber}
                     geometry="primitive:plane, src='#number_box'"
                     side="double"
                     align="center"
@@ -517,7 +519,7 @@ export default function DavidGallery() {
                     rotation="0 0 0"
                     width="15"
                     color="#57240f"
-                    value={data[4].number}
+                    value={data[4].lotNumber}
                     geometry="primitive:plane, src='#number_box'"
                     side="double"
                     align="center"

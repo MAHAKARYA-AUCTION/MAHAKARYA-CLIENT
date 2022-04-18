@@ -11,9 +11,8 @@ import axios from "axios";
 import LotCard from "../components/lotCard";
 
 export default function ProfileView() {
-  
-  const id = localStorage.id
-  const dispatch = useDispatch()
+  const id = localStorage.id;
+  const dispatch = useDispatch();
   const [showTopup, setShowTopup] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const { userById, isLoading } = useSelector((state) => state.userReducer);
@@ -245,7 +244,7 @@ export default function ProfileView() {
                       </tr>
                       {/* <br /> */}
                       <tr>
-                        <td>Phone</td>
+                        <td>Phone Number</td>
                         <td className="px-2">:</td>
                         {userById && (
                           <td className="py-2">{userById.data.phoneNumber}</td>
@@ -261,7 +260,7 @@ export default function ProfileView() {
                       </tr>
                       {/* <br /> */}
                       <tr>
-                        <td>Join At</td>
+                        <td>Joined At</td>
                         <td className="px-2">:</td>
                         {userById && (
                           <td className="py-2">

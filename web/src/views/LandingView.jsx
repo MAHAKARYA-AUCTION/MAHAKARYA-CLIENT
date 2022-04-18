@@ -15,6 +15,11 @@ export default function LandingView() {
   }, []);
 
   const collections = useSelector((state) => state.lotsReducer.collections);
+  const currentCollections = useSelector((state) =>
+    state?.lotsReducer?.collections?.filter(
+      (e) => new Date(e.endDate) > new Date()
+    )
+  );
   const pastCollections = useSelector((state) =>
     state?.lotsReducer?.collections?.filter(
       (e) => new Date(e.endDate) < new Date()
@@ -31,7 +36,8 @@ export default function LandingView() {
     setPageNumber(pageNumber - 1);
   }
 
-  function handleNext() {
+  function handleNext(e) {
+    console.log(e);
     if (pageNumber === Math.ceil(collections.length / limit)) return;
     setPageNumber(pageNumber + 1);
   }
@@ -73,7 +79,7 @@ export default function LandingView() {
         </div>
         {/* END:LINE BREAK */}
         {/* START: FEATURED COLLECTION */}
-        <FeaturedCollection collections={collections} />
+        <FeaturedCollection collections={currentCollections} />
         {/* END: FEATURED COLLECTION */}
         {/* START:LINE BREAK */}
         <div className="h-20 grid grid-cols-9 items-center w-[80%] mx-auto">
