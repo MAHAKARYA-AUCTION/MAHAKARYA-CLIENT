@@ -2,82 +2,53 @@ import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import { useCountdown } from "../hooks/useCountdown";
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchCollection,
+  fetchLotsByCollectionId,
+} from "../store/actions/lots";
+import { useParams } from "react-router-dom";
 import LotCard from "../components/lotCard";
 
 export default function CollectionList() {
-  const collection = {
-    Lots: [
-      {
-        id: 1,
-        name: "Paintings 1",
-        artistName: "Artist 1",
-        primaryImage: "https://loremflickr.com/g/1080/720/painting?lock=2",
-        startingBid: 1000000,
-        Bids: [
-          {
-            id: 1,
-            bidPrice: 1500000,
-          },
-        ],
-      },
-      {
-        id: 2,
-        name: "Paintings 1",
-        artistName: "Artist 1",
-        primaryImage: "https://loremflickr.com/g/1080/720/painting?lock=2",
-        startingBid: 1000000,
-        Bids: [
-          {
-            id: 1,
-            bidPrice: 1500000,
-          },
-        ],
-      },
-      {
-        id: 3,
-        name: "Paintings 1",
-        artistName: "Artist 1",
-        primaryImage: "https://loremflickr.com/g/1080/720/painting?lock=2",
-        startingBid: 1000000,
-        Bids: [],
-      },
-      {
-        id: 4,
-        name: "Paintings 1",
-        artistName: "Artist 1",
-        primaryImage: "https://loremflickr.com/g/1080/720/painting?lock=2",
-        startingBid: 1000000,
-        Bids: [
-          {
-            id: 1,
-            bidPrice: 1500000,
-          },
-        ],
-      },
-      {
-        id: 5,
-        name: "Paintings 1",
-        artistName: "Artist 1",
-        primaryImage: "https://loremflickr.com/g/1080/720/painting?lock=2",
-        startingBid: 1000000,
-        Bids: [
-          {
-            id: 1,
-            bidPrice: 1500000,
-          },
-        ],
-      },
-      ,
-    ],
-  };
+  const dispatch = useDispatch();
+  const { id } = useParams();
+  const { collection, lots } = useSelector((state) => state.lotsReducer);
+  const [filter, setFilter] = useState({
+    name: "",
+    artistName: "",
+    startingBid: "",
+  });
+  const [refetchSwitch, setRefetchSwitch] = useState(false);
 
-  var tomorrow = new Date("20 Apr 2022");
+  useEffect(() => {
+    dispatch(fetchCollection(id));
+  }, []);
+
+  useEffect(() => {
+    console.log("a");
+    dispatch(fetchLotsByCollectionId({ id, filter }));
+  }, [refetchSwitch]);
+
+  var tomorrow = new Date(collection.endDate);
   const [days, hours, minutes, seconds] = useCountdown(tomorrow);
 
   const [pageNumber, setPageNumber] = useState(1);
-  const [limit] = useState(10);
+  const [limit, setLimit] = useState(8);
   const offset = pageNumber * limit - limit;
-  const paginatedLots = collection.Lots.slice(offset, offset + limit);
+  let paginatedLots = lots.slice(offset, offset + limit);
+
+  function filterHandler(e) {
+    e.preventDefault();
+    const { name, value } = e.target;
+    const newFilter = { ...filter, [name]: value };
+    setFilter(newFilter);
+  }
+
+  function refetch() {
+    console.log("refetch");
+    setRefetchSwitch(!refetchSwitch);
+  }
 
   function handlePrev() {
     if (pageNumber === 1) return;
@@ -94,19 +65,16 @@ export default function CollectionList() {
       <Navbar />
       <div className="my-10 mx-auto rounded-xl relative w-[99vw] ">
         <img
-          src={require("../resources/img/placeholder-banner.jpg")}
+          src={collection.imgUrl}
           className="collection-banner w-[100vw] absolute z-0 brightness-75"
         ></img>
         <div className="z-50 relative text-[#F8F1E7] font-bold mt-64 mb-16  w-[80%] mx-auto space-y-5 flex flex-row">
           <div className="w-1/2">
             <h1 className=" font-bosque text-7xl text-left tracking-widest">
-              Collection Name
+              {collection.name}
             </h1>
-            <p className="text-xl font-poppins text-left tracking-wider">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-              varius mi sed tortor accumsan consequat. In hac habitasse platea
-              dictumst. Vivamus in tempor enim. Interdum et malesuada fames ac
-              ante.
+            <p className="text-xl font-poppins text-left tracking-wider leading-10 mt-2">
+              {collection.description}
             </p>
           </div>
           <div className="w-1/2">
@@ -121,19 +89,19 @@ export default function CollectionList() {
                 </h1>
                 <div className="bg-[#ebd7bb] rounded-xl shadow-2xl text-[#57240f] grid grid-cols-4 poppins font-bold py-2">
                   <div className="border-r-2 border-white flex flex-col justify-center items-center">
-                    <label className="text-3xl">{days}</label>
+                    <label className="text-3xl">{days ? days : ""}</label>
                     <label className="text-xl">Day</label>
                   </div>
                   <div className="border-r-2 border-white flex flex-col justify-center items-center">
-                    <label className="text-3xl">{hours}</label>
+                    <label className="text-3xl">{hours ? hours : ""}</label>
                     <label className="text-xl">Hours</label>
                   </div>
                   <div className="border-r-2 border-white flex flex-col justify-center items-center">
-                    <label className="text-3xl">{minutes}</label>
+                    <label className="text-3xl">{minutes ? minutes : ""}</label>
                     <label className="text-xl">Minutes</label>
                   </div>
                   <div className=" border-white flex flex-col justify-center items-center">
-                    <label className="text-3xl">{seconds}</label>
+                    <label className="text-3xl">{seconds ? seconds : ""}</label>
                     <label className="text-xl">Seconds</label>
                   </div>
                 </div>
@@ -154,8 +122,11 @@ export default function CollectionList() {
                 </label>
                 <input
                   type="text"
+                  name="name"
                   placeholder="Type here"
                   className="input input-bordered w-full"
+                  onChange={filterHandler}
+                  value={filter.name}
                 />
                 <label className="label">
                   <span className="label-text-alt text-base">
@@ -169,8 +140,11 @@ export default function CollectionList() {
                 </label>
                 <input
                   type="text"
+                  name="artistName"
                   placeholder="Type here"
                   className="input input-bordered w-full"
+                  onChange={filterHandler}
+                  value={filter.artistName}
                 />
                 <label className="label">
                   <span className="label-text-alt text-base">
@@ -178,7 +152,10 @@ export default function CollectionList() {
                   </span>
                 </label>
               </div>
-              <button className="btn bg-[#ebd7bb] text-[#57240f] border-[#57240f] hover:scale-105 hover:text-[#ebd7bb] hover:bg-[#57240f] transform transition duration-400">
+              <button
+                className="btn bg-[#ebd7bb] text-[#57240f] border-[#57240f] hover:scale-105 hover:text-[#ebd7bb] hover:bg-[#57240f] transform transition duration-400"
+                onClick={refetch}
+              >
                 Filter
               </button>
             </div>
@@ -200,21 +177,21 @@ export default function CollectionList() {
                       <a>Lot Number</a>
                     </li>
                     <li>
-                      <a>Bottom Price: Highest to Lowest</a>
+                      <a>Price: Highest to Lowest</a>
                     </li>
                     <li>
-                      <a>Bottom Price: Lowest to Highest</a>
+                      <a>Price: Lowest to Highest</a>
                     </li>
                   </ul>
                 </div>
                 <div className="flex flex-col justify-end items-baseline">
                   <h1 className="text-2xl font-poppins align-middle font-semibold">
-                    21 Lots
+                    {lots.length} Lots
                   </h1>
                 </div>
               </div>
-              <div className="grid grid-cols-4 grid-flow-row p-5 space-x-2 space-y-3 items-baseline">
-                {collection.Lots.map((lot, index) => {
+              <div className="grid grid-cols-4 grid-flow-row p-5 space-x-2 space-y-6 items-baseline">
+                {paginatedLots.map((lot, index) => {
                   return (
                     <LotCard
                       key={lot.id}
