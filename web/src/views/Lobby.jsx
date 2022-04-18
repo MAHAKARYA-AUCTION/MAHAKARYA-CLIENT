@@ -20,6 +20,8 @@ export default function Lobby() {
       .then((x) => setData(x));
   }, []);
 
+  console.log(data);
+
   return (
     <>
       <a-scene>
