@@ -10,14 +10,14 @@ export const fetchUserDetail = (id) => {
         method: "GET",
         headers: {
           // access_token: localStorage.access_token,
-        }
-      })
-      dispatch(fetchUserDetailAction(user))
+        },
+      });
+      dispatch(fetchUserDetailAction(user));
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
-}
+  };
+};
 
 export function fetchUserDetailAction(payload) {
   return {
@@ -25,3 +25,15 @@ export function fetchUserDetailAction(payload) {
     payload,
   };
 }
+
+export const doRegister = (payload) => {
+  return (dispatch) => {
+    return axios.post(`${baseUrl}/users/register`, payload);
+  };
+};
+
+export const doLogin = (payload) => {
+  return (dispatch) => {
+    return axios.post(`${baseUrl}/users/login`, payload);
+  };
+};

@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 export default function Gallery() {
   const navigate = useNavigate();
   const BASE_URL = "http://localhost:3000/lots";
+  // const BASE_URL = "http://api.mahakarya-auction.com/lots";
 
   const [wholeData, setWholeData] = useState(null);
   const [data, setData] = useState(null);
@@ -28,7 +29,7 @@ export default function Gallery() {
   console.log(data);
 
   const floorTransporter = () => {
-    navigate("../lobby", { replace: true });
+    navigate("../david-gallery", { replace: true });
   };
 
   const position = {
@@ -98,17 +99,14 @@ export default function Gallery() {
         {/* __________________________________ assets */}
         <>
           <a-assets>
-            <img id="number_box" src="assets/marble/black_23.jpg" />
-            <a-asset-item id="scene" src="assets/scene.gltf" />
-            <a-asset-item id="door" src="assets/door/scene.gltf" />
-            <a-asset-item id="door" src="assets/carpets" />
-            <a-mixin
-              id="up_and_down"
-              animation__bounceUp="property: position; from: 0 0 0 ; to: 0 1 0; dur:500; "
-              animation__bounceDown="property: position; from: 0 1 0 ; to: 0 0 0; dur:500; start-events: animationcomplete__bounceup"
-            ></a-mixin>
+            <img
+              id="advertisement"
+              src="https://mahakarya-auction.s3.ap-southeast-1.amazonaws.com/painting/collection-1.jpg"
+            />
           </a-assets>
         </>
+
+        <a-box src="#advertisement"></a-box>
 
         {/* __________________________________ floor */}
         <a-plane
