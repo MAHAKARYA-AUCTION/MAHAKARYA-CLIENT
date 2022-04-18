@@ -6,10 +6,11 @@ export default function LotCard({ lot, lotNumber }) {
     navigate(`/lot/${lot.id}`);
   }
   return (
-    <div className="card card-compact w-80 bg-[#F8F1E7] shadow-xl hover:scale-105 relative overflow-hidden h-[490px]">
-      <figure>
-        <img src={lot?.primaryImage} alt="Lot Picture" className="w-96 h-60" />
-      </figure>
+    <div className="card card-compact w-[95%] bg-[#F8F1E7] shadow-xl hover:scale-105 relative overflow-hidden h-[490px]">
+      <div
+        className=" h-96 bg-cover bg-center"
+        style={{ backgroundImage: `url(${lot?.primaryImage})` }}
+      ></div>
       <div className="card-body font-poppins">
         <div className="flex flex-row justify-between">
           <h2 className="card-title clamp">{lot?.name}</h2>
