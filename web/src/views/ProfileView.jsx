@@ -3,7 +3,6 @@ import Footer from "../components/footer";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserDetail } from "../store/actions/User";
-import { useParams } from "react-router";
 import formatRupiah from "../helpers/formatPrice";
 import Loading from "./Loading";
 import { useForm } from "react-hook-form";
@@ -14,7 +13,7 @@ import LotCard from "../components/lotCard";
 
 export default function ProfileView() {
   
-  const { id } = useParams()
+  const id = localStorage.id
   const dispatch = useDispatch()
   const [showTopup, setShowTopup] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
