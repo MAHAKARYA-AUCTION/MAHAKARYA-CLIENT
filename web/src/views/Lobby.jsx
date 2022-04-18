@@ -4,6 +4,9 @@ require("aframe");
 
 export default function Lobby() {
   const navigate = useNavigate();
+  // const BASE_URL = "http://localhost:3000/";
+  const BASE_URL = "http://api.mahakarya-auction.com/";
+  const [floor, setFloor] = useState("46");
   const floorTransporter = () => {
     navigate("../goliath-gallery", { replace: true });
   };
@@ -12,15 +15,22 @@ export default function Lobby() {
     var html = document.querySelector("html");
     html.removeAttribute("class");
   };
-  const BASE_URL = "http://localhost:3000/";
-  const [data, setData] = useState(null);
+  const [collectionsData, setCollectionsData] = useState(null);
   useEffect(() => {
     fetch(BASE_URL + "collections")
       .then((response) => response.json())
-      .then((x) => setData(x));
+      .then((x) => setCollectionsData(x));
   }, []);
 
-  console.log(data);
+  const pressUp = () => {
+    if (floor == "46") {
+      floor = "87";
+    } else {
+      floor = "46";
+    }
+  };
+
+  console.log(collectionsData);
 
   return (
     <>
@@ -29,7 +39,10 @@ export default function Lobby() {
           position="0 2 5"
           wasd-controls-enabled="true"
           wasd-controls="acceleration:25"
-          look-controls="pointerLockEnabled:true"
+          // look-controls
+          // ="
+          // // pointerLockEnabled:true
+          // "
           fov="60"
           near="0.1"
           far="100"
@@ -96,7 +109,18 @@ export default function Lobby() {
           depth="0.5"
           height="5"
           width="12"
-          src={"url(/assets/marble/black_2.jpg)"}
+          repeat="1 1"
+          color="firebrick"
+          src={"url(/assets/wall/white_stucco_paint.jpg)"}
+        ></a-box>
+
+        <a-box
+          id="board"
+          position="3.35 2.5 -5.75"
+          depth="0.1"
+          height="2"
+          width="3"
+          src={"url(/assets/marble/black_1.jpg)"}
         ></a-box>
 
         {/* left-side lobby wall */}
@@ -162,13 +186,47 @@ export default function Lobby() {
 
         {/* elevator */}
         <a-entity
-          onClick={floorTransporter}
+          // onClick={floorTransporter}
           scale="0.014 0.014 0.014"
           position="0 3 -5"
           gltf-model="url(/assets/elevator/scene.gltf)"
         ></a-entity>
 
+        <a-triangle
+          id="elevator_up_button"
+          onClick={floorTransporter}
+          position="0.9 1.735 -4.861"
+          color="red"
+          side="double"
+          scale="0.1 0.1 0.1"
+          material=""
+          geometry=""
+        ></a-triangle>
+        <a-text
+          id="elevator_text"
+          value={floor}
+          position="0 3.37 -4.875"
+          color="black"
+          scale=".5 .5 .5"
+        ></a-text>
+
         <a-light type="ambient" color="white" intensity="0.5"></a-light>
+
+        <a-text
+          id="Floor 46: \nGoliath gallery"
+          value="Floor 46: \nGoliath gallery"
+          geometry="primitive:plane"
+          position="2.5 2.7 -5.5"
+          color="black"
+          scale=".5 .5 .5"
+        ></a-text>
+        <a-text
+          value="Floor 87: \nDavid gallery"
+          geometry="primitive:plane"
+          position="2.5 2 -5.5"
+          color="black"
+          scale=".5 .5 .5"
+        ></a-text>
 
         <a-sky color="#ECECEC"></a-sky>
       </a-scene>

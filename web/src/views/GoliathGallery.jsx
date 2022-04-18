@@ -9,8 +9,8 @@ import Swal from "sweetalert2";
 
 export default function Gallery() {
   const navigate = useNavigate();
-  const BASE_URL = "http://localhost:3000/lots";
-  // const BASE_URL = "http://api.mahakarya-auction.com/lots";
+  // const BASE_URL = "http://localhost:3000/lots";
+  const BASE_URL = "http://api.mahakarya-auction.com/lots";
 
   const [wholeData, setWholeData] = useState(null);
   const [data, setData] = useState(null);
@@ -86,9 +86,9 @@ export default function Gallery() {
           position="0 2 0"
           wasd-controls-enabled="true"
           wasd-controls="acceleration:25"
-          look-controls="
-          pointerLockEnabled: true;
-          "
+          // look-controls="
+          // // pointerLockEnabled: true;
+          // "
           fov="60"
           near="0.1"
           far="100"
@@ -96,7 +96,7 @@ export default function Gallery() {
           <a-cursor></a-cursor>
         </a-camera>
 
-        {/* __________________________________ assets */}
+        {/* __________________________________ assets
         <>
           <a-assets>
             <img
@@ -106,7 +106,7 @@ export default function Gallery() {
           </a-assets>
         </>
 
-        <a-box src="#advertisement"></a-box>
+        <a-box src="#advertisement"></a-box> */}
 
         {/* __________________________________ floor */}
         <a-plane
@@ -114,7 +114,7 @@ export default function Gallery() {
           rotation="-90 0 0"
           width="25"
           height="30"
-          color="white"
+          color="brown"
           src="url(/assets/square_floor_4k/textures/square_floor_diff_4k.jpg)"
           repeat="10 10"
         ></a-plane>
@@ -125,6 +125,7 @@ export default function Gallery() {
           rotation="-90 0 0"
           width="60"
           height="60"
+          color="tan"
           src="url(/assets/marble/black_2.jpg)"
           repeat="4 4"
         ></a-box>
@@ -157,7 +158,8 @@ export default function Gallery() {
               depth="0.5"
               height="7"
               width="12"
-              src="url(/assets/marble/black_2.jpg)"
+              color="firebrick"
+              src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
             ></a-box>
             {/* __________________________________left-side elevator wall */}
             <a-box
@@ -166,7 +168,8 @@ export default function Gallery() {
               depth="0.5"
               height="7"
               width="7"
-              src="url(/assets/marble/black_2.jpg)"
+              color="firebrick"
+              src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
             ></a-box>
             {/* __________________________________right-side elevator wall */}
             <a-box
@@ -175,7 +178,8 @@ export default function Gallery() {
               depth="0.5"
               height="7"
               width="7"
-              src="url(/assets/marble/black_2.jpg)"
+              color="firebrick"
+              src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
             ></a-box>
           </>
         </>
@@ -194,7 +198,8 @@ export default function Gallery() {
                   depth="0.5"
                   height="7"
                   width="6"
-                  src={"url(/assets/marble/black_2.jpg)"}
+                  color="firebrick"
+                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
                 ></a-box>
                 {/* __________________________________ first_light */}
                 <a-light
@@ -258,7 +263,8 @@ export default function Gallery() {
                   depth="0.5"
                   height="7"
                   width="6"
-                  src="url(/assets/marble/black_2.jpg)"
+                  color="firebrick"
+                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
                 ></a-box>
                 {/* __________________________________ second_light */}
                 <a-light
@@ -322,7 +328,8 @@ export default function Gallery() {
                   depth="0.5"
                   height="7"
                   width="6"
-                  src="url(/assets/marble/black_2.jpg)"
+                  color="firebrick"
+                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
                 ></a-box>
                 {/* __________________________________ third_light */}
                 <a-light
@@ -386,7 +393,8 @@ export default function Gallery() {
                   depth="0.5"
                   height="7"
                   width="6"
-                  src="url(/assets/marble/black_2.jpg)"
+                  color="firebrick"
+                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
                 ></a-box>
                 {/* __________________________________ fourth_light */}
                 <a-light
@@ -450,7 +458,8 @@ export default function Gallery() {
                   depth="0.5"
                   height="7"
                   width="6"
-                  src="url(/assets/marble/black_2.jpg)"
+                  color="firebrick"
+                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
                 ></a-box>
                 {/* __________________________________ fifth_light */}
                 <a-light
@@ -530,7 +539,8 @@ export default function Gallery() {
                   depth="0.5"
                   height="7"
                   width="6"
-                  src="url(/assets/marble/black_2.jpg)"
+                  color="firebrick"
+                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
                 ></a-box>
                 {/* __________________________________ sixth_light */}
                 <a-light
@@ -578,7 +588,8 @@ export default function Gallery() {
                   depth="0.5"
                   height="7"
                   width="6"
-                  src="url(/assets/marble/black_2.jpg)"
+                  color="firebrick"
+                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
                 ></a-box>
                 {/* __________________________________ seventh_light */}
                 <a-light
@@ -642,7 +653,8 @@ export default function Gallery() {
                   depth="0.5"
                   height="7"
                   width="6"
-                  src="url(/assets/marble/black_2.jpg)"
+                  color="firebrick"
+                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
                 ></a-box>
                 {/* __________________________________ eighth_number_box */}
                 {data[7] && (
@@ -707,7 +719,8 @@ export default function Gallery() {
                   depth="0.5"
                   height="7"
                   width="6"
-                  src="url(/assets/marble/black_2.jpg)"
+                  color="firebrick"
+                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
                 ></a-box>
                 {/* __________________________________ ninth_light */}
                 <a-light
@@ -771,7 +784,8 @@ export default function Gallery() {
                   depth="0.5"
                   height="7"
                   width="6"
-                  src="url(/assets/marble/black_2.jpg)"
+                  color="firebrick"
+                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
                 ></a-box>
                 {/* __________________________________ tenth_light */}
                 <a-light
@@ -836,7 +850,8 @@ export default function Gallery() {
           depth="0.5"
           height="7"
           width="6"
-          src="url(/assets/marble/black_2.jpg)"
+          color="firebrick"
+          src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
         ></a-box>
 
         {/* light for top wall painting */}

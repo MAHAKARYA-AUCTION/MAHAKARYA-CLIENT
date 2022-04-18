@@ -8,8 +8,8 @@ import Swal from "sweetalert2";
 
 export default function DavidGallery() {
   const navigate = useNavigate();
-  const BASE_URL = "http://localhost:3000/lots";
-  // const BASE_URL = "https://api.mahakarya-auction.com/lots";
+  // const BASE_URL = "http://localhost:3000/lots";
+  const BASE_URL = "https://api.mahakarya-auction.com/lots";
 
   const [wholeData, setWholeData] = useState(null);
   const [data, setData] = useState(null);
@@ -41,11 +41,11 @@ export default function DavidGallery() {
   function emerge() {
     anime({
       targets: "#left_cone",
-      position: ["1.5 1.5 -9.5", "1 1.5 -9.5"],
+      position: ["-2.75 1.5 -5.25", "-2.75 1.5 -4.75"],
     });
     anime({
       targets: "#right_cone",
-      position: ["1.5 1.5 -9.5", "2 1.5 -9.5"],
+      position: ["-2.75 1.5 -5.25", "-2.75 1.5 -5.75"],
     });
   }
 
@@ -574,7 +574,7 @@ export default function DavidGallery() {
             emerge();
           }}
           radius="0.2"
-          position="1.5 1.45 -9.5"
+          position="-2.75 1.5 -5.25"
           rotation="0 0 0"
           color="#ebd7bb"
           animation="property: object3D.position.y; to: 1.55; dir: alternate; dur: 2000; loop: true"
@@ -590,8 +590,8 @@ export default function DavidGallery() {
           height="0.2"
           radius-bottom="0.1"
           radius-top="0.001"
-          position="1.5 1.5 -9.5"
-          rotation="0 0 90"
+          position="-2.75 1.5 -5.25"
+          rotation="90 0 0"
           // position="-0.8 1.5 -8"
         ></a-cone>
         <a-cone
@@ -603,8 +603,8 @@ export default function DavidGallery() {
           height="0.2"
           radius-bottom="0.1"
           radius-top="0.001"
-          rotation="0 0 -90"
-          position="1.5 1.5 -9.5"
+          rotation="-90 0 0"
+          position="-2.75 1.5 -5.25"
         ></a-cone>
         {/* sofa */}
         <a-entity
