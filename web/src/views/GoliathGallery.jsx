@@ -45,24 +45,24 @@ export default function Gallery() {
     sixth: [0, 0, 0],
     seventh: [0, 0, 0],
     eighth: [0, 0, 0],
-    ninth: [0, 0, 0]
+    ninth: [0, 0, 0],
   };
 
   anime({
     targets: "#sphere",
     rotation: "0 2 0",
     loop: true,
-    autoplay: true
+    autoplay: true,
   });
 
   function emerge() {
     anime({
       targets: "#left_cone",
-      position: ["0 1.5 -8", "-0.5 1.5 -8"]
+      position: ["0 1.5 -8", "-0.5 1.5 -8"],
     });
     anime({
       targets: "#right_cone",
-      position: ["0 1.5 -8", "0.5 1.5 -8"]
+      position: ["0 1.5 -8", "0.5 1.5 -8"],
     });
   }
 
@@ -90,9 +90,7 @@ export default function Gallery() {
           position="0 2 7"
           wasd-controls-enabled="true"
           wasd-controls="acceleration:25"
-          // look-controls="
-          // // pointerLockEnabled: true;
-          // "
+          look-controls="pointerLockEnabled:true"
           fov="60"
           near="0.1"
           far="100"
@@ -124,8 +122,21 @@ export default function Gallery() {
           repeat="10 10"
         ></a-plane>
 
+        {/* __________________________________ middle_carpet */}
+        <a-plane
+          id="middle_carpet"
+          position="0 0.01 -8"
+          rotation="-90 0 0"
+          width="10"
+          height="10"
+          color="maroon"
+          src="url(/assets/carpets/index.jpg)"
+          // src="url(/assets/square_floor_4k/textures/square_floor_diff_4k.jpg)"
+          repeat="10 10"
+        ></a-plane>
+
         {/* __________________________________ roof */}
-        <a-box
+        {/* <a-box
           position="0 7 -4"
           rotation="-90 0 0"
           width="60"
@@ -133,7 +144,7 @@ export default function Gallery() {
           color="saddlebrown"
           src="url(/assets/marble/black_2.jpg)"
           repeat="4 4"
-        ></a-box>
+        ></a-box> */}
 
         {/* elevator and elevator walls */}
         <>
@@ -251,7 +262,7 @@ export default function Gallery() {
                         text: `Created by: ${data[0].artistName}`,
                         imageUrl: data[0].primaryImage,
                         imageWidth: data[0].width,
-                        imageHeight: data[0].height
+                        imageHeight: data[0].height,
                       });
                     }}
                     position={`${position.first[0]} ${position.first[1]} ${position.first[2]}`}
@@ -329,7 +340,7 @@ export default function Gallery() {
                         text: `Created by: ${data[1].artistName}`,
                         imageUrl: data[1].primaryImage,
                         imageWidth: data[1].width,
-                        imageHeight: data[1].height
+                        imageHeight: data[1].height,
                       });
                     }}
                     position="-8.55 2 -1.995"
@@ -407,7 +418,7 @@ export default function Gallery() {
                         text: `Created by: ${data[2].artistName}`,
                         imageUrl: data[2].primaryImage,
                         imageWidth: data[2].width,
-                        imageHeight: data[2].height
+                        imageHeight: data[2].height,
                       });
                     }}
                     position="-8.55 2 -8"
@@ -485,7 +496,7 @@ export default function Gallery() {
                         text: `Created by: ${data[3].artistName}`,
                         imageUrl: data[3].primaryImage,
                         imageWidth: data[3].width,
-                        imageHeight: data[3].height
+                        imageHeight: data[3].height,
                       });
                     }}
                     position="-8.55 2 -14"
@@ -573,7 +584,7 @@ export default function Gallery() {
                         text: `Created by: ${data[4].artistName}`,
                         imageUrl: data[4].primaryImage,
                         imageWidth: data[4].width,
-                        imageHeight: data[4].height
+                        imageHeight: data[4].height,
                       });
                     }}
                     position="-6 2 -16.8"
@@ -660,7 +671,7 @@ export default function Gallery() {
                         text: `Created by: ${data[5].artistName}`,
                         imageUrl: data[5].primaryImage,
                         imageWidth: data[5].width,
-                        imageHeight: data[5].height
+                        imageHeight: data[5].height,
                       });
                     }}
                     position="6 2 -16.8"
@@ -747,7 +758,7 @@ export default function Gallery() {
                         text: `Created by: ${data[6].artistName}`,
                         imageUrl: data[6].primaryImage,
                         imageWidth: data[6].width,
-                        imageHeight: data[6].height
+                        imageHeight: data[6].height,
                       });
                     }}
                     position="8.55 2 -14"
@@ -859,7 +870,7 @@ export default function Gallery() {
                         text: `Created by: ${data[7].artistName}`,
                         imageUrl: data[7].primaryImage,
                         imageWidth: data[7].width,
-                        imageHeight: data[7].height
+                        imageHeight: data[7].height,
                       });
                     }}
                     position="8.55 2 -8"
@@ -924,7 +935,7 @@ export default function Gallery() {
                         text: `Created by: ${data[8].artistName}`,
                         imageUrl: data[8].primaryImage,
                         imageWidth: data[8].width,
-                        imageHeight: data[8].height
+                        imageHeight: data[8].height,
                       });
                     }}
                     position="8.55 2 -2"
@@ -1012,7 +1023,7 @@ export default function Gallery() {
                         text: `Created by: ${data[9].artistName}`,
                         imageUrl: data[9].primaryImage,
                         imageWidth: data[9].width,
-                        imageHeight: data[9].height
+                        imageHeight: data[9].height,
                       });
                     }}
                     position="6 2 1.05"
@@ -1108,11 +1119,11 @@ export default function Gallery() {
         {/* omni_light */}
         <a-light
           id="omni_light"
-          position="0 2 0"
+          position="0 4 -7.85"
           angle="360"
-          type="ambient"
+          type="point"
           color="white"
-          intensity="0.8"
+          intensity="1"
         ></a-light>
 
         {/* barrier */}
@@ -1123,14 +1134,38 @@ export default function Gallery() {
           rotation="0 180 0"
           gltf-model="url(/assets/barrier/scene.gltf)"
         ></a-entity> */}
-        {/* sofa */}
-        <a-entity
-          id="sofa"
-          scale="1 1 1"
-          position="0 0 -5"
-          rotation="0 0 0"
-          gltf-model="url(/assets/mini_sofa/scene.gltf)"
-        ></a-entity>
+        {/* sofas */}
+        <>
+          <a-entity
+            id="sofa_1"
+            scale="1 1 1"
+            position="-4.5 0 -4"
+            rotation="0 90 0"
+            gltf-model="url(/assets/mini_sofa/scene.gltf)"
+          ></a-entity>
+          {/* sofa */}
+          <a-entity
+            id="sofa_2"
+            scale="1 1 1"
+            position="-4.5 0 -11.85"
+            rotation="0 90 0"
+            gltf-model="url(/assets/mini_sofa/scene.gltf)"
+          ></a-entity>
+          <a-entity
+            id="sofa_3"
+            scale="1 1 1"
+            position="4.5 0 -11.85"
+            rotation="0 90 0"
+            gltf-model="url(/assets/mini_sofa/scene.gltf)"
+          ></a-entity>
+          <a-entity
+            id="sofa_4"
+            scale="1 1 1"
+            position="4.5 0 -4"
+            rotation="0 90 0"
+            gltf-model="url(/assets/mini_sofa/scene.gltf)"
+          ></a-entity>
+        </>
         {/* pagination_sphere */}
         <>
           s

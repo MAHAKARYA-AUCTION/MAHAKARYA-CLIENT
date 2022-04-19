@@ -8,13 +8,17 @@ export default function LandingCollectionItem({ collection, isPastAuction }) {
   return (
     <div className="grid grid-cols-4 mt-10 space-x-5 relative">
       <div className="h-full overflow-hidden rounded-lg">
-        <img
+        <div
+          className=" w-full bg-center bg-cover bg-no-repeat h-full"
+          style={{ backgroundImage: `url('${collection.imgUrl}')` }}
+        ></div>
+        {/* <img
           src={collection.imgUrl}
           className=" w-[50%] scale-[107%] hover:scale-125 transform transition duration-600 rounded-lg img-cover"
-        />
+        /> */}
       </div>
       <div className="grid grid-rows-4 text-xl text-left col-span-3">
-        <div className="">
+        <div className="h-fit">
           <label className="">
             {collection.startDate.slice(8, 10)} {startMonth} -{" "}
             {collection.endDate.slice(8, 10)} {endMonth} |{" "}
@@ -28,7 +32,9 @@ export default function LandingCollectionItem({ collection, isPastAuction }) {
         </button> */}
         <div className="row-span-3 space-y-2">
           <h1 className="font-bold text-3xl">{collection.name}</h1>
-          <p>{collection.description}</p>
+          <p className="collection-clamp text-justify tracking-wide">
+            {collection.description}
+          </p>
         </div>
       </div>
     </div>
