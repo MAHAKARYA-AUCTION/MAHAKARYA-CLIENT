@@ -14,6 +14,8 @@ import swal from "../helpers/swalToast";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLotById } from "../store/actions/lots";
 import { useParams } from "react-router-dom";
+import Palette from "react-palette";
+import { usePalette } from "react-palette";
 
 export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
   // Placeholder Time
@@ -41,36 +43,40 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
     dispatch(fetchLotById(id));
   }, []);
 
+  // console.log(lotData.primaryImage);
+
   const bids = [
     {
       id: 4,
       bidPrice: 4500000,
       Users: {
-        username: "Jhon Doe"
-      }
+        username: "Jhon Doe",
+      },
     },
     {
       id: 3,
       bidPrice: 4000000,
       Users: {
-        username: "Konstadina Kondwani"
-      }
+        username: "Konstadina Kondwani",
+      },
     },
     {
       id: 2,
       bidPrice: 2700000,
       Users: {
-        username: "Budiman Perkasa"
-      }
+        username: "Budiman Perkasa",
+      },
     },
     {
       id: 1,
       bidPrice: 1500000,
       Users: {
-        username: "Jhonny Krugger"
-      }
-    }
+        username: "Jhonny Krugger",
+      },
+    },
   ];
+
+  // console.log(lotData);
 
   function bidHandler(bid) {
     Swal.fire({
@@ -82,7 +88,7 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
       cancelButtonText: "Cancel",
       confirmButtonText: "Bid",
       confirmButtonColor: "#a35831",
-      cancelButtonColor: "#702F13"
+      cancelButtonColor: "#702F13",
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
@@ -101,7 +107,7 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: false
+    arrows: false,
   };
 
   //BARCODE SETTING
@@ -109,9 +115,14 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
     value: "http://localhost:3000/lot/1",
     options: {
       background: "#ebd7bb",
-      displayValue: false
-    }
+      displayValue: false,
+    },
   });
+
+  let { data, loading, error } = usePalette(lotData.primaryImage);
+  let swatch = Object.values(data);
+  console.log(swatch[0]);
+
   return (
     <div className="flex flex-col justify-between pt-10">
       <Navbar />
@@ -181,6 +192,32 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
               </table>
               <p className="text-justify">{lotData?.description}</p>
             </div>
+            <div className="flex flex-col">
+              <div style={{ backgroundColor: `${swatch[0]}` }}>
+                {""}
+                <p>{"_"}</p>
+              </div>
+              <div style={{ backgroundColor: `${swatch[1]}` }}>
+                {""}
+                <p>{"_"}</p>
+              </div>
+              <div style={{ backgroundColor: `${swatch[2]}` }}>
+                {""}
+                <p>{"_"}</p>
+              </div>
+              <div style={{ backgroundColor: `${swatch[3]}` }}>
+                {""}
+                <p>{"_"}</p>
+              </div>
+              <div style={{ backgroundColor: `${swatch[4]}` }}>
+                {""}
+                <p>{"_"}</p>
+              </div>
+              <div style={{ backgroundColor: `${swatch[5]}` }}>
+                {""}
+                <p>{"_"}</p>
+              </div>
+            </div>
             <div
               tabIndex="0"
               className="collapse collapse-arrow border-2 border-[#675237] rounded-box mt-5 pl-5 shadow-sm overflow-visible"
@@ -226,9 +263,9 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
                       </div>
                       <div className="flex flex-col justify-center">
                         {/* START:BID Dropdown */}
-                        <div class="dropdown dropdown-left">
+                        <div className="dropdown dropdown-left">
                           <button
-                            tabindex="0"
+                            tabIndex="0"
                             className="btn bg-[#ebd7bb] px-6 poppins font-semibold text-3xl mr-2 hover:scale-110
                    transform transition duration-400 border-2 text-[#57240f] border-[#57240f]
                     rounded-xl hover:bg-[#57240f] hover:text-[#cdbba6]  focus:bg-[#57240f] focus:text-[#cdbba6] focus:scale-110 text-center hover:border-0 "
@@ -236,8 +273,8 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
                             Bid
                           </button>
                           <ul
-                            tabindex="0"
-                            class="dropdown-content menu p-2 bg-[#F0E2CD] rounded-box w-32 z-50 shadow-2xl font-poppins text-center"
+                            tabIndex="0"
+                            className="dropdown-content menu p-2 bg-[#F0E2CD] rounded-box w-32 z-50 shadow-2xl font-poppins text-center"
                           >
                             <li>
                               <a
@@ -331,6 +368,11 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
           </div>
         </div>
       </div>
+      {/* <Palette src={lotData.primaryImage}>
+        {({ data, loading, error }) => (
+          <div style={{ color: data.vibrant }}>Text with the vibrant color</div>
+        )}
+      </Palette> */}
       <Footer />
     </div>
   );
