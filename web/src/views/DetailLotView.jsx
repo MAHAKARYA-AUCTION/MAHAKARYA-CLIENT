@@ -31,12 +31,7 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
 
   const dbref = firestore.collection("bid");
   const query = dbref.where("lotId", "==", +id);
-  // .orderBy("createdAt", "desc")
-  // .limit(25);
-  // .limit(25);
   const [bidData] = useCollectionData(query, { idField: "id" });
-
-  console.log(bidData);
 
   useEffect(() => {
     dispatch(fetchLotById(id));
@@ -64,8 +59,7 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
           total = lotData.startingBid + bid;
           setBidAmount(total);
         }
-        await handleBid(total);
-        swal("success", "Bid Success");
+        await hitBid(total);
         setBidAmount(0);
       } else if (result.isDenied) {
         Swal.fire("Changes are not saved", "", "info");
@@ -73,10 +67,13 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
     });
   }
 
-  const handleBid = async (total) => {
-    try {
-      dispatch(bidByLotId(id, total));
-    } catch (error) {}
+  const hitBid = async (total) => {
+    const bid = await bidByLotId(id, total);
+    if (bid.isSuccess) {
+      swal("success", "Bid Success");
+    } else {
+      swal("error", bid.data);
+    }
   };
 
   const settings = {
@@ -207,7 +204,7 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
                         <label>Minimum Bid</label>
                         <h1 className="text-5xl font-bold font-bosque tracking-widest">
                           {bidData && bidData[0]
-                            ? formatRupiah(bidData[0].price + 100000)
+                            ? formatRupiah(bidData[0].price + 500000)
                             : formatRupiah(lotData?.startingBid)}
                         </h1>
                       </div>

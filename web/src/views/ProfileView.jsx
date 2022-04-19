@@ -9,6 +9,8 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import axios from "axios";
 import LotCard from "../components/lotCard";
+import firestore from "../config/firebase";
+import { useCollectionData } from "react-firebase-hooks/firestore";
 
 export default function ProfileView() {
   const id = localStorage.getItem("id");
@@ -16,6 +18,12 @@ export default function ProfileView() {
   const [showTopup, setShowTopup] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const { userById, isLoading } = useSelector((state) => state.userReducer);
+
+  const dbref = firestore.collection("bid");
+  const query = dbref.where("userId", "==", +id);
+  const [lots] = useCollectionData(query, { idField: "id" });
+
+  // console.log(lots);
   useEffect(() => {
     dispatch(fetchUserDetail(id));
   }, [id]);
@@ -67,6 +75,7 @@ export default function ProfileView() {
       const UserId = id;
       const { price } = data;
       // console.log(UserId, price);
+      // const cb = await axios.post(`http://localhost:3000/topup`, {
       const cb = await axios.post(`https://api.mahakarya-auction.com/topup`, {
         UserId,
         price
@@ -90,6 +99,8 @@ export default function ProfileView() {
       if (data.password !== data.currentPassword) {
         throw new Error("password not match");
       }
+      // await axios.put(`hhttp://localhost:3000/users/${id}`, data);
+
       await axios.put(`https://api.mahakarya-auction.com/users/${id}`, data);
       Swal.fire({
         icon: "success",
@@ -121,13 +132,7 @@ export default function ProfileView() {
         name: "Paintings 1",
         artistName: "Artist 1",
         primaryImage: "https://loremflickr.com/g/1080/720/painting?lock=2",
-        startingBid: 1000000,
-        Bids: [
-          {
-            id: 1,
-            bidPrice: 1500000
-          }
-        ]
+        startingBid: 1000000
       },
       {
         id: 2,

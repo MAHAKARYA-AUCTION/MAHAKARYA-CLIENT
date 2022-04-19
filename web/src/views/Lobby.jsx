@@ -30,7 +30,7 @@ export default function Lobby() {
     }
   };
 
-  console.log(collectionsData);
+  // console.log(collectionsData);
 
   return (
     <>

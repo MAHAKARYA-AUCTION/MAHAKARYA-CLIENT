@@ -14,7 +14,7 @@ export default function LandingView() {
   }, []);
 
   const collections = useSelector((state) => state.lotsReducer.collections);
-  console.log(collections);
+  // console.log(collections);
   const pastCollections = useSelector((state) =>
     state?.lotsReducer?.collections?.filter((e) => e.endDate > new Date())
   );

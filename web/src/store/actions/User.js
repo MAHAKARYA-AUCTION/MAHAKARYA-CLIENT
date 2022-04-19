@@ -5,7 +5,7 @@ const baseUrl = "https://api.mahakarya-auction.com";
 
 export const fetchUserDetail = (id) => {
   return async (dispatch) => {
-    console.log(localStorage.getItem("access_token"));
+    // console.log(localStorage.getItem("access_token"));
     try {
       const user = await axios.get(`${baseUrl}/users/${id}`, {
         headers: {
@@ -14,7 +14,7 @@ export const fetchUserDetail = (id) => {
       });
       dispatch(fetchUserDetailAction(user));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };

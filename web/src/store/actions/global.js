@@ -6,7 +6,7 @@ const BASE_URL = "https://api.mahakarya-auction.com/";
 export function setIsLoading(isLoading) {
   return {
     type: SET_IS_LOADING,
-    payload: isLoading,
+    payload: isLoading
   };
 }
 
@@ -15,6 +15,6 @@ export function setError(error) {
     type: SET_ERROR,
     payload: error
       ? error
-      : { isError: false, type: "error", message: "Internal server error" },
+      : { isError: false, type: "error", message: "Internal server error" }
   };
 }
