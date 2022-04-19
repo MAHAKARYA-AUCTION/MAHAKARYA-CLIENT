@@ -18,25 +18,17 @@ export default function DavidGallery() {
 
   const [test, setTest] = useState(null);
 
-  // useEffect(() => {
-  //   fetch(BASE_URL + "lots").then((response) =>
-  //     response.json().then((x) => {
-  //       x.map((y, index) => (y.number = index + 1));
-  //       setWholeData(x);
-  //       setData(x.slice(sliceIndex[0], sliceIndex[1]));
-  //     })
-  //   );
-  // }, []);
-
   useEffect(() => {
     fetch(BASE_URL + "collections").then((response) =>
       response.json().then((x) => {
-        x = x.filter((e) => e.galleryName != location.pathname.slice(1));
+        x = x.filter((e) => e.galleryName == location.pathname.slice(1));
         setWholeData(x[0].Lots);
         setData(x[0].Lots.slice(sliceIndex[0], sliceIndex[1]));
       })
     );
   }, []);
+
+  console.log(data);
 
   const floorTransporter = () => {
     navigate("../lobby", { replace: true });
@@ -87,7 +79,7 @@ export default function DavidGallery() {
         ></a-entity>
         <a-entity enviropack="preset: tankfarm"></a-entity>a
         <a-camera
-          position="0 2 0"
+          position="0 2 7"
           wasd-controls-enabled="true"
           wasd-controls="acceleration:25"
           look-controls="
@@ -215,7 +207,7 @@ export default function DavidGallery() {
                     rotation="0 180 0"
                     width="15"
                     color="#57240f"
-                    value={data[0].number}
+                    value={data[0].lotNumber}
                     geometry="primitive:plane, src='#number_box'"
                     side="double"
                     align="center"
@@ -293,7 +285,7 @@ export default function DavidGallery() {
                     rotation="0 90 0"
                     width="15"
                     color="#57240f"
-                    value={data[1].number}
+                    value={data[1].lotNumber}
                     geometry="primitive:plane, src='#number_box'"
                     side="double"
                     align="center"
@@ -371,7 +363,7 @@ export default function DavidGallery() {
                     rotation="0 90 0"
                     width="15"
                     color="#57240f"
-                    value={data[2].number}
+                    value={data[2].lotNumber}
                     geometry="primitive:plane, src='#number_box'"
                     side="double"
                     align="center"
@@ -449,7 +441,7 @@ export default function DavidGallery() {
                     rotation="0 90 0"
                     width="15"
                     color="#57240f"
-                    value={data[3].number}
+                    value={data[3].lotNumber}
                     geometry="primitive:plane, src='#number_box'"
                     side="double"
                     align="center"
@@ -527,7 +519,7 @@ export default function DavidGallery() {
                     rotation="0 0 0"
                     width="15"
                     color="#57240f"
-                    value={data[4].number}
+                    value={data[4].lotNumber}
                     geometry="primitive:plane, src='#number_box'"
                     side="double"
                     align="center"
@@ -553,6 +545,20 @@ export default function DavidGallery() {
                     depth="0.2"
                     // ------------------------------------ //
                     src={data[4].primaryImage}
+                    height={data[4].height / 100}
+                    width={data[4].width / 100}
+                  ></a-box>
+                )}
+                {/* __________________________________ fifth_frame */}
+                {data[4] && (
+                  <a-box
+                    id="fifth_frame"
+                    position="-4.5 2 -11.015"
+                    rotation="0 0 0"
+                    depth="0.2"
+                    scale="1.1 1.1 1.1"
+                    // ------------------------------------ //
+                    color="tomato"
                     height={data[4].height / 100}
                     width={data[4].width / 100}
                   ></a-box>

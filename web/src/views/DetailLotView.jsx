@@ -16,6 +16,8 @@ import { fetchLotById, bidByLotId } from "../store/actions/lots";
 import { useParams } from "react-router-dom";
 import firestore from "../config/firebase";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import Palette from "react-palette";
+import { usePalette } from "react-palette";
 
 export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
   // Placeholder Time
@@ -47,8 +49,8 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
       cancelButtonText: "Cancel",
       confirmButtonText: "Bid",
       confirmButtonColor: "#a35831",
-      cancelButtonColor: "#702F13"
-    }).then(async (result) => {
+      cancelButtonColor: "#702F13",
+    }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         let total = 0;
@@ -82,7 +84,7 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: false
+    arrows: false,
   };
 
   //BARCODE SETTING
@@ -90,9 +92,14 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
     value: "http://localhost:3000/lot/1",
     options: {
       background: "#ebd7bb",
-      displayValue: false
-    }
+      displayValue: false,
+    },
   });
+
+  let { data, loading, error } = usePalette(lotData.primaryImage);
+  let swatch = Object.values(data);
+  console.log(swatch[0]);
+
   return (
     <div className="flex flex-col justify-between pt-10">
       <Navbar />
@@ -162,7 +169,32 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
               </table>
               <p className="text-justify">{lotData?.description}</p>
             </div>
-            <div></div>
+            <div className="flex flex-col">
+              <div style={{ backgroundColor: `${swatch[0]}` }}>
+                {""}
+                <p>{"_"}</p>
+              </div>
+              <div style={{ backgroundColor: `${swatch[1]}` }}>
+                {""}
+                <p>{"_"}</p>
+              </div>
+              <div style={{ backgroundColor: `${swatch[2]}` }}>
+                {""}
+                <p>{"_"}</p>
+              </div>
+              <div style={{ backgroundColor: `${swatch[3]}` }}>
+                {""}
+                <p>{"_"}</p>
+              </div>
+              <div style={{ backgroundColor: `${swatch[4]}` }}>
+                {""}
+                <p>{"_"}</p>
+              </div>
+              <div style={{ backgroundColor: `${swatch[5]}` }}>
+                {""}
+                <p>{"_"}</p>
+              </div>
+            </div>
             <div
               tabIndex="0"
               className="collapse collapse-arrow border-2 border-[#675237] rounded-box mt-5 pl-5 shadow-sm overflow-visible"
@@ -326,12 +358,6 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
           </div>
         </div>
       </div>
-      {bidData &&
-        bidData.map((e) => {
-          <>
-            <p>{e}</p>;<p>Test</p>
-          </>;
-        })}
       <Footer />
     </div>
   );

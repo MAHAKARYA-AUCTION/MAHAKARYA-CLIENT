@@ -5,6 +5,7 @@ import Footer from "../components/footer";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLots, fetchCollections } from "../store/actions/lots";
+import HorizontalLines from "../components/horizontalLines";
 
 export default function LandingView() {
   const dispatch = useDispatch();
@@ -14,9 +15,15 @@ export default function LandingView() {
   }, []);
 
   const collections = useSelector((state) => state.lotsReducer.collections);
-  // console.log(collections);
+  const currentCollections = useSelector((state) =>
+    state?.lotsReducer?.collections?.filter(
+      (e) => new Date(e.endDate) > new Date()
+    )
+  );
   const pastCollections = useSelector((state) =>
-    state?.lotsReducer?.collections?.filter((e) => e.endDate > new Date())
+    state?.lotsReducer?.collections?.filter(
+      (e) => new Date(e.endDate) < new Date()
+    )
   );
 
   const [pageNumber, setPageNumber] = useState(1);
@@ -29,7 +36,8 @@ export default function LandingView() {
     setPageNumber(pageNumber - 1);
   }
 
-  function handleNext() {
+  function handleNext(e) {
+    console.log(e);
     if (pageNumber === Math.ceil(collections.length / limit)) return;
     setPageNumber(pageNumber + 1);
   }
@@ -59,6 +67,7 @@ export default function LandingView() {
           <div className="col-span-4">
             <hr className="bg-[#57240f] h-2" />
           </div>
+          {/* <HorizontalLines /> */}
           <img
             src={require("../resources/img/barcode.png")}
             className="h-16 font-bold w-40 mx-auto"
@@ -70,7 +79,7 @@ export default function LandingView() {
         </div>
         {/* END:LINE BREAK */}
         {/* START: FEATURED COLLECTION */}
-        <FeaturedCollection collections={collections} />
+        <FeaturedCollection collections={currentCollections} />
         {/* END: FEATURED COLLECTION */}
         {/* START:LINE BREAK */}
         <div className="h-20 grid grid-cols-9 items-center w-[80%] mx-auto">
@@ -93,7 +102,7 @@ export default function LandingView() {
             <h1 className="font-bosque text-7xl font-bold text-center ">
               Our Past Collections
             </h1>
-            {paginatedCollections && (
+            {pastCollections && (
               <div className="grid grid-cols-2 gap-5">
                 {pastCollections.map((collection, index) => (
                   <LandingCollectionItem key={index} collection={collection} />

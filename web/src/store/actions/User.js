@@ -7,7 +7,15 @@ export const fetchUserDetail = (id) => {
   return async (dispatch) => {
     // console.log(localStorage.getItem("access_token"));
     try {
-      const user = await axios.get(`${baseUrl}/users/${id}`, {
+      // const user = await axios(`${baseUrl}/users/${id}`, {
+      //   method: "GET",
+      //   headers: {
+      //     access_token: localStorage.getItem("access_token"),
+      //   },
+      // });
+      const user = await axios({
+        method: "GET",
+        url: `${baseUrl}/users/${id}`,
         headers: {
           access_token: localStorage.getItem("access_token")
         }

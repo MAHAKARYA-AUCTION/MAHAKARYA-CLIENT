@@ -84,7 +84,7 @@ export default function CollectionList() {
           className="collection-banner w-[100vw] absolute z-0 brightness-75"
           alt="collection banner"
         ></img>
-        <div className="z-50 relative text-[#F8F1E7] font-bold mt-64 mb-16  w-[80%] mx-auto space-y-5 flex flex-row">
+        <div className="z-50 relative text-[#F8F1E7] font-bold mt-64 mb-16  w-[80%] mx-auto space-y-5 flex sm:flex-col xl:flex-row">
           <div className="w-1/2">
             <h1 className=" font-bosque text-7xl text-left tracking-widest">
               {collection.name}
@@ -129,8 +129,8 @@ export default function CollectionList() {
           <h1 className="font-bosque text-6xl text-center my-10 font-semibold">
             Lot List
           </h1>
-          <div className="flex flex-row px-5 divide-x-2 divide-[#675237] h-[100%]">
-            <div className="flex flex-col w-1/4 space-y-10 px-5  font-poppins tracking-wider">
+          <div className="flex sm:flex-col xl:flex-row px-5 xl:divide-x-2 xl:divide-[#675237] h-[100%]">
+            <div className="flex flex-col lg:w-full sm:mb-10 xl:w-1/4 space-y-10 px-5 font-poppins tracking-wider">
               <h1 className="font-poppins text-2xl font-semibold ">Filter</h1>
               <div className="form-control w-full">
                 <label className="label">
@@ -175,7 +175,7 @@ export default function CollectionList() {
                 Filter
               </button>
             </div>
-            <div className="flex flex-col w-3/4 px-3">
+            <div className="flex flex-col lg:w-full xl:w-3/4 px-3">
               <div className="flex flex-row justify-between px-5 pr-14">
                 <div className="dropdown font-poppins">
                   <label
@@ -224,7 +224,7 @@ export default function CollectionList() {
                   </h1>
                 </div>
               </div>
-              <div className="grid grid-cols-4 grid-flow-row p-5 space-x-2 space-y-6 items-baseline ">
+              <div className="grid lg:grid-cols-2 xl:grid-cols-3  2xl:grid-cols-4 grid-flow-row p-5 space-x-2 space-y-6 items-baseline ">
                 {paginatedLots.map((lot, index) => {
                   return (
                     <LotCard

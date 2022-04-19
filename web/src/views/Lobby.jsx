@@ -6,9 +6,13 @@ export default function Lobby() {
   const navigate = useNavigate();
   // const BASE_URL = "http://localhost:3000/";
   const BASE_URL = "http://api.mahakarya-auction.com/";
-  const [floor, setFloor] = useState("46");
+  let [floor, setFloor] = useState("46");
   const floorTransporter = () => {
-    navigate("../goliath-gallery", { replace: true });
+    if (floor == "46") {
+      navigate("../goliath-gallery", { replace: true });
+    } else {
+      navigate("../david-gallery", { replace: true });
+    }
   };
   const back = () => {
     navigate("../", { replace: true });
@@ -24,25 +28,21 @@ export default function Lobby() {
 
   const pressUp = () => {
     if (floor == "46") {
-      floor = "87";
+      setFloor("87");
     } else {
-      floor = "46";
+      setFloor("46");
     }
   };
-
-  // console.log(collectionsData);
 
   return (
     <>
       <a-scene>
         <a-camera
-          position="0 2 5"
+          position="0 2 7"
+          rotation="90 0 0"
           wasd-controls-enabled="true"
           wasd-controls="acceleration:25"
-          // look-controls
-          // ="
-          // // pointerLockEnabled:true
-          // "
+          look-controls="pointerLockEnabled:true"
           fov="60"
           near="0.1"
           far="100"
@@ -53,15 +53,15 @@ export default function Lobby() {
           <a-asset-item id="scene" src="assets/scene.gltf"></a-asset-item>
           <a-asset-item id="door" src="assets/door/scene.gltf"></a-asset-item>
         </a-assets>
+        <a-scene loading-screen="dotsColor: red; backgroundColor: black"></a-scene>
         {/* floor */}
-        {/* height = y */}
-        {/* floor = 0.5 */}
         <a-plane
           position="0 0 -4"
           rotation="-90 0 0"
           width="12"
           height="24"
           src="url(/assets/wood_parquet/seamless_texture_rovere_wood_parquet_DIFFUSE.jpg)"
+          color="gray"
         ></a-plane>
         {/* left_door */}
         <a-entity
@@ -91,13 +91,14 @@ export default function Lobby() {
           intensity="0.8"
         ></a-light>
         {/* roof */}
-        {/* <a-box
+        <a-box
           position="0 5 -4"
           rotation="-90 0 0"
           width="12"
           height="24"
-          color="beige"
-        ></a-box> */}
+          src="url(/assets/wood_parquet/seamless_texture_rovere_wood_parquet_DIFFUSE.jpg)"
+          color="gray"
+        ></a-box>
         <a-box
           id="right_side_elevator_wall"
           position="0 2.5 7.75"
@@ -182,6 +183,7 @@ export default function Lobby() {
         ></a-entity>
         <a-triangle
           id="elevator_up_button"
+          onClick={pressUp}
           position="0.9 1.7285 -4.970"
           color="red"
           side="double"
