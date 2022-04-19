@@ -89,7 +89,7 @@ export default function Gallery() {
         <a-camera
           position="0 2 7"
           wasd-controls-enabled="true"
-          wasd-controls="acceleration:25"
+          wasd-controls="acceleration:15"
           look-controls="pointerLockEnabled:true"
           fov="60"
           near="0.1"
@@ -110,12 +110,12 @@ export default function Gallery() {
 
         <a-box src="#advertisement"></a-box> */}
 
-        <a-entity
+        {/* <a-entity
           geometry="primitive: cylinder; segmentsRadial: 6; height: 20; radius: 0.25"
           rotation="90 90 0"
           roughness="0.8"
           src="url(/assets/wall/cream_1.jpg)"
-        ></a-entity>
+        ></a-entity> */}
 
         {/* __________________________________ floor */}
         <a-plane
@@ -1157,6 +1157,7 @@ export default function Gallery() {
             scale="1 1 1"
             position="-4.5 0 -11.85"
             rotation="0 90 0"
+            roughness="1"
             gltf-model="url(/assets/mini_sofa/scene.gltf)"
           ></a-entity>
           <a-entity
@@ -1171,6 +1172,7 @@ export default function Gallery() {
             scale="1 1 1"
             position="4.5 0 -4"
             rotation="0 90 0"
+            roughness="1"
             gltf-model="url(/assets/mini_sofa/scene.gltf)"
           ></a-entity>
         </>
