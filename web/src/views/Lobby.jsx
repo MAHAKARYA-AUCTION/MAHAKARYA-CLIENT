@@ -55,13 +55,13 @@ export default function Lobby() {
         </a-assets>
         <a-scene loading-screen="dotsColor: red; backgroundColor: black"></a-scene>
         {/* floor */}
-
         <a-plane
           position="0 0 -4"
           rotation="-90 0 0"
           width="12"
           height="24"
           src="url(/assets/wood_parquet/seamless_texture_rovere_wood_parquet_DIFFUSE.jpg)"
+          color="gray"
         ></a-plane>
         {/* left_door */}
         <a-entity
@@ -96,7 +96,8 @@ export default function Lobby() {
           rotation="-90 0 0"
           width="12"
           height="24"
-          color="tan"
+          src="url(/assets/wood_parquet/seamless_texture_rovere_wood_parquet_DIFFUSE.jpg)"
+          color="gray"
         ></a-box>
         <a-box
           id="right_side_elevator_wall"
