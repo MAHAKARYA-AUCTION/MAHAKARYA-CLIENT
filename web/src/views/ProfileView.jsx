@@ -11,19 +11,30 @@ import axios from "axios";
 import LotCard from "../components/lotCard";
 import firestore from "../config/firebase";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import { useNavigate } from "react-router-dom";
 
 export default function ProfileView() {
+  const navigate = useNavigate();
+
   const id = localStorage.getItem("id");
   const dispatch = useDispatch();
   const [showTopup, setShowTopup] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const { userById, isLoading } = useSelector((state) => state.userReducer);
 
-  const dbref = firestore.collection("bid");
-  const query = dbref.where("userId", "==", +id);
-  const [lots] = useCollectionData(query, { idField: "id" });
+  const userLotref = firestore.collection("bid");
+  const userLotQuery = userLotref.where("userId", "==", +id);
+  const [lots] = useCollectionData(userLotQuery, { idField: "id" });
 
-  // console.log(lots);
+  const Highestref = firestore.collection("HighestBid");
+  const [highest, loadingHighest] = useCollectionData(Highestref, {
+    idField: "id"
+  });
+  let bidList = [];
+
+  // console.log("lots", lots);
+  // console.log("highest", highest);
+
   useEffect(() => {
     dispatch(fetchUserDetail(id));
   }, [id]);
@@ -53,20 +64,20 @@ export default function ProfileView() {
     setPreloadedValues(newValues);
   };
 
-  useEffect(() => {
-    const midtransScriptUrl = "https://app.sandbox.midtrans.com/snap/snap.js";
-    const myMidtransClientKey = "SB-Mid-client-s6SV0WfrkztKRJyG";
+  // useEffect(() => {
+  //   const midtransScriptUrl = "https://app.sandbox.midtrans.com/snap/snap.js";
+  //   const myMidtransClientKey = "SB-Mid-client-s6SV0WfrkztKRJyG";
 
-    let scriptTag = document.createElement("script");
-    scriptTag.src = midtransScriptUrl;
+  //   let scriptTag = document.createElement("script");
+  //   scriptTag.src = midtransScriptUrl;
 
-    scriptTag.setAttribute("data-client-key", myMidtransClientKey);
+  //   scriptTag.setAttribute("data-client-key", myMidtransClientKey);
 
-    document.body.appendChild(scriptTag);
-    return () => {
-      document.body.removeChild(scriptTag);
-    };
-  }, []);
+  //   document.body.appendChild(scriptTag);
+  //   return () => {
+  //     document.body.removeChild(scriptTag);
+  //   };
+  // }, []);
 
   const { register, handleSubmit } = useForm();
 
@@ -125,65 +136,65 @@ export default function ProfileView() {
     }
   };
 
-  const collection = {
-    Lots: [
-      {
-        id: 1,
-        name: "Paintings 1",
-        artistName: "Artist 1",
-        primaryImage: "https://loremflickr.com/g/1080/720/painting?lock=2",
-        startingBid: 1000000
-      },
-      {
-        id: 2,
-        name: "Paintings 1",
-        artistName: "Artist 1",
-        primaryImage: "https://loremflickr.com/g/1080/720/painting?lock=2",
-        startingBid: 1000000,
-        Bids: [
-          {
-            id: 1,
-            bidPrice: 1500000
-          }
-        ]
-      },
-      {
-        id: 3,
-        name: "Paintings 1",
-        artistName: "Artist 1",
-        primaryImage: "https://loremflickr.com/g/1080/720/painting?lock=2",
-        startingBid: 1000000,
-        Bids: []
-      },
-      {
-        id: 4,
-        name: "Paintings 1",
-        artistName: "Artist 1",
-        primaryImage: "https://loremflickr.com/g/1080/720/painting?lock=2",
-        startingBid: 1000000,
-        Bids: [
-          {
-            id: 1,
-            bidPrice: 1500000
-          }
-        ]
-      },
-      {
-        id: 5,
-        name: "Paintings 1",
-        artistName: "Artist 1",
-        primaryImage: "https://loremflickr.com/g/1080/720/painting?lock=2",
-        startingBid: 1000000,
-        Bids: [
-          {
-            id: 1,
-            bidPrice: 1500000
-          }
-        ]
-      },
-      ,
-    ]
-  };
+  // const collection = {
+  //   Lots: [
+  //     {
+  //       id: 1,
+  //       name: "Paintings 1",
+  //       artistName: "Artist 1",
+  //       primaryImage: "https://loremflickr.com/g/1080/720/painting?lock=2",
+  //       startingBid: 1000000
+  //     },
+  //     {
+  //       id: 2,
+  //       name: "Paintings 1",
+  //       artistName: "Artist 1",
+  //       primaryImage: "https://loremflickr.com/g/1080/720/painting?lock=2",
+  //       startingBid: 1000000,
+  //       Bids: [
+  //         {
+  //           id: 1,
+  //           bidPrice: 1500000
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       id: 3,
+  //       name: "Paintings 1",
+  //       artistName: "Artist 1",
+  //       primaryImage: "https://loremflickr.com/g/1080/720/painting?lock=2",
+  //       startingBid: 1000000,
+  //       Bids: []
+  //     },
+  //     {
+  //       id: 4,
+  //       name: "Paintings 1",
+  //       artistName: "Artist 1",
+  //       primaryImage: "https://loremflickr.com/g/1080/720/painting?lock=2",
+  //       startingBid: 1000000,
+  //       Bids: [
+  //         {
+  //           id: 1,
+  //           bidPrice: 1500000
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       id: 5,
+  //       name: "Paintings 1",
+  //       artistName: "Artist 1",
+  //       primaryImage: "https://loremflickr.com/g/1080/720/painting?lock=2",
+  //       startingBid: 1000000,
+  //       Bids: [
+  //         {
+  //           id: 1,
+  //           bidPrice: 1500000
+  //         }
+  //       ]
+  //     },
+  //     ,
+  //   ]
+  // };
 
   const [pageNumber, setPageNumber] = useState(1);
   const [limit] = useState(10);
@@ -194,9 +205,35 @@ export default function ProfileView() {
   }
 
   function handleNext() {
-    if (pageNumber === Math.ceil(collection.Lots.length / limit)) return;
+    if (pageNumber === Math.ceil(lots.length / limit)) return;
     setPageNumber(pageNumber + 1);
   }
+
+  const checkIsHighest = (e) => {
+    if (loadingHighest) {
+      return;
+    }
+    // console.log(highest);
+    const ishighest = highest?.filter(
+      (f) => f.userId === e.userId && f.lotId === e.lotId
+    );
+    if (ishighest.length > 0) {
+      return "Highest";
+    } else {
+      return "Outbid";
+    }
+  };
+
+  const highestPrice = (e) => {
+    if (loadingHighest) {
+      return;
+    }
+
+    const data = highest?.filter((f) => f.lotId === e.lotId);
+    if (data.length > 0) {
+      return formatRupiah(data[0].price);
+    }
+  };
 
   return (
     <div className="flex flex-col justify-between pt-10">
@@ -490,7 +527,7 @@ export default function ProfileView() {
                   {userById &&
                     userById.data.Transactions.map((e, i) => {
                       return (
-                        <tr className="pt-4">
+                        <tr className="pt-4" key={i}>
                           <td>{i + 1}.</td>
                           <td>{e.transactionNumber}</td>
                           <td>{e.status}</td>
@@ -507,8 +544,8 @@ export default function ProfileView() {
               <div className="flex flex-row justify-between px-5 pr-14">
                 <div className="flex flex-col justify-end items-baseline"></div>
               </div>
-              <div className="grid grid-cols-4 grid-flow-row p-5 space-x-2 space-y-8 items-baseline">
-                {collection.Lots.map((lot, index) => {
+              {/* <div className="grid grid-cols-4 grid-flow-row p-5 space-x-2 space-y-8 items-baseline">
+                {lots.map((lot, index) => {
                   return (
                     <LotCard
                       key={lot.id}
@@ -517,8 +554,46 @@ export default function ProfileView() {
                     />
                   );
                 })}
+              </div> */}
+              <div className="collapse collapse-arrow border-2 border-[#675237] rounded-box mt-5 pl-5 py-4 shadow-sm overflow-visible">
+                <table className="table-fixed text-left">
+                  <thead>
+                    <tr>
+                      <th>No.</th>
+                      <th>Name</th>
+                      <th>Status</th>
+                      <th>Last Price</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {lots &&
+                      lots.map((e, i) => {
+                        if (bidList.includes(e.lotId)) {
+                          return;
+                        }
+                        bidList.push(e.lotId);
+                        return (
+                          <tr className="pt-4" key={i}>
+                            <td>{i + 1}.</td>
+                            <td>{e.lotName}</td>
+                            <td>{checkIsHighest(e)}</td>
+                            <td>{highestPrice(e)}</td>
+                            <td>
+                              <button
+                                className="btn bg-[#702F13] text-[#ebd7bb] border-0 hover:bg-[#451D0C]"
+                                onClick={() => navigate(`/lot/${e.lotId}`)}
+                              >
+                                Detail
+                              </button>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                  </tbody>
+                </table>
               </div>
-              <div className="flex flex-row justify-center">
+              {/* <div className="flex flex-row justify-center">
                 <div className="btn-group">
                   <button
                     className="btn bg-[#ebd7bb] border-[#57240f] text-[#57240f]  hover:bg-[#451D0C] hover:text-[#ebd7bb] text-xl"
@@ -536,7 +611,7 @@ export default function ProfileView() {
                     »
                   </button>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

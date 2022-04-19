@@ -33,11 +33,28 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
 
   const dbref = firestore.collection("bid");
   const query = dbref.where("lotId", "==", +id);
-  const [bidData] = useCollectionData(query, { idField: "id" });
+  const [bidData, loadingBid] = useCollectionData(query, { idField: "id" });
 
   useEffect(() => {
     dispatch(fetchLotById(id));
   }, []);
+
+  useEffect(() => {
+    if (loadingBid) {
+      return;
+    }
+    bidData.sort(compare);
+  }, [bidData]);
+
+  function compare(a, b) {
+    if (a.createdAt > b.createdAt) {
+      return -1;
+    }
+    if (a.createdAt < b.createdAt) {
+      return 1;
+    }
+    return 0;
+  }
 
   function bidHandler(bid) {
     Swal.fire({
