@@ -126,7 +126,7 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
               {lotData?.primaryImage && (
                 <div className="object-fit w-[720px] h-[480px] bg-no-repeat bg-center">
                   <div
-                    className="w-full h-full bg-no-repeat bg-center"
+                    className="w-full h-full bg-no-repeat bg-center bg-contain"
                     style={{ backgroundImage: `url(${lotData.primaryImage})` }}
                   ></div>
                 </div>
@@ -134,7 +134,7 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
               {lotData?.secondImage && (
                 <div className="object-fit w-[720px] h-[480px] bg-no-repeat bg-center">
                   <div
-                    className="w-full h-full bg-no-repeat bg-center"
+                    className="w-full h-full bg-no-repeat bg-center bg-contain"
                     style={{ backgroundImage: `url(${lotData.secondImage})` }}
                   ></div>
                 </div>
@@ -142,7 +142,7 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
               {lotData?.thirdImage && (
                 <div className="object-fit w-[720px] h-[480px] bg-no-repeat bg-center">
                   <div
-                    className="w-full h-full bg-no-repeat bg-center"
+                    className="w-full h-full bg-no-repeat bg-cente bg-contain"
                     style={{ backgroundImage: `url(${lotData.thirdImage})` }}
                   ></div>
                 </div>
