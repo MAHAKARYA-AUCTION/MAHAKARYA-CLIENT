@@ -11,9 +11,8 @@ import axios from "axios";
 import LotCard from "../components/lotCard";
 
 export default function ProfileView() {
-  
-  const id = localStorage.id
-  const dispatch = useDispatch()
+  const id = localStorage.getItem("id");
+  const dispatch = useDispatch();
   const [showTopup, setShowTopup] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const { userById, isLoading } = useSelector((state) => state.userReducer);
@@ -27,7 +26,7 @@ export default function ProfileView() {
         username: userById.data.username,
         email: userById.data.email,
         phoneNumber: userById.data.phoneNumber,
-        address: userById.data.address,
+        address: userById.data.address
       });
     }
   }, [userById]);
@@ -36,7 +35,7 @@ export default function ProfileView() {
     username: "",
     email: "",
     phoneNumber: "",
-    address: "",
+    address: ""
   });
 
   const preloadedValuesHandler = (e) => {
@@ -70,7 +69,7 @@ export default function ProfileView() {
       // console.log(UserId, price);
       const cb = await axios.post(`https://api.mahakarya-auction.com/topup`, {
         UserId,
-        price,
+        price
       });
       // console.log(cb.data);
       let win = window.open(cb.data.redirect_url, "_blank");
@@ -80,7 +79,7 @@ export default function ProfileView() {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: error.response.data.message,
+        text: error.response.data.message
       });
     }
   };
@@ -95,7 +94,7 @@ export default function ProfileView() {
       Swal.fire({
         icon: "success",
         title: "Edit",
-        text: "Edit Success!",
+        text: "Edit Success!"
       });
       setShowEdit(false);
     } catch (error) {
@@ -103,13 +102,13 @@ export default function ProfileView() {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: "password not match",
+          text: "password not match"
         });
       } else {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: error.response.data.message,
+          text: error.response.data.message
         });
       }
     }
@@ -126,9 +125,9 @@ export default function ProfileView() {
         Bids: [
           {
             id: 1,
-            bidPrice: 1500000,
-          },
-        ],
+            bidPrice: 1500000
+          }
+        ]
       },
       {
         id: 2,
@@ -139,9 +138,9 @@ export default function ProfileView() {
         Bids: [
           {
             id: 1,
-            bidPrice: 1500000,
-          },
-        ],
+            bidPrice: 1500000
+          }
+        ]
       },
       {
         id: 3,
@@ -149,7 +148,7 @@ export default function ProfileView() {
         artistName: "Artist 1",
         primaryImage: "https://loremflickr.com/g/1080/720/painting?lock=2",
         startingBid: 1000000,
-        Bids: [],
+        Bids: []
       },
       {
         id: 4,
@@ -160,9 +159,9 @@ export default function ProfileView() {
         Bids: [
           {
             id: 1,
-            bidPrice: 1500000,
-          },
-        ],
+            bidPrice: 1500000
+          }
+        ]
       },
       {
         id: 5,
@@ -173,12 +172,12 @@ export default function ProfileView() {
         Bids: [
           {
             id: 1,
-            bidPrice: 1500000,
-          },
-        ],
+            bidPrice: 1500000
+          }
+        ]
       },
       ,
-    ],
+    ]
   };
 
   const [pageNumber, setPageNumber] = useState(1);

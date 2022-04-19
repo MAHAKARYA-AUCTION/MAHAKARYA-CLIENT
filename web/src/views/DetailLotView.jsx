@@ -108,25 +108,25 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
               className="w-[80%] mx-auto col-span-2 row-span-2"
             >
               {lotData?.primaryImage && (
-                <div className="object-fit w-[720px] h-[480px] bg-no-repeat bg-center">
+                <div className="object-fit w-[720px] h-[480px] ">
                   <div
-                    className="w-full h-full bg-no-repeat bg-center"
+                    className="w-full h-full bg-no-repeat bg-contain bg-center"
                     style={{ backgroundImage: `url(${lotData.primaryImage})` }}
                   ></div>
                 </div>
               )}
               {lotData?.secondImage && (
-                <div className="object-fit w-[720px] h-[480px] bg-no-repeat bg-center">
+                <div className="object-fit w-[720px] h-[480px] ">
                   <div
-                    className="w-full h-full bg-no-repeat bg-center"
+                    className="w-full h-full bg-no-repeat bg-contain bg-center"
                     style={{ backgroundImage: `url(${lotData.secondImage})` }}
                   ></div>
                 </div>
               )}
               {lotData?.thirdImage && (
-                <div className="object-fit w-[720px] h-[480px] bg-no-repeat bg-center">
+                <div className="object-fit w-[720px] h-[480px] ">
                   <div
-                    className="w-full h-full bg-no-repeat bg-center"
+                    className="w-full h-full bg-no-repeat bg-contain bg-center"
                     style={{ backgroundImage: `url(${lotData.thirdImage})` }}
                   ></div>
                 </div>

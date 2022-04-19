@@ -17,7 +17,7 @@ export default function BidTableItem({ bid, index, previousPrice }) {
           </div>
         </div>
       </td>
-      <td className="bg-[#F8F1E7] text-xl">Usename</td>
+      <td className="bg-[#F8F1E7] text-xl">{bid.username}</td>
     </tr>
   );
 }
