@@ -82,9 +82,7 @@ export default function DavidGallery() {
           position="0 2 7"
           wasd-controls-enabled="true"
           wasd-controls="acceleration:25"
-          look-controls="
-          pointerLockEnabled: true;
-          "
+          look-controls="pointerLockEnabled:true"
           fov="60"
           near="0.1"
           far="100"
@@ -622,7 +620,7 @@ export default function DavidGallery() {
           repeat="20 20"
         ></a-plane>
         {/* __________________________________ roof */}
-        <a-box
+        {/* <a-box
           id="roof"
           position="0 5 -4"
           rotation="-90 0 0"
@@ -631,15 +629,15 @@ export default function DavidGallery() {
           src="url(/assets/marble/black_2.jpg)"
           color="gray"
           repeat="4 4"
-        ></a-box>
+        ></a-box> */}
         {/* omni light */}
         <a-light
           id="omni_light"
-          position="0 2 0"
+          position="0.4 4 -3.6"
           angle="360"
-          type="ambient"
+          type="point"
           color="white"
-          intensity="0.9"
+          intensity="1"
         ></a-light>
         {/* pagination_sphere */}
         <>
