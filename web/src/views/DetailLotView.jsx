@@ -60,6 +60,7 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
     Swal.fire({
       title: "Bid " + formatRupiah(bid + bidAmount),
       color: "#080504",
+      iconColor: "#57240f",
       background: "#ebd7bb",
       showDenyButton: false,
       showCancelButton: true,
@@ -164,7 +165,7 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
                 <h1 className="text-6xl font-bold font-bosque">
                   {lotData?.name}
                 </h1>
-                <h2 className="text-2xl font-bold font-bosque bg-[#F8F1E7] border border-[#57240f] rounded-full w-fit px-3 py-[1px] text-[#57240f]">
+                <h2 className="text-2xl mt-2 font-bold font-bosque bg-[#F8F1E7] border border-[#57240f] rounded-full w-fit px-3 py-[1px] text-[#57240f]">
                   {lotData?.artistName}
                 </h2>
               </div>

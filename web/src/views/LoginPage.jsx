@@ -9,13 +9,13 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const [inputData, setInputData] = useState({
     email: "",
-    password: ""
+    password: "",
   });
 
   const inputHandler = (e) => {
     const { value, name } = e.target;
     const newInput = {
-      ...inputData
+      ...inputData,
     };
     newInput[name] = value;
     setInputData(newInput);
@@ -27,10 +27,11 @@ export default function LoginPage() {
       .then((response) => {
         Swal.fire({
           icon: "success",
+          iconColor: "#57240f",
           title: "Login Success!",
           color: "#080504",
           background: "#ebd7bb",
-          confirmButtonColor: "#a35831"
+          confirmButtonColor: "#a35831",
         });
         const { id, username, email } = response.data.user;
         const access_token = response.data.access_token;
@@ -44,11 +45,12 @@ export default function LoginPage() {
       .catch((error) => {
         Swal.fire({
           icon: "error",
+          iconColor: "#57240f",
           title: "Error!",
           text: error.response.data.message,
           color: "#080504",
           background: "#ebd7bb",
-          confirmButtonColor: "#a35831"
+          confirmButtonColor: "#a35831",
         });
       });
   };
@@ -59,7 +61,7 @@ export default function LoginPage() {
         <div
           className="hidden bg-cover lg:block lg:w-1/2"
           style={{
-            backgroundImage: `url('https://blue.kumparan.com/image/upload/fl_progressive,fl_lossy,c_fill,q_auto:best,w_640/v1529666730/tyirixjudhpfuecnfxva.jpg')`
+            backgroundImage: `url('https://blue.kumparan.com/image/upload/fl_progressive,fl_lossy,c_fill,q_auto:best,w_640/v1529666730/tyirixjudhpfuecnfxva.jpg')`,
           }}
         ></div>
 
