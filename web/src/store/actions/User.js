@@ -16,7 +16,7 @@ export const fetchUserDetail = (id) => {
         method: "GET",
         url: `${baseUrl}/users/${id}`,
         headers: {
-          access_token: localStorage.getItem("access_token")
+          access_token: localStorage.access_token,
         },
       });
       dispatch(fetchUserDetailAction(user));

@@ -3,18 +3,15 @@ import Footer from "../components/footer";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserDetail } from "../store/actions/User";
-import { useParams } from "react-router";
 import formatRupiah from "../helpers/formatPrice";
 import Loading from "./Loading";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import axios from "axios";
 import LotCard from "../components/lotCard";
-import NumberInput from "../components/numberInputs";
-// import {useNavigate} from "react-router"
 
 export default function ProfileView() {
-  const { id } = useParams();
+  const id = localStorage.id;
   const dispatch = useDispatch();
   const [showTopup, setShowTopup] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
@@ -247,7 +244,7 @@ export default function ProfileView() {
                       </tr>
                       {/* <br /> */}
                       <tr>
-                        <td>Phone</td>
+                        <td>Phone Number</td>
                         <td className="px-2">:</td>
                         {userById && (
                           <td className="py-2">{userById.data.phoneNumber}</td>
@@ -263,7 +260,7 @@ export default function ProfileView() {
                       </tr>
                       {/* <br /> */}
                       <tr>
-                        <td>Join At</td>
+                        <td>Joined At</td>
                         <td className="px-2">:</td>
                         {userById && (
                           <td className="py-2">

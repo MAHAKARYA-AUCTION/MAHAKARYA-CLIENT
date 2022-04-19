@@ -4,13 +4,15 @@ import "aframe-fps-look-controls-component";
 import anime from "animejs/lib/anime.es.js";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
 
 export default function Gallery() {
   const navigate = useNavigate();
-  const BASE_URL = "http://localhost:3000/lots";
-  // const BASE_URL = "http://api.mahakarya-auction.com/lots";
+  const location = useLocation();
+
+  // const BASE_URL = "http://localhost:3000/lots";
+  const BASE_URL = "http://api.mahakarya-auction.com/collections";
 
   const [wholeData, setWholeData] = useState(null);
   const [data, setData] = useState(null);
@@ -19,9 +21,11 @@ export default function Gallery() {
   useEffect(() => {
     fetch(BASE_URL).then((response) =>
       response.json().then((x) => {
-        x.map((y, index) => (y.number = index + 1));
-        setWholeData(x);
-        setData(x.slice(sliceIndex[0], sliceIndex[1]));
+        x = x.filter((e) => e.galleryName == location.pathname.slice(1));
+        // console.log(x);
+        x[0].Lots.map((y, index) => (y.number = index + 1));
+        setWholeData(x[0].Lots);
+        setData(x[0].Lots.slice(sliceIndex[0], sliceIndex[1]));
       })
     );
   }, []);
@@ -83,12 +87,12 @@ export default function Gallery() {
     <>
       <a-scene>
         <a-camera
-          position="0 2 0"
+          position="0 2 7"
           wasd-controls-enabled="true"
           wasd-controls="acceleration:25"
-          look-controls="
-          pointerLockEnabled: true;
-          "
+          // look-controls="
+          // // pointerLockEnabled: true;
+          // "
           fov="60"
           near="0.1"
           far="100"
@@ -96,7 +100,7 @@ export default function Gallery() {
           <a-cursor></a-cursor>
         </a-camera>
 
-        {/* __________________________________ assets */}
+        {/* __________________________________ assets
         <>
           <a-assets>
             <img
@@ -106,7 +110,7 @@ export default function Gallery() {
           </a-assets>
         </>
 
-        <a-box src="#advertisement"></a-box>
+        <a-box src="#advertisement"></a-box> */}
 
         {/* __________________________________ floor */}
         <a-plane
@@ -114,8 +118,9 @@ export default function Gallery() {
           rotation="-90 0 0"
           width="25"
           height="30"
-          color="white"
-          src="url(/assets/square_floor_4k/textures/square_floor_diff_4k.jpg)"
+          // color="brown"
+          src="url(/assets/wood_parquet/wood_parquet_2.jpg)"
+          // src="url(/assets/square_floor_4k/textures/square_floor_diff_4k.jpg)"
           repeat="10 10"
         ></a-plane>
 
@@ -125,6 +130,7 @@ export default function Gallery() {
           rotation="-90 0 0"
           width="60"
           height="60"
+          color="saddlebrown"
           src="url(/assets/marble/black_2.jpg)"
           repeat="4 4"
         ></a-box>
@@ -133,7 +139,6 @@ export default function Gallery() {
         <>
           {/* elevator */}
           <a-entity
-            onClick={floorTransporter}
             scale="0.014 0.014 0.014"
             position="0 3 4.84506"
             rotation="0 180 0"
@@ -149,6 +154,14 @@ export default function Gallery() {
             material=""
             geometry=""
           ></a-triangle>
+          <a-circle
+            id="elevator_lift_button"
+            onClick={floorTransporter}
+            color="red"
+            side="double"
+            position="0.882 1.7285 5.080"
+            scale="0.1 0.1 0.1"
+          ></a-circle>
           {/* elevator_wall */}
           <>
             {/* __________________________________back elevator wall */}
@@ -157,7 +170,8 @@ export default function Gallery() {
               depth="0.5"
               height="7"
               width="12"
-              src="url(/assets/marble/black_2.jpg)"
+              color="firebrick"
+              src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
             ></a-box>
             {/* __________________________________left-side elevator wall */}
             <a-box
@@ -166,7 +180,8 @@ export default function Gallery() {
               depth="0.5"
               height="7"
               width="7"
-              src="url(/assets/marble/black_2.jpg)"
+              color="firebrick"
+              src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
             ></a-box>
             {/* __________________________________right-side elevator wall */}
             <a-box
@@ -175,7 +190,8 @@ export default function Gallery() {
               depth="0.5"
               height="7"
               width="7"
-              src="url(/assets/marble/black_2.jpg)"
+              color="firebrick"
+              src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
             ></a-box>
           </>
         </>
@@ -194,7 +210,8 @@ export default function Gallery() {
                   depth="0.5"
                   height="7"
                   width="6"
-                  src={"url(/assets/marble/black_2.jpg)"}
+                  color="firebrick"
+                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
                 ></a-box>
                 {/* __________________________________ first_light */}
                 <a-light
@@ -212,7 +229,7 @@ export default function Gallery() {
                 {data[0] && (
                   <a-text
                     id="first_number_box"
-                    position="-6 4 0.95"
+                    position="-6 4.5 0.95"
                     rotation="0 180 0"
                     width="15"
                     color="white"
@@ -246,8 +263,21 @@ export default function Gallery() {
                     width={data[0].width / 100}
                   ></a-box>
                 )}
+                {/* __________________________________ first_frame */}
+                {data[0] && (
+                  <a-box
+                    id="first_frame"
+                    position="-6 2 1.075"
+                    rotation="0 0 0"
+                    depth="0.2"
+                    scale="1.05 1.05 1.05"
+                    // ------------------------------------ //
+                    src="url(/assets/textures/wooden_frame.jpg)"
+                    height={data[0].height / 100}
+                    width={data[0].width / 100}
+                  ></a-box>
+                )}
               </>
-
               {/* __________________________________ second */}
               <>
                 {/* __________________________________second_wall */}
@@ -258,7 +288,8 @@ export default function Gallery() {
                   depth="0.5"
                   height="7"
                   width="6"
-                  src="url(/assets/marble/black_2.jpg)"
+                  color="firebrick"
+                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
                 ></a-box>
                 {/* __________________________________ second_light */}
                 <a-light
@@ -276,7 +307,7 @@ export default function Gallery() {
                 {data[1] && (
                   <a-text
                     id="second_number_box"
-                    position="-8.5 4 -2"
+                    position="-8.5 4.5 -2"
                     rotation="0 90 0"
                     width="15"
                     color="white"
@@ -301,7 +332,7 @@ export default function Gallery() {
                         imageHeight: data[1].height,
                       });
                     }}
-                    position="-8.55 2 -2"
+                    position="-8.55 2 -1.995"
                     rotation="0 90 0"
                     depth="0.2"
                     // ------------------------------------ //
@@ -310,8 +341,21 @@ export default function Gallery() {
                     width={data[1].width / 100}
                   ></a-box>
                 )}
+                {/* __________________________________ second_frame */}
+                {data[1] && (
+                  <a-box
+                    id="second_frame "
+                    position="-8.56 2 -2"
+                    rotation="0 90 0"
+                    depth="0.2"
+                    scale="1.07 1.07 1.07"
+                    // ------------------------------------ //
+                    src="url(/assets/textures/wooden_frame.jpg)"
+                    height={data[1].height / 100}
+                    width={data[1].width / 100}
+                  ></a-box>
+                )}
               </>
-
               {/* __________________________________ third */}
               <>
                 {/* __________________________________ third_wall */}
@@ -322,7 +366,8 @@ export default function Gallery() {
                   depth="0.5"
                   height="7"
                   width="6"
-                  src="url(/assets/marble/black_2.jpg)"
+                  color="firebrick"
+                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
                 ></a-box>
                 {/* __________________________________ third_light */}
                 <a-light
@@ -340,7 +385,7 @@ export default function Gallery() {
                 {data[2] && (
                   <a-text
                     id="third_number_box"
-                    position="-8.5 4 -8"
+                    position="-8.5 4.5 -8"
                     rotation="0 90 0"
                     width="15"
                     color="white"
@@ -374,8 +419,21 @@ export default function Gallery() {
                     width={data[2].width / 100}
                   ></a-box>
                 )}
+                {/* __________________________________ third_frame */}
+                {data[1] && (
+                  <a-box
+                    id="third_frame "
+                    position="-8.58 2 -8"
+                    rotation="0 90 90"
+                    depth="0.2"
+                    scale="1.07 1.07 1.07"
+                    // ------------------------------------ //
+                    src="url(/assets/textures/wooden_frame.jpg)"
+                    height={data[1].height / 100}
+                    width={data[1].width / 100}
+                  ></a-box>
+                )}
               </>
-
               {/* __________________________________ fourth */}
               <>
                 {/* __________________________________ fourth_vertical_wall */}
@@ -386,7 +444,8 @@ export default function Gallery() {
                   depth="0.5"
                   height="7"
                   width="6"
-                  src="url(/assets/marble/black_2.jpg)"
+                  color="firebrick"
+                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
                 ></a-box>
                 {/* __________________________________ fourth_light */}
                 <a-light
@@ -404,7 +463,7 @@ export default function Gallery() {
                 {data[3] && (
                   <a-text
                     id="fourth_number_box"
-                    position="-8.5 4 -14"
+                    position="-8.5 4.5 -14"
                     rotation="0 90 0"
                     width="15"
                     color="white"
@@ -438,8 +497,31 @@ export default function Gallery() {
                     width={data[3].width / 100}
                   ></a-box>
                 )}
+                {/* __________________________________ fourth_frame */}
+                {data[3] && (
+                  <a-box
+                    id="fourth_frame"
+                    onClick={() => {
+                      Swal.fire({
+                        title: data[3].name,
+                        text: `Created by: ${data[3].artistName}`,
+                        imageUrl: data[3].primaryImage,
+                        imageWidth: data[3].width,
+                        imageHeight: data[3].height,
+                      });
+                    }}
+                    position="-8.58 2 -14"
+                    rotation="0 90 0"
+                    scale="1.1 1.1 1.1"
+                    depth="0.2"
+                    // ------------------------------------ //
+                    src="url(/assets/textures/wooden_frame.jpg)"
+                    ws
+                    height={data[3].height / 100}
+                    width={data[3].width / 100}
+                  ></a-box>
+                )}
               </>
-
               {/* __________________________________ fifth */}
               <>
                 {/* __________________________________ fifth_wall */}
@@ -450,7 +532,8 @@ export default function Gallery() {
                   depth="0.5"
                   height="7"
                   width="6"
-                  src="url(/assets/marble/black_2.jpg)"
+                  color="firebrick"
+                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
                 ></a-box>
                 {/* __________________________________ fifth_light */}
                 <a-light
@@ -468,7 +551,7 @@ export default function Gallery() {
                 {data[4] && (
                   <a-text
                     id="fifth_number_box"
-                    position="-6 4 -16.7"
+                    position="-6 4.5 -16.7"
                     rotation="0 0 0"
                     width="15"
                     color="white"
@@ -502,26 +585,32 @@ export default function Gallery() {
                     width={data[4].width / 100}
                   ></a-box>
                 )}
+                {/* __________________________________ fifth_frame */}
+                {data[4] && (
+                  <a-box
+                    id="fifth_frame"
+                    onClick={() => {
+                      Swal.fire({
+                        title: data[4].name,
+                        text: `Created by: ${data[4].artistName}`,
+                        imageUrl: data[4].primaryImage,
+                        imageWidth: data[4].width,
+                        imageHeight: data[4].height,
+                      });
+                    }}
+                    position="-6 2 -16.85s"
+                    rotation="0 0 0"
+                    scale="1.05 1.05 1.05"
+                    depth="0.2"
+                    // ------------------------------------ //
+                    src="url(/assets/textures/wooden_frame.jpg)"
+                    height={data[4].height / 100}
+                    width={data[4].width / 100}
+                  ></a-box>
+                )}
               </>
-
               {/* __________________________________ sixth */}
               <>
-                {/* __________________________________ sixth_number_box */}
-                {data[5] && (
-                  <a-text
-                    id="sixth_number_box"
-                    position="6 3.5 -16.7"
-                    rotation="0 0 0"
-                    width="15"
-                    color="white"
-                    value={data[5].number}
-                    geometry="primitive:plane, src='#number_box'"
-                    side="double"
-                    align="center"
-                    fontImage="url(/assets/marble/black_2.jpg)"
-                    src="#number_box"
-                  ></a-text>
-                )}
                 {/* __________________________________ sixth_wall */}
                 <a-box
                   id="sixth_wall"
@@ -530,7 +619,8 @@ export default function Gallery() {
                   depth="0.5"
                   height="7"
                   width="6"
-                  src="url(/assets/marble/black_2.jpg)"
+                  color="firebrick"
+                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
                 ></a-box>
                 {/* __________________________________ sixth_light */}
                 <a-light
@@ -544,6 +634,22 @@ export default function Gallery() {
                   position="6 5 -14"
                   penumbra="0.4"
                 ></a-light>
+                {/* __________________________________ sixth_number_box */}
+                {data[5] && (
+                  <a-text
+                    id="sixth_number_box"
+                    position="6 4.5 -16.7"
+                    rotation="0 0 0"
+                    width="15"
+                    color="white"
+                    value={data[5].number}
+                    geometry="primitive:plane, src='#number_box'"
+                    side="double"
+                    align="center"
+                    fontImage="url(/assets/marble/black_2.jpg)"
+                    src="#number_box"
+                  ></a-text>
+                )}
                 {/* __________________________________ sixth_painting */}
                 {data[5] && (
                   <a-box
@@ -566,8 +672,30 @@ export default function Gallery() {
                     width={data[5].width / 100}
                   ></a-box>
                 )}
+                {/* __________________________________ sixth_frame */}
+                {data[5] && (
+                  <a-box
+                    id="sixth_frame"
+                    onClick={() => {
+                      Swal.fire({
+                        title: data[5].name,
+                        text: `Created by: ${data[5].artistName}`,
+                        imageUrl: data[5].primaryImage,
+                        imageWidth: data[5].width,
+                        imageHeight: data[5].height,
+                      });
+                    }}
+                    position="6 2 -16.83"
+                    rotation="0 0 0"
+                    scale="1.1 1.1 1.1"
+                    depth="0.2"
+                    // ------------------------------------ //
+                    src="url(/assets/textures/wooden_frame.jpg)"
+                    height={data[5].height / 100}
+                    width={data[5].width / 100}
+                  ></a-box>
+                )}
               </>
-
               {/* __________________________________ seventh */}
               <>
                 {/* __________________________________seventh_wall */}
@@ -578,7 +706,8 @@ export default function Gallery() {
                   depth="0.5"
                   height="7"
                   width="6"
-                  src="url(/assets/marble/black_2.jpg)"
+                  color="firebrick"
+                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
                 ></a-box>
                 {/* __________________________________ seventh_light */}
                 <a-light
@@ -596,7 +725,7 @@ export default function Gallery() {
                 {data[6] && (
                   <a-text
                     id="seventh_number_box"
-                    position="8.5 3.5 -14"
+                    position="8.5 4.5 -14"
                     rotation="0 -90 0"
                     width="15"
                     color="white"
@@ -630,8 +759,31 @@ export default function Gallery() {
                     width={data[6].width / 100}
                   ></a-box>
                 )}
-              </>
 
+                {/* __________________________________ seventh_frame */}
+                {data[6] && (
+                  <a-box
+                    id="seventh_frame"
+                    onClick={() => {
+                      Swal.fire({
+                        title: data[6].name,
+                        text: `Created by: ${data[6].artistName}`,
+                        imageUrl: data[6].primaryImage,
+                        imageWidth: data[6].width,
+                        imageHeight: data[6].height,
+                      });
+                    }}
+                    position="8.563 2 -14"
+                    rotation="0 90 0"
+                    scale="1.1 1.1 1.1"
+                    depth="0.2"
+                    // ------------------------------------ //
+                    src="url(/assets/textures/wooden_frame.jpg)"
+                    height={data[6].height / 100}
+                    width={data[6].width / 100}
+                  ></a-box>
+                )}
+              </>
               {/* __________________________________ eighth */}
               <>
                 {/* __________________________________ eighth_wall */}
@@ -642,13 +794,14 @@ export default function Gallery() {
                   depth="0.5"
                   height="7"
                   width="6"
-                  src="url(/assets/marble/black_2.jpg)"
+                  color="firebrick"
+                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
                 ></a-box>
                 {/* __________________________________ eighth_number_box */}
                 {data[7] && (
                   <a-text
                     id="eighth_number_box"
-                    position="8.5 3.5 -8"
+                    position="8.5 4.5 -8"
                     rotation="0 -90 0"
                     width="15"
                     color="white"
@@ -673,6 +826,29 @@ export default function Gallery() {
                   penumbra="0.4"
                 ></a-light>
 
+                {/* __________________________________ eighth_frame */}
+                {data[7] && (
+                  <a-box
+                    id="eighth_frame "
+                    onClick={() => {
+                      Swal.fire({
+                        title: data[7].name,
+                        text: `Created by: ${data[7].artistName}`,
+                        imageUrl: data[7].primaryImage,
+                        imageWidth: data[7].width,
+                        imageHeight: data[7].height,
+                      });
+                    }}
+                    position="8.57 2 -8"
+                    rotation="0 90 0"
+                    scale="1.1 1.1 1.1"
+                    depth="0.2"
+                    // ------------------------------------ //
+                    src="url(/assets/textures/wooden_frame.jpg)"
+                    height={data[7].height / 100}
+                    width={data[7].width / 100}
+                  ></a-box>
+                )}
                 {/* __________________________________ eighth_painting */}
                 {data[7] && (
                   <a-box
@@ -707,7 +883,8 @@ export default function Gallery() {
                   depth="0.5"
                   height="7"
                   width="6"
-                  src="url(/assets/marble/black_2.jpg)"
+                  color="firebrick"
+                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
                 ></a-box>
                 {/* __________________________________ ninth_light */}
                 <a-light
@@ -725,7 +902,7 @@ export default function Gallery() {
                 {data[8] && (
                   <a-text
                     id="eighth_number_box"
-                    position="8.5 3.5 -2"
+                    position="8.5 4.5 -2"
                     rotation="0 -90 0"
                     width="15"
                     color="white"
@@ -759,8 +936,31 @@ export default function Gallery() {
                     width={data[8].width / 100}
                   ></a-box>
                 )}
-              </>
 
+                {/* __________________________________ ninth_painting */}
+                {data[8] && (
+                  <a-box
+                    id="right_0_vertical_painting "
+                    onClick={() => {
+                      Swal.fire({
+                        title: data[8].name,
+                        text: `Created by: ${data[8].artistName}`,
+                        imageUrl: data[8].primaryImage,
+                        imageWidth: data[8].width,
+                        imageHeight: data[8].height,
+                      });
+                    }}
+                    position="8.60 2 -2"
+                    rotation="0 90 0"
+                    scale="1.1 1.1 1.1"
+                    depth="0.2"
+                    // ------------------------------------ //
+                    src="url(/assets/textures/wooden_frame.jpg)"
+                    height={data[8].height / 100}
+                    width={data[8].width / 100}
+                  ></a-box>
+                )}
+              </>
               {/* __________________________________ tenth */}
               <>
                 {/* __________________________________ tenth_wall */}
@@ -771,7 +971,8 @@ export default function Gallery() {
                   depth="0.5"
                   height="7"
                   width="6"
-                  src="url(/assets/marble/black_2.jpg)"
+                  color="firebrick"
+                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
                 ></a-box>
                 {/* __________________________________ tenth_light */}
                 <a-light
@@ -789,7 +990,7 @@ export default function Gallery() {
                 {data[9] && (
                   <a-text
                     id="bottom_right_horizontal_number"
-                    position="6 3.5 0.95"
+                    position="6 4.5 0.95"
                     rotation="0 180 0"
                     width="15"
                     color="white"
@@ -823,6 +1024,20 @@ export default function Gallery() {
                     width={data[9].width / 100}
                   ></a-box>
                 )}
+                {/* __________________________________ tenth_frame */}
+                {data[9] && (
+                  <a-box
+                    id="tenth_frame "
+                    position="6 2 1.10"
+                    rotation="0 0 0"
+                    scale="1.1 1.1 1.1"
+                    depth="0.2"
+                    // ------------------------------------ //
+                    src="url(/assets/textures/wooden_frame.jpg)"
+                    height={data[9].height / 100}
+                    width={data[9].width / 100}
+                  ></a-box>
+                )}
               </>
             </>
           )}
@@ -836,7 +1051,8 @@ export default function Gallery() {
           depth="0.5"
           height="7"
           width="6"
-          src="url(/assets/marble/black_2.jpg)"
+          color="firebrick"
+          src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
         ></a-box>
 
         {/* light for top wall painting */}
@@ -889,7 +1105,7 @@ export default function Gallery() {
           gltf-model="/assets/chandelier/scene.gltf"
         ></a-entity>
 
-        {/* omni light */}
+        {/* omni_light */}
         <a-light
           id="omni_light"
           position="0 2 0"
@@ -915,47 +1131,46 @@ export default function Gallery() {
           rotation="0 0 0"
           gltf-model="url(/assets/mini_sofa/scene.gltf)"
         ></a-entity>
-        <a-sphere
-          id="sphere"
-          onClick={() => {
-            emerge();
-          }}
-          radius="0.2"
-          position="0 1.5 -8"
-          rotation="0 0 0"
-          src="url(/assets/marble/black_2.jpg)"
-          // mixin="up_and_down"
-        ></a-sphere>
-        <a-cone
-          id="left_cone"
-          onClick={() => {
-            toPreviousBatch();
-          }}
-          color="tomato"
-          height="0.2"
-          radius-bottom="0.1"
-          radius-top="0.001"
-          rotation="0 0 90"
-          position="0 1.5 -8"
-          // position="-0.8 1.5 -8"
-        ></a-cone>
-        <a-cone
-          id="right_cone"
-          onClick={() => {
-            toNextBatch();
-          }}
-          color="tomato"
-          height="0.2"
-          radius-bottom="0.1"
-          radius-top="0.001"
-          rotation="0 0 -90"
-          position="0 1.5 -8"
-        ></a-cone>
-        {/* <a-box
-          position="-1 1.6 -5"
-          animation="property: position; to: [1 8 -10, -1 1.6 -5]; dur: 2000; easing: linear; loop: true"
-          color="tomato"
-        ></a-box> */}
+        {/* pagination_sphere */}
+        <>
+          s
+          <a-sphere
+            id="sphere"
+            onClick={() => {
+              emerge();
+            }}
+            radius="0.2"
+            position="0 1.5 -8"
+            rotation="0 0 0"
+            src="url(/assets/textures/Bumpy-Red-Plastic-Texture.png)"
+            // mixin="up_and_down"
+          ></a-sphere>
+          <a-cone
+            id="left_cone"
+            onClick={() => {
+              toPreviousBatch();
+            }}
+            src="url(/assets/textures/Bumpy-Red-Plastic-Texture.png)"
+            height="0.2"
+            radius-bottom="0.1"
+            radius-top="0.001"
+            rotation="0 0 90"
+            position="0 1.5 -8"
+            // position="-0.8 1.5 -8"
+          ></a-cone>
+          <a-cone
+            id="right_cone"
+            onClick={() => {
+              toNextBatch();
+            }}
+            src="url(/assets/textures/Bumpy-Red-Plastic-Texture.png)"
+            height="0.2"
+            radius-bottom="0.1"
+            radius-top="0.001"
+            rotation="0 0 -90"
+            position="0 1.5 -8"
+          ></a-cone>
+        </>
         <a-sky color="#ECECEC"></a-sky>
       </a-scene>
     </>
