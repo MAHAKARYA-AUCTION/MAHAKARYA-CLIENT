@@ -118,7 +118,7 @@ export default function LandingView() {
                   >
                     «
                   </button>
-                  <button className="btn border-y-2 border-x-0 bg-[#ebd7bb] border-[#57240f] text-[#57240f]  hover:bg-[#ebd7bb]">
+                  <button className="btn border-x-0 bg-[#ebd7bb] border-[#57240f] text-[#57240f]  hover:bg-[#ebd7bb]">
                     Page {pageNumber}
                   </button>
                   <button

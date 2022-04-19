@@ -203,6 +203,7 @@ export default function CollectionList() {
                         onClick={() => {
                           handleSort("highestPrice");
                         }}
+                        className="text-left"
                       >
                         Price: Highest to Lowest
                       </button>
@@ -212,6 +213,7 @@ export default function CollectionList() {
                         onClick={() => {
                           handleSort("lowestPrice");
                         }}
+                        className="text-left"
                       >
                         Price: Lowest to Highest
                       </button>

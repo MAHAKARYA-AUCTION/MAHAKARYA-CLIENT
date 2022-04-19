@@ -127,8 +127,8 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
     <div className="flex flex-col justify-between pt-10">
       <Navbar />
       <div className="w-[80vw] mx-auto my-10 min-h-[64vh]">
-        <div className="flex flex-row h-full">
-          <div className="w-1/2 flex flex-col">
+        <div className="flex sm:flex-col xl:flex-row h-full">
+          <div className="sm:w-full xl:w-1/2 flex flex-col">
             {/* START:IMAGE CAROUSEL */}
             <Slider
               {...settings}
@@ -161,7 +161,7 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
             </Slider>
             {/* END:IMAGE CAROUSEL */}
           </div>
-          <div className="w-1/2 flex flex-col">
+          <div className="sm:w-full xl:w-1/2 flex flex-col">
             <div className="text-left flex flex-row justify-between">
               <div className="w-2/3">
                 <label className="text-center text-xl align-middle p-[1px] btn-circle font-semibold">

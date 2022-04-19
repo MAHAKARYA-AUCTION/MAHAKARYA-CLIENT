@@ -34,7 +34,7 @@ export default function Navbar() {
           </div>
         </div>
 
-        <div className="grid grid-rows-4 grid-flow-col w-[18%] justify-end gap-2">
+        <div className="grid grid-rows-4 grid-flow-col w-[18%] justify-end gap-2 sm:invisible xl:visible">
           <div className="row-span-4 justify-center flex flex-row">
             <img
               src={require("../resources/img/sphere.png")}

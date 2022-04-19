@@ -91,6 +91,13 @@ code {
   overflow: hidden;
 }
 
+.collection-clamp{
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 /* .card:hover .lot-name:after {
   border-radius: 0,5rem ;
 } */
