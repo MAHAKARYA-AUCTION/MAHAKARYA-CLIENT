@@ -38,17 +38,17 @@ export default function DavidGallery() {
     targets: "#sphere",
     rotation: "0 2 0",
     loop: true,
-    autoplay: true,
+    autoplay: true
   });
 
   function emerge() {
     anime({
       targets: "#left_cone",
-      position: ["-2.75 1.5 -5.25", "-2.75 1.5 -4.75"],
+      position: ["-2.75 1.5 -5.25", "-2.75 1.5 -4.75"]
     });
     anime({
       targets: "#right_cone",
-      position: ["-2.75 1.5 -5.25", "-2.75 1.5 -5.75"],
+      position: ["-2.75 1.5 -5.25", "-2.75 1.5 -5.75"]
     });
   }
 
@@ -225,7 +225,7 @@ export default function DavidGallery() {
                         text: `Created by: ${data[0].artistName}`,
                         imageUrl: data[0].primaryImage,
                         imageWidth: data[0].width,
-                        imageHeight: data[0].height,
+                        imageHeight: data[0].height
                       });
                     }}
                     position="-4.5 2 1"
@@ -303,7 +303,7 @@ export default function DavidGallery() {
                         text: `Created by: ${data[1].artistName}`,
                         imageUrl: data[1].primaryImage,
                         imageWidth: data[1].width,
-                        imageHeight: data[1].height,
+                        imageHeight: data[1].height
                       });
                     }}
                     position="-6.8 2 -1.25"
@@ -381,7 +381,7 @@ export default function DavidGallery() {
                         text: `Created by: ${data[2].artistName}`,
                         imageUrl: data[2].primaryImage,
                         imageWidth: data[2].width,
-                        imageHeight: data[2].height,
+                        imageHeight: data[2].height
                       });
                     }}
                     position="-6.8 2 -5.25"
@@ -459,7 +459,7 @@ export default function DavidGallery() {
                         text: `Created by: ${data[3].artistName}`,
                         imageUrl: data[3].primaryImage,
                         imageWidth: data[3].width,
-                        imageHeight: data[3].height,
+                        imageHeight: data[3].height
                       });
                     }}
                     position="-6.8 2 -9.25"
@@ -537,7 +537,7 @@ export default function DavidGallery() {
                         text: `Created by: ${data[4].artistName}`,
                         imageUrl: data[4].primaryImage,
                         imageWidth: data[4].width,
-                        imageHeight: data[4].height,
+                        imageHeight: data[4].height
                       });
                     }}
                     position="-4.5 2 -11"

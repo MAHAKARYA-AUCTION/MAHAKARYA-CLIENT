@@ -9,13 +9,21 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import axios from "axios";
 import LotCard from "../components/lotCard";
+import firestore from "../config/firebase";
+import { useCollectionData } from "react-firebase-hooks/firestore";
 
 export default function ProfileView() {
-  const id = localStorage.id;
+  const id = localStorage.getItem("id");
   const dispatch = useDispatch();
   const [showTopup, setShowTopup] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const { userById, isLoading } = useSelector((state) => state.userReducer);
+
+  const dbref = firestore.collection("bid");
+  const query = dbref.where("userId", "==", +id);
+  const [lots] = useCollectionData(query, { idField: "id" });
+
+  // console.log(lots);
   useEffect(() => {
     dispatch(fetchUserDetail(id));
   }, [id]);
@@ -26,7 +34,7 @@ export default function ProfileView() {
         username: userById.data.username,
         email: userById.data.email,
         phoneNumber: userById.data.phoneNumber,
-        address: userById.data.address,
+        address: userById.data.address
       });
     }
   }, [userById]);
@@ -35,7 +43,7 @@ export default function ProfileView() {
     username: "",
     email: "",
     phoneNumber: "",
-    address: "",
+    address: ""
   });
 
   const preloadedValuesHandler = (e) => {
@@ -67,9 +75,10 @@ export default function ProfileView() {
       const UserId = id;
       const { price } = data;
       // console.log(UserId, price);
+      // const cb = await axios.post(`http://localhost:3000/topup`, {
       const cb = await axios.post(`https://api.mahakarya-auction.com/topup`, {
         UserId,
-        price,
+        price
       });
       // console.log(cb.data);
       let win = window.open(cb.data.redirect_url, "_blank");
@@ -79,7 +88,7 @@ export default function ProfileView() {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: error.response.data.message,
+        text: error.response.data.message
       });
     }
   };
@@ -90,11 +99,13 @@ export default function ProfileView() {
       if (data.password !== data.currentPassword) {
         throw new Error("password not match");
       }
+      // await axios.put(`hhttp://localhost:3000/users/${id}`, data);
+
       await axios.put(`https://api.mahakarya-auction.com/users/${id}`, data);
       Swal.fire({
         icon: "success",
         title: "Edit",
-        text: "Edit Success!",
+        text: "Edit Success!"
       });
       setShowEdit(false);
     } catch (error) {
@@ -102,13 +113,13 @@ export default function ProfileView() {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: "password not match",
+          text: "password not match"
         });
       } else {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: error.response.data.message,
+          text: error.response.data.message
         });
       }
     }
@@ -121,13 +132,7 @@ export default function ProfileView() {
         name: "Paintings 1",
         artistName: "Artist 1",
         primaryImage: "https://loremflickr.com/g/1080/720/painting?lock=2",
-        startingBid: 1000000,
-        Bids: [
-          {
-            id: 1,
-            bidPrice: 1500000,
-          },
-        ],
+        startingBid: 1000000
       },
       {
         id: 2,
@@ -138,9 +143,9 @@ export default function ProfileView() {
         Bids: [
           {
             id: 1,
-            bidPrice: 1500000,
-          },
-        ],
+            bidPrice: 1500000
+          }
+        ]
       },
       {
         id: 3,
@@ -148,7 +153,7 @@ export default function ProfileView() {
         artistName: "Artist 1",
         primaryImage: "https://loremflickr.com/g/1080/720/painting?lock=2",
         startingBid: 1000000,
-        Bids: [],
+        Bids: []
       },
       {
         id: 4,
@@ -159,9 +164,9 @@ export default function ProfileView() {
         Bids: [
           {
             id: 1,
-            bidPrice: 1500000,
-          },
-        ],
+            bidPrice: 1500000
+          }
+        ]
       },
       {
         id: 5,
@@ -172,12 +177,12 @@ export default function ProfileView() {
         Bids: [
           {
             id: 1,
-            bidPrice: 1500000,
-          },
-        ],
+            bidPrice: 1500000
+          }
+        ]
       },
       ,
-    ],
+    ]
   };
 
   const [pageNumber, setPageNumber] = useState(1);

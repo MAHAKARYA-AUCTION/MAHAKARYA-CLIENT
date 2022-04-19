@@ -12,8 +12,10 @@ import formatRupiah from "../helpers/formatPrice";
 import Swal from "sweetalert2";
 import swal from "../helpers/swalToast";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchLotById } from "../store/actions/lots";
+import { fetchLotById, bidByLotId } from "../store/actions/lots";
 import { useParams } from "react-router-dom";
+import firestore from "../config/firebase";
+import { useCollectionData } from "react-firebase-hooks/firestore";
 import Palette from "react-palette";
 import { usePalette } from "react-palette";
 
@@ -29,54 +31,13 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
   const { id } = useParams();
   const dispatch = useDispatch();
 
-  // const [data, setData] = useState({
-  //   name: "",
-  //   description: "",
-  //   size: "",
-  //   startingBid: "",
-  //   CollectionId: "",
-  //   lotNumber: "",
-  //   primaryImage: ""
-  // });
+  const dbref = firestore.collection("bid");
+  const query = dbref.where("lotId", "==", +id);
+  const [bidData] = useCollectionData(query, { idField: "id" });
 
   useEffect(() => {
     dispatch(fetchLotById(id));
   }, []);
-
-  // console.log(lotData.primaryImage);
-
-  const bids = [
-    {
-      id: 4,
-      bidPrice: 4500000,
-      Users: {
-        username: "Jhon Doe",
-      },
-    },
-    {
-      id: 3,
-      bidPrice: 4000000,
-      Users: {
-        username: "Konstadina Kondwani",
-      },
-    },
-    {
-      id: 2,
-      bidPrice: 2700000,
-      Users: {
-        username: "Budiman Perkasa",
-      },
-    },
-    {
-      id: 1,
-      bidPrice: 1500000,
-      Users: {
-        username: "Jhonny Krugger",
-      },
-    },
-  ];
-
-  // console.log(lotData);
 
   function bidHandler(bid) {
     Swal.fire({
@@ -89,17 +50,33 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
       confirmButtonText: "Bid",
       confirmButtonColor: "#a35831",
       cancelButtonColor: "#702F13",
-    }).then((result) => {
+    }).then(async (result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        setBidAmount(bid + bids[0].bidPrice);
-        swal("success", "Bid Success");
+        let total = 0;
+        if (bidData[0]) {
+          total = bid + bidData[0].price;
+          setBidAmount(total);
+        } else {
+          total = lotData.startingBid + bid;
+          setBidAmount(total);
+        }
+        await hitBid(total);
         setBidAmount(0);
       } else if (result.isDenied) {
         Swal.fire("Changes are not saved", "", "info");
       }
     });
   }
+
+  const hitBid = async (total) => {
+    const bid = await bidByLotId(id, total);
+    if (bid.isSuccess) {
+      swal("success", "Bid Success");
+    } else {
+      swal("error", bid.data);
+    }
+  };
 
   const settings = {
     dots: true,
@@ -135,25 +112,25 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
               className="w-[80%] mx-auto col-span-2 row-span-2"
             >
               {lotData?.primaryImage && (
-                <div className="object-fit w-[720px] h-[480px] bg-no-repeat bg-center">
+                <div className="object-fit w-[720px] h-[480px] ">
                   <div
-                    className="w-full h-full bg-no-repeat bg-center bg-contain"
+                    className="w-full h-full bg-no-repeat bg-contain bg-center"
                     style={{ backgroundImage: `url(${lotData.primaryImage})` }}
                   ></div>
                 </div>
               )}
               {lotData?.secondImage && (
-                <div className="object-fit w-[720px] h-[480px] bg-no-repeat bg-center">
+                <div className="object-fit w-[720px] h-[480px] ">
                   <div
-                    className="w-full h-full bg-no-repeat bg-center bg-contain"
+                    className="w-full h-full bg-no-repeat bg-contain bg-center"
                     style={{ backgroundImage: `url(${lotData.secondImage})` }}
                   ></div>
                 </div>
               )}
               {lotData?.thirdImage && (
-                <div className="object-fit w-[720px] h-[480px] bg-no-repeat bg-center">
+                <div className="object-fit w-[720px] h-[480px] ">
                   <div
-                    className="w-full h-full bg-no-repeat bg-center bg-contain"
+                    className="w-full h-full bg-no-repeat bg-contain bg-center"
                     style={{ backgroundImage: `url(${lotData.thirdImage})` }}
                   ></div>
                 </div>
@@ -257,8 +234,10 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
                     <div className="flex flex-row justify-between">
                       <div className="w-2/3 ">
                         <label>Minimum Bid</label>
-                        <h1 className="text-6xl font-bold font-bosque tracking-widest">
-                          {formatRupiah(bids[0].bidPrice + 100000)}
+                        <h1 className="text-5xl font-bold font-bosque tracking-widest">
+                          {bidData && bidData[0]
+                            ? formatRupiah(bidData[0].price + 500000)
+                            : formatRupiah(lotData?.startingBid)}
                         </h1>
                       </div>
                       <div className="flex flex-col justify-center">
@@ -345,20 +324,31 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
                       </tr>
                     </thead>
                     <tbody>
-                      {bids.map((bid, index) => {
-                        return (
-                          <BidTableItem
-                            key={bid.id}
-                            bid={bid}
-                            index={index}
-                            previousPrice={
-                              bids[index + 1]
-                                ? bids[index + 1].bidPrice
-                                : lot.startingBid
-                            }
-                          />
-                        );
-                      })}
+                      {bidData?.length === 0 ? (
+                        <tr>
+                          <th
+                            colSpan="3"
+                            className="bg-[#F8F1E7] text-center text-2xl"
+                          >
+                            No Bidders
+                          </th>
+                        </tr>
+                      ) : (
+                        bidData?.map((bid, index) => {
+                          return (
+                            <BidTableItem
+                              key={index}
+                              bid={bid}
+                              index={index}
+                              previousPrice={
+                                bidData[index + 1]
+                                  ? bidData[index + 1].price
+                                  : lot.startingBid
+                              }
+                            />
+                          );
+                        })
+                      )}
                     </tbody>
                   </table>
                 </div>
@@ -368,11 +358,6 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
           </div>
         </div>
       </div>
-      {/* <Palette src={lotData.primaryImage}>
-        {({ data, loading, error }) => (
-          <div style={{ color: data.vibrant }}>Text with the vibrant color</div>
-        )}
-      </Palette> */}
       <Footer />
     </div>
   );

@@ -30,6 +30,7 @@ export const fetchLotsByCollectionId = ({ id: collectionId, filter }) => {
 export const fetchCollections = () => {
   return async (dispatch) => {
     const data = await axios.get(BASE_URL + "collections");
+    // console.log(data);
     dispatch({ type: SET_COLLECTIONS, payload: data.data });
   };
 };
@@ -44,7 +45,24 @@ export const fetchCollection = (id) => {
 export const fetchLotById = (id) => {
   return async (dispatch) => {
     const data = await axios.get(BASE_URL + "lots/" + id);
-    console.log(data.data);
     dispatch({ type: SET_LOT, payload: data.data });
   };
+};
+
+export const bidByLotId = async (id, sum) => {
+  try {
+    const { data } = await axios.post(
+      `${BASE_URL}bid/${id}`,
+      { userId: localStorage.getItem("id"), sum: sum },
+      {
+        method: "POST",
+        headers: {
+          access_token: localStorage.access_token
+        }
+      }
+    );
+    return { isSuccess: true, data: data };
+  } catch (error) {
+    return { isSuccess: false, data: error.response.data.msg };
+  }
 };
