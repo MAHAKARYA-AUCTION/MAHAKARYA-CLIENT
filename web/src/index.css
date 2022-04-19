@@ -98,6 +98,18 @@ code {
   overflow: hidden;
 }
 
+.swal2-icon.swal2-error {
+  border-color: #57240f !important;
+}
+
+.swal2-x-mark-line-left {
+  background-color: #57240f !important;
+}
+
+.swal2-x-mark-line-right {
+  background-color: #57240f !important;
+}
+
 /* .card:hover .lot-name:after {
   border-radius: 0,5rem ;
 } */

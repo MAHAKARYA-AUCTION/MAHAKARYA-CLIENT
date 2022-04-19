@@ -21,6 +21,7 @@ const Toast = Swal.mixin({
 export default function showError(type = "error", message = "Internal server error") {
     Toast.fire({
         icon: type,
+        iconColor: "#57240f",
         title: message,
     });
 }

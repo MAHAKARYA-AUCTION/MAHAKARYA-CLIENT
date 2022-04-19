@@ -17,7 +17,7 @@ export default function LotCard({ lot, lotNumber }) {
         ></div>
         <div className="card-body font-poppins">
           <div className="flex flex-row justify-between">
-            <h2 className="card-title clamp">{lot?.name}</h2>
+            <h2 className="card-title clamp text-left">{lot?.name}</h2>
           </div>
           <div className="text-left">
             <p className="text-base">
