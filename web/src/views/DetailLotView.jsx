@@ -153,7 +153,7 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
               {lotData?.thirdImage && (
                 <div className="object-fit w-[720px] h-[480px] bg-no-repeat bg-center">
                   <div
-                    className="w-full h-full bg-no-repeat bg-cente bg-contain"
+                    className="w-full h-full bg-no-repeat bg-center bg-contain"
                     style={{ backgroundImage: `url(${lotData.thirdImage})` }}
                   ></div>
                 </div>
