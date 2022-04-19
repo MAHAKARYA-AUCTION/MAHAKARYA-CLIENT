@@ -49,8 +49,8 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
       cancelButtonText: "Cancel",
       confirmButtonText: "Bid",
       confirmButtonColor: "#a35831",
-      cancelButtonColor: "#702F13",
-    }).then((result) => {
+      cancelButtonColor: "#702F13"
+    }).then(async (result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         let total = 0;
@@ -84,7 +84,7 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: false,
+    arrows: false
   };
 
   //BARCODE SETTING
@@ -92,8 +92,8 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
     value: "http://localhost:3000/lot/1",
     options: {
       background: "#ebd7bb",
-      displayValue: false,
-    },
+      displayValue: false
+    }
   });
 
   let { data, loading, error } = usePalette(lotData.primaryImage);
