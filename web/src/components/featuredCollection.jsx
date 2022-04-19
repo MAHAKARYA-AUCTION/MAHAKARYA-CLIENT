@@ -113,7 +113,7 @@ export default function FeaturedCollection({ collections }) {
   // ];
   return (
     <div className="pb-10 space-y-16">
-      <div className="carousel w-full">
+      <div className="carousel w-full overflow-hidden">
         {featuredCollections &&
           featuredCollections.map((fc, index) => {
             return (
@@ -145,7 +145,7 @@ export default function FeaturedCollection({ collections }) {
           </Link>
         </div>
         {/* START: FEATURED COLECTION LIST */}
-        <div className="grid grid-cols-5 col-span-2 space-x-5 mt-10 justify-around">
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-5 col-span-2 space-x-5 mt-10 justify-around">
           {/* START: CURRENT COLLECTION CARD */}
           {featuredPreview &&
             featuredPreview

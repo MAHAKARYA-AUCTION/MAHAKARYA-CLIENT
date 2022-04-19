@@ -101,7 +101,15 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
               {...settings}
               className="w-[80%] mx-auto col-span-2 row-span-2"
             >
-              <div className="object-fit w-[720px] h-[480px] bg-[url(https://loremflickr.com/720/480/painting?lock=1)] bg-no-repeat bg-center"></div>
+              <div className="object-fit w-[720px] h-[480px] bg-center">
+                <div
+                  className="w-full h-full bg-no-repeat bg-contain bg-center"
+                  style={{
+                    backgroundImage: `url(https://res.cloudinary.com/mahakarya/image/upload/v1650263210/paintings/1-8-1_nis5mv.jpg
+                    )`,
+                  }}
+                ></div>
+              </div>
               <div className="object-fit w-[720px] h-[480px] bg-[url(https://loremflickr.com/720/480/painting?lock=1234)] bg-no-repeat bg-center"></div>
               <div className="object-fit w-[720px] h-[480px] bg-[url(https://loremflickr.com/720/480/painting?lock=145)] bg-no-repeat bg-center"></div>
             </Slider>
