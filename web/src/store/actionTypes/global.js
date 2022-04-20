@@ -6,3 +6,4 @@ export const SET_COLLECTIONS = "collections/setCollections";
 export const SET_COLLECTION = "collections/setCollection";
 export const SET_SORTED_LOTS = "lots/setSortedLots";
 export const SET_LOT = "lots/setLotById";
+export const SET_WIDE_LOTS = "lots/setWideLots";

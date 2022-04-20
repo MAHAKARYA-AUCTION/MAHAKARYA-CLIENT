@@ -4,7 +4,6 @@ import Footer from "../components/footer";
 import BidTableItem from "../components/bidTableItem";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import NumberInput from "../components/numberInputs";
 import { useBarcode } from "react-barcodes";
 import { useCountdown } from "../hooks/useCountdown";
 import { useEffect, useState } from "react";
@@ -187,28 +186,46 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
               </table>
               <p className="text-justify">{lotData?.description}</p>
             </div>
-            <div className="flex flex-col">
-              <div style={{ backgroundColor: `${swatch[0]}` }}>
+            <div className="flex">
+              <div
+                className="flex-auto"
+                style={{ backgroundColor: `${swatch[0]}` }}
+              >
                 {""}
                 <p>{"_"}</p>
               </div>
-              <div style={{ backgroundColor: `${swatch[1]}` }}>
+              <div
+                className="flex-auto"
+                style={{ backgroundColor: `${swatch[1]}` }}
+              >
                 {""}
                 <p>{"_"}</p>
               </div>
-              <div style={{ backgroundColor: `${swatch[2]}` }}>
+              <div
+                className="flex-auto"
+                style={{ backgroundColor: `${swatch[2]}` }}
+              >
                 {""}
                 <p>{"_"}</p>
               </div>
-              <div style={{ backgroundColor: `${swatch[3]}` }}>
+              <div
+                className="flex-auto"
+                style={{ backgroundColor: `${swatch[3]}` }}
+              >
                 {""}
                 <p>{"_"}</p>
               </div>
-              <div style={{ backgroundColor: `${swatch[4]}` }}>
+              <div
+                className="flex-auto"
+                style={{ backgroundColor: `${swatch[4]}` }}
+              >
                 {""}
                 <p>{"_"}</p>
               </div>
-              <div style={{ backgroundColor: `${swatch[5]}` }}>
+              <div
+                className="flex-auto"
+                style={{ backgroundColor: `${swatch[5]}` }}
+              >
                 {""}
                 <p>{"_"}</p>
               </div>

@@ -4,15 +4,22 @@ import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchLots, fetchCollections } from "../store/actions/lots";
+import {
+  fetchLots,
+  fetchWideLots,
+  fetchCollections,
+} from "../store/actions/lots";
 import HorizontalLines from "../components/horizontalLines";
 
 export default function LandingView() {
   const dispatch = useDispatch();
 
+  const [bannerIndex, setBannerIndex] = useState(0);
+
   useEffect(() => {
     dispatch(fetchCollections());
-  }, []);
+    dispatch(fetchWideLots());
+  }, [fetchWideLots]);
 
   const collections = useSelector((state) => state.lotsReducer.collections);
   const currentCollections = useSelector((state) =>
@@ -25,6 +32,17 @@ export default function LandingView() {
       (e) => new Date(e.endDate) < new Date()
     )
   );
+  const lots = useSelector((state) => state.lotsReducer.wideLots);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const newBannerIndex = Math.floor(Math.random() * lots.length);
+      setBannerIndex(newBannerIndex);
+    }, 3000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [bannerIndex]);
 
   const [pageNumber, setPageNumber] = useState(1);
   const [limit] = useState(10);
@@ -60,7 +78,25 @@ export default function LandingView() {
         {/* END:Header */}
         <Navbar />
         {/* START:BANNER */}
-        <div className="banner hover:scale-[101%] transform transition duration-700 w-[80%] mx-auto"></div>
+        {lots && (
+          <div className="mx-auto relative overflow-hidden w-[80%]">
+            <div className="py-5 z-10 top-8 left-10 right-10 absolute">
+              <img
+                src={lots[bannerIndex].primaryImage}
+                className="bg-transparent hover:scale-[101%] transform transition duration-700 mx-auto h-[700px] shadow-lg shadow-gray-800"
+              ></img>
+            </div>
+            <div
+              style={{
+                backgroundImage: `url(${lots[bannerIndex].primaryImage})`,
+              }}
+              className="mx-auto z-0 top-0 left-0 w-[2400px] h-[800px] blur-xl"
+            >
+              {"ggggggggggggggggggggg"}
+            </div>
+          </div>
+        )}
+
         {/* END:BANNER */}
         {/* START:LINE BREAK */}
         <div className="h-20 grid grid-cols-9 items-center w-[80%] mx-auto">
@@ -69,9 +105,10 @@ export default function LandingView() {
           </div>
           {/* <HorizontalLines /> */}
           <img
+            // src={require("../resources/img/horizontal_lines_2-removebg-preview.png")}
             src={require("../resources/img/barcode.png")}
             className="h-16 font-bold w-40 mx-auto"
-            alt="barcode"
+            // alt="barcode"
           />
           <div className="col-span-4">
             <hr className="bg-[#57240f] h-2" />

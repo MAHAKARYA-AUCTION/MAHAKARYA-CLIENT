@@ -39,9 +39,8 @@ export default function Lobby() {
       <a-scene>
         <a-camera
           position="0 2 7"
-          rotation="90 0 0"
           wasd-controls-enabled="true"
-          wasd-controls="acceleration:25"
+          wasd-controls="acceleration:15"
           look-controls="pointerLockEnabled:true"
           fov="60"
           near="0.1"
@@ -60,7 +59,8 @@ export default function Lobby() {
           rotation="-90 0 0"
           width="12"
           height="24"
-          src="url(/assets/wood_parquet/seamless_texture_rovere_wood_parquet_DIFFUSE.jpg)"
+          repeat="8 8"
+          src={"url(/assets/marble/black_2.jpg)"}
           color="gray"
         ></a-plane>
         {/* left_door */}
@@ -86,7 +86,7 @@ export default function Lobby() {
           id="omni_light"
           position="0 2 0"
           angle="360"
-          type="ambient"
+          type="point"
           color="white"
           intensity="0.8"
         ></a-light>
@@ -106,8 +106,7 @@ export default function Lobby() {
           height="5"
           width="12"
           repeat="1 1"
-          color="firebrick"
-          src={"url(/assets/wall/white_stucco_paint.jpg)"}
+          src={"url(/assets/marble/black_2.jpg)"}
         ></a-box>
         <a-box
           id="board"
@@ -199,7 +198,6 @@ export default function Lobby() {
           position="0.9 1.7285 -5.267"
           scale="0.1 0.1 0.1"
         ></a-circle>
-
         <a-text
           id="elevator_text"
           value={floor}
@@ -228,40 +226,3 @@ export default function Lobby() {
     </>
   );
 }
-
-// <a-entity
-//   scale="2 2 2"
-//   position="-5.5 0 -3.35"
-//   rotation="0 90 0"
-//   gltf-model="url(/assets/door/scene.gltf)"
-// ></a-entity>
-
-// <a-entity
-//   scale="2 2 2"
-//   position="-5.5 0 -5.65"
-//   rotation="0 -90 0"
-//   gltf-model="url(/assets/door/scene.gltf)"
-// ></a-entity>
-
-{
-  /* left-side front lobby wall */
-}
-//    <a-box
-//    position="-5.75 2.5 -11"
-//    rotation="0 90 0"
-//    depth="0.5"
-//    height="5"
-//    width="8"
-//    color="tomato"
-//  ></a-box>
-{
-  /* right-side front lobby wall */
-}
-// <a-box
-//   position="5.75 2.5 -11"
-//   rotation="0 90 0"
-//   depth="0.5"
-//   height="5"
-//   width="8"
-//   color="beige"
-// ></a-box>

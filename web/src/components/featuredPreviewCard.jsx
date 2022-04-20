@@ -4,14 +4,14 @@ export default function FeaturedPreviewCard({ lot }) {
     <div className="w-[80%] h-[full] text-xl space-y-3 mx-auto hover:scale-105 transform transition duration-600">
       <Link to={"/lot/" + lot.id}>
         <div
-          className="w-[300px] h-[200px] bg-cover bg-center rounded-lg"
+          className="w-[300px] h-[200px] bg-cover bg-center rounded-lg relative"
           style={{ backgroundImage: `url(${lot.primaryImage})` }}
         >
           {" "}
           <div className="text-left poppins text-[#675237] flex flex-col justify-between items-end">
             <div className="flex flex-col flex-auto">
               <div className="">
-                <label className=" text-[#ebd7bb] px-3 py-1 rounded-full bg-[#a35831] w-auto text-sm">
+                <label className=" text-[#ebd7bb] px-3 py-1 rounded-full bg-[#a35831] w-auto text-sm absolute right-2 bottom-2">
                   {lot.artistName}
                 </label>
               </div>

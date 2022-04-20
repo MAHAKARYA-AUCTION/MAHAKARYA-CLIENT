@@ -9,6 +9,8 @@ import {
 } from "../store/actions/lots";
 import { useParams } from "react-router-dom";
 import LotCard from "../components/lotCard";
+import Slider from "@mui/material/Slider";
+import formatRupiah from "../helpers/formatPrice";
 
 export default function CollectionList() {
   const dispatch = useDispatch();
@@ -18,10 +20,12 @@ export default function CollectionList() {
     name: "",
     artistName: "",
     startingBid: "",
+    priceValue: [0, 100],
+    size: "",
+    orientation: "",
   });
   const [sortBy, setSortBy] = useState("");
   const [refetchSwitch, setRefetchSwitch] = useState(false);
-
   useEffect(() => {
     dispatch(fetchCollection(id));
   }, []);
@@ -73,6 +77,34 @@ export default function CollectionList() {
 
   function handleSort(sortBy) {
     setSortBy(sortBy);
+  }
+
+  function valuetext(value) {
+    return `${value}M`;
+  }
+
+  const [value, setValue] = useState([0, 100]);
+
+  function handleChange(event, newValue) {
+    setValue(newValue);
+    setFilter({
+      ...filter,
+      priceValue: [newValue[0] * 1000000, newValue[1] * 1000000],
+    });
+  }
+
+  function sizeHandler(value) {
+    setFilter({
+      ...filter,
+      size: value,
+    });
+  }
+
+  function orientationHandler(value) {
+    setFilter({
+      ...filter,
+      orientation: value,
+    });
   }
 
   return (
@@ -166,6 +198,119 @@ export default function CollectionList() {
                   <span className="label-text-alt text-base">
                     Find painting by it's painter
                   </span>
+                </label>
+              </div>
+              <div className="form-control w-full">
+                <label className="label">
+                  <span className="text-xl">
+                    Size :{" "}
+                    <span className="capitalize text-base">
+                      {filter.size ? filter.size : "All"}
+                    </span>
+                  </span>
+                  <button
+                    className="label-text-alt text-base font-poppins hover:scale-110 font-semibold text-[#675237] transform duration-100"
+                    onClick={() => sizeHandler("")}
+                  >
+                    Clear
+                  </button>
+                </label>
+                <div className="flex flex-row h-20 justify-start space-x-4 items-center">
+                  <button
+                    className={
+                      filter.size === "big"
+                        ? "rounded-2xl h-16 w-16 bg-[#675237] text-[#ebd7bb] font-poppins text-3xl border-4 border-[#451D0C]"
+                        : "rounded-2xl h-16 w-16 bg-[#675237] text-[#ebd7bb] font-poppins text-3xl hover:border-4 hover:border-[#451D0C]"
+                    }
+                    onClick={() => sizeHandler("big")}
+                  >
+                    LG
+                  </button>
+                  <button
+                    className={
+                      filter.size === "medium"
+                        ? "rounded-2xl h-14 w-14 bg-[#675237] text-[#ebd7bb] font-poppins text-3xl border-4 border-[#451D0C]"
+                        : "rounded-2xl h-14 w-14 bg-[#675237] text-[#ebd7bb] font-poppins text-3xl hover:border-4 hover:border-[#451D0C]"
+                    }
+                    onClick={() => sizeHandler("medium")}
+                  >
+                    MD
+                  </button>
+                  <button
+                    className={
+                      filter.size === "small"
+                        ? "rounded-2xl h-12 w-12 bg-[#675237] text-[#ebd7bb] font-poppins text-2xl border-4 border-[#451D0C]"
+                        : "rounded-2xl h-12 w-12 bg-[#675237] text-[#ebd7bb] font-poppins text-2xl hover:border-4 hover:border-[#451D0C]"
+                    }
+                    onClick={() => sizeHandler("small")}
+                  >
+                    SM
+                  </button>
+                </div>
+              </div>
+              <div className="form-control w-full">
+                <label className="label">
+                  <span className="text-xl">
+                    Orientation :{" "}
+                    <span className="capitalize text-base">
+                      {filter.orientation ? filter.orientation : "All"}
+                    </span>
+                  </span>
+                  <button
+                    className="label-text-alt text-base font-poppins hover:scale-110 font-semibold text-[#675237] transform duration-100"
+                    onClick={() => {
+                      orientationHandler("");
+                    }}
+                  >
+                    Clear
+                  </button>
+                </label>
+                <div className="flex flex-row h-20 justify-start space-x-4 items-center">
+                  <button
+                    className={
+                      filter.size === "big"
+                        ? "rounded-2xl h-16 w-16 bg-[#675237] text-[#ebd7bb] font-poppins text-3xl border-4 border-[#451D0C]"
+                        : "rounded-2xl h-16 w-16 bg-[#675237] text-[#ebd7bb] font-poppins text-3xl hover:border-4 hover:border-[#451D0C]"
+                    }
+                    onClick={() => {
+                      orientationHandler("landscape");
+                    }}
+                  >
+                    <i class="fa-solid fa-image"></i>
+                  </button>
+                  <button
+                    className={
+                      filter.size === "big"
+                        ? "rounded-2xl h-16 w-16 bg-[#675237] text-[#ebd7bb] font-poppins text-3xl border-4 border-[#451D0C]"
+                        : "rounded-2xl h-16 w-16 bg-[#675237] text-[#ebd7bb] font-poppins text-3xl hover:border-4 hover:border-[#451D0C]"
+                    }
+                    onClick={() => {
+                      orientationHandler("potrait");
+                    }}
+                  >
+                    <i class="fa-solid fa-file-image"></i>
+                  </button>
+                </div>
+              </div>
+              <div className="form-control w-full">
+                <label className="label">
+                  <span className="text-xl">Starting Price :</span>
+                </label>
+                <Slider
+                  getAriaLabel={() => "Temperature range"}
+                  value={value}
+                  onChange={handleChange}
+                  valueLabelDisplay="auto"
+                  valueLabelFormat={(value) => <div>{valuetext(value)}</div>}
+                  getAriaValueText={valuetext}
+                  sx={{
+                    width: "full",
+                    color: "#675237",
+                  }}
+                />
+                <label className="label ml-0">
+                  <span className="label-text-alt text-base">{value[0]} M</span>
+                  <span className="label-text-alt text-base">{value[1]} M</span>
                 </label>
               </div>
               <button
