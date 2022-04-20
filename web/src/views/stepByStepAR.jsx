@@ -4,28 +4,100 @@ import Footer from "../components/footer";
 export default function StepByStepAR() {
   return (
     <>
+      <br />
+      <br />
       <Navbar />
-      <div className="flex flex-col pt-10 h-[74vh] ">
-        <div className="w-[70%] mx-auto justify-center flex flex-col">
-          <h1 className="font-bosque text-6xl font-bold">MAHAKARYA AR</h1>
-          <h2 className="font-bosque text-2xl">
-            Bring the painting into reality
-          </h2>
-          <div className="w-full flex flex-col text-2xl font-poppins space-y-20 mt-10 tracking-wide leading-loose">
-            <div className="flex flex-row-reverse items-center gap-4">
-              <div className="bg-black justify-start items-start rounded-xl w-60 h-60">
-                Placeholder
-              </div>
-              <p className="text-right w-[40%]">
+      <div
+        style={{
+          margin: "auto",
+          display: "flex",
+          flexDirection: "column",
+          width: "80vw",
+          marginTop: 30
+        }}
+      >
+        <h1 className="font-bosque text-6xl font-bold">MAHAKARYA AR</h1>
+        <h2 className="font-bosque text-2xl">
+          Bring the painting into reality
+        </h2>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            height: "100",
+            justifyContent: "space-evenly",
+            marginTop: 70
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              // backgroundColor: "lightblue",
+              width: "50%",
+              justifyContent: "center"
+            }}
+          >
+            <img src={require("../resources/img/ar-mobile.png")} width="250" />
+          </div>
+          <div
+            style={{
+              display: "flex",
+              alignContent: "center",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "50%"
+            }}
+            className="text-2xl font-poppins"
+          >
+            <div
+              style={{
+                backgroundColor: "whitesmoke",
+                paddingLeft: 100,
+                paddingRight: 100,
+                paddingTop: 70,
+                paddingBottom: 70,
+                borderRadius: 10
+              }}
+            >
+              <p style={{ width: 450 }} className="text-left">
                 Want to view the painting in real life? Yes you can! With
                 MAHAKARYA-AR you can have a look at the painting that you wish
                 for as if it's in your room right now.
               </p>
             </div>
-            <div className="flex flex-row space-x-10 leading-relaxed text-left marker:text-[#675237]">
-              <div className="bg-black justify-start items-start w-60 h-60 rounded-xl">
-                Placeholder
-              </div>
+          </div>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            height: "100",
+            justifyContent: "space-evenly",
+            marginTop: 70,
+            marginBottom: 70
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignContent: "center",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "50%"
+              // backgroundColor: "tomato"
+            }}
+            className="text-2xl font-poppins"
+          >
+            <div
+              style={{
+                backgroundColor: "whitesmoke",
+                paddingLeft: 100,
+                paddingRight: 100,
+                paddingTop: 70,
+                paddingBottom: 70,
+                borderRadius: 10
+              }}
+            >
               <div>
                 <label className="font-semibold text-[#1F2937]">
                   Follow these steps :
@@ -42,8 +114,7 @@ export default function StepByStepAR() {
                     app and{" "}
                     <a
                       className="text-[#57240f] font-semibold hover:underline decoration-[#451D0C]"
-                      href="https://res.cloudinary.com/mahakarya/image/upload/v1650449039/MAHAKARYA_AUCTION_QR_gaqfad.jpg
-"
+                      href="https://res.cloudinary.com/mahakarya/image/upload/v1650449039/MAHAKARYA_AUCTION_QR_gaqfad.jpg"
                     >
                       Marker
                     </a>{" "}
@@ -62,6 +133,20 @@ export default function StepByStepAR() {
                 </ul>
               </div>
             </div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              // backgroundColor: "lightblue",
+              width: "50%",
+              alignItems: "center",
+              justifyContent: "center"
+            }}
+          >
+            <img
+              src={require("../resources/img/qr.jpg")}
+              style={{ width: 400, height: 400 }}
+            />
           </div>
         </div>
       </div>
