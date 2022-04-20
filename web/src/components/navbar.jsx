@@ -79,6 +79,11 @@ export default function Navbar() {
                     Virtual Gallery
                   </button>
                 </Link>
+                <Link to="/ar-gallery">
+                  <button className="x-6 py-3 poppins font-semibold mr-2 hover:scale-110 transform transition duration-400">
+                    AR Gallery
+                  </button>
+                </Link>
               </li>
               {localStorage.getItem("access_token") ? (
                 <>

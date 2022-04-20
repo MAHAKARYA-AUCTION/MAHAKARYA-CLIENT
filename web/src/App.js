@@ -10,6 +10,7 @@ import DetailLotView from "./views/DetailLotView";
 import DetailCollection from "./views/DetailCollection";
 import ProfileView from "./views/ProfileView";
 import RequireAuth from "./middlewares/requireAuth";
+import StepByStepAR from "./views/stepByStepAR";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/collection/:id" element={<DetailCollection />} />
         <Route path="/lot/:id" element={<DetailLotView />} />
+        <Route path="/ar-gallery" element={<StepByStepAR />} />
         <Route path="/profile" element={
           <RequireAuth>
             <ProfileView />
