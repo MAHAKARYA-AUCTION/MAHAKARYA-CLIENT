@@ -86,15 +86,7 @@ export default function Gallery() {
   return (
     <>
       <a-scene>
-        <a-camera
-          position="0 2 7"
-          wasd-controls-enabled="true"
-          wasd-controls="acceleration:15"
-          look-controls="pointerLockEnabled:true"
-          fov="60"
-          near="0.1"
-          far="100"
-        >
+        <a-camera position="0 2 7" wasd-controls-enabled="true" wasd-controls="acceleration:15" look-controls="pointerLockEnabled:true" fov="60" near="0.1" far="100">
           <a-cursor></a-cursor>
         </a-camera>
 
@@ -144,74 +136,22 @@ export default function Gallery() {
         ></a-plane>
 
         {/* __________________________________ roof */}
-        <a-box
-          position="0 7 -4"
-          rotation="-90 0 0"
-          width="60"
-          height="60"
-          color="saddlebrown"
-          src="url(/assets/marble/black_2.jpg)"
-          repeat="4 4"
-        ></a-box>
+        <a-box position="0 7 -4" rotation="-90 0 0" width="60" height="60" color="saddlebrown" src="url(/assets/marble/black_2.jpg)" repeat="4 4"></a-box>
 
         {/* elevator and elevator walls */}
         <>
           {/* elevator */}
-          <a-entity
-            scale="0.014 0.014 0.014"
-            position="0 3 4.84506"
-            rotation="0 180 0"
-            gltf-model="/assets/elevator/scene.gltf"
-          ></a-entity>
-          <a-triangle
-            id="elevator_up_button"
-            onPress={floorTransporter}
-            position="-0.9086 1.70955 4.81707"
-            color="red"
-            side="double"
-            scale="0.1 0.1 0.1"
-            material=""
-            geometry=""
-          ></a-triangle>
-          <a-circle
-            id="elevator_lift_button"
-            onClick={floorTransporter}
-            color="red"
-            side="double"
-            position="0.882 1.7285 5.080"
-            scale="0.1 0.1 0.1"
-          ></a-circle>
+          <a-entity scale="0.014 0.014 0.014" position="0 3 4.84506" rotation="0 180 0" gltf-model="/assets/elevator/scene.gltf"></a-entity>
+          <a-triangle id="elevator_up_button" onPress={floorTransporter} position="-0.9086 1.70955 4.81707" color="red" side="double" scale="0.1 0.1 0.1" material="" geometry=""></a-triangle>
+          <a-circle id="elevator_lift_button" onClick={floorTransporter} color="red" side="double" position="0.882 1.7285 5.080" scale="0.1 0.1 0.1"></a-circle>
           {/* elevator_wall */}
           <>
             {/* __________________________________back elevator wall */}
-            <a-box
-              position="0 3.5 7.75"
-              depth="0.5"
-              height="7"
-              width="12"
-              color="firebrick"
-              src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
-            ></a-box>
+            <a-box position="0 3.5 7.75" depth="0.5" height="7" width="12" color="firebrick" src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"></a-box>
             {/* __________________________________left-side elevator wall */}
-            <a-box
-              position="-2.75 3.5 4.5"
-              rotation="0 90 0"
-              depth="0.5"
-              height="7"
-              width="7"
-              color="firebrick"
-              src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
-            ></a-box>
+            <a-box position="-2.75 3.5 4.5" rotation="0 90 0" depth="0.5" height="7" width="7" color="firebrick" src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"></a-box>
             {/* __________________________________right-side elevator wall */}
-            <a-box
-              position="2.75 3.5 4.5"
-              rotation="0 90 0"
-              depth="0.5"
-              height="7"
-              width="7"
-              color="firebrick"
-              src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
-            ></a-box>
+            <a-box position="2.75 3.5 4.5" rotation="0 90 0" depth="0.5" height="7" width="7" color="firebrick" src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"></a-box>
           </>
         </>
 
@@ -222,44 +162,11 @@ export default function Gallery() {
               {/* __________________________________ first */}
               <>
                 {/* __________________________________ first_wall */}
-                <a-box
-                  id="first_wall "
-                  position="-6 3.5 1.25"
-                  rotation="0 0 0"
-                  depth="0.5"
-                  height="7"
-                  width="6"
-                  color="firebrick"
-                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
-                ></a-box>
+                <a-box id="first_wall " position="-6 3.5 1.25" rotation="0 0 0" depth="0.5" height="7" width="6" color="firebrick" src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"></a-box>
                 {/* __________________________________ first_light */}
-                <a-light
-                  id="first_light"
-                  type="spot"
-                  angle="50"
-                  color="white"
-                  intensity="0.6"
-                  distance="25"
-                  rotation="-45 180 0"
-                  position="-6 5 -1"
-                  penumbra="0.4"
-                ></a-light>
+                <a-light id="first_light" type="spot" angle="50" color="white" intensity="0.6" distance="25" rotation="-45 180 0" position="-6 5 -1" penumbra="0.4"></a-light>
                 {/* __________________________________ first_number_box */}
-                {data[0] && (
-                  <a-text
-                    id="first_number_box"
-                    position="-6 4.5 0.95"
-                    rotation="0 180 0"
-                    width="15"
-                    color="white"
-                    value={data[0].number}
-                    geometry="primitive:plane, src='#number_box'"
-                    side="double"
-                    align="center"
-                    fontImage="url(/assets/marble/black_2.jpg)"
-                    src="#number_box"
-                  ></a-text>
-                )}
+                {data[0] && <a-text id="first_number_box" position="-6 4.5 0.95" rotation="0 180 0" width="15" color="white" value={data[0].number} geometry="primitive:plane, src='#number_box'" side="double" align="center" fontImage="url(/assets/marble/black_2.jpg)" src="#number_box"></a-text>}
                 {/* __________________________________ first_painting */}
                 {data[0] && (
                   <a-box
@@ -300,44 +207,11 @@ export default function Gallery() {
               {/* __________________________________ second */}
               <>
                 {/* __________________________________second_wall */}
-                <a-box
-                  id="second_wall "
-                  position="-8.75 3.5 -2"
-                  rotation="0 90 0"
-                  depth="0.5"
-                  height="7"
-                  width="6"
-                  color="firebrick"
-                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
-                ></a-box>
+                <a-box id="second_wall " position="-8.75 3.5 -2" rotation="0 90 0" depth="0.5" height="7" width="6" color="firebrick" src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"></a-box>
                 {/* __________________________________ second_light */}
-                <a-light
-                  id="second_light"
-                  type="spot"
-                  angle="50"
-                  color="white"
-                  intensity="0.6"
-                  distance="25"
-                  rotation="-45 90 0"
-                  position="-6.5 5 -2"
-                  penumbra="0.4"
-                ></a-light>
+                <a-light id="second_light" type="spot" angle="50" color="white" intensity="0.6" distance="25" rotation="-45 90 0" position="-6.5 5 -2" penumbra="0.4"></a-light>
                 {/* __________________________________ second_number_box */}
-                {data[1] && (
-                  <a-text
-                    id="second_number_box"
-                    position="-8.5 4.5 -2"
-                    rotation="0 90 0"
-                    width="15"
-                    color="white"
-                    value={data[1].number}
-                    geometry="primitive:plane, src='#number_box'"
-                    side="double"
-                    align="center"
-                    fontImage="url(/assets/marble/black_1.jpg)"
-                    src="#number_box"
-                  ></a-text>
-                )}
+                {data[1] && <a-text id="second_number_box" position="-8.5 4.5 -2" rotation="0 90 0" width="15" color="white" value={data[1].number} geometry="primitive:plane, src='#number_box'" side="double" align="center" fontImage="url(/assets/marble/black_1.jpg)" src="#number_box"></a-text>}
                 {/* __________________________________ second_painting */}
                 {data[1] && (
                   <a-box
@@ -378,44 +252,11 @@ export default function Gallery() {
               {/* __________________________________ third */}
               <>
                 {/* __________________________________ third_wall */}
-                <a-box
-                  id="left-1 vertical wall "
-                  position="-8.75 3.5 -8"
-                  rotation="0 90 0"
-                  depth="0.5"
-                  height="7"
-                  width="6"
-                  color="firebrick"
-                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
-                ></a-box>
+                <a-box id="left-1 vertical wall " position="-8.75 3.5 -8" rotation="0 90 0" depth="0.5" height="7" width="6" color="firebrick" src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"></a-box>
                 {/* __________________________________ third_light */}
-                <a-light
-                  id="third_light"
-                  type="spot"
-                  angle="50"
-                  color="white"
-                  intensity="0.6"
-                  distance="25"
-                  rotation="-45 90 0"
-                  position="-6.5 5 -8"
-                  penumbra="0.4"
-                ></a-light>
+                <a-light id="third_light" type="spot" angle="50" color="white" intensity="0.6" distance="25" rotation="-45 90 0" position="-6.5 5 -8" penumbra="0.4"></a-light>
                 {/* __________________________________ third_number_box */}
-                {data[2] && (
-                  <a-text
-                    id="third_number_box"
-                    position="-8.5 4.5 -8"
-                    rotation="0 90 0"
-                    width="15"
-                    color="white"
-                    value={data[2].number}
-                    geometry="primitive:plane, src='#number_box'"
-                    side="double"
-                    align="center"
-                    fontImage="url(/assets/marble/black_1.jpg)"
-                    src="#number_box"
-                  ></a-text>
-                )}
+                {data[2] && <a-text id="third_number_box" position="-8.5 4.5 -8" rotation="0 90 0" width="15" color="white" value={data[2].number} geometry="primitive:plane, src='#number_box'" side="double" align="center" fontImage="url(/assets/marble/black_1.jpg)" src="#number_box"></a-text>}
                 {/* __________________________________ third_painting */}
                 {data[2] && (
                   <a-box
@@ -456,44 +297,11 @@ export default function Gallery() {
               {/* __________________________________ fourth */}
               <>
                 {/* __________________________________ fourth_vertical_wall */}
-                <a-box
-                  id="left-2 vertical wall"
-                  position="-8.75 3.5 -14"
-                  rotation="0 90 0"
-                  depth="0.5"
-                  height="7"
-                  width="6"
-                  color="firebrick"
-                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
-                ></a-box>
+                <a-box id="left-2 vertical wall" position="-8.75 3.5 -14" rotation="0 90 0" depth="0.5" height="7" width="6" color="firebrick" src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"></a-box>
                 {/* __________________________________ fourth_light */}
-                <a-light
-                  id="fourth_light"
-                  type="spot"
-                  angle="50"
-                  color="white"
-                  intensity="0.6"
-                  distance="25"
-                  rotation="-45 90 0"
-                  position="-6.5 5 -14"
-                  penumbra="0.4"
-                ></a-light>
+                <a-light id="fourth_light" type="spot" angle="50" color="white" intensity="0.6" distance="25" rotation="-45 90 0" position="-6.5 5 -14" penumbra="0.4"></a-light>
                 {/* __________________________________ fourth_number_box */}
-                {data[3] && (
-                  <a-text
-                    id="fourth_number_box"
-                    position="-8.5 4.5 -14"
-                    rotation="0 90 0"
-                    width="15"
-                    color="white"
-                    value={data[3].number}
-                    geometry="primitive:plane, src='#number_box'"
-                    side="double"
-                    align="center"
-                    fontImage="url(/assets/marble/black_1.jpg)"
-                    src="#number_box"
-                  ></a-text>
-                )}
+                {data[3] && <a-text id="fourth_number_box" position="-8.5 4.5 -14" rotation="0 90 0" width="15" color="white" value={data[3].number} geometry="primitive:plane, src='#number_box'" side="double" align="center" fontImage="url(/assets/marble/black_1.jpg)" src="#number_box"></a-text>}
                 {/* __________________________________ fourth_painting */}
                 {data[3] && (
                   <a-box
@@ -544,44 +352,11 @@ export default function Gallery() {
               {/* __________________________________ fifth */}
               <>
                 {/* __________________________________ fifth_wall */}
-                <a-box
-                  id="top-0 horizontal wall "
-                  position="-6 3.5 -17"
-                  rotation="0 0 0"
-                  depth="0.5"
-                  height="7"
-                  width="6"
-                  color="firebrick"
-                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
-                ></a-box>
+                <a-box id="top-0 horizontal wall " position="-6 3.5 -17" rotation="0 0 0" depth="0.5" height="7" width="6" color="firebrick" src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"></a-box>
                 {/* __________________________________ fifth_light */}
-                <a-light
-                  id="fifth_light"
-                  type="spot"
-                  angle="50"
-                  color="white"
-                  intensity="0.6"
-                  distance="25"
-                  rotation="-45 0 0"
-                  position="-6 5 -14"
-                  penumbra="0.4"
-                ></a-light>
+                <a-light id="fifth_light" type="spot" angle="50" color="white" intensity="0.6" distance="25" rotation="-45 0 0" position="-6 5 -14" penumbra="0.4"></a-light>
                 {/* __________________________________ fifth_number_box */}
-                {data[4] && (
-                  <a-text
-                    id="fifth_number_box"
-                    position="-6 4.5 -16.7"
-                    rotation="0 0 0"
-                    width="15"
-                    color="white"
-                    value={data[4].number}
-                    geometry="primitive:plane, src='#number_box'"
-                    side="double"
-                    align="center"
-                    fontImage="url(/assets/marble/black_2.jpg)"
-                    src="#number_box"
-                  ></a-text>
-                )}
+                {data[4] && <a-text id="fifth_number_box" position="-6 4.5 -16.7" rotation="0 0 0" width="15" color="white" value={data[4].number} geometry="primitive:plane, src='#number_box'" side="double" align="center" fontImage="url(/assets/marble/black_2.jpg)" src="#number_box"></a-text>}
                 {/* __________________________________ fifth_painting */}
                 {data[4] && (
                   <a-box
@@ -631,44 +406,11 @@ export default function Gallery() {
               {/* __________________________________ sixth */}
               <>
                 {/* __________________________________ sixth_wall */}
-                <a-box
-                  id="sixth_wall"
-                  position="6 3.5 -17"
-                  rotation="0 0 0"
-                  depth="0.5"
-                  height="7"
-                  width="6"
-                  color="firebrick"
-                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
-                ></a-box>
+                <a-box id="sixth_wall" position="6 3.5 -17" rotation="0 0 0" depth="0.5" height="7" width="6" color="firebrick" src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"></a-box>
                 {/* __________________________________ sixth_light */}
-                <a-light
-                  id="sixth_light"
-                  type="spot"
-                  angle="50"
-                  color="white"
-                  intensity="0.6"
-                  distance="25"
-                  rotation="-45 0 0"
-                  position="6 5 -14"
-                  penumbra="0.4"
-                ></a-light>
+                <a-light id="sixth_light" type="spot" angle="50" color="white" intensity="0.6" distance="25" rotation="-45 0 0" position="6 5 -14" penumbra="0.4"></a-light>
                 {/* __________________________________ sixth_number_box */}
-                {data[5] && (
-                  <a-text
-                    id="sixth_number_box"
-                    position="6 4.5 -16.7"
-                    rotation="0 0 0"
-                    width="15"
-                    color="white"
-                    value={data[5].number}
-                    geometry="primitive:plane, src='#number_box'"
-                    side="double"
-                    align="center"
-                    fontImage="url(/assets/marble/black_2.jpg)"
-                    src="#number_box"
-                  ></a-text>
-                )}
+                {data[5] && <a-text id="sixth_number_box" position="6 4.5 -16.7" rotation="0 0 0" width="15" color="white" value={data[5].number} geometry="primitive:plane, src='#number_box'" side="double" align="center" fontImage="url(/assets/marble/black_2.jpg)" src="#number_box"></a-text>}
                 {/* __________________________________ sixth_painting */}
                 {data[5] && (
                   <a-box
@@ -718,44 +460,11 @@ export default function Gallery() {
               {/* __________________________________ seventh */}
               <>
                 {/* __________________________________seventh_wall */}
-                <a-box
-                  id="seventh_wall "
-                  position="8.75 3.5 -14"
-                  rotation="0 90 0"
-                  depth="0.5"
-                  height="7"
-                  width="6"
-                  color="firebrick"
-                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
-                ></a-box>
+                <a-box id="seventh_wall " position="8.75 3.5 -14" rotation="0 90 0" depth="0.5" height="7" width="6" color="firebrick" src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"></a-box>
                 {/* __________________________________ seventh_light */}
-                <a-light
-                  id="seventh_light"
-                  type="spot"
-                  angle="50"
-                  color="white"
-                  intensity="0.6"
-                  distance="25"
-                  rotation="-45 -90 0"
-                  position="6.5 5 -14"
-                  penumbra="0.4"
-                ></a-light>
+                <a-light id="seventh_light" type="spot" angle="50" color="white" intensity="0.6" distance="25" rotation="-45 -90 0" position="6.5 5 -14" penumbra="0.4"></a-light>
                 {/* __________________________________ seventh_number_box */}
-                {data[6] && (
-                  <a-text
-                    id="seventh_number_box"
-                    position="8.5 4.5 -14"
-                    rotation="0 -90 0"
-                    width="15"
-                    color="white"
-                    value="7"
-                    geometry="primitive:plane, src='#number_box'"
-                    side="double"
-                    align="center"
-                    fontImage="url(/assets/marble/black_1.jpg)"
-                    src="#number_box"
-                  ></a-text>
-                )}
+                {data[6] && <a-text id="seventh_number_box" position="8.5 4.5 -14" rotation="0 -90 0" width="15" color="white" value="7" geometry="primitive:plane, src='#number_box'" side="double" align="center" fontImage="url(/assets/marble/black_1.jpg)" src="#number_box"></a-text>}
                 {/* __________________________________ seventh_painting */}
                 {data[6] && (
                   <a-box
@@ -806,44 +515,11 @@ export default function Gallery() {
               {/* __________________________________ eighth */}
               <>
                 {/* __________________________________ eighth_wall */}
-                <a-box
-                  id="eighth_wall"
-                  position="8.75 3.5 -8"
-                  rotation="0 90 0"
-                  depth="0.5"
-                  height="7"
-                  width="6"
-                  color="firebrick"
-                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
-                ></a-box>
+                <a-box id="eighth_wall" position="8.75 3.5 -8" rotation="0 90 0" depth="0.5" height="7" width="6" color="firebrick" src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"></a-box>
                 {/* __________________________________ eighth_number_box */}
-                {data[7] && (
-                  <a-text
-                    id="eighth_number_box"
-                    position="8.5 4.5 -8"
-                    rotation="0 -90 0"
-                    width="15"
-                    color="white"
-                    value={data[7].number}
-                    geometry="primitive:plane, src='#number_box'"
-                    side="double"
-                    align="center"
-                    fontImage="url(/assets/marble/black_1.jpg)"
-                    src="#number_box"
-                  ></a-text>
-                )}
+                {data[7] && <a-text id="eighth_number_box" position="8.5 4.5 -8" rotation="0 -90 0" width="15" color="white" value={data[7].number} geometry="primitive:plane, src='#number_box'" side="double" align="center" fontImage="url(/assets/marble/black_1.jpg)" src="#number_box"></a-text>}
                 {/* __________________________________ eighth_light */}
-                <a-light
-                  id="eighth_light"
-                  type="spot"
-                  angle="50"
-                  color="white"
-                  intensity="0.6"
-                  distance="25"
-                  rotation="-45 -90 0"
-                  position="6.5 5 -8"
-                  penumbra="0.4"
-                ></a-light>
+                <a-light id="eighth_light" type="spot" angle="50" color="white" intensity="0.6" distance="25" rotation="-45 -90 0" position="6.5 5 -8" penumbra="0.4"></a-light>
 
                 {/* __________________________________ eighth_frame */}
                 {data[7] && (
@@ -895,44 +571,11 @@ export default function Gallery() {
               {/* __________________________________ ninth */}
               <>
                 {/* __________________________________ ninth_wall */}
-                <a-box
-                  id="right-0 vertical wall "
-                  position="8.75 3.5 -2"
-                  rotation="0 90 0"
-                  depth="0.5"
-                  height="7"
-                  width="6"
-                  color="firebrick"
-                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
-                ></a-box>
+                <a-box id="right-0 vertical wall " position="8.75 3.5 -2" rotation="0 90 0" depth="0.5" height="7" width="6" color="firebrick" src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"></a-box>
                 {/* __________________________________ ninth_light */}
-                <a-light
-                  id="ninth_light"
-                  type="spot"
-                  angle="50"
-                  color="white"
-                  intensity="0.6"
-                  distance="25"
-                  rotation="-45 -90 0"
-                  position="6.5 5 -2"
-                  penumbra="0.4"
-                ></a-light>
+                <a-light id="ninth_light" type="spot" angle="50" color="white" intensity="0.6" distance="25" rotation="-45 -90 0" position="6.5 5 -2" penumbra="0.4"></a-light>
                 {/* __________________________________ ninth_number_box */}
-                {data[8] && (
-                  <a-text
-                    id="eighth_number_box"
-                    position="8.5 4.5 -2"
-                    rotation="0 -90 0"
-                    width="15"
-                    color="white"
-                    value="9"
-                    geometry="primitive:plane, src='#number_box'"
-                    side="double"
-                    align="center"
-                    fontImage="url(/assets/marble/black_1.jpg)"
-                    src="#number_box"
-                  ></a-text>
-                )}
+                {data[8] && <a-text id="eighth_number_box" position="8.5 4.5 -2" rotation="0 -90 0" width="15" color="white" value="9" geometry="primitive:plane, src='#number_box'" side="double" align="center" fontImage="url(/assets/marble/black_1.jpg)" src="#number_box"></a-text>}
                 {/* __________________________________ ninth_painting */}
                 {data[8] && (
                   <a-box
@@ -983,44 +626,11 @@ export default function Gallery() {
               {/* __________________________________ tenth */}
               <>
                 {/* __________________________________ tenth_wall */}
-                <a-box
-                  id="bottom-right horizontal wall "
-                  position="6 3.5 1.25"
-                  rotation="0 0 0"
-                  depth="0.5"
-                  height="7"
-                  width="6"
-                  color="firebrick"
-                  src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
-                ></a-box>
+                <a-box id="bottom-right horizontal wall " position="6 3.5 1.25" rotation="0 0 0" depth="0.5" height="7" width="6" color="firebrick" src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"></a-box>
                 {/* __________________________________ tenth_light */}
-                <a-light
-                  id="tenth_light"
-                  type="spot"
-                  angle="50"
-                  color="white"
-                  intensity="0.6"
-                  distance="25"
-                  rotation="-45 180 0"
-                  position="6 5 -1"
-                  penumbra="0.4"
-                ></a-light>
+                <a-light id="tenth_light" type="spot" angle="50" color="white" intensity="0.6" distance="25" rotation="-45 180 0" position="6 5 -1" penumbra="0.4"></a-light>
                 {/* __________________________________ tenth_number_box */}
-                {data[9] && (
-                  <a-text
-                    id="bottom_right_horizontal_number"
-                    position="6 4.5 0.95"
-                    rotation="0 180 0"
-                    width="15"
-                    color="white"
-                    value={data[9].number}
-                    geometry="primitive:plane, src='#number_box'"
-                    side="double"
-                    align="center"
-                    fontImage="url(/assets/marble/black_1.jpg)"
-                    src="#number_box"
-                  ></a-text>
-                )}
+                {data[9] && <a-text id="bottom_right_horizontal_number" position="6 4.5 0.95" rotation="0 180 0" width="15" color="white" value={data[9].number} geometry="primitive:plane, src='#number_box'" side="double" align="center" fontImage="url(/assets/marble/black_1.jpg)" src="#number_box"></a-text>}
                 {/* __________________________________ tenth_painting */}
                 {data[9] && (
                   <a-box
@@ -1063,76 +673,26 @@ export default function Gallery() {
         </>
 
         {/* __________________________________ empty_wall */}
-        <a-box
-          id="top-1 horizontal wall "
-          position="0 3.5 -17"
-          rotation="0 0 0"
-          depth="0.5"
-          height="7"
-          width="6"
-          color="firebrick"
-          src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
-        ></a-box>
+        <a-box id="top-1 horizontal wall " position="0 3.5 -17" rotation="0 0 0" depth="0.5" height="7" width="6" color="firebrick" src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"></a-box>
 
         {/* __________________________________ light for top wall painting */}
-        <a-light
-          id="top_diamond_light"
-          type="spot"
-          angle="50"
-          color="white"
-          intensity="0.6"
-          distance="25"
-          rotation="-45 0 0"
-          position="0 4.8 -11"
-          penumbra="0.4"
-        ></a-light>
+        <a-light id="top_diamond_light" type="spot" angle="50" color="white" intensity="0.6" distance="25" rotation="-45 0 0" position="0 4.8 -11" penumbra="0.4"></a-light>
 
         {/* __________________________________ elevator */}
-        <a-entity
-          onClick={floorTransporter}
-          scale="0.014 0.014 0.014"
-          position="0 3 4.84506"
-          rotation="0 180 0"
-          gltf-model="/assets/elevator/scene.gltf"
-        ></a-entity>
-        <a-triangle
-          id="elevator_up_button"
-          onPress={floorTransporter}
-          position="-0.9086 1.70955 4.81707"
-          color="red"
-          side="double"
-          scale="0.1 0.1 0.1"
-          material=""
-          geometry=""
-        ></a-triangle>
+        <a-entity onClick={floorTransporter} scale="0.014 0.014 0.014" position="0 3 4.84506" rotation="0 180 0" gltf-model="/assets/elevator/scene.gltf"></a-entity>
+        <a-triangle id="elevator_up_button" onPress={floorTransporter} position="-0.9086 1.70955 4.81707" color="red" side="double" scale="0.1 0.1 0.1" material="" geometry=""></a-triangle>
 
         {/* __________________________________ window */}
-        <a-entity
-          id="window"
-          scale="1.5 1.5 1"
-          position="0 2.8 -15.18"
-          rotation="0 0 0"
-          gltf-model="/assets/gothic_window/scene.gltf"
-        ></a-entity>
+        <a-entity id="window" scale="1.5 1.5 1" position="0 2.8 -15.18" rotation="0 0 0" gltf-model="/assets/gothic_window/scene.gltf"></a-entity>
 
         {/* __________________________________ chandelier */}
-        <a-entity
-          id="chandelier"
-          scale=".04 .04 .04"
-          position="0 5 -7.75"
-          rotation="0 0 0"
-          gltf-model="/assets/chandelier/scene.gltf"
-        ></a-entity>
+        <a-entity id="chandelier" scale=".04 .04 .04" position="0 5 -7.75" rotation="0 0 0" gltf-model="/assets/chandelier/scene.gltf"></a-entity>
 
         {/* omni_light */}
-        <a-light
-          id="omni_light"
-          position="0 4 -7.85"
-          angle="360"
-          type="point"
-          color="white"
-          intensity="1"
-        ></a-light>
+        <a-light id="omni_light" position="0 4 -7.85" angle="360" type="point" color="white" intensity="1"></a-light>
+
+        {/* ambient */}
+        <a-light id="omni_light" position="0 4 -7.85" angle="360" type="ambient" color="white" intensity="0.6"></a-light>
 
         {/* barrier */}
         {/* <a-entity
@@ -1144,37 +704,11 @@ export default function Gallery() {
         ></a-entity> */}
         {/* sofas */}
         <>
-          <a-entity
-            id="sofa_1"
-            scale="1 1 1"
-            position="-4.5 0 -4"
-            rotation="0 90 0"
-            gltf-model="url(/assets/mini_sofa/scene.gltf)"
-          ></a-entity>
+          <a-entity id="sofa_1" scale="1 1 1" position="-4.5 0 -4" rotation="0 90 0" gltf-model="url(/assets/mini_sofa/scene.gltf)"></a-entity>
           {/* sofa */}
-          <a-entity
-            id="sofa_2"
-            scale="1 1 1"
-            position="-4.5 0 -11.85"
-            rotation="0 90 0"
-            roughness="1"
-            gltf-model="url(/assets/mini_sofa/scene.gltf)"
-          ></a-entity>
-          <a-entity
-            id="sofa_3"
-            scale="1 1 1"
-            position="4.5 0 -11.85"
-            rotation="0 90 0"
-            gltf-model="url(/assets/mini_sofa/scene.gltf)"
-          ></a-entity>
-          <a-entity
-            id="sofa_4"
-            scale="1 1 1"
-            position="4.5 0 -4"
-            rotation="0 90 0"
-            roughness="1"
-            gltf-model="url(/assets/mini_sofa/scene.gltf)"
-          ></a-entity>
+          <a-entity id="sofa_2" scale="1 1 1" position="-4.5 0 -11.85" rotation="0 90 0" roughness="1" gltf-model="url(/assets/mini_sofa/scene.gltf)"></a-entity>
+          <a-entity id="sofa_3" scale="1 1 1" position="4.5 0 -11.85" rotation="0 90 0" gltf-model="url(/assets/mini_sofa/scene.gltf)"></a-entity>
+          <a-entity id="sofa_4" scale="1 1 1" position="4.5 0 -4" rotation="0 90 0" roughness="1" gltf-model="url(/assets/mini_sofa/scene.gltf)"></a-entity>
         </>
         {/* pagination_sphere */}
         <>

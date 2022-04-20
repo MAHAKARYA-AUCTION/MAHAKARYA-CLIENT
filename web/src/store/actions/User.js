@@ -1,7 +1,7 @@
 import axios from "axios";
 import { FETCH_USER_DETAIL } from "../actionTypes/global";
-const baseUrl = "http://localhost:3000";
-// const baseUrl = "https://api.mahakarya-auction.com";
+// const baseUrl = "http://localhost:3000";
+const baseUrl = "https://api.mahakarya-auction.com";
 
 export const fetchUserDetail = (id) => {
   return async (dispatch) => {
