@@ -11,7 +11,7 @@ import DetailCollection from "./views/DetailCollection";
 import ProfileView from "./views/ProfileView";
 import RequireAuth from "./middlewares/requireAuth";
 import StepByStepAR from "./views/stepByStepAR";
-
+import LandingVirtualGallery from "./views/LandingVirtualGallery";
 
 function App() {
   return (
@@ -26,11 +26,15 @@ function App() {
         <Route path="/collection/:id" element={<DetailCollection />} />
         <Route path="/lot/:id" element={<DetailLotView />} />
         <Route path="/ar-gallery" element={<StepByStepAR />} />
-        <Route path="/profile" element={
-          <RequireAuth>
-            <ProfileView />
-          </RequireAuth>
-        } />
+        <Route path="/virtual-gallery" element={<LandingVirtualGallery />} />
+        <Route
+          path="/profile"
+          element={
+            <RequireAuth>
+              <ProfileView />
+            </RequireAuth>
+          }
+        />
       </Routes>
     </div>
   );
