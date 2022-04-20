@@ -33,14 +33,12 @@ export default function LandingView() {
     )
   );
   const lots = useSelector((state) => state.lotsReducer.wideLots);
-  console.log(lots);
 
   useEffect(() => {
     const interval = setInterval(() => {
       const newBannerIndex = Math.floor(Math.random() * lots.length);
-      console.log(newBannerIndex);
       setBannerIndex(newBannerIndex);
-    }, 5000);
+    }, 3000);
     return () => {
       clearInterval(interval);
     };
@@ -81,11 +79,24 @@ export default function LandingView() {
         <Navbar />
         {/* START:BANNER */}
         {lots && (
-          <img
-            src={lots[bannerIndex].primaryImage}
-            className="hover:scale-[101%] transform transition duration-700 mx-auto h-[800px]"
-          ></img>
+          <div className="mx-auto relative overflow-hidden w-[2400px] ">
+            <div className="py-5 z-10 top-8 left-10 right-10 absolute">
+              <img
+                src={lots[bannerIndex].primaryImage}
+                className="bg-transparent hover:scale-[101%] transform transition duration-700 mx-auto h-[700px]"
+              ></img>
+            </div>
+            <div
+              style={{
+                backgroundImage: `url(${lots[bannerIndex].primaryImage})`,
+              }}
+              className="mx-auto z-0 top-0 left-0 w-[2400px] h-[800px] blur-xl"
+            >
+              {"ggggggggggggggggggggg"}
+            </div>
+          </div>
         )}
+
         {/* END:BANNER */}
         {/* START:LINE BREAK */}
         <div className="h-20 grid grid-cols-9 items-center w-[80%] mx-auto">
@@ -94,9 +105,10 @@ export default function LandingView() {
           </div>
           {/* <HorizontalLines /> */}
           <img
+            // src={require("../resources/img/horizontal_lines_2-removebg-preview.png")}
             src={require("../resources/img/barcode.png")}
             className="h-16 font-bold w-40 mx-auto"
-            alt="barcode"
+            // alt="barcode"
           />
           <div className="col-span-4">
             <hr className="bg-[#57240f] h-2" />
