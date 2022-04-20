@@ -88,7 +88,7 @@ export default function ProfileView() {
       const { price } = data;
       // console.log(UserId, price);
       // const cb = await axios.post(`http://localhost:3000/topup`, {
-      const cb = await axios.post(`https://api.mahakarya-auction.com/topup`, {
+      const cb = await axios.post(`http://localhost:3000/topup`, {
         UserId,
         price,
       });
@@ -283,23 +283,13 @@ export default function ProfileView() {
                         <td className="px-2">:</td>
                         {userById && (
                           <td className="py-2">
-                            {formatRupiah(userById.data.balance)}
+                            {formatRupiah(userById.data.balance - userById.data.balanceSpent)}
                           </td>
                         )}
                       </tr>
                       {/* <br /> */}
                       <tr>
-                        <td>Spent</td>
-                        <td className="px-2">:</td>
-                        {userById && (
-                          <td className="py-2">
-                            {formatRupiah(userById.data.balanceSpent)}
-                          </td>
-                        )}
-                      </tr>
-                      {/* <br /> */}
-                      <tr>
-                        <td>Phone Number</td>
+                        <td>Phone</td>
                         <td className="px-2">:</td>
                         {userById && (
                           <td className="py-2">{userById.data.phoneNumber}</td>
@@ -535,7 +525,8 @@ export default function ProfileView() {
                     <th>No.</th>
                     <th>Transaction Number</th>
                     <th>Status</th>
-                    <th>Topup</th>
+                    <th>Type</th>
+                    <th>Balance</th>
                     <th>Time</th>
                   </tr>
                 </thead>
@@ -547,6 +538,7 @@ export default function ProfileView() {
                           <td>{i + 1}.</td>
                           <td>{e.transactionNumber}</td>
                           <td>{e.status}</td>
+                          <td>{e.type}</td>
                           <td>{formatRupiah(e.price)}</td>
                           <td>{e.updatedAt.split("T")[0]}</td>
                         </tr>
