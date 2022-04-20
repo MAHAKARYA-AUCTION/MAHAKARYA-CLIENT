@@ -4,7 +4,6 @@ import Footer from "../components/footer";
 import BidTableItem from "../components/bidTableItem";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import NumberInput from "../components/numberInputs";
 import { useBarcode } from "react-barcodes";
 import { useCountdown } from "../hooks/useCountdown";
 import { useEffect, useState } from "react";

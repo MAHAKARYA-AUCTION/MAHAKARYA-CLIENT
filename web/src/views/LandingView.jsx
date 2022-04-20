@@ -79,11 +79,11 @@ export default function LandingView() {
         <Navbar />
         {/* START:BANNER */}
         {lots && (
-          <div className="mx-auto relative overflow-hidden w-[2400px] ">
+          <div className="mx-auto relative overflow-hidden w-[80%]">
             <div className="py-5 z-10 top-8 left-10 right-10 absolute">
               <img
                 src={lots[bannerIndex].primaryImage}
-                className="bg-transparent hover:scale-[101%] transform transition duration-700 mx-auto h-[700px]"
+                className="bg-transparent hover:scale-[101%] transform transition duration-700 mx-auto h-[700px] shadow-lg shadow-gray-800"
               ></img>
             </div>
             <div

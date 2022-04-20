@@ -34,13 +34,17 @@ export default function Navbar() {
           </div>
         </div>
 
-        <div className="grid grid-rows-4 grid-flow-col w-[18%] justify-end gap-2 sm:invisible xl:visible">
-          <div className="row-span-4 justify-center flex flex-row">
-            <img
-              src={require("../resources/img/sphere.png")}
-              className="h-32 w-32"
-              alt="sphere"
-            />
+        <div className="grid grid-rows-4 grid-flow-col w-[18%] justify-end sm:invisible xl:visible mb-5">
+          <div className="row-span-4 justify-center items-center flex">
+            <div className="pb-3">
+              <img
+                src={require("../resources/img/MAHAKARYA_LOGO.png")}
+                className=""
+                height={800}
+                width={800}
+                alt="sphere"
+              />
+            </div>
           </div>
           <div className="row-span-2 col-span-2 flex flex-row justify-between items-center">
             <label className="border-[3px] border-black rounded-full text-center align-middle p-2 btn-circle font-bold poppins">
