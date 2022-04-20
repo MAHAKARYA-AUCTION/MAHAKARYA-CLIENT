@@ -4,15 +4,22 @@ import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchLots, fetchCollections } from "../store/actions/lots";
+import {
+  fetchLots,
+  fetchWideLots,
+  fetchCollections,
+} from "../store/actions/lots";
 import HorizontalLines from "../components/horizontalLines";
 
 export default function LandingView() {
   const dispatch = useDispatch();
 
+  const [bannerIndex, setBannerIndex] = useState(0);
+
   useEffect(() => {
     dispatch(fetchCollections());
-  }, []);
+    dispatch(fetchWideLots());
+  }, [fetchWideLots]);
 
   const collections = useSelector((state) => state.lotsReducer.collections);
   const currentCollections = useSelector((state) =>
@@ -25,6 +32,19 @@ export default function LandingView() {
       (e) => new Date(e.endDate) < new Date()
     )
   );
+  const lots = useSelector((state) => state.lotsReducer.wideLots);
+  console.log(lots);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const newBannerIndex = Math.floor(Math.random() * lots.length);
+      console.log(newBannerIndex);
+      setBannerIndex(newBannerIndex);
+    }, 5000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [bannerIndex]);
 
   const [pageNumber, setPageNumber] = useState(1);
   const [limit] = useState(10);
@@ -60,7 +80,12 @@ export default function LandingView() {
         {/* END:Header */}
         <Navbar />
         {/* START:BANNER */}
-        <div className="banner hover:scale-[101%] transform transition duration-700 w-[80%] mx-auto"></div>
+        {lots && (
+          <img
+            src={lots[bannerIndex].primaryImage}
+            className="hover:scale-[101%] transform transition duration-700 mx-auto h-[800px]"
+          ></img>
+        )}
         {/* END:BANNER */}
         {/* START:LINE BREAK */}
         <div className="h-20 grid grid-cols-9 items-center w-[80%] mx-auto">

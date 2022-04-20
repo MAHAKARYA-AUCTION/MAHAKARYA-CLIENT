@@ -60,7 +60,8 @@ export default function Lobby() {
           rotation="-90 0 0"
           width="12"
           height="24"
-          src="url(/assets/wood_parquet/seamless_texture_rovere_wood_parquet_DIFFUSE.jpg)"
+          repeat="8 8"
+          src={"url(/assets/marble/black_2.jpg)"}
           color="gray"
         ></a-plane>
         {/* left_door */}
@@ -86,7 +87,7 @@ export default function Lobby() {
           id="omni_light"
           position="0 2 0"
           angle="360"
-          type="ambient"
+          type="point"
           color="white"
           intensity="0.8"
         ></a-light>
@@ -106,8 +107,7 @@ export default function Lobby() {
           height="5"
           width="12"
           repeat="1 1"
-          color="firebrick"
-          src={"url(/assets/wall/white_stucco_paint.jpg)"}
+          src={"url(/assets/marble/black_2.jpg)"}
         ></a-box>
         <a-box
           id="board"

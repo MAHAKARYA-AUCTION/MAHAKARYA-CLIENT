@@ -89,7 +89,7 @@ export default function Gallery() {
         <a-camera
           position="0 2 7"
           wasd-controls-enabled="true"
-          wasd-controls="acceleration:25"
+          wasd-controls="acceleration:15"
           look-controls="pointerLockEnabled:true"
           fov="60"
           near="0.1"
@@ -109,6 +109,13 @@ export default function Gallery() {
         </>
 
         <a-box src="#advertisement"></a-box> */}
+
+        {/* <a-entity
+          geometry="primitive: cylinder; segmentsRadial: 6; height: 20; radius: 0.25"
+          rotation="90 90 0"
+          roughness="0.8"
+          src="url(/assets/wall/cream_1.jpg)"
+        ></a-entity> */}
 
         {/* __________________________________ floor */}
         <a-plane
@@ -130,13 +137,14 @@ export default function Gallery() {
           width="10"
           height="10"
           color="maroon"
+          roughness="1"
           src="url(/assets/carpets/index.jpg)"
           // src="url(/assets/square_floor_4k/textures/square_floor_diff_4k.jpg)"
           repeat="10 10"
         ></a-plane>
 
         {/* __________________________________ roof */}
-        {/* <a-box
+        <a-box
           position="0 7 -4"
           rotation="-90 0 0"
           width="60"
@@ -144,7 +152,7 @@ export default function Gallery() {
           color="saddlebrown"
           src="url(/assets/marble/black_2.jpg)"
           repeat="4 4"
-        ></a-box> */}
+        ></a-box>
 
         {/* elevator and elevator walls */}
         <>
@@ -1066,7 +1074,7 @@ export default function Gallery() {
           src="url(/assets/wall/Kanawa Studio Wood Stripe.jpg)"
         ></a-box>
 
-        {/* light for top wall painting */}
+        {/* __________________________________ light for top wall painting */}
         <a-light
           id="top_diamond_light"
           type="spot"
@@ -1079,7 +1087,7 @@ export default function Gallery() {
           penumbra="0.4"
         ></a-light>
 
-        {/* elevator */}
+        {/* __________________________________ elevator */}
         <a-entity
           onClick={floorTransporter}
           scale="0.014 0.014 0.014"
@@ -1098,7 +1106,7 @@ export default function Gallery() {
           geometry=""
         ></a-triangle>
 
-        {/* window */}
+        {/* __________________________________ window */}
         <a-entity
           id="window"
           scale="1.5 1.5 1"
@@ -1107,7 +1115,7 @@ export default function Gallery() {
           gltf-model="/assets/gothic_window/scene.gltf"
         ></a-entity>
 
-        {/* chandelier */}
+        {/* __________________________________ chandelier */}
         <a-entity
           id="chandelier"
           scale=".04 .04 .04"
@@ -1149,6 +1157,7 @@ export default function Gallery() {
             scale="1 1 1"
             position="-4.5 0 -11.85"
             rotation="0 90 0"
+            roughness="1"
             gltf-model="url(/assets/mini_sofa/scene.gltf)"
           ></a-entity>
           <a-entity
@@ -1163,6 +1172,7 @@ export default function Gallery() {
             scale="1 1 1"
             position="4.5 0 -4"
             rotation="0 90 0"
+            roughness="1"
             gltf-model="url(/assets/mini_sofa/scene.gltf)"
           ></a-entity>
         </>
