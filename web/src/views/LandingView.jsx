@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   fetchLots,
   fetchWideLots,
-  fetchCollections,
+  fetchCollections
 } from "../store/actions/lots";
 import HorizontalLines from "../components/horizontalLines";
 
@@ -36,6 +36,7 @@ export default function LandingView() {
 
   useEffect(() => {
     const interval = setInterval(() => {
+      console.log(lots.length);
       const newBannerIndex = Math.floor(Math.random() * lots.length);
       setBannerIndex(newBannerIndex);
     }, 3000);
@@ -88,7 +89,7 @@ export default function LandingView() {
             </div>
             <div
               style={{
-                backgroundImage: `url(${lots[bannerIndex].primaryImage})`,
+                backgroundImage: `url(${lots[bannerIndex].primaryImage})`
               }}
               className="mx-auto z-0 top-0 left-0 w-[2400px] h-[800px] blur-xl"
             >

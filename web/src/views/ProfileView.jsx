@@ -58,6 +58,7 @@ export default function ProfileView() {
   });
 
   const preloadedValuesHandler = (e) => {
+    e.preventDefault();
     const { value, name } = e.target;
     const newValues = { ...preloadedValues };
     newValues[name] = value;
@@ -106,14 +107,22 @@ export default function ProfileView() {
   };
 
   const onSubmitEdit = async (data) => {
-    // console.log(data);
+    console.log(data);
     try {
       if (data.password !== data.currentPassword) {
         throw new Error("password not match");
       }
       // await axios.put(`hhttp://localhost:3000/users/${id}`, data);
-
-      await axios.put(`https://api.mahakarya-auction.com/users/${id}`, data);
+      let username = preloadedValues.username
+      let password = data.password
+      let email = preloadedValues.email
+      let phoneNumber = preloadedValues.phoneNumber
+      let address = preloadedValues.address
+      await axios.put(`https://api.mahakarya-auction.com/users/${id}`, { username, password, email, phoneNumber, address }, {
+        headers: {
+          access_token: localStorage.getItem("access_token")
+        }
+      });
       Swal.fire({
         icon: "success",
         iconColor: "#57240f",
@@ -433,6 +442,7 @@ export default function ProfileView() {
                                 name="username"
                                 value={preloadedValues.username}
                                 onChange={preloadedValuesHandler}
+                              // {...register("username")}
                               />
                               <label
                                 htmlFor="email"
@@ -480,6 +490,7 @@ export default function ProfileView() {
                               <input
                                 type="text"
                                 className="w-full px-8 py-4 text-md font-encode border border-slate-500 rounded-full"
+                                name="phoneNumber"
                                 value={preloadedValues.phoneNumber}
                                 onChange={preloadedValuesHandler}
                               />
@@ -492,6 +503,7 @@ export default function ProfileView() {
                               <input
                                 type="text"
                                 className="w-full px-8 py-4 text-md font-encode border border-slate-500 rounded-full"
+                                name="address"
                                 value={preloadedValues.address}
                                 onChange={preloadedValuesHandler}
                               />
