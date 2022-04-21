@@ -88,7 +88,7 @@ export default function ProfileView() {
       const { price } = data;
       // console.log(UserId, price);
       // const cb = await axios.post(`http://localhost:3000/topup`, {
-      const cb = await axios.post(`http://localhost:3000/topup`, {
+      const cb = await axios.post(`https://api.mahakarya-auction.com/topup`, {
         UserId,
         price,
       });
