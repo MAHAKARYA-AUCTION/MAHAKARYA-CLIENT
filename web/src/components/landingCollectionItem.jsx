@@ -21,11 +21,11 @@ export default function LandingCollectionItem({ collection, isPastAuction }) {
         <div className="h-fit">
           <label className="">
             {collection.startDate.slice(8, 10)} {startMonth} -{" "}
-            {collection.endDate.slice(8, 10)} {endMonth} |{" "}
+            {collection.endDate.slice(8, 10)} {endMonth}{" "}
           </label>
-          <label className="text-[#ebd7bb] px-3 py-1 rounded-full bg-[#a35831] w-auto text-sm">
+          {/* <label className="text-[#ebd7bb] px-3 py-1 rounded-full bg-[#a35831] w-auto text-sm">
             40 Lots
-          </label>
+          </label> */}
         </div>
         {/* <button className="btn rounded-3xl bg-transparent text-[#57240f] border-[#57240f] absolute top-0 right-0 hover:text-white hover:bg-[#57240f] hover:scale-105 transform transition duration-600 ">
           View Collection
