@@ -4,7 +4,7 @@ import {
   SET_COLLECTIONS,
   SET_COLLECTION,
   SET_LOT,
-  SET_WIDE_LOTS,
+  SET_WIDE_LOTS
 } from "../actionTypes/global";
 // const BASE_URL = "http://localhost:3000/";
 const BASE_URL = "https://api.mahakarya-auction.com/";
@@ -22,7 +22,7 @@ export const fetchWideLots = () => {
     const wideData = await data.filter((e) => e.width > e.height);
     await dispatch({
       type: SET_WIDE_LOTS,
-      payload: wideData,
+      payload: wideData
     });
   };
 };
@@ -32,7 +32,7 @@ export const fetchLotsByCollectionId = ({ id: collectionId, filter }) => {
     const data = await axios.get(
       BASE_URL + "lots/collections/" + collectionId,
       {
-        params: filter,
+        params: filter
       }
     );
     dispatch({ type: SET_LOTS, payload: data.data });
@@ -69,8 +69,8 @@ export const bidByLotId = async (id, sum) => {
       {
         method: "POST",
         headers: {
-          access_token: localStorage.access_token,
-        },
+          access_token: localStorage.access_token
+        }
       }
     );
     return { isSuccess: true, data: data };

@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchCollection,
-  fetchLotsByCollectionId,
+  fetchLotsByCollectionId
 } from "../store/actions/lots";
 import { useParams } from "react-router-dom";
 import LotCard from "../components/lotCard";
@@ -20,9 +20,9 @@ export default function CollectionList() {
     name: "",
     artistName: "",
     startingBid: "",
-    priceValue: [0, 100],
+    priceValue: [0, 1000000000],
     size: "",
-    orientation: "",
+    orientation: ""
   });
   const [sortBy, setSortBy] = useState("");
   const [refetchSwitch, setRefetchSwitch] = useState(false);
@@ -89,21 +89,21 @@ export default function CollectionList() {
     setValue(newValue);
     setFilter({
       ...filter,
-      priceValue: [newValue[0] * 1000000, newValue[1] * 1000000],
+      priceValue: [newValue[0] * 1000000, newValue[1] * 1000000]
     });
   }
 
   function sizeHandler(value) {
     setFilter({
       ...filter,
-      size: value,
+      size: value
     });
   }
 
   function orientationHandler(value) {
     setFilter({
       ...filter,
-      orientation: value,
+      orientation: value
     });
   }
 
@@ -276,7 +276,7 @@ export default function CollectionList() {
                       orientationHandler("landscape");
                     }}
                   >
-                    <i class="fa-solid fa-image"></i>
+                    <i className="fa-solid fa-image"></i>
                   </button>
                   <button
                     className={
@@ -288,7 +288,7 @@ export default function CollectionList() {
                       orientationHandler("potrait");
                     }}
                   >
-                    <i class="fa-solid fa-file-image"></i>
+                    <i className="fa-solid fa-file-image"></i>
                   </button>
                 </div>
               </div>
@@ -305,7 +305,7 @@ export default function CollectionList() {
                   getAriaValueText={valuetext}
                   sx={{
                     width: "full",
-                    color: "#675237",
+                    color: "#675237"
                   }}
                 />
                 <label className="label ml-0">

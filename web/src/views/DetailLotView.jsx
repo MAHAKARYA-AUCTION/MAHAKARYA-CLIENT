@@ -23,9 +23,27 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
   // tomorrow.setDate(tomorrow.getDate() + 1);
   const [bidAmount, setBidAmount] = useState(0);
   const { lot: lotData } = useSelector((state) => state.lotsReducer);
-  const [days, hours, minutes, seconds] = useCountdown(
-    lotData?.Collection?.endDate
-  );
+  const currDate = new Date();
+  const dateToCome =
+    new Date(lotData?.Collection?.startDate) > currDate &&
+    new Date(lotData?.Collection?.endDate) < currDate
+      ? lotData?.Collection?.startDate
+      : lotData?.Collection?.endDate;
+  const isAuction =
+    currDate < new Date(lotData?.Collection?.startDate) ||
+    currDate > new Date(lotData?.Collection?.endDate)
+      ? false
+      : true;
+  const labelTimeLeft =
+    currDate < new Date(lotData?.Collection?.startDate)
+      ? "Auction Starts In"
+      : "Auction Ends In";
+  const [days, hours, minutes, seconds] = useCountdown(dateToCome);
+  // console.log(
+  //   "TEST",
+  //   currDate < new Date(lotData?.Collection?.startDate) ||
+  //     currDate > new Date(lotData?.Collection?.endDate)
+  // );
 
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -115,7 +133,7 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
 
   let { data, loading, error } = usePalette(lotData.primaryImage);
   let swatch = Object.values(data);
-  console.log(swatch[0]);
+  // console.log(swatch[0]);
 
   return (
     <div className="flex flex-col justify-between pt-10">
@@ -189,42 +207,60 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
             <div className="flex">
               <div
                 className="flex-auto"
-                style={{ backgroundColor: `${swatch[0]}` }}
+                style={{
+                  backgroundColor: `${swatch[0]}`,
+                  color: `${swatch[0]}`
+                }}
               >
                 {""}
                 <p>{"_"}</p>
               </div>
               <div
                 className="flex-auto"
-                style={{ backgroundColor: `${swatch[1]}` }}
+                style={{
+                  backgroundColor: `${swatch[1]}`,
+                  color: `${swatch[1]}`
+                }}
               >
                 {""}
                 <p>{"_"}</p>
               </div>
               <div
                 className="flex-auto"
-                style={{ backgroundColor: `${swatch[2]}` }}
+                style={{
+                  backgroundColor: `${swatch[2]}`,
+                  color: `${swatch[2]}`
+                }}
               >
                 {""}
                 <p>{"_"}</p>
               </div>
               <div
                 className="flex-auto"
-                style={{ backgroundColor: `${swatch[3]}` }}
+                style={{
+                  backgroundColor: `${swatch[3]}`,
+                  color: `${swatch[3]}`
+                }}
               >
                 {""}
                 <p>{"_"}</p>
               </div>
               <div
                 className="flex-auto"
-                style={{ backgroundColor: `${swatch[4]}` }}
+                style={{
+                  backgroundColor: `${swatch[4]}`,
+                  color: `${swatch[4]}`
+                }}
               >
                 {""}
                 <p>{"_"}</p>
               </div>
               <div
                 className="flex-auto"
-                style={{ backgroundColor: `${swatch[5]}` }}
+                style={{
+                  backgroundColor: `${swatch[5]}`,
+                  color: `${swatch[5]}`
+                }}
               >
                 {""}
                 <p>{"_"}</p>
@@ -243,7 +279,7 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
                       <div className="flex-grow border-t border-[#675237]"></div>
                       {/* START:Countdown Timer */}
                       <div className="flex-shrink mx-4 flex flex-col font-poppins">
-                        <label className="text-center">Auction Ends At</label>
+                        <label className="text-center">{labelTimeLeft}</label>
                         <label className="space-x-2">
                           <span className="font-semibold text-[#57240f]">
                             {days}
@@ -278,14 +314,16 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
                       <div className="flex flex-col justify-center">
                         {/* START:BID Dropdown */}
                         <div className="dropdown dropdown-left">
-                          <button
-                            tabIndex="0"
-                            className="btn bg-[#ebd7bb] px-6 poppins font-semibold text-3xl mr-2 hover:scale-110
+                          {isAuction && localStorage.getItem("access_token") && (
+                            <button
+                              tabIndex="0"
+                              className="btn bg-[#ebd7bb] px-6 poppins font-semibold text-3xl mr-2 hover:scale-110
                    transform transition duration-400 border-2 text-[#57240f] border-[#57240f]
                     rounded-xl hover:bg-[#57240f] hover:text-[#cdbba6]  focus:bg-[#57240f] focus:text-[#cdbba6] focus:scale-110 text-center hover:border-0 "
-                          >
-                            Bid
-                          </button>
+                            >
+                              Bid
+                            </button>
+                          )}
                           <ul
                             tabIndex="0"
                             className="dropdown-content menu p-2 bg-[#F0E2CD] rounded-box w-32 z-50 shadow-2xl font-poppins text-center"
@@ -336,12 +374,24 @@ export default function DetailLotView({ lot = { startingBid: 1000000 } }) {
                   <>
                     <div className="mx-auto flex flex-col justify-center items-center h-full">
                       <h1 className="text-3xl font-bosque">Auctions Ends</h1>
-                      <p className="text-3xl font-bosque ">
-                        Sold with price{" "}
-                        <span className="font-bold tracking-wide">
-                          Rp. 4.500.000
-                        </span>
-                      </p>
+                      {bidData?.length > 0 ? (
+                        <div>
+                          <p className="text-3xl font-bosque ">
+                            Sold with price{" "}
+                            <span className="font-bold tracking-wide">
+                              {formatRupiah(bidData[0]?.price)}{" "}
+                            </span>
+                          </p>
+                          <p className="text-3xl font-bosque text-center">
+                            to{" "}
+                            <span className="font-bold tracking-wide">
+                              Mr/Mrs {bidData[0]?.username}{" "}
+                            </span>
+                          </p>
+                        </div>
+                      ) : (
+                        <p className="text-3xl font-bosque ">Unsold Lot</p>
+                      )}
                     </div>
                   </>
                 )}

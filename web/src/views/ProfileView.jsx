@@ -235,6 +235,14 @@ export default function ProfileView() {
       (f) => f.userId === e.userId && f.lotId === e.lotId
     );
     if (ishighest.length > 0) {
+      if (
+        userById?.data.Transactions.some((e) => e.LotId === ishighest.lotId)
+      ) {
+        console.log(
+          userById?.data.Transactions.some((e) => e.LotId === ishighest.lotId)
+        );
+        return "Winner";
+      }
       return "Highest";
     } else {
       return "Outbid";
