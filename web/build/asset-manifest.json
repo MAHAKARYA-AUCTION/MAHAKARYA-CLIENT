@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/static/css/main.e643c8b2.css",
+    "main.js": "/static/js/main.59787d7a.js",
+    "static/js/787.d1d4a2c2.chunk.js": "/static/js/787.d1d4a2c2.chunk.js",
+    "static/media/ar-mobile.png": "/static/media/ar-mobile.66da03befe9813e2fd4d.png",
+    "static/media/VG3.jpg": "/static/media/VG3.1bddf613788195c2ddb7.jpg",
+    "static/media/BOSQUE.otf": "/static/media/BOSQUE.77f441344f78dd24b0d7.otf",
+    "static/media/VG1.jpg": "/static/media/VG1.d2e88efffd007f61004b.jpg",
+    "static/media/VG2.jpg": "/static/media/VG2.2859e50a82202f08d622.jpg",
+    "static/media/qr.jpg": "/static/media/qr.350eac3d495f27c3cd2d.jpg",
+    "static/media/MAHAKARYA_LOGO.png": "/static/media/MAHAKARYA_LOGO.892196d27de409e31f03.png",
+    "static/media/horizontal_lines_3.png": "/static/media/horizontal_lines_3.b8d23ae6d838602b3ec0.png",
+    "static/media/Bon Foyage.otf": "/static/media/Bon Foyage.4fbb2a82a8f067b29fe6.otf",
+    "static/media/slick.svg": "/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
+    "index.html": "/index.html",
+    "main.e643c8b2.css.map": "/static/css/main.e643c8b2.css.map",
+    "main.59787d7a.js.map": "/static/js/main.59787d7a.js.map",
+    "787.d1d4a2c2.chunk.js.map": "/static/js/787.d1d4a2c2.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e643c8b2.css",
+    "static/js/main.59787d7a.js"
+  ]
+}
