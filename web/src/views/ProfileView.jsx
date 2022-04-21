@@ -28,7 +28,7 @@ export default function ProfileView() {
 
   const Highestref = firestore.collection("HighestBid");
   const [highest, loadingHighest] = useCollectionData(Highestref, {
-    idField: "id"
+    idField: "id",
   });
   let bidList = [];
 
@@ -45,7 +45,7 @@ export default function ProfileView() {
         username: userById.data.username,
         email: userById.data.email,
         phoneNumber: userById.data.phoneNumber,
-        address: userById.data.address
+        address: userById.data.address,
       });
     }
   }, [userById]);
@@ -54,7 +54,7 @@ export default function ProfileView() {
     username: "",
     email: "",
     phoneNumber: "",
-    address: ""
+    address: "",
   });
 
   const preloadedValuesHandler = (e) => {
@@ -90,7 +90,7 @@ export default function ProfileView() {
       // const cb = await axios.post(`http://localhost:3000/topup`, {
       const cb = await axios.post(`http://localhost:3000/topup`, {
         UserId,
-        price
+        price,
       });
       // console.log(cb.data);
       let win = window.open(cb.data.redirect_url, "_blank");
@@ -101,7 +101,7 @@ export default function ProfileView() {
         icon: "error",
         iconColor: "#57240f",
         title: "Oops...",
-        text: error.response.data.message
+        text: error.response.data.message,
       });
     }
   };
@@ -123,15 +123,15 @@ export default function ProfileView() {
         { username, password, email, phoneNumber, address },
         {
           headers: {
-            access_token: localStorage.getItem("access_token")
-          }
+            access_token: localStorage.getItem("access_token"),
+          },
         }
       );
       Swal.fire({
         icon: "success",
         iconColor: "#57240f",
         title: "Edit",
-        text: "Edit Success!"
+        text: "Edit Success!",
       });
       setShowEdit(false);
     } catch (error) {
@@ -140,14 +140,14 @@ export default function ProfileView() {
           icon: "error",
           iconColor: "#57240f",
           title: "Oops...",
-          text: "password not match"
+          text: "password not match",
         });
       } else {
         Swal.fire({
           icon: "error",
           iconColor: "#57240f",
           title: "Oops...",
-          text: error.response.data.message
+          text: error.response.data.message,
         });
       }
     }
